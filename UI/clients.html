@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tic Doc</title>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/fontawesome/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/jquery.loader.min.css" />
+    <link rel="stylesheet" href="css/fontawesome/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap/html5shiv.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap/respond.min.js"></script>
+    <script type="text/javascript" src="js/jquery.loader.min.js"></script>
+    <script type="text/javascript" src="js/validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="scripts/general.js"></script>
+    <script type="text/javascript" src="scripts/staticviews.js"></script>
+    <script type="text/javascript" src="scripts/menuview.js"></script>
+</head>
+<body class="pageClients whiteBackground container-fluid">
+
+
+    <div class="row header"></div>
+
+    <div class="row pageBody">
+        <div class="content">
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left noPaddingRight">
+                <span class="pageTitle">Clients &nbsp;<a href="client.html"><span class="glyphicon glyphicon-plus-sign"></span></a></span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+                <input type="text" onkeyup="filter()" placeholder="Type to filter" class="input-form txtSearchClients" id="txtSearchClients" name="txtSearchClients" />
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 dvClientsContainer">
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 filterable">
+                    <div class="dvCliensData">
+                        <div><img src="images/1.jpg" /></div>
+                        <div class="clientName"><span>Ali John</span></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 filterable">
+                    <div class="dvCliensData">
+                        <div><img src="images/2.jpg" /></div>
+                        <div class="clientName">Adam Leeeeeeeeeeeee</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 filterable">
+                    <div class="dvCliensData">
+                        <div><img src="images/3.png" /></div>
+                        <div class="clientName">Ahmed Alaa</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 filterable">
+                    <div class="dvCliensData">
+                        <div><img src="images/4.jpg" /></div>
+                        <div class="clientName">adam smith</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 filterable">
+                    <div class="dvCliensData">
+                        <div><img src="images/1.jpg" /></div>
+                        <div class="clientName"><span>Ali John</span></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 filterable">
+                    <div class="dvCliensData">
+                        <div><img src="images/2.jpg" /></div>
+                        <div class="clientName">Adam Leeeeeeeeeeeee</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 filterable">
+                    <div class="dvCliensData">
+                        <div><img src="images/3.png" /></div>
+                        <div class="clientName">Ahmed Alaa</div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div id="dvNoResult" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hide text-center">
+                <h1>No clients found</h1>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+        <div class="menu"></div>
+    </div>
+    <div class="row footer"></div>
+
+    <script type="text/javascript" src="scripts/clients.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EHS</title>
+    <link rel="icon" href="images/logo.ico" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/fontawesome/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/jquery.loader.min.css" />
+    <link rel="stylesheet" href="css/fontawesome/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap/html5shiv.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap/respond.min.js"></script>
+    <script type="text/javascript" src="js/jquery.loader.min.js"></script>
+    <script type="text/javascript" src="js/validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="scripts/general.js"></script>
+    <script type="text/javascript" src="scripts/staticviews.js"></script>
+    <script type="text/javascript" src="scripts/menuview.js"></script>
+</head>
+<body class="pageClient whiteBackground container-fluid">
+
+
+    <div class="row header"></div>
+
+    <div class="row pageBody">
+        <div class="content">
+            <div>
+                <div class="pull-right">
+                    <button class="btn btn-invert">Health Record</button>
+                </div>
+                <div class="clear2"></div>
+                <form name="frmAddClient" id="frmAddClient">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <div class="row">
+                                        <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                            <input type="text" name="txtClientName" id="txtClientName" class="input-form" placeholder="Client Name">
+                                        </div>
+                                    </div>
+                                    <div class="clear row"></div>
+                                    <div class="row">
+                                        <div class="input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                            <input type="text" name="txtLastName" id="txtLastName" class="input-form" placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                    <div class="clear row "></div>
+                                    <div class="row">
+                                        <div class="input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                            <select id="cmbGender" name="cmbGender" class="input-form select">
+                                                <option value="0" selected disabled>Gender</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center col-md-6 col-sm-6 col-xs-6 imgClient">
+                                    <img id="imgClient" class="cursorPointer" src="images/unknown.png" onclick="$('#uploadClientImage').click()" />
+                                    <input type="file" onchange="convertImgToBase64URL(event)" accept="image/*" id="uploadClientImage" class="hide" />
+                                </div>
+
+                            </div>
+
+                            <div class="clear row"></div>
+                            <div class="row">
+                                <div class="input-group-lg  col-md-6 col-sm-6 col-xs-6">
+                                    <input type="text" id="txtPhone" name="txtPhone" class="input-form" placeholder="Mobile">
+                                </div>
+                                <div class="input-group-lg col-md-6 col-sm-6 col-xs-6">
+                                    <input type="email" id="txtEmail" name="txtEmail" class="input-form" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="clear row"></div>
+                            <div class="row">
+                                <div class="input-group-lg col-md-6 col-sm-6 col-xs-6">
+                                    <input type="text" name="txtDob" id="txtDob" data-field="date" data-format="yyyy-mm-dd" class="fillDateTime input-form" placeholder="Date of birth">
+                                </div>
+                                <div class="input-group-lg col-md-6 col-sm-6 col-xs-6">
+                                    <input type="text" id="txtBloodType" name="txtBloodType" class="input-form" placeholder="Blood Type">
+                                </div>
+                            </div>
+
+                            <div class="clear row"></div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="alert alert-success alert-dismissible hideMe text-center" id="dvMSG" role="alert">
+                                        <span id="spTXT"> </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="clear"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="text-left col-md-6 col-sm-6 col-xs-6">
+                            <button class="btn btn-dismiss" type="button" onclick="cancelClient()">Dismiss</button>
+                        </div>
+                        <div class="text-right col-md-6 col-sm-6 col-xs-6">
+                            <button class="btn btn-invert" type="submit" onclick="addClient()">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="menu">
+            
+        </div>
+    </div>
+
+    <div class="row footer"></div>
+
+    <script type="text/javascript" src="scripts/client.js"></script>
+</body>
+</html>

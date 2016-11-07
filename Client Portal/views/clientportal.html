@@ -1,0 +1,139 @@
+﻿<div class="container">
+    <div class="row header">
+        <div class="col-xs-6 text-left">
+            <span class="txtPageHeader">Client Care Plans</span>
+        </div>
+        <div class="text-right col-xs-6">
+            <b><span class="userName">Sameh Alaa</span>&nbsp;|&nbsp;<a href="#">Logout</a></b>
+        </div>
+    </div>
+
+    <div class="pageBody">
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-6 text-right">
+                <input ng-model="filtirationTxt.name" placeholder="Type to filter" class="input-form txtFillterClients" />
+            </div>
+        </div>
+        <div class="spacer1"></div>
+        <div class="row">
+            <div class="col-xs-4" ng-repeat="plan in plans | filter : filtirationTxt as filteredplans" ng-click="openPlanModal(plan.id)">
+                <div class="dvClientsData">
+                    <div><img src="images/plan1.png" class="img-responsive clientImg" /></div>
+                    <div class="clientName text-center text-capitalize"><span>{{plan.name}}</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="!filteredplans.length">
+            <div class="col-xs-12 text-center">
+                <h1>No plans found</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="col-xs-6 text-left">
+            <h6>© 2016 – 2017</h6>
+        </div>
+        <div class="col-xs-6 text-right">
+            <img src="images/logo2.png" />
+        </div>
+    </div>
+
+    <div class="modal fade detailsModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="closeIcon" aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">
+                        Client care plans
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                <h3 class="text-capitalize">{{currentPlan.name}}</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                <span>{{currentPlan.startDate}}&nbsp;-&nbsp;{{currentPlan.endDate}}</span>
+                            </div>
+                        </div>
+                        <div class="spacer3"></div>
+
+                        <div ng-show="showDetails">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class=" dvPlanContainer">
+
+                                        <div class="row dvPlanItem">
+                                            <div class="col-xs-12">
+                                                <b>Goal</b>
+                                            </div>
+                                            <div class="col-xs-11 col-xs-offset-1">
+                                                <span>{{currentPlan.Goal}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row dvPlanItem">
+                                            <div class="col-xs-12">
+                                                <b>Carer's Objective</b>
+                                            </div>
+                                            <div class="col-xs-11 col-xs-offset-1">
+                                                <span>{{currentPlan.carerObjective}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="spacer3"></div>
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <button ng-click="showDetails = !showDetails" class="btn btn-primary">Enter Progress Notes</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-hide="showDetails">
+                            <div class="row">
+                                <div class="col-xs-12 text-left">
+                                    <h3>Enter Progress Notes</h3>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="addNotes">
+                                <div class="col-xs-12 text-center">
+                                    <textarea class="form-control" rows="3" ng-model="txtNote"></textarea>
+                                    <div class="spacer3"></div>
+                                    <button ng-click="addProgressNote()" class="btn btn-primary">Add</button>
+                                </div>
+                            </div>
+                            <div class="spacer1"></div>
+                            <div class="row">
+                                <div class="col-xs-12 prgrsDvLbl" style="color:#999;font-size:12px">How is it going?</div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 prgrsDv" ng-click="addNotes = true">
+                                    <div class="row" ng-repeat="note in notes">
+                                        <span class="col-xs-7 col-sm-8 col-md-10 blueFont">{{note.text}}</span>
+                                        <span style="font-size: 10px;" class="col-xs-5 col-sm-4 col-md-2 text-muted text-right">Adam Mark - 03/10/2016</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="spacer2"></div>
+                            <div class="row">
+                                <div class="col-xs-6 text-center">
+                                    <button ng-click="showDetails = !showDetails" class="btn btn-default">Cancel</button>
+                                </div>
+                                <div class="col-xs-6 text-center">
+                                    <button ng-click="showDetails = !showDetails" class="btn btn-primary" data-dismiss="modal">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</div>

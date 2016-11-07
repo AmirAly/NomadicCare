@@ -1,0 +1,518 @@
+/*@font-face {
+    font-family: 'Droid Arabic Kufi';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/DroidKufi-Regular.eot);
+    src: url(../fonts/DroidKufi-Regular.eot?#iefix) format('embedded-opentype'), url(../fonts/DroidKufi-Regular.woff2) format('woff2'), url(../fonts/DroidKufi-Regular.woff) format('woff'), url(../fonts/DroidKufi-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Droid Arabic Kufi';
+    font-style: normal;
+    font-weight: 700;
+    src: url(../fonts/DroidKufi-Bold.eot);
+    src: url(../fonts/DroidKufi-Bold.eot?#iefix) format('embedded-opentype'), url(../fonts/DroidKufi-Bold.woff2) format('woff2'), url(../fonts/DroidKufi-Bold.woff) format('woff'), url(../fonts/DroidKufi-Bold.ttf) format('truetype');
+}*/
+
+body {
+    background-color: #000;
+    background: url(../images/backgound.png)no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: sans-serif;
+    color: #ffffff;
+    font-size: 14px !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #fff;
+}
+
+.listIcon {
+    font-size: 30px;
+    line-height: initial;
+}
+
+.greenFont {
+    color: #009900;
+}
+
+.redFont {
+    color: #ee1111;
+}
+
+.clear {
+    float: left;
+    width: 100%;
+    height: 30px;
+}
+
+.clear2 {
+    float: left;
+    width: 100%;
+    height: 15px;
+}
+
+.fullHeight {
+    /*min-height: 100vh;*/
+}
+
+.noPaddingRight {
+    padding-right: 0;
+}
+
+.noPaddingLeft {
+    padding-left: 0;
+}
+
+.whiteBackground {
+    background-color: #ffffff;
+    color: #336699;
+}
+
+.hideMe {
+    display: none;
+}
+
+.input-form {
+    display: inline-block;
+    width: 100%;
+    height: 38px;
+    padding-right: 0px;
+    padding-left: 0px;
+    border-style: none none solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #e6e6e6;
+    border-radius: 0px;
+    background-color: transparent;
+    color: #fff;
+    font-size: 14px;
+    padding: 5px;
+}
+
+    .input-form:focus, .input-form:active {
+        border-bottom-width: 1px;
+        border-bottom-color: red;
+        border-style: none none solid;
+        outline: none;
+    }
+
+    .input-form.select {
+        background-image: -webkit-linear-gradient(transparent, transparent) !important;
+        background-image: linear-gradient(transparent, transparent) !important;
+        outline: none;
+    }
+
+        .input-form.select option:first-child {
+            color: #ccc !important;
+        }
+
+option {
+    background-color: black;
+}
+
+.btn-invert {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+    .btn-invert.active, .btn-invert:active ,
+    .btn-invert.active.focus, .btn-invert.active:focus, .btn-invert.focus, .btn-invert:active.focus, .btn-invert:active:focus, .btn-invert:focus {
+        color: #fff;
+    }
+
+    .btn-dismiss {
+    background-color: transparent;
+    border: 2px solid #aaa;
+    color: #aaa;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+    .btn-dismiss.active, .btn-dismiss:active ,
+    .btn-dismiss.active.focus, .btn-dismiss.active:focus, .btn-dismiss.focus, .btn-dismiss:active.focus, .btn-dismiss:active:focus, .btn-dismiss:focus {
+        color: #aaa;
+    }
+
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #fff;
+    color: #000;
+    height: 40px;
+    border-bottom: 2px solid #000;
+}
+
+.pageHeader {
+    font-size: 16px;
+    position: absolute;
+    line-height: 2.3;
+    font-weight: bold;
+}
+.pageHeader img{
+    width: 24px !important;
+    display: inline;
+}
+
+.pageBody {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.menu {
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-top: 50px;
+}
+
+    .menu .imgMenuItem {
+        border-radius: 50%;
+        width: auto;
+        height: 65px;
+    }
+
+    .menu .dvMenuItem {
+        padding: 5px;
+        margin-bottom: 5px;
+        margin-top: 10px;
+    }
+
+    .menu .txtMenuItem {
+        color: #fff;
+        font-size: 14px;
+        font-weight: normal;
+    }
+
+
+.rightHeader {
+    line-height: 3;
+    text-align: right;
+    font-size: 12px;
+}
+
+    .rightHeader a, a:hover, a:active, a:focus {
+        text-decoration: none;
+        color: #000 !important;
+    }
+
+.logo {
+    width: 40px !important;
+    float: left;
+    padding: 2px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-top: 2px solid red;
+    color: #FFF;
+    min-height: 45px;
+    background: url(../images/backgound.png)no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+    .footer h6 {
+        font-weight: normal;
+        line-height: initial;
+    }
+
+    .footer img {
+        height: 30px !important;
+        width: auto !important;
+        margin: 1%;
+    }
+
+label.error {
+    color: red;
+}
+
+.cursorPointer {
+    cursor: pointer;
+}
+
+
+/*login*/
+.pageLogin {
+    background-image: url(../images/backgound.png);
+}
+
+    .pageLogin #dvLogin {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .pageLogin #frmLogin {
+        min-width: 500px;
+    }
+
+/*All Clients*/
+.pageClients .dvClientsContainer {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.pageClients .filterable {
+    display: flex;
+    position: relative;
+    width: 25%;
+    align-items: center;
+    justify-content:center;
+}
+
+.pageClients .dvCliensData {
+    margin-bottom: 18%;
+    background-color: #fff;
+    padding: 2px;
+    border: 1px solid #ccc;
+    border-radius: 10%;
+    text-align: center;
+    height: 115px;
+    max-height: 115px;
+    width: auto !important;
+    max-width: 100px;
+}
+
+.pageClients .dvCliensData img {
+    width: auto !important;
+    max-width: 85px;
+    height: 85px;
+    max-height: 85px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+
+.pageClients .clientName {
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    color: #000;
+}
+
+.pageClients #dvNoResult h1{
+    font-size:30px;
+    color:#fff;
+}
+
+
+.pageClients .dvSearchClient {
+    display: flex;
+}
+
+.pageClients .pageTitle {
+    font-size: 30px;
+    color: #fff;
+}
+
+    .pageClients .pageTitle a {
+        color: #fff;
+    }
+
+        .pageClients .pageTitle a span {
+            top: 5px;
+        }
+
+
+
+/*Client*/
+
+.pageClient .content {
+    margin: 5%;
+    margin-top: 0;
+}
+
+    .pageClient .content h1 {
+        color: #fff;
+    }
+
+.pageClient img {
+    width: 100%;
+}
+
+.pageClient .dvCliendData {
+    margin-bottom: 18px;
+    background-color: #A7C4E6;
+    padding: 5px;
+    border: 1px solid #5B9BD5;
+    border-radius: 10%;
+    height: auto;
+    min-height: 130px;
+    max-height: 130px;
+}
+
+    .pageClient .dvCliendData img {
+        width: 60%;
+        border-radius: 20%;
+        max-height: 80px;
+        max-width: 80px;
+        margin: 5px;
+    }
+
+.pageClient .clientName {
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
+.pageClient .footer .dvButton {
+    line-height: 9;
+}
+
+.pageClient .imgClient img {
+    border: 2px solid #eee;
+    max-height: 170px;
+    width: auto !important;
+    border-radius: 25px;
+}
+
+@media (min-width : 480px) {
+
+    }
+
+/*Plan*/
+
+
+.client img {
+    height: auto;
+    padding: 2px !important;
+    margin: 2px !important;
+    width: 35px;
+}
+
+.pagePlan .content {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.pagePlan .dvClientData h1, h2, h3, h4, h5, h6 {
+    color: #fff;
+    margin-bottom: 3px;
+}
+
+.pagePlan .dvClientData .glyphicon {
+    font-size: 47px;
+    color: #fff;
+}
+
+.pagePlan .content .btn-invert {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.tab-content {
+    background-color: #fff;
+    min-height: 300px;
+    height: 60vh;
+    padding-top: 7px;
+    padding-left: 15px;
+    padding-right: 9px;
+    font-size: 17px;
+}
+
+    .tab-content input {
+        font-size: 17px !important;
+        color:#000;
+    }
+
+    .tab-content button {
+        padding: 0 !important;
+        margin: 0;
+    }
+
+.close {
+    color: #f00;
+    font-size:45px;
+}
+/*Plans tab*/
+.tabs-left {
+    border-bottom: none;
+    padding-top: 0px;
+    /*border-right: 1px solid #ddd;*/
+}
+
+    .tabs-left > li {
+        float: none;
+        font-size: 19px;
+        font-weight: bold;
+        /*margin-bottom: 0px;*/
+        /*margin-right: -1px;*/
+    }
+
+        .tabs-left > li > a {
+            border-radius: 15px 0 0 15px;
+            margin-right: 0;
+            display: block;
+            color: #fff;
+            background-color: #464646;
+            margin-bottom: 9px;
+        }
+
+        .tabs-left > li.active > a,
+        .tabs-left > li.active > a:hover,
+        .tabs-left > li.active > a:focus {
+            border-bottom-color: #fff;
+            border-right-color: transparent;
+            color: #000;
+        }
+/*End plans tab*/
+
+
+
+/*Health Record*/
+.pageHealthRecord .content {
+    margin: 5%;
+}
+
+.pageHealthRecord h1, h2, h3, h4, h5, h6 {
+    color: #fff;
+}
+
+.pageHealthRecord .dvClientData .glyphicon {
+    font-size: 70px;
+    font-weight: 100;
+    color: #fff;
+}
+
+.pageHealthRecord .content button {
+    background-color: transparent;
+    color: #fff;
+    font-size: 3vw;
+    background-color: #000;
+    border-radius: 15px;
+    border: 1.5px solid #f3eaef;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+    .pageHealthRecord .content button > span > img {
+        width: 5vw;
+    }

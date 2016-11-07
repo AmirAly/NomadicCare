@@ -1,0 +1,214 @@
+﻿/*general*/
+.noPadding {
+    padding: 0px;
+}
+
+.noPaddingLeft {
+    padding-left: 0px;
+}
+
+.noPaddingRight {
+    padding-right: 0px;
+}
+
+.cursorPointer {
+    cursor: pointer;
+}
+
+.spacer1 {
+    float: left;
+    width: 100%;
+    height: 30px;
+}
+
+.spacer2 {
+    float: left;
+    width: 100%;
+    height: 20px;
+}
+
+.spacer3 {
+    float: left;
+    width: 100%;
+    height: 10px;
+}
+
+body {
+    height: 100vh;
+    background: #000; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left, #000, rgba(8, 8, 8, 0.79)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #000, rgba(8, 8, 8, 0.79)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #000, rgba(8, 8, 8, 0.79)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #000, rgba(8, 8, 8, 0.79)); /* Standard syntax */
+    font-family: sans-serif;
+    color: #fff;
+    font-size: 14px !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #fff;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #fff;
+    color: #000;
+    height: 40px;
+    border-bottom: 2px solid #000;
+    line-height: 3;
+    text-align: right;
+    font-size: 12px;
+}
+
+    .header a, .header a:hover, .header a:active, .header a:focus {
+        text-decoration: none;
+        color: #000 !important;
+    }
+
+.txtPageHeader {
+    font-weight: bold;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    line-height: 2.3;
+}
+
+.pageBody {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-top: 2px solid red;
+    color: #FFF;
+    min-height: 45px;
+    background: url(../images/backgound.png)no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+    .footer h6 {
+        font-weight: normal;
+        line-height: initial;
+    }
+
+    .footer img {
+        height: 30px !important;
+        width: auto !important;
+        margin: 1%;
+    }
+
+.dvClientsData {
+    margin: 10px auto;
+    background: #fff;
+    border-radius: 10px;
+    color: #000;
+    height: 115px;
+    max-height: 115px;
+    width: auto !important;
+    max-width: 100px;
+    padding: 4px;
+    border-radius: 20%;
+}
+
+    .dvClientsData .clientImg {
+        margin: auto;
+        width: 85px;
+        max-width: 85px;
+        height: 85px;
+        max-height: 85px;
+        border-radius: 15%;
+        margin-bottom: 5px;
+    }
+
+    .dvClientsData .clientName {
+        margin-top: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: bold;
+    }
+
+.txtFillterClients {
+    padding: 10px 10px 10px 5px;
+    border: none;
+    border-bottom: 1px solid #757575;
+    display: inline-block;
+    width: 100%;
+    height: 38px;
+    padding-right: 0px;
+    padding-left: 0px;
+    border-style: none none solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #e6e6e6;
+    border-radius: 0px;
+    background-color: transparent;
+    color: #fff;
+    font-size: 14px;
+    padding: 5px;
+}
+
+    .txtFillterClients:focus, .txtFillterClients:focus {
+        outline: none;
+    }
+
+.detailsModal .modal-header img {
+    max-width: 30px;
+}
+
+.detailsModal .modal-header .closeIcon {
+    font-size: 32px;
+}
+
+.detailsModal .prgrsDv {
+    min-height: 100px;
+    max-height: 150px;
+    border: none;
+    border-bottom: 2px #888 solid;
+    overflow-y: scroll;
+}
+
+.detailsModal .blueFont {
+    background-color: #ffffff;
+    color: #336699;
+}
+
+.detailsModal .modal-content {
+    color: #000;
+}
+
+    .detailsModal .modal-content h1, .detailsModal .modal-content h2, .detailsModal .modal-content h3, .detailsModal .modal-content h4, .detailsModal .modal-content h5, .detailsModal .modal-content h6 {
+        color: #000;
+    }
+
+    .detailsModal .modal-content .modal-body {
+        padding-top: 0;
+    }
+
+    .detailsModal .modal-content textarea {
+        resize: none;
+    }
+
+    .detailsModal .modal-content .dvPlanContainer {
+        margin: auto;
+    }
+
+        .detailsModal .modal-content .dvPlanContainer .dvPlanItem {
+            padding: 10px;
+        }
