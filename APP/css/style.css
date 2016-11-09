@@ -31,12 +31,6 @@
 }
 
 
-
-
-
-
-
-
 /*modal*/
 .showMe {
     display: block;
@@ -154,10 +148,6 @@ h1, h2, h3, h4, h5, h6 {
     height: 15px;
 }
 
-.fullHeight {
-    /*min-height: 100vh;*/
-}
-
 .noPaddingRight {
     padding-right: 0;
 }
@@ -232,8 +222,7 @@ input:focus, select:focus, textarea:focus {
     outline: none;
 }
 
-input:valid, textarea:valid
-/*,select:valid*/ {
+input:valid, textarea:valid {
     border-bottom: 1px solid #4fc24f;
 }
 
@@ -263,8 +252,7 @@ input:valid, textarea:valid
     }
 
 input:valid ~ .bar:before, input:valid ~ .bar:after,
-textarea:valid ~ .bar:before, textarea:valid ~ .bar:after
-/*select:valid ~ .bar:before, select:valid ~ .bar:after*/ {
+textarea:valid ~ .bar:before, textarea:valid ~ .bar:after {
     background: #4fc24f !important;
 }
 
@@ -290,20 +278,17 @@ select:focus ~ label, select.used ~ label, textarea:focus ~ label, textarea.used
 
 input:valid ~ label, input:valid.used ~ label,
 textarea:valid ~ label, textarea:valid.used ~ label,
-/*select:valid ~ label,*/
 select:valid.used ~ label {
     color: #4fc24f;
 }
 
 input:focus ~ .bar:before,
-textarea:focus ~ .bar:before
-/*,select:focus ~ .bar:before*/ {
+textarea:focus ~ .bar:before {
     width: 50%;
 }
 
 input:focus ~ .bar:after,
-textarea:focus ~ .bar:after
-/*,select:focus ~ .bar:after*/ {
+textarea:focus ~ .bar:after {
     width: 50%;
 }
 
@@ -598,8 +583,6 @@ canvas {
     border: 1px solid #ccc;
     border-radius: 20%;
     text-align: center;
-    /*height: 115px;
-    max-height: 115px;*/
     height: 97px;
     max-height: 97px;
     margin-bottom: 50px;
@@ -621,8 +604,6 @@ canvas {
 .pageClients .clientName {
     font-size: 14px;
     font-weight: bold;
-    /*white-space: nowrap;
-    overflow: hidden !important;*/
     white-space: pre-line;
     overflow: visible;
     text-overflow: ellipsis;
@@ -741,10 +722,6 @@ canvas {
 
 .pageOrganization .spnAddRow {
     font-size: 20px;
-}
-
-.pageOrganization table {
-    /*margin-top: 15px;*/
 }
 
     .pageOrganization table input {
@@ -1020,7 +997,6 @@ canvas {
     position: absolute;
     top: 40px;
     height: calc(100vh - 40px - 52px - 45px);
-    /* width: 100%; */
     left: 15px;
     right: 15px;
     overflow-y: auto;
@@ -1069,7 +1045,6 @@ canvas {
 .dvCarePalans .dvPersonalData {
     position: absolute !important;
     top: 40px;
-    /*top: 92px !important;*/
     right: 0;
     left: 0;
     width: 100%;
@@ -1108,7 +1083,6 @@ canvas {
 .dvCarePalans .customFooter {
     position: fixed !important;
     bottom: 45px;
-    /*width: 101%;*/
     right: 0;
     left: 0;
     background: #000;
@@ -1120,9 +1094,7 @@ canvas {
     position: absolute !important;
     top: 0;
     background: #fff;
-    /* padding: 10px; */
     z-index: 999;
-    /*padding-bottom: 0;*/
 }
 
 .dvCarePalans li a {
@@ -1335,17 +1307,3 @@ canvas {
     color: #999;
     font-size: 12px;
 }
-/*thead, tbody { display: block; }
-
-tbody {
-    max-height: 55vh;     
-    overflow-y: auto;   
-    overflow-x: hidden; 
-}
-tbody td, thead th {
-    width: calc(100% / 6); 
-}*/
-
-/*.customPageBody {
-    margin-top: 90px;
-}*/
