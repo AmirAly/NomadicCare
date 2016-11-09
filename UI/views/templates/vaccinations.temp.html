@@ -1,0 +1,134 @@
+﻿<div class="row">
+    <div class="col-xs-6 col-xs-offset-6 col-sm-3 col-sm-offset-9  text-right">
+        <input type="text" placeholder="Type to filter" class="input-form txtSearchNotes" id="txtSearchNotes" name="txtSearchNotes" />
+    </div>
+</div>
+<div class="clear2"></div>
+<!-- Table Start -->
+<div class="table-responsive">
+    <table class="table table-bordered tblWhite">
+        <thead>
+            <tr>
+                <th>Date&nbsp;Administreted</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Brand</th>
+                <th>Status</th>
+                <th>Clinician</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1 Apr 2014</td>
+                <td>Typhiod</td>
+                <td>Immunisation</td>
+                <td>Typhiodus</td>
+                <td>Current/Inactive/Not Adminstreted</td>
+                <td>Dr.Kountoris</td>
+            </tr>
+            <tr>
+                <td>1 Apr 2014</td>
+                <td>Typhiod</td>
+                <td>Immunisation</td>
+                <td>Typhiodus</td>
+                <td>Current/Inactive/Not Adminstreted</td>
+                <td>Dr.Kountoris</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Table End -->
+
+<button class="btn btn-success adjustNewButton" data-toggle="modal" data-target="#vaccinationsModal" type="button">
+    <span class="glyphicon glyphicon-plus"></span>
+</button>
+
+<!-- Vaccination Modal Start -->
+<div id="vaccinationsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Vaccination Modal content Start-->
+        <div class="modal-content">
+            <!-- Vaccination Modal Body Start -->
+            <div class="modal-body">
+                <!-- Vaccination Modal Header Start -->
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
+                <h4 class="text-center">New Vaccination</h4>
+                <!-- Vaccination Modal Header End -->
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group groupVaccinationModal">
+                            <input type="text" class="fontBlack" name="txtDateVaccination" pattern=".{1,80}" id="txtDateVaccination" required readonly>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label id="lblDOB">Date Administreted</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group">
+                            <input type="text" pattern=".{1,80}" id="txtDescription" class="txtDescription" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Description</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group">
+                            <input type="text" pattern=".{1,80}" name="txtType" id="txtType" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Type</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group">
+                            <input type="text" pattern=".{1,80}" name="txtBrand" id="txtBrand" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Brand</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group">
+                            <input type="text" pattern=".{1,80}" name="txtStatus" id="txtStatus" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Status</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group">
+                            <input type="text" pattern=".{1,80}" name="txtClinician" id="txtClinician" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Clinician</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Vaccination Modal Body End -->
+            <!-- Vaccination Modal Footer Start -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+            </div>
+            <!-- Vaccination Modal Footer End -->
+        </div>
+        <!-- Vaccination Modal Content End -->
+    </div>
+</div>
+<!-- Vaccination Modal End -->

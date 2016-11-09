@@ -1,0 +1,120 @@
+﻿<div class="row">
+    <div class="col-xs-6 col-xs-offset-6 col-sm-3 col-sm-offset-9  text-right">
+        <input type="text" placeholder="Type to filter" class="input-form txtSearchNotes" id="txtSearchNotes" name="txtSearchNotes" />
+    </div>
+</div>
+<div class="clear2"></div>
+<!-- Table Start -->
+<div class="table-responsive">
+    <table class="table table-bordered tblWhite">
+        <thead>
+            <tr>
+                <th>Date&nbsp;Required</th>
+                <th>Reason for follow-up</th>
+                <th>Related&nbsp;Consultation</th>
+                <th>Status</th>
+                <th>Clinician</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1 Apr 2014</td>
+                <td>Need to come back for HbA1c results</td>
+                <td>[Dropdown for consultation]</td>
+                <td>Sent/Returned/Lapsed</td>
+                <td>Dr.Kountoris</td>
+            </tr>
+            <tr>
+                <td>1 Apr 2014</td>
+                <td>Need to come back for HbA1c results</td>
+                <td>[Dropdown for consultation]</td>
+                <td>Sent/Returned/Lapsed</td>
+                <td>Dr.Kountoris</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Table End -->
+
+<button class="btn btn-success adjustNewButton" data-toggle="modal" data-target="#followupModal" type="button">
+    <span class="glyphicon glyphicon-plus"></span>
+</button>
+
+<!-- FollowUp Modal Start -->
+<div id="followupModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- FollowUp Modal content Start-->
+        <div class="modal-content">
+            <!-- FollowUp Modal Body Start -->
+            <div class="modal-body">
+                <!-- FollowUp Modal Header Start -->
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
+                <h4 class="text-center">New FollowUp</h4>
+                <!-- FollowUp Modal Header End -->
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group groupFollowUpModal">
+                            <input type="text" class="fontBlack" name="txtDateFollowUp" pattern=".{1,80}" id="txtDateFollowUp" required readonly>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label id="lblDOB">Date Required</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group">
+                            <input type="text" pattern=".{1,80}" id="txtReason" class="txtReason" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Reason for follow-up</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group">
+                            <input type="text" pattern=".{1,80}" name="txtRelatedConsultation" id="txtRelatedConsultation" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Related Consultation</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group">
+                            <input type="text" pattern=".{1,80}" name="txtStatus" id="txtStatus" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Status</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group">
+                            <input type="text" pattern=".{1,80}" name="txtClinician" id="txtClinician" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Clinician</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FollowUp Modal Body End -->
+            <!-- FollowUp Modal Footer Start -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+            </div>
+            <!-- FollowUp Modal Footer End -->
+        </div>
+        <!-- FollowUp Modal Content End -->
+    </div>
+</div>
+<!-- FollowUp Modal End -->

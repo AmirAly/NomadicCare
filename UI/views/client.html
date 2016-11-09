@@ -1,0 +1,197 @@
+﻿<div class="row header" ui-view="headerView"></div>
+<div class="pageBody pageClient ">
+    <div class="row animated fadeInRight">
+        <div class="container">
+            <div class="clear2"></div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <button ng-show="createMode == false" class="btn btn-invert pull-right" type="button" ng-click="viewHealthrecords()">Health Record</button>
+                </div>
+            </div>
+            <div class="clear2"></div>
+            <form name="frmAddClient" novalidate>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row">
+                                <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                    <div class="group">
+                                        <input ng-input-effect-class is-required ng-model="txtClientName" ng-class="{errorBorder : frmAddClient.txtClientName.$dirty == true && frmAddClient.txtClientName.$invalid == true ,'used': txtClientName.length > 0}" type="text" pattern=".{1,80}" name="txtClientName" id="txtClientName" required>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label ng-class="{errorFont : frmAddClient.txtClientName.$dirty == true && frmAddClient.txtClientName.$invalid == true }">First Name</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear row"></div>
+                            <div class="row">
+                                <div class="input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                    <div class="group">
+                                        <input ng-input-effect-class is-required ng-model="txtLastName" ng-class="{errorBorder : frmAddClient.txtLastName.$dirty == true && frmAddClient.txtLastName.$invalid == true ,'used': txtLastName.length > 0}" type="text" pattern=".{1,80}" name="txtLastName" id="txtLastName" required>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label ng-class="{errorFont : frmAddClient.txtLastName.$dirty == true && frmAddClient.txtLastName.$invalid == true }">Last Name</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear row "></div>
+                            <div class="row">
+                                <div class="input-group-lg col-md-12 col-sm-12 col-xs-12">
+
+                                    <div class="group">
+                                        <select ng-select-effect-class ng-model="cmbGender"
+                                                ng-class="{'used': cmbGender != '0'}" 
+                                                id="cmbGender" name="cmbGender" class="input-form" required>
+                                            <option value="0" disabled selected></option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label id="lblGender">Gender</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center col-md-6 col-sm-6 col-xs-6 imgClient">
+                            <img id="imgClient" ng-click="ShowFileSelector()" class="cursorPointer" ng-src="{{userImg}}" />
+                            <input type="file" onchange="convertImgToBase64URL(event)" id="uploadClientImage" class="hide" />
+                        </div>
+
+                    </div>
+
+                    <div class="clear row"></div>
+                    <div class="row">
+                        <div class="input-group-lg  col-md-6 col-sm-6 col-xs-6">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtPhone" ng-class="{errorBorder : frmAddClient.txtPhone.$dirty == true && frmAddClient.txtPhone.$invalid == true ,'used': txtPhone.length > 0}" type="number" string-to-number pattern=".{1,80}" id="txtPhone" name="txtPhone" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmAddClient.txtPhone.$dirty == true && frmAddClient.txtPhone.$invalid == true }">Mobile</label>
+                            </div>
+                        </div>
+                        <div class="input-group-lg col-md-6 col-sm-6 col-xs-6">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtEmail" ng-class="{errorBorder : frmAddClient.txtEmail.$dirty == true && frmAddClient.txtEmail.$invalid == true ,'used': txtEmail.length > 0}" type="email" pattern="[a-zA-Z0-9_]+(?:\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" id="txtEmail" name="txtEmail" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmAddClient.txtEmail.$dirty == true && frmAddClient.txtEmail.$invalid == true }">Email</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear row"></div>
+                    <div class="row">
+                        <div class="input-group-lg col-md-6 col-sm-6 col-xs-6">
+                            <div class="col-md-12 col-sm-12 col-xs-12 row">
+                                <div class="group">
+                                    <a data-toggle="dropdown" class="dropdown-toggle" id="dropdown">
+                                        <input ng-input-effect-class is-required
+                                               data-ng-model="txtDob" data-date-time-input="MMM DD, YYYY"
+                                               ng-class="{errorBorder : frmAddClient.txtDob.$dirty == true && frmAddClient.txtDob.$invalid == true ,'used': txtDob.length > 0}"
+                                               type="text" name="txtDob" pattern=".{1,80}" id="txtDob" required>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label ng-class="{errorFont : frmAddClient.txtDob.$dirty == true && frmAddClient.txtDob.$invalid == true }">Date Of Birth</label>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <datetimepicker data-ng-model="txtDob"
+                                                        data-datetimepicker-config="datepickerconfigurations"
+                                                        data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group-lg col-md-6 col-sm-6 col-xs-6">
+
+                            <div class="group">
+                                <select ng-select-effect-class required ng-model="cmbBloodType"
+                                        ng-class="{'used': cmbBloodType != '0'}" id="cmbBloodType" name="cmbBloodType" class="input-form">
+                                    <option value='0' disabled selected></option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label id="lblBloodType">Blood type</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clear row"></div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div ng-class="{'alert-success' : messageStatus == 'success' ,'alert-danger' : messageStatus == 'danger' ,'alert-warning' : messageStatus == 'warning'}" class="alert alert-dismissible text-center" ng-show="showMessage == true" id="dvMSG" role="alert">
+                                <span>{{messageTxt}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--<div class="input-group">
+                        <input type="text" class="form-control" data-ng-model="finalDate | date:' MMM dd, yyyy'" ng-click="showPicker = true">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
+                    </div>
+                    <datetimepicker data-ng-model="data.date"
+                                    ng-show="showPicker == true"
+                                    data-datetimepicker-config="datepickerconfigurations"
+                                    data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>-->
+
+
+                    <div class="clear"></div>
+                </div>
+                <div class="clear row"></div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="row footer2">
+        <div class="text-left col-md-6 col-sm-6 col-xs-6">
+            <button class="btn btn-dismiss" type="button" ng-click="cancelClient()">Dismiss</button>
+        </div>
+        <div class="text-right col-md-6 col-sm-6 col-xs-6">
+            <button class="btn btn-invert saveBtn" ng-click="submit(frmAddClient)" type="submit">Save</button>
+        </div>
+    </div>
+    <div id="libModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="clear2"></div>
+                    <div class="clear2"></div>
+                    <div class="clear2"></div>
+                    <div class="clear2"></div>
+                    <div class="col-xs-5 col-xs-offset-2 text-center" ng-click="CamSource()">
+                        <img src="images/camicon.png" class="img-responsive" style="max-width:40%" />
+                    </div>
+                    <div class="col-xs-5 text-right" style="padding-left:7.5%" ng-click="ImgSource()">
+                        <img src="images/galleryicon.png" class="img-responsive" style="max-width:40%" />
+                    </div>
+                    <div class="col-xs-5 col-xs-offset-2" ng-click="CamSource()">
+                        <h3 style="color:#333">Camera</h3>
+                    </div>
+                    <div class="col-xs-5 text-left" ng-click="ImgSource()">
+                        <h3 style="color:#333;">Photo Gallery</h3>
+                    </div>
+                    <div class="clear2"></div>
+                    <div class="clear2"></div>
+                    <div class="clear2"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning btn-block" data-dismiss="modal">Dismiss</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

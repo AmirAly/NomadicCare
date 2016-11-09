@@ -1,0 +1,43 @@
+﻿<div class="row header" ui-view="headerView"></div>
+<div class="pageBody pageListOrganizations animated fadeInRight">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="clear2"></div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left noPaddingRight">
+                <span class="pageTitle">Providers &nbsp;<span class="glyphicon glyphicon-plus-sign" ui-sref="provider"></span></span>
+            </div>
+            <div class="clear2"></div>
+            <!-- Table Start -->
+            <div class="row" ng-hide="!providers.length">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Provider Name</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="provider in providers">
+                                    <td><img src="{{provider.img}}">&nbsp;<span>{{provider.name}}</span></td>
+                                    <td>
+                                        <span>{{provider.address}}</span>
+                                        <a class="tableicon" ng-click="showProviderDetails($index)"><span class="glyphicon glyphicon-edit"></span></a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Table End -->
+            <div ng-show="!providers.length" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hide text-center">
+                <h1>No Providers found</h1>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--<div class="row footer" ui-view="footerView"></div>-->

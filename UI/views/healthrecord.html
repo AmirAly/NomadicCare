@@ -1,0 +1,40 @@
+﻿<div class="row header" ui-view="headerView"></div>
+
+<div class="pageBody pageHealthRrecords ">
+    <div class="row">
+        <div class="customHeader1">
+            <a id="clientLink" ng-click="backToEditClient()" class="text-left">
+                <span class="glyphicon glyphicon-edit"></span>
+            </a>
+
+            <div class="col-xs-12 blackBg">
+                <ul class="nav nav-tabs outerOptoins">
+                    <li class="outerTab1" ng-class="{active:activeoutertab == 'healthmeasurment'}" ng-click="activeoutertab = 'healthmeasurment'">
+                        <a ui-sref="healthrecord.healthmeasurment.weight" data-toggle="tab">Health&nbsp;Measurments</a>
+                    </li>
+                    <li class="outerTab2" ng-class="{active:activeoutertab == 'healthnotes'}" ng-click="activeoutertab = 'healthnotes'">
+                        <a ui-sref="healthrecord.healthnotes.medications" data-toggle="tab">Health&nbsp;Notes</a>
+                    </li>
+                    <li class="outerTab3" ng-class="{active:activeoutertab == 'consultationnotes'}" ng-click="activeoutertab = 'consultationnotes'">
+                        <a ui-sref="healthrecord.consultationnotes" data-toggle="tab">Consultation&nbsp;Notes</a>
+                    </li>
+                    <li class="outerTab4" ng-class="{active:activeoutertab == 'careplans'}" ng-click="activeoutertab = 'careplans'">
+                        <a ui-sref="healthrecord.careplans({planid:1})" data-toggle="tab">Care&nbsp;Palns</a>
+                    </li>
+                    <li class="outerTab5" ng-class="{active:activeoutertab == 'analytics'}" ng-click="activeoutertab = 'analytics'">
+                        <a ui-sref="healthrecord.analytics" data-toggle="tab">Analytics</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <div class="tab-content col-xs-12 customPageBody">
+            <div ui-view></div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row footer" ui-view="footerView"></div>

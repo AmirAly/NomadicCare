@@ -1,34 +1,119 @@
-/*@font-face {
-    font-family: 'Droid Arabic Kufi';
-    font-style: normal;
-    font-weight: 400;
-    src: url(../fonts/DroidKufi-Regular.eot);
-    src: url(../fonts/DroidKufi-Regular.eot?#iefix) format('embedded-opentype'), url(../fonts/DroidKufi-Regular.woff2) format('woff2'), url(../fonts/DroidKufi-Regular.woff) format('woff'), url(../fonts/DroidKufi-Regular.ttf) format('truetype');
-}
-
-@font-face {
-    font-family: 'Droid Arabic Kufi';
-    font-style: normal;
-    font-weight: 700;
-    src: url(../fonts/DroidKufi-Bold.eot);
-    src: url(../fonts/DroidKufi-Bold.eot?#iefix) format('embedded-opentype'), url(../fonts/DroidKufi-Bold.woff2) format('woff2'), url(../fonts/DroidKufi-Bold.woff) format('woff'), url(../fonts/DroidKufi-Bold.ttf) format('truetype');
-}*/
-
-body {
-    background-color: #000;
-    background: url(../images/backgound.png)no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+﻿body {
+    height: 100vh;
+    background: #000; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left, #000, rgba(8, 8, 8, 0.79)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #000, rgba(8, 8, 8, 0.79)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #000, rgba(8, 8, 8, 0.79)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #000, rgba(8, 8, 8, 0.79)); /* Standard syntax */
     font-family: sans-serif;
     color: #ffffff;
     font-size: 14px !important;
 }
 
+/*animation*/
+.ng-enter:not(.animated) {
+    transition: all linear 500ms;
+    opacity: 0;
+}
+
+.ng-enter-active:not(.animated) {
+    opacity: 1;
+}
+
+.ng-leave:not(.animated) {
+    transition: all linear 500ms;
+    opacity: 0;
+}
+
+.ng-leave-active:not(.animated) {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+}
+
+
+
+
+
+
+
+
+/*modal*/
+.showMe {
+    display: block;
+    opacity: 1;
+    top: 100px;
+    overflow: visible;
+}
+
+.hide {
+    display: none;
+}
+
+/*scroll*/
+::-webkit-scrollbar {
+    border-radius: 20px;
+    width: 6px; /* for vertical scrollbars */
+    height: 6px; /* for horizontal scrollbars */
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #777; /*bar color*/
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 20px;
+    background: #ccc; /*background color*/
+}
+
 h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
+/*date Picker*/
+.datetimepicker {
+    background: #fff;
+    color: #000;
+    width: 250px !important;
+    height: 280px !important;
+}
+
+#loginContainer {
+    margin-top: 20%;
+}
+
+.glyphicon {
+    cursor: pointer;
+}
+
+.tblWhite td {
+    color: #fff;
+}
+
+.noPaddingLeft {
+    padding-left: 0px;
+}
+
+.hrItem {
+    border: 2px solid #fff;
+    border-radius: 20px;
+    padding: 1%;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    cursor: pointer;
+}
+
+    .hrItem span {
+        font-size: 24px;
+        line-height: 200%;
+    }
+
+    .hrItem img {
+        max-height: 100px;
+        max-width: 50px;
+    }
 
 .listIcon {
     font-size: 30px;
@@ -39,8 +124,22 @@ h1, h2, h3, h4, h5, h6 {
     color: #009900;
 }
 
+.errorFont {
+    color: red !important;
+}
+
+.errorBorder {
+    border-bottom: 2px solid red !important;
+}
+
 .redFont {
     color: #ee1111;
+}
+
+.fontNormal {
+    font-weight: normal;
+    padding-right: 5px;
+    text-transform: capitalize;
 }
 
 .clear {
@@ -72,9 +171,178 @@ h1, h2, h3, h4, h5, h6 {
     color: #336699;
 }
 
+.blackBg {
+    background-color: #000;
+}
+
 .hideMe {
     display: none;
 }
+
+.darkInput {
+    border-bottom-color: #666 !important;
+    color: #333 !important;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px red !important inset;
+}
+
+.close {
+    color: #f00;
+    font-size: 36px;
+}
+
+/*input effect*/
+.group {
+    position: relative;
+}
+
+label:not(.checkboxLabel) {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+}
+
+input:not(#txtSMS):not(#txtSMSnotifications):not(.switchChbx):not([type="checkbox"]) {
+    padding: 10px 10px 10px 5px;
+    border: none;
+    border-bottom: 1px solid #757575;
+    display: inline-block;
+    width: 100%;
+    height: 38px;
+    padding-right: 0px;
+    padding-left: 0px;
+    border-style: none none solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #e6e6e6;
+    border-radius: 0px;
+    background-color: transparent;
+    color: #fff;
+    font-size: 14px;
+    padding: 5px;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+}
+
+input:valid, textarea:valid
+/*,select:valid*/ {
+    border-bottom: 1px solid #4fc24f;
+}
+
+/* BOTTOM BARS ================================= */
+.bar {
+    position: relative;
+    display: block;
+    top: 1px;
+}
+
+    .bar:before, .bar:after {
+        content: '';
+        height: 2px;
+        width: 0;
+        bottom: 1px;
+        position: absolute;
+        background: red;
+        transition: 0.2s ease all;
+    }
+
+    .bar:before {
+        left: 50%;
+    }
+
+    .bar:after {
+        right: 50%;
+    }
+
+input:valid ~ .bar:before, input:valid ~ .bar:after,
+textarea:valid ~ .bar:before, textarea:valid ~ .bar:after
+/*select:valid ~ .bar:before, select:valid ~ .bar:after*/ {
+    background: #4fc24f !important;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    transition: 0.2s ease all;
+    opacity: 0.5;
+}
+
+/* active state -------------------------------------------- */
+input:focus ~ label, input.used ~ label, .Zebra_DatePicker_Icon_Wrapper ~ label,
+select:focus ~ label, select.used ~ label, textarea:focus ~ label, textarea.used ~ label {
+    top: -20px;
+    font-size: 14px;
+    color: red;
+}
+
+input:valid ~ label, input:valid.used ~ label,
+textarea:valid ~ label, textarea:valid.used ~ label,
+/*select:valid ~ label,*/
+select:valid.used ~ label {
+    color: #4fc24f;
+}
+
+input:focus ~ .bar:before,
+textarea:focus ~ .bar:before
+/*,select:focus ~ .bar:before*/ {
+    width: 50%;
+}
+
+input:focus ~ .bar:after,
+textarea:focus ~ .bar:after
+/*,select:focus ~ .bar:after*/ {
+    width: 50%;
+}
+
+input:focus ~ .highlight,
+textarea:focus ~ .highlight,
+select:focus ~ .highlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+}
+
+input:valid ~ .hightlight,
+textarea:valid ~ .hightlight,
+select:valid ~ .hightlight {
+    -webkit-animation: validHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+    from {
+        background: red;
+    }
+
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+@-webkit-keyframes validHighlighter {
+    from {
+        background: #4fc24f !important;
+    }
+
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+/*input effect*/
 
 .input-form {
     display: inline-block;
@@ -116,29 +384,65 @@ option {
 .btn-invert {
     background-color: transparent;
     border: 2px solid #fff;
-    color: #fff;
+    color: #fff !important;
     padding-left: 20px;
     padding-right: 20px;
 }
 
-    .btn-invert.active, .btn-invert:active ,
+    .btn-invert.active, .btn-invert:active,
     .btn-invert.active.focus, .btn-invert.active:focus, .btn-invert.focus, .btn-invert:active.focus, .btn-invert:active:focus, .btn-invert:focus {
         color: #fff;
     }
 
-    .btn-dismiss {
+.btn-dismiss {
     background-color: transparent;
     border: 2px solid #aaa;
-    color: #aaa;
+    color: #aaa !important;
     padding-left: 20px;
     padding-right: 20px;
 }
 
-    .btn-dismiss.active, .btn-dismiss:active ,
+    .btn-dismiss.active, .btn-dismiss:active,
     .btn-dismiss.active.focus, .btn-dismiss.active:focus, .btn-dismiss.focus, .btn-dismiss:active.focus, .btn-dismiss:active:focus, .btn-dismiss:focus {
         color: #aaa;
     }
 
+/*Menu*/
+.spmenu {
+    background: #000;
+    border: 0;
+    max-width: 250px;
+    top: 40px;
+    -moz-box-shadow: -20px 0px 30px #fff !important;
+    -webkit-box-shadow: -20px 0px 30px white !important;
+    box-shadow: -20px 0px 30px white !important;
+}
+
+
+    .spmenu .sidebar-nav {
+        list-style: none;
+        padding-left: 10px;
+    }
+
+        .spmenu .sidebar-nav .sidebar-brand {
+            height: 65px;
+            font-size: 18px;
+            line-height: 60px;
+            list-style-type: none;
+        }
+
+            .spmenu .sidebar-nav .sidebar-brand .txtMenuItem {
+                color: #fff;
+                font-size: 18px;
+                font-weight: normal;
+                margin-top: 20px;
+            }
+
+            .spmenu .sidebar-nav .sidebar-brand .imgMenuItem {
+                border-radius: 50%;
+                max-width: 50px;
+                max-height: 50px;
+            }
 
 .header {
     position: fixed;
@@ -151,7 +455,10 @@ option {
     background-color: #fff;
     color: #000;
     height: 40px;
-    border-bottom: 2px solid #000;
+    border-bottom: 1px solid #a9a9a9;
+    -webkit-box-shadow: 0px 1px 9px 1px rgba(169,169,169,1);
+    -moz-box-shadow: 0px 1px 9px 1px rgba(169,169,169,1);
+    box-shadow: 0px 1px 9px 1px rgba(169,169,169,1);
 }
 
 .pageHeader {
@@ -159,41 +466,31 @@ option {
     position: absolute;
     line-height: 2.3;
     font-weight: bold;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    padding-left: 5px;
 }
-.pageHeader img{
-    width: 24px !important;
-    display: inline;
-}
+
+    .pageHeader img {
+        max-width: 25px !important;
+        display: inline;
+        width: 100%;
+        max-height: 25px;
+    }
+
 
 .pageBody {
     margin-top: 50px;
     margin-bottom: 50px;
+    padding: 2px !important;
 }
 
-.menu {
-    margin-right: 10%;
-    margin-left: 10%;
-    margin-top: 50px;
+
+.modal .modal-title {
+    color: #337ab7 !important;
 }
-
-    .menu .imgMenuItem {
-        border-radius: 50%;
-        width: auto;
-        height: 65px;
-    }
-
-    .menu .dvMenuItem {
-        padding: 5px;
-        margin-bottom: 5px;
-        margin-top: 10px;
-    }
-
-    .menu .txtMenuItem {
-        color: #fff;
-        font-size: 14px;
-        font-weight: normal;
-    }
-
 
 .rightHeader {
     line-height: 3;
@@ -227,18 +524,36 @@ option {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    z-index: 9999;
 }
 
-    .footer h6 {
-        font-weight: normal;
-        line-height: initial;
-    }
+.footer2 {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 5px;
+    color: #FFF;
+    min-height: 45px;
+    background: url(../images/backgound.png)no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 
-    .footer img {
-        height: 30px !important;
-        width: auto !important;
-        margin: 1%;
-    }
+.footer h6 {
+    font-weight: normal;
+    line-height: initial;
+}
+
+.footer img {
+    height: 30px !important;
+    width: auto !important;
+    margin: 1%;
+}
 
 label.error {
     color: red;
@@ -248,26 +563,20 @@ label.error {
     cursor: pointer;
 }
 
-
-/*login*/
-.pageLogin {
-    background-image: url(../images/backgound.png);
+.fontBlack {
+    color: black !important;
 }
 
-    .pageLogin #dvLogin {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%);
-    }
+canvas {
+    height: auto !important;
+    width: 75% !important;
+    margin: 0 auto !important;
+}
 
-    .pageLogin #frmLogin {
-        min-width: 500px;
-    }
-
-/*All Clients*/
+/******************************************************************************
+********************************* pageClients *********************************
+*******************************************************************************
+*******************************************************************************/
 .pageClients .dvClientsContainer {
     display: table;
     width: 100%;
@@ -279,7 +588,7 @@ label.error {
     position: relative;
     width: 25%;
     align-items: center;
-    justify-content:center;
+    justify-content: center;
 }
 
 .pageClients .dvCliensData {
@@ -287,35 +596,49 @@ label.error {
     background-color: #fff;
     padding: 2px;
     border: 1px solid #ccc;
-    border-radius: 10%;
+    border-radius: 20%;
     text-align: center;
-    height: 115px;
-    max-height: 115px;
+    /*height: 115px;
+    max-height: 115px;*/
+    height: 97px;
+    max-height: 97px;
+    margin-bottom: 50px;
     width: auto !important;
+    padding: 4px;
     max-width: 100px;
 }
 
-.pageClients .dvCliensData img {
-    width: auto !important;
-    max-width: 85px;
-    height: 85px;
-    max-height: 85px;
-    border-radius: 50%;
-    margin-bottom: 5px;
-}
+    .pageClients .dvCliensData img {
+        width: 100% !important;
+        max-width: 85px;
+        height: 85px;
+        width: 85px;
+        max-height: 85px;
+        border-radius: 15%;
+        margin-bottom: 5px;
+    }
 
 .pageClients .clientName {
     font-size: 14px;
     font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden !important;
+    /*white-space: nowrap;
+    overflow: hidden !important;*/
+    white-space: pre-line;
+    overflow: visible;
     text-overflow: ellipsis;
-    color: #000;
+    color: #fff;
+    text-align: center;
+    margin-top: 2px;
 }
 
-.pageClients #dvNoResult h1{
-    font-size:30px;
-    color:#fff;
+    .pageClients .clientName span {
+        padding: 1px;
+        font-weight: normal;
+    }
+
+.pageClients #dvNoResult h1 {
+    font-size: 30px;
+    color: #fff;
 }
 
 
@@ -336,67 +659,546 @@ label.error {
             top: 5px;
         }
 
+            .pageClients .pageTitle a span:hover {
+                color: white;
+            }
 
-
-/*Client*/
-
-.pageClient .content {
-    margin: 5%;
-    margin-top: 0;
-}
-
-    .pageClient .content h1 {
-        color: #fff;
-    }
-
-.pageClient img {
-    width: 100%;
-}
-
-.pageClient .dvCliendData {
-    margin-bottom: 18px;
-    background-color: #A7C4E6;
-    padding: 5px;
-    border: 1px solid #5B9BD5;
-    border-radius: 10%;
-    height: auto;
-    min-height: 130px;
-    max-height: 130px;
-}
-
-    .pageClient .dvCliendData img {
-        width: 60%;
-        border-radius: 20%;
-        max-height: 80px;
-        max-width: 80px;
-        margin: 5px;
-    }
-
-.pageClient .clientName {
-    font-size: 14px;
-    font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden !important;
-    text-overflow: ellipsis;
-}
-
-.pageClient .footer .dvButton {
-    line-height: 9;
-}
-
+/******************************************************************************
+********************************* pageClient **********************************
+*******************************************************************************
+*******************************************************************************/
 .pageClient .imgClient img {
     border: 2px solid #eee;
     max-height: 170px;
-    width: auto !important;
+    max-width: 170px;
+    width: 100% !important;
     border-radius: 25px;
 }
 
-@media (min-width : 480px) {
+/******************************************************************************
+********************************* pageListOrganizations ***********************
+*******************************************************************************
+*******************************************************************************/
+.pageListOrganizations .pageTitle {
+    font-size: 30px;
+    color: #fff;
+}
 
+    .pageListOrganizations .pageTitle a, .pageListOrganizations .pageTitle a:active, .pageListOrganizations .pageTitle a:focus, .pageListOrganizations .pageTitle a:hover {
+        color: #fff !important;
     }
 
-/*Plan*/
+        .pageListOrganizations .pageTitle a span {
+            top: 5px;
+        }
 
+.pageListOrganizations thead th {
+    background-color: #7f8c8d;
+    color: #fff;
+}
+
+.pageListOrganizations td {
+    color: #fff;
+}
+
+.pageListOrganizations .tableicon {
+    color: #fff;
+}
+
+.pageListOrganizations .glyphicon-edit {
+    float: right;
+    color: #fff;
+}
+
+    .pageListOrganizations .glyphicon-edit:hover, .pageListOrganizations .glyphicon-edit:visited,
+    .pageListOrganizations .glyphicon-edit:active, .pageListOrganizations .glyphicon-edit:focus {
+        color: #fff;
+    }
+
+.pageListOrganizations table img {
+    max-width: 30px;
+}
+
+.pageListOrganizations thead th {
+    background-color: #bdc3c7;
+    color: #fff;
+}
+
+/******************************************************************************
+********************************* pageOrganization ****************************
+*******************************************************************************
+*******************************************************************************/
+
+.pageOrganization #txtSMS {
+    width: auto;
+}
+
+.pageOrganization #spanSMS {
+    line-height: 1;
+    color: #999;
+    font-size: 18px;
+}
+
+.pageOrganization .spnAddRow {
+    font-size: 20px;
+}
+
+.pageOrganization table {
+    /*margin-top: 15px;*/
+}
+
+    .pageOrganization table input {
+        border: 0px !important;
+    }
+
+.pageOrganization thead th {
+    background-color: #7f8c8d;
+    color: #fff;
+}
+
+.pageOrganization td {
+    color: #fff;
+}
+
+.pageOrganization .tableicon {
+    color: #fff;
+}
+
+.pageOrganization .glyphicon-trash {
+    margin-top: 12px;
+    color: #fff;
+}
+
+    .pageOrganization .glyphicon-trash:hover, .pageOrganization .glyphicon-trash:visited,
+    .pageOrganization .glyphicon-trash:active, .pageOrganization .glyphicon-trash:focus {
+        color: #fff;
+    }
+
+/******************************************************************************
+********************************* pageCarePlans *******************************
+*******************************************************************************
+*******************************************************************************/
+
+.pageCarePlans table img {
+    max-width: 30px;
+}
+
+.pageCarePlans thead th {
+    background-color: #bdc3c7;
+    color: #fff;
+}
+
+.pageCarePlans tbody a, .pageCarePlans tbody a:focus {
+    color: #fff !important;
+}
+
+.pageCarePlans .tblWhite tr {
+    cursor: pointer;
+}
+
+.pageCarePlans .linkCarePlans a {
+    text-decoration: underline;
+}
+
+
+/******************************************************************************
+******************************* pageHealthRrecords ****************************
+*******************************************************************************
+*******************************************************************************/
+.pageHealthRrecords .nav-tabs > li.active > a,
+.pageHealthRrecords  .nav-tabs > li.active > a:focus,
+.pageHealthRrecords  .nav-tabs > li.active > a:hover{
+        box-shadow: 0px -1px 3px #fbfbfb;
+}
+.pageHealthRrecords .customHeader1 {
+    position: absolute !important;
+    top: 40px;
+    width: 101%;
+    right: 0;
+    left: 0;
+    background: #000;
+    padding: 10px;
+    z-index: 999;
+    padding-bottom: 0;
+}
+
+.pageHealthRrecords #clientLink {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 999;
+}
+
+    .pageHealthRrecords #clientLink span {
+        color: #fff;
+        font-size: 30px;
+    }
+
+.pageHealthRrecords h4 {
+    color: #9E9E9E;
+}
+
+.pageHealthRrecords li a {
+    color: #fff;
+}
+
+.pageHealthRrecords .panel {
+    border-radius: 0px;
+}
+
+
+
+.pageHealthRrecords .outerOptoins li {
+    min-width: calc(100% / 6);
+}
+
+.pageHealthRrecords .outerOptoins .outerTab1 a,
+.pageHealthRrecords .innerOptions .outerTab1 a:focus,
+.pageHealthRrecords .innerOptions .outerTab1 a:hover {
+    background-color: #3498db !important;
+    color: #fff !important;
+    text-align: center;
+}
+
+.pageHealthRrecords .outerOptoins .outerTab2 a,
+.pageHealthRrecords .innerOptions .outerTab2 a:focus,
+.pageHealthRrecords .innerOptions .outerTab2 a:hover {
+    background-color: #e67e22 !important;
+    color: #fff !important;
+    text-align: center;
+}
+
+.pageHealthRrecords .outerOptoins .outerTab3 a,
+.pageHealthRrecords .innerOptions .outerTab3 a:focus,
+.pageHealthRrecords .innerOptions .outerTab3 a:hover {
+    background-color: #2ecc71 !important;
+    color: #fff !important;
+    text-align: center;
+}
+
+.pageHealthRrecords .outerOptoins .outerTab4 a,
+.pageHealthRrecords .innerOptions .outerTab4 a:focus,
+.pageHealthRrecords .innerOptions .outerTab4 a:hover {
+    background-color: #2980b9 !important;
+    color: #fff !important;
+    text-align: center;
+}
+
+.pageHealthRrecords .outerOptoins .outerTab5 a,
+.pageHealthRrecords .innerOptions .outerTab5 a:focus,
+.pageHealthRrecords .innerOptions .outerTab5 a:hover {
+    background-color: #795548 !important;
+    color: #fff !important;
+    text-align: center;
+}
+
+.pageHealthRrecords .outerOptoins {
+    border-bottom-color: black;
+}
+
+.pageHealthRrecords .innerOptions {
+    background-color: #000 !important;
+    border-bottom-color: black;
+    margin-bottom: 0px;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    height: 56px;
+}
+
+.pageHealthRrecords .innerOptions .panel-heading {
+    border: 1px solid #e67e22;
+    padding: 5px !important;
+    right: 23px;
+    left: 23px;
+    top: -1px;
+    border-radius: 0;
+    position: absolute;
+    background: #e67e22;
+}
+    .pageHealthRrecords .innerOptions ul {
+        border-bottom: 0px !important;
+    }
+
+    .pageHealthRrecords .innerOptions li {
+        margin-bottom: -1px;
+        width: calc(100% / 7);
+        padding: 5px;
+        text-align: center;
+    }
+
+        .pageHealthRrecords .innerOptions li a,
+        .pageHealthRrecords .innerOptions li a:focus,
+        .pageHealthRrecords .innerOptions li a:hover {
+            background-color: transparent;
+            color: #fff !important;
+            padding: 5px;
+            font-size: 13px !important;
+            margin-bottom: 5px;
+        }
+
+        .pageHealthRrecords .innerOptions li.active a,
+        .pageHealthRrecords .innerOptions li.active a:focus,
+        .pageHealthRrecords .innerOptions li.active a:hover {
+            background-color: #fff !important;
+            color: #000 !important;
+            border: 0px !important;
+        }
+
+.pageHealthRrecords .innerOptionsMeasurments {
+    background-color: #000 !important;
+    border-bottom-color: black;
+    margin-bottom: 0px;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    height: 56px;
+}
+
+.pageHealthRrecords .innerOptionsMeasurments .panel-heading {
+    border: 1px solid #3498db;
+    padding: 5px !important;
+    right: 23px;
+    left: 23px;
+    top: -1px;
+    border-radius: 0;
+    position: absolute;
+    background: #3498db;
+}
+
+    .pageHealthRrecords .innerOptionsMeasurments ul {
+        border-bottom: 0px !important;
+    }
+
+    .pageHealthRrecords .innerOptionsMeasurments li {
+        margin-bottom: -1px;
+        width: calc(100% / 6);
+        padding: 5px;
+        text-align: center;
+    }
+
+        .pageHealthRrecords .innerOptionsMeasurments li.col-xs-1.active {
+            background-color: #fff !important;
+            color: #000 !important;
+            border: 1px solid #ddd;
+            border-bottom-color: transparent;
+        }
+
+        .pageHealthRrecords .innerOptionsMeasurments li a,
+        .pageHealthRrecords .innerOptionsMeasurments li a:focus,
+        .pageHealthRrecords .innerOptionsMeasurments li a:hover {
+            background-color: transparent;
+            color: #fff !important;
+            padding: 5px;
+            font-size: 13px !important;
+            margin-bottom: 5px;
+        }
+
+        .pageHealthRrecords .innerOptionsMeasurments li.active a,
+        .pageHealthRrecords .innerOptionsMeasurments li.active a:focus,
+        .pageHealthRrecords .innerOptionsMeasurments li.active a:hover {
+            background-color: #fff !important;
+            color: #000 !important;
+            border:0 !important;
+        }
+
+.innerSingleTab {
+    position: absolute;
+    top: 98px; /*92px default*/
+    height: calc(100vh - 40px - 52px - 59px - 45px);
+    width: 100%;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+}
+
+.innerSingleTabNoTabs {
+    position: absolute;
+    top: 40px;
+    height: calc(100vh - 40px - 52px - 45px);
+    /* width: 100%; */
+    left: 15px;
+    right: 15px;
+    overflow-y: auto;
+}
+
+.pageHealthRrecords .adjustNewButton {
+    margin-right: 10px;
+    position: fixed;
+    top: 84vh;
+    right: 20px;
+    text-transform: capitalize;
+    z-index: 999999;
+    border-radius: 50%;
+    padding: 7px 13px;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: none;
+    outline: none;
+    color: #FFF;
+    font-size: 26px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition: .3s;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    opacity: 0.7;
+}
+
+.pageHealthRrecords .tblWhite th {
+    color: #000;
+    background-color: #fff;
+}
+
+.pageHealthRrecords .table-responsive {
+    width: 100%;
+    margin-bottom: 70px;
+}
+
+    .pageHealthRrecords .table-responsive > .table-bordered {
+        max-height: 60vh;
+    }
+
+/******************************************************************************
+******************************* Care Plans ****************************
+*******************************************************************************
+*******************************************************************************/
+.dvCarePalans .dvPersonalData {
+    position: absolute !important;
+    top: 40px;
+    /*top: 92px !important;*/
+    right: 0;
+    left: 0;
+    width: 100%;
+    background: #000;
+    padding: 5px;
+    padding-right: 40px;
+    padding-left: 20px;
+    z-index: 999;
+}
+
+    .dvCarePalans .dvPersonalData .mainBar h5 {
+        color: #999;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .dvCarePalans .dvPersonalData .mainBar h6 {
+        color: #fff;
+        font-family: "century gothic";
+    }
+
+    .dvCarePalans .dvPersonalData .subBar {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+.dvCarePalans .pageBody {
+    background-color: #fff;
+    top: 132px;
+    position: absolute;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.dvCarePalans .customFooter {
+    position: fixed !important;
+    bottom: 45px;
+    /*width: 101%;*/
+    right: 0;
+    left: 0;
+    background: #000;
+    padding: 7px;
+}
+
+.dvCarePalans .customHeader2 {
+    width: 100%;
+    position: absolute !important;
+    top: 0;
+    background: #fff;
+    /* padding: 10px; */
+    z-index: 999;
+    /*padding-bottom: 0;*/
+}
+
+.dvCarePalans li a {
+    color: #555 !important;
+}
+
+.dvCarePalans li.active a {
+    background-color: #ddd !important;
+}
+
+.dvCarePalans .newPlanLi {
+    padding: 6px;
+    font-size: 20px;
+    margin-left: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+    .dvCarePalans .newPlanLi a {
+        background-color: #ccc !important;
+    }
+
+.dvCarePalans .pageCustomMargin {
+    margin: 0;
+    margin-top: 42px;
+    width: 100%;
+    background: #fff;
+    color: #555;
+}
+
+    .dvCarePalans .pageCustomMargin input {
+        color: #555 !important;
+    }
+
+    .dvCarePalans .pageCustomMargin #innerTabs {
+        height: calc(100vh - 40px - 52px - 91px - 10px - 42px - 50px - 45px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 5px 10px 10px 10px;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+.dvCarePalans .tabContainer {
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+/******************************************************************************
+******************************* Modals ****************************
+*******************************************************************************
+*******************************************************************************/
+.modal-content input {
+    color: #000 !important;
+}
+
+.modal-content select {
+    color: #000 !important;
+}
+
+.modal-content option {
+    background-color: #fff !important;
+}
+
+.pagePlan .grayButton {
+    color: #fff;
+}
+
+    .pagePlan .grayButton:hover, .pagePlan .grayButton:focus {
+        color: #fff !important;
+    }
+
+.pagePlan .pageBody {
+    margin-top: 70px;
+}
 
 .client img {
     height: auto;
@@ -405,114 +1207,145 @@ label.error {
     width: 35px;
 }
 
-.pagePlan .content {
-    margin-left: 5%;
-    margin-right: 5%;
+.pagePlan input {
+    font-size: 14px !important;
+    color: #333 !important;
 }
 
-.pagePlan .dvClientData h1, h2, h3, h4, h5, h6 {
-    color: #fff;
-    margin-bottom: 3px;
+.pagePlan label {
+    font-size: 12px !important;
 }
 
-.pagePlan .dvClientData .glyphicon {
-    font-size: 47px;
-    color: #fff;
-}
-
-.pagePlan .content .btn-invert {
+.pagePlan textarea {
+    height: auto;
+    resize: none;
+    border: none;
+    border-bottom: 1px solid #757575;
+    width: 100%;
+    min-height: 38px;
+    padding-right: 0px;
+    padding-left: 0px;
+    border-style: none none solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #e6e6e6;
+    border-radius: 0px;
     background-color: transparent;
-    border: 2px solid #fff;
-    color: #fff;
-    padding-left: 20px;
-    padding-right: 20px;
+    font-size: 14px;
+    color: #333 !important;
+    padding: 5px;
+    display: block;
+    line-height: 1.42857143;
 }
 
-.tab-content {
-    background-color: #fff;
-    min-height: 300px;
-    height: 60vh;
-    padding-top: 7px;
-    padding-left: 15px;
-    padding-right: 9px;
-    font-size: 17px;
+.pagePlan #byWhoModal label {
+    line-height: 5 !important;
 }
-
-    .tab-content input {
-        font-size: 17px !important;
-        color:#000;
-    }
-
-    .tab-content button {
-        padding: 0 !important;
-        margin: 0;
-    }
 
 .close {
     color: #f00;
-    font-size:45px;
-}
-/*Plans tab*/
-.tabs-left {
-    border-bottom: none;
-    padding-top: 0px;
-    /*border-right: 1px solid #ddd;*/
+    font-size: 36px;
 }
 
-    .tabs-left > li {
-        float: none;
-        font-size: 19px;
-        font-weight: bold;
-        /*margin-bottom: 0px;*/
-        /*margin-right: -1px;*/
-    }
-
-        .tabs-left > li > a {
-            border-radius: 15px 0 0 15px;
-            margin-right: 0;
-            display: block;
-            color: #fff;
-            background-color: #464646;
-            margin-bottom: 9px;
-        }
-
-        .tabs-left > li.active > a,
-        .tabs-left > li.active > a:hover,
-        .tabs-left > li.active > a:focus {
-            border-bottom-color: #fff;
-            border-right-color: transparent;
-            color: #000;
-        }
-/*End plans tab*/
-
-
-
-/*Health Record*/
-.pageHealthRecord .content {
-    margin: 5%;
-}
-
-.pageHealthRecord h1, h2, h3, h4, h5, h6 {
+.pagePlan .dvPersonalData {
+    top: 38px !important;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1010;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
     color: #fff;
+    background: url(../images/backgound.png)no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
-.pageHealthRecord .dvClientData .glyphicon {
-    font-size: 70px;
-    font-weight: 100;
-    color: #fff;
+.pagePlan .pageHeader {
+    font-size: 14px;
 }
 
-.pageHealthRecord .content button {
-    background-color: transparent;
-    color: #fff;
-    font-size: 3vw;
-    background-color: #000;
-    border-radius: 15px;
-    border: 1.5px solid #f3eaef;
-    padding-left: 20px;
-    padding-right: 20px;
+.pagePlan .planBody {
+    margin-top: 114px;
 }
 
-    .pageHealthRecord .content button > span > img {
-        width: 5vw;
-    }
+.pagePlan .prgrsDv {
+    min-height: 100px;
+    max-height: 150px;
+    border: none;
+    border-bottom: 2px #888 solid;
+    overflow-y: scroll;
+}
+
+#planModal h4 {
+    color: #999 !important;
+}
+
+#planModal label {
+    font-size: 18px !important;
+}
+
+#planModal input {
+    color: #999;
+}
+
+#planModal .input-form {
+    color: #999;
+}
+
+#planModal option {
+    background-color: #fff;
+}
+
+#planModal .ChKPatientAgrees {
+    top: 3px;
+}
+
+#planModal #spanPatientAgrees {
+    color: #999;
+    line-height: 3;
+}
+
+#planModal #txtSMS {
+    width: auto;
+}
+
+#planModal #spanSMS {
+    line-height: 1;
+    color: #999;
+    font-size: 18px;
+}
+
+#spanPatientAgrees {
+    line-height: 3;
+    color: #999;
+}
+
+.prgrsDv {
+    min-height: 100px;
+    max-height: 150px;
+    border: none;
+    border-bottom: 2px #888 solid;
+    overflow-y: scroll;
+}
+
+.prgrsDvLbl {
+    color: #999;
+    font-size: 12px;
+}
+/*thead, tbody { display: block; }
+
+tbody {
+    max-height: 55vh;     
+    overflow-y: auto;   
+    overflow-x: hidden; 
+}
+tbody td, thead th {
+    width: calc(100% / 6); 
+}*/
+
+/*.customPageBody {
+    margin-top: 90px;
+}*/

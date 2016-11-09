@@ -1,0 +1,22 @@
+﻿<div class="tab-pane fade in active">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel with-nav-tabs innerOptionsMeasurments">
+                <div class="panel-heading">
+                    <ul class=" nav nav-tabs">
+                        <li class="col-xs-2" ng-class="{active:activetab == 'weight'}" ng-click="activetab = 'weight'"><a data-toggle="tab" ui-sref="healthrecord.healthmeasurment.weight">Weight/BMI</a></li>
+                        <li class="col-xs-2" ng-class="{active:activetab == 'activity'}" ng-click="activetab = 'activity'"><a data-toggle="tab" ui-sref="healthrecord.healthmeasurment.activity">Activity</a></li>
+                        <li class="col-xs-2" ng-class="{active:activetab == 'bloodpressure'}" ng-click="activetab = 'bloodpressure'"><a data-toggle="tab" ui-sref="healthrecord.healthmeasurment.bloodpressure">Blood&nbsp;Pressure</a></li>
+                        <li class="col-xs-2" ng-class="{active:activetab == 'cholesterol'}" ng-click="activetab = 'cholesterol'"><a data-toggle="tab" ui-sref="healthrecord.healthmeasurment.cholesterol">Cholesterol</a></li>
+                        <li class="col-xs-2" ng-class="{active:activetab == 'hba1c'}" ng-click="activetab = 'hba1c'"><a data-toggle="tab" ui-sref="healthrecord.healthmeasurment.hba1c">HBA1c</a></li>
+                        <li class="col-xs-2" ng-class="{active:activetab == 'bloodglucose'}" ng-click="activetab = 'bloodglucose'"><a data-toggle="tab" ui-sref="healthrecord.healthmeasurment.bloodglucose">Blood&nbsp;Glucose</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="innerSingleTab" ui-view>
+
+</div>

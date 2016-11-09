@@ -1,0 +1,13 @@
+﻿<div class="col-lg-10 col-md-10 col-sm-9 col-xs-6 noPaddingRight" ng-push-menu="menu">
+    <span class="glyphicon glyphicon-menu-hamburger listIcon cursorPointer"></span>
+    <span class="pageHeader">
+        &nbsp;{{clientname}}&nbsp;<img class="img-circle hidden-xs" src="{{clientImg}}">
+		&nbsp;&nbsp;&nbsp;Age: <span class="fontNormal">{{clientAge}}&nbsp;years</span>
+		&nbsp;&nbsp;&nbsp;Gender: <span class="fontNormal">{{clientGender}}</span>
+		&nbsp;&nbsp;&nbsp;Phone: <span class="fontNormal">{{clientMobile}}</span>
+		&nbsp;&nbsp;&nbsp;Suburb: <span class="fontNormal">{{clientSuburb}}</span>
+	</span>
+</div>
+<div class="rightHeader mun col-lg-2 col-md-2 col-sm-3 col-xs-6">
+    <b><span class="userName">{{currentUserName}}</span>&nbsp;|&nbsp;<a ng-click="logout()">Logout</a></b>
+</div>

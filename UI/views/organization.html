@@ -1,0 +1,194 @@
+﻿<div class="row header" ui-view="headerView"></div>
+<div class="pageBody pageOrganization">
+    <div class="clear"></div>
+    <div class="row animated fadeInRight">
+        <form name="frmAddOrganization" id="frmAddOrganization" novalidate>
+            <div class="col-xs-12">
+                <div class="clear2"></div>
+                <!-- Row1 Start -->
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="row">
+                            <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                <div class="group">
+                                    <input ng-input-effect-class is-required ng-model="txtOrganizationName" ng-class="{errorBorder : frmAddOrganization.txtOrganizationName.$dirty == true && frmAddOrganization.txtOrganizationName.$invalid == true ,'used': txtOrganizationName.length > 0}" type="text" pattern=".{1,80}" name="txtOrganizationName" id="txtOrganizationName" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label ng-class="{errorFont : frmAddOrganization.txtOrganizationName.$dirty == true && frmAddOrganization.txtOrganizationName.$invalid == true }">Organisation Name</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="row">
+                            <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                <div class="group">
+                                    <input ng-input-effect-class is-required ng-model="txtOrganizationAddress" ng-class="{errorBorder : frmAddOrganization.txtOrganizationAddress.$dirty == true && frmAddOrganization.txtOrganizationAddress.$invalid == true ,'used': txtOrganizationAddress.length > 0}" type="text" pattern=".{1,80}" name="txtOrganizationAddress" id="txtOrganizationAddress" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label ng-class="{errorFont : frmAddOrganization.txtOrganizationAddress.$dirty == true && frmAddOrganization.txtOrganizationAddress.$invalid == true }">Organisation Address</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row1 End -->
+                <div class="clear2"></div>
+                <div class="clear2"></div>
+                <!-- Row2 Start -->
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="row">
+                            <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                <div class="group">
+                                    <input ng-input-effect-class is-required ng-model="txtPostalCode" ng-class="{errorBorder : frmAddOrganization.txtPostalCode.$dirty == true && frmAddOrganization.txtPostalCode.$invalid == true ,'used': txtPostalCode.length > 0}" type="number" string-to-number pattern=".{1,80}" id="txtPostalCode" name="txtPostalCode" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label ng-class="{errorFont : frmAddOrganization.txtPostalCode.$dirty == true && frmAddOrganization.txtPostalCode.$invalid == true }">Postal Code</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="row">
+                            <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                <div class="group">
+                                    <input ng-input-effect-class is-required ng-model="txtPhone" ng-class="{errorBorder : frmAddOrganization.txtPhone.$dirty == true && frmAddOrganization.txtPhone.$invalid == true ,'used': txtPhone.length > 0}" type="text" pattern=".{1,80}" id="txtPhone" name="txtPhone" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label ng-class="{errorFont : frmAddOrganization.txtPhone.$dirty == true && frmAddOrganization.txtPhone.$invalid == true }">Phone</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row2 End -->
+                <div class="clear2"></div>
+                <div class="clear2"></div>
+                <!-- Row3 Start -->
+                <div class="row">
+                    <div class="col-md-6  col-sm-6 col-xs-6">
+                        <div class="row">
+                            <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                <div class="group">
+                                    <input ng-input-effect-class is-required ng-model="txtMobile" ng-class="{errorBorder : frmAddOrganization.txtMobile.$dirty == true && frmAddOrganization.txtMobile.$invalid == true ,'used': txtMobile.length > 0}" type="text" pattern=".{1,80}" id="txtMobile" name="txtMobile" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label ng-class="{errorFont : frmAddOrganization.txtMobile.$dirty == true && frmAddOrganization.txtMobile.$invalid == true }">Mobile</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6  col-sm-6 col-xs-6">
+                        <div class="col-md-6  col-sm-6 col-xs-6">
+                            <label>SMS Notifications</label>
+                        </div>
+                        <div class="col-md-6  col-sm-6 col-xs-6 checkbox">
+                            <switch name="yesNo" ng-model="yesNo" on="Yes" off="No" class="wide"></switch>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row3 End -->
+                <div class="clear2"></div>
+                <div class="clear2"></div>
+
+
+
+                <!-- Row4 Start -->
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="row">
+                            <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                <div class="group">
+                                    <input ng-input-effect-class is-required ng-model="txtEmail" ng-class="{errorBorder : frmAddOrganization.txtEmail.$dirty == true && frmAddOrganization.txtEmail.$invalid == true ,'used': txtEmail.length > 0}" type="email" pattern="[a-zA-Z0-9_]+(?:\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" id="txtEmail" name="txtEmail" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label ng-class="{errorFont : frmAddOrganization.txtEmail.$dirty == true && frmAddOrganization.txtEmail.$invalid == true }">Mail</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row4 End -->
+                <div class="clear2"></div>
+                <div class="clear2"></div>
+                <!-- Row5 Start -->
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="table-responsive">
+                            <table id="table" class="table table-bordered tblSpeciality">
+                                <thead>
+                                    <tr>
+                                        <th>Specialty Name</th>
+                                        <th>Description<span class="glyphicon glyphicon-plus-sign pull-right spnAddRow" ng-click="addSpeciality()"></span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="spec in speciality">
+                                        <td>
+                                            <div class="row">
+                                                <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="group">
+                                                        <input type="text" pattern=".{1,80}" name="txt1" ng-model="spec.name" class="txtSpecialityName">
+                                                        <span class="highlight"></span>
+                                                        <span class="bar"></span>
+                                                        <label></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-xs-11">
+                                                <div class="row">
+                                                    <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="group">
+                                                            <input type="text" pattern=".{1,80}" ng-model="spec.desc" name="txt2" class="txtSpecialityDescription">
+                                                            <span class="highlight"></span>
+                                                            <span class="bar"></span>
+                                                            <label></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="tableicon" ng-click="deleteSpeciality(spec)"><span class="glyphicon glyphicon-trash"></span></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row5 End -->
+                <!-- Row6 Start -->
+                <div class="row">
+                    <div class="col-xs-3 text-left">
+                        <button class="btn btn-invert" type="button" ui-sref="listproviderssystem">Providers</button>
+                    </div>
+                </div>
+                <!-- Row6 End -->
+                <div class="clear row"></div>
+                <!-- Error msg -->
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div ng-class="{'alert-success' : messageStatus == 'success' ,'alert-danger' : messageStatus == 'danger' ,'alert-warning' : messageStatus == 'warning'}" class="alert alert-dismissible text-center" ng-show="showMessage == true" id="dvMSG" role="alert">
+                            <span>{{messageTxt}}</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Error msg End-->
+            </div>
+        </form>
+        <div class="clear"></div>
+    </div>
+
+    <div class="row footer2">
+        <div class="text-left col-md-6 col-sm-6 col-xs-6">
+            <button class="btn btn-dismiss" type="button" ng-click="cancelOrganization()">Dismiss</button>
+        </div>
+        <div class="text-right col-md-6 col-sm-6 col-xs-6">
+            <button class="btn btn-invert saveBtn"  ng-click="submit(frmAddOrganization)" type="submit">Save</button>
+        </div>
+    </div>
+</div>
+<!--<div class="row footer" ui-view="footerView"></div>-->
