@@ -1,0 +1,138 @@
+﻿<div class="innerSingleTabNoTabs">
+
+    <div class="clear2"></div>
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-6 col-sm-3 col-sm-offset-9 text-right">
+            <input type="text" placeholder="Type to filter" class="input-form txtSearchNotes" id="txtSearchNotes" name="txtSearchNotes" />
+        </div>
+    </div>
+
+    <div class="clear2"></div>
+
+    <!-- Table Start -->
+    <div class="table-responsive dvTblNotes">
+        <table class="table table-bordered tblWhite">
+            <thead>
+                <tr>
+                    <th>Date Entered</th>
+                    <th>Clinical Reason</th>
+                    <th>Examination</th>
+                    <th>Treatment</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody class="tblNotes">
+                <tr>
+                    <td>1 Apr 2014</td>
+                    <td>Head Pain</td>
+                    <td>Patient reports headaches</td>
+                    <td>Panadol preciption</td>
+                    <td>Resolve</td>
+                </tr>
+                <tr>
+                    <td>1 Apr 2014</td>
+                    <td>heart Pain</td>
+                    <td>Patient reports heart pain</td>
+                    <td>Panadol preciption</td>
+                    <td>Unresolved</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Table End -->
+
+    <div class="row">
+        <div id="dvNoResult" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hide text-center dvNoResult">
+            <h1>No result found</h1>
+        </div>
+    </div>
+
+</div>
+
+<button class="btn btn-success adjustNewButton" data-toggle="modal" data-target="#consultationnotesModal" type="button">
+    <span class="glyphicon glyphicon-plus"></span>
+</button>
+
+<!-- Consultation Notes Modal Start -->
+<div id="consultationnotesModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Consultation Notes Modal content Start-->
+        <div class="modal-content">
+            <!-- Consultation Notes Modal Body Start -->
+            <div class="modal-body">
+                <!-- Consultation Notes Modal Header Start -->
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
+                <h4 class="text-center">New Consultation Notes</h4>
+                <!-- Consultation Notes Modal Header End -->
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group groupConsultationNotesModal">
+                            <input type="text" class="fontBlack" name="txtDateConsultationNotes" pattern=".{1,80}" id="txtDateConsultationNotes" required readonly>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label id="lblDOB">Date Entered</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group">
+                            <select id="cmbClinicalReason" name="cmbClinicalReason" class="input-form" required>
+                                <option value="0" disabled selected></option>
+                                <option value="1">Clinical Reason 1</option>
+                                <option value="2">Clinical Reason 2</option>
+                            </select>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Clinical Reason</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group">
+                            <input type="text" pattern=".{1,80}" name="txtExamination" id="txtExamination" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Examination</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="group">
+                            <input type="text" pattern=".{1,80}" name="txtTreatment" id="txtTreatment" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>Treatment</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <label>Is Resolved</label>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 checkbox">
+                            <switch name="yesNo" ng-model="yesNo" on="Yes" off="No" class="wide"></switch>
+                            <span id="spanStatus"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Consultation Notes Modal Body End -->
+            <!-- Consultation Notes Modal Footer Start -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+            </div>
+            <!-- Consultation Notes Modal Footer End -->
+        </div>
+        <!-- Consultation Notes Modal Content End -->
+    </div>
+</div>
+<!-- Consultation Notes Modal End -->

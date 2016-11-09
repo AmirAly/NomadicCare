@@ -1,0 +1,40 @@
+﻿<div class="row header" ui-view="headerView"></div>
+<div class="pageBody pageCarePlans animated fadeInRight">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="clear2"></div>
+            <!-- Table Start -->
+            <div class="">
+                <table ng-hide="!careplans.length" class="table table-bordered tblWhite tblPlanList">
+                    <thead>
+                        <tr>
+                            <th>Client&nbsp;Name</th>
+                            <th>Care&nbsp;Plan&nbsp;Name</th>
+                            <th>Provider</th>
+                            <th>Status</th>
+                            <th>Last&nbsp;Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="plan in careplans">
+                            <td class="linkCarePlans">
+                                <img src="{{plan.client.img}}">&nbsp;<a ng-click="viewClient(plan.client.id)">{{plan.client.name}}</a>
+                            </td>
+                            <td class="linkCarePlans"><a ng-click="viewPlan(plan.client.id,plan.planId )">{{plan.planName}}</a></td>
+                            <td class="linkCarePlans"><img src="{{plan.provider.img}}">&nbsp;<a ng-click="viewProvider(plan.provider.id)">{{plan.provider.name}}</a></td>
+                            <td>{{plan.planStatus}}</td>
+                            <td>{{plan.lastUpdated}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Table End -->
+            <div ng-show="!careplans.length" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h1>No plans found</h1>
+            </div>
+        </div>
+        <div class="clear2"></div>
+    </div>
+
+</div>
+<!--<div class="row footer" ui-view="footerView"></div>-->

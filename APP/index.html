@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EHS</title>
+    <link rel="shortcut icon" href="img/icon.png" />
+    <!--css-->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/fontawesome/font-awesome.min.css" />
+
+
+
+    <link rel="stylesheet" href="js/general/angular-bootstrap-datetimepicker/css/datetimepicker.css" />
+    <link href="js/general/switch/angular-ui-switch.css" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="css/slideandpush.css" />
+    <link href="css/animation/animate.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+
+</head>
+<body ng-app="ehs" class="container-fluid">
+
+    <div ui-view >
+
+    </div>
+
+    <ng-slide-push-menu id="menu" position="left">
+        <div ng-switch="userType">
+            <div ng-switch-when="admin" >
+                <div ng-include="'views/templates/adminmenu.temp.html'"></div>
+            </div>
+            <div ng-switch-when="system">
+                <div ng-include="'views/templates/systemmenu.temp.html'"></div>
+            </div>
+            <div ng-switch-default>
+                <div ng-include="'views/templates/adminmenu.temp.html'"></div>
+            </div>
+        </div>
+    </ng-slide-push-menu>
+
+    <div id="confirmationModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog" role="document">
+           <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h5 class="modal-title">Are You Sure You Want To Delete This ?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="DeleteConfirmed=true">Ok</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <div id="confirmationModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title">Are You Sure You Want To Delete This ?</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="DeleteConfirmed2=true">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script type="text/javascript" src="js/general/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/general/bootstrap/bootstrap.min.js"></script>
+
+    <!--angular js-->
+    <script type="text/javascript" src="js/general/angular.min.js"></script>
+    <script type="text/javascript" src="js/general/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="js/general/angular-animate.js"></script>
+
+    <script type="text/javascript" src="js/general/angular-bootstrap-datetimepicker/js/moment.js"></script>
+
+    <script type="text/javascript" src="js/general/angular-bootstrap-datetimepicker/js/datetimepicker.js"></script>
+    <script type="text/javascript" src="js/general/angular-bootstrap-datetimepicker/js/datetimepicker.templates.js"></script>
+    
+    <script type="text/javascript" src="js/general/datetimeinput.js"></script>
+    <script type="text/javascript" src="js/general/switch/angular-ui-switch.js"></script>
+
+
+    <!--<script type="text/javascript" src="js/app.js"></script>-->
+    <script type="text/javascript" src="js/approutes.js"></script>
+    <script type="text/javascript" src="js/services/warehouse.js"></script>
+    <script type="text/javascript" src="js/directives.js"></script>
+    <script type="text/javascript" src="js/services/pushmenu.js"></script>
+    <script type="text/javascript" src="js/general/chartbundle.js"></script>
+
+    <script type="text/javascript" src="js/controllers/logincontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/clientscontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/clientcontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/listorganizationscontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/organizationcontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/listproviderssystemcontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/providerssystemcontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/listproviderscontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/providercontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/careplanslistcontroller.js"></script>
+
+    <script type="text/javascript" src="js/controllers/healthrecordcontroller.js"></script>
+
+    <script type="text/javascript" src="js/controllers/weightcontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/activitycontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/bloodglucosecontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/cholesterolcontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/bloodpressurecontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/hba1ccontroller.js"></script>
+
+    <script type="text/javascript" src="js/controllers/allergiescontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/vaccinationscontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/diagnosiscontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/laboratorycontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/followupcontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/documentscontroller.js"></script>
+
+    <script type="text/javascript" src="js/controllers/medicationscontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/consultationnotescontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/analyticscontroller.js"></script>
+    <script type="text/javascript" src="js/controllers/careplanscontroller.js"></script>
+
+
+</body>
+
+</html>

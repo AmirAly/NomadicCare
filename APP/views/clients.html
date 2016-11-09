@@ -1,0 +1,30 @@
+﻿<div class="row header" ui-view="headerView"></div>
+<div class="pageBody pageClients animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left noPaddingRight">
+            <span class="pageTitle">Clients &nbsp;<a ui-sref="client"><span class="glyphicon glyphicon-plus-sign"></span></a></span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+            <input type="text" placeholder="Type to filter" class="input-form txtSearchClients" ng-model="searchText.name" />
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 dvClientsContainer">
+            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-4 filterable" ng-repeat="client in clients | filter:searchText as filteredArray">
+                <div class="dvCliensData" ng-click="showClientDetails($index)">
+                    <div><img src="{{client.img}}" /></div>
+                    <div class="clientName"><span>{{client.name}}</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="filteredArray.length == 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <h1>No Clients Found</h1>
+        </div>
+
+    </div>
+
+    <div class="clear"></div>
+</div>
+<!--<div class="row footer" ui-view="footerView"></div>-->
