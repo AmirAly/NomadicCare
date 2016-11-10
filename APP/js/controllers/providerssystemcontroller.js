@@ -1,4 +1,4 @@
-﻿ehs.controller("providerssystemController", function ($scope, $state, $rootScope, $stateParams) {
+﻿ehs.controller("providerssystemController", function ($scope, $state, $rootScope, $stateParams, API) {
     $rootScope.pageHeader = '';
     console.log($stateParams.providerid);
 
@@ -12,26 +12,52 @@
         $scope.txtPhone = "";
         $scope.txtMobile = "";
         $scope.txtEmail = "";
-        $scope.speciality = [{ name: '', desc: '' }];
-        $scope.practices = [{ name: '' }];
+        $scope.speciality = [{ Name: '', Description: '' }];
+        $scope.practices = [{ Name: '', Description: '' }];
     }
     else {
         //Edit client
-        $rootScope.pageHeader = 'Provider Edit';
-        $scope.createMode = false;
-        $scope.txtProviderName = "Kamelia";
-        $scope.txtProviderAddress = "Egypt, Cairo 20 Masr St.";
-        $scope.txtPostalCode = "123456";
-        $scope.txtPhone = "01245415844";
-        $scope.txtMobile = "03510685";
-        $scope.txtEmail = "Kamelia@mail.com";
-        $scope.speciality = [{ name: 'spec 1 ', desc: 'desc 1' }];
-        $scope.practices = [{ name: 'practice 1' }];
+        var req = {
+            method: 'get',
+            url: '/Coordinator/' + $stateParams.orgid,
+            data: {}
+        }
+        ////loader
+        //$scope.loading = true;
+
+        API.execute(req).then(function (_res) {
+            console.log(_res.data);
+            if (_res.data.code == 100) {
+                $rootScope.pageHeader = 'Provider Edit';
+                $scope.createMode = false;
+                $scope.txtProviderName = _res.data.data.Name;
+                $scope.txtProviderAddress = _res.data.data.Location;
+                $scope.txtPostalCode = _res.data.data.PostalCode;
+                $scope.txtPhone = _res.data.data.Phone;
+                $scope.txtMobile = _res.data.data.Mobile;
+                $scope.txtEmail = _res.data.data.Email;
+                $scope.speciality = _res.data.data.Speciality;
+                $scope.practices = _res.data.data.Practice;
+                $scope.txtSMS = _res.data.data.SmsNotificationsEnabled;
+            }
+            else {
+                $rootScope.pageHeader = 'Provider Edit';
+                $scope.createMode = false;
+                $scope.showMessage = true;
+                $scope.messageTxt = 'No Such Provider ...';
+                $scope.messageStatus = 'warning';
+            }
+            //$scope.loading = false;
+        }, function (error) {
+            $scope.showMessage = true;
+            $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
+            $scope.messageStatus = 'warning';
+        });
     }
 
 
     $scope.cancelProvider = function () {
-        $state.go('listproviderssystem');
+        $state.go('listproviderssystem', { orgid: $stateParams.orgid });
     }
 
     $scope.submit = function (form) {
@@ -48,7 +74,10 @@
                 Mobile: $scope.txtMobile,
                 Email: $scope.txtEmail,
                 Speciality: $scope.speciality,
-                Practice :$scope.practices
+                Practice: $scope.practices,
+                SmsNotificationsEnabled: $scope.txtSMS,
+                Organization: $stateParams.orgid,
+                _id: $stateParams.providerid
             }
             console.log($scope.orgObj);
             console.log('valid');
@@ -61,7 +90,7 @@
     }
     
     $scope.addSpeciality = function () {
-        $scope.speciality.push({ name: '', desc: '' });
+        $scope.speciality.push({ Name: '', Description: '' });
     }
 
     $scope.deleteSpeciality = function (_spec, _type) {
@@ -76,7 +105,7 @@
                 $scope.speciality.splice(index, 1);
                 console.log($scope.speciality);
                 if ($scope.speciality.length == 0) { // if no speciality add empty row
-                    $scope.speciality.push({ name: '', desc: '' });
+                    $scope.speciality.push({ Name: '', Description: '' });
                 }
                 $rootScope.DeleteConfirmed = false;
             }
@@ -85,7 +114,7 @@
     }
 
     $scope.addPractice = function () {
-        $scope.practices.push({ name: '' });
+        $scope.practices.push({ Name: '', Description: '' });
     }
 
     $scope.deletePractice = function (_practice, _type) {
@@ -100,7 +129,7 @@
                 $scope.practices.splice(index, 1);
                 console.log($scope.practices);
                 if ($scope.practices.length == 0) { // if no practice add empty row
-                    $scope.practices.push({ name: '' });
+                    $scope.practices.push({ Name: '', Description: '' });
                 }
                 $rootScope.DeleteConfirmed2 = false;
             }

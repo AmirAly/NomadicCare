@@ -22,11 +22,11 @@
                             <tbody>
                                 <tr ng-repeat="org in Organisations">
                                     <td>
-                                        <span>{{org.name}}</span>
+                                        <span>{{org.Name}}</span>
                                     </td>
                                     <td>
-                                        <span>{{org.address}}</span>
-                                        <a class="tableicon" ng-click="showOrganizationDetails($index)">
+                                        <span>{{org.Location}}</span>
+                                        <a class="tableicon" ng-click="showOrganizationDetails(org._id)">
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </a>
                                     </td>
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" ng-show="!Organisations.length">
-                <h1>No Organisations Found</h1>
+                <h3>No Organisations Found</h3>
             </div>
         </div>
         <div class="clear2"></div>

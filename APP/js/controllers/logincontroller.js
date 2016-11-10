@@ -1,6 +1,7 @@
 ﻿ehs.controller("LoginController", function ($scope, $state, $rootScope, API) {
     $scope.loginFormError = false;
     $scope.submit = function (form) {
+        $scope.showMessage = false;
         angular.forEach($scope.frmLogin.$error.required, function (field) {
                 field.$setDirty();
             });
@@ -15,10 +16,7 @@
                 }
             }
             ////loader
-            //$scope.loading = false;
-            //$scope.onSubmit = function () {
-            //    $scope.loading = true;
-            //}
+            //$scope.loading = true;
 
             API.execute(req).then(function (_res) {
                 console.log(_res.data);
@@ -60,7 +58,7 @@
                     $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
                     $scope.messageStatus = 'warning';
                 }
-                //$.loader("close");
+                //$scope.loading = false;
             }, function (error) {
                 $scope.showMessage = true;
                 $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';

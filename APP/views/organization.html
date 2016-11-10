@@ -53,10 +53,11 @@
                         <div class="row">
                             <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
                                 <div class="group">
-                                    <input ng-input-effect-class is-required ng-model="txtPhone" ng-class="{errorBorder : frmAddOrganization.txtPhone.$dirty == true && frmAddOrganization.txtPhone.$invalid == true ,'used': txtPhone.length > 0}" type="text" pattern=".{1,80}" id="txtPhone" name="txtPhone" required>
+                                    <input ng-input-effect-class is-required type="tel" pattern="^\d{3}-\d{3}-\d{4}$" ng-model="txtPhone" ng-class="{errorBorder : frmAddOrganization.txtPhone.$dirty == true && frmAddOrganization.txtPhone.$invalid == true ,'used': txtPhone.length > 0}" type="text" pattern=".{1,80}" id="txtPhone" name="txtPhone" required>
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label ng-class="{errorFont : frmAddOrganization.txtPhone.$dirty == true && frmAddOrganization.txtPhone.$invalid == true }">Phone</label>
+                                    <span class="errorFont" ng-show="frmAddOrganization.txtPhone.$error.pattern && frmAddOrganization.txtPhone.$touched == true">Invalid Syntax ,It Should Look Like xxx-xxx-xxxx</span>
                                 </div>
                             </div>
                         </div>
@@ -71,10 +72,11 @@
                         <div class="row">
                             <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
                                 <div class="group">
-                                    <input ng-input-effect-class is-required ng-model="txtMobile" ng-class="{errorBorder : frmAddOrganization.txtMobile.$dirty == true && frmAddOrganization.txtMobile.$invalid == true ,'used': txtMobile.length > 0}" type="text" pattern=".{1,80}" id="txtMobile" name="txtMobile" required>
+                                    <input ng-input-effect-class is-required type="tel" pattern="^\d{3}-\d{3}-\d{4}$" ng-model="txtMobile" ng-class="{errorBorder : frmAddOrganization.txtMobile.$dirty == true && frmAddOrganization.txtMobile.$invalid == true ,'used': txtMobile.length > 0}" type="text" pattern=".{1,80}" id="txtMobile" name="txtMobile" required>
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label ng-class="{errorFont : frmAddOrganization.txtMobile.$dirty == true && frmAddOrganization.txtMobile.$invalid == true }">Mobile</label>
+                                    <span class="errorFont" ng-show="frmAddOrganization.txtMobile.$error.pattern && frmAddOrganization.txtMobile.$touched == true">Invalid Syntax ,It Should Look Like xxx-xxx-xxxx</span>
                                 </div>
                             </div>
                         </div>
@@ -85,14 +87,12 @@
                             <label>SMS Notifications</label>
                         </div>
                         <div class="col-md-6  col-sm-6 col-xs-6 checkbox">
-                            <switch name="yesNo" ng-model="yesNo" on="Yes" off="No" class="wide"></switch>
+                            <switch name="txtSMS" ng-model="txtSMS" on="Yes" off="No" class="wide"></switch>
                         </div>
                     </div>
                 </div>
                 <!-- Row3 End -->
                 <div class="clear2"></div>
-                <div class="clear2"></div>
-
 
 
                 <!-- Row4 Start -->
@@ -130,7 +130,7 @@
                                             <div class="row">
                                                 <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
                                                     <div class="group">
-                                                        <input type="text" pattern=".{1,80}" name="txt1" ng-model="spec.name" class="txtSpecialityName">
+                                                        <input type="text" pattern=".{1,80}" name="txt1" ng-model="spec.Name" class="txtSpecialityName">
                                                         <span class="highlight"></span>
                                                         <span class="bar"></span>
                                                         <label></label>
@@ -143,7 +143,7 @@
                                                 <div class="row">
                                                     <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
                                                         <div class="group">
-                                                            <input type="text" pattern=".{1,80}" ng-model="spec.desc" name="txt2" class="txtSpecialityDescription">
+                                                            <input type="text" pattern=".{1,80}" ng-model="spec.Description" name="txt2" class="txtSpecialityDescription">
                                                             <span class="highlight"></span>
                                                             <span class="bar"></span>
                                                             <label></label>
@@ -162,8 +162,8 @@
                 <!-- Row5 End -->
                 <!-- Row6 Start -->
                 <div class="row">
-                    <div class="col-xs-3 text-left">
-                        <button class="btn btn-invert" type="button" ui-sref="listproviderssystem">Providers</button>
+                    <div class="col-xs-3 text-left" ng-show="createMode == false">
+                        <button class="btn btn-invert" type="button" ng-click="showlistProvidersSystem()">Providers</button>
                     </div>
                 </div>
                 <!-- Row6 End -->

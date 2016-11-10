@@ -6,7 +6,6 @@ ehs.run(function ($rootScope, $state) {
     };
     $rootScope.DeleteConfirmed = false;
     $rootScope.DeleteConfirmed2 = false;
-
 });
 
 ehs.config(function ($stateProvider, $urlRouterProvider) {
@@ -35,14 +34,14 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
         }
     })
     .state('listproviderssystem', {
-        url: '/listproviderssystem',
+        url: '/listproviderssystem/:orgid?',
         views: {
             '': { templateUrl: 'views/listproviderssystem.html', controller: 'ListproviderssystemController' },
             'headerView@listproviderssystem': { templateUrl: 'views/templates/header.temp.html' },
         }
     })
     .state('providerssystem', {
-        url: '/providerssystem/:providerid?',
+        url: '/providerssystem/:orgid/:providerid?',
         views: {
             '': { templateUrl: 'views/providerssystem.html', controller: 'providerssystemController' },
             'headerView@providerssystem': { templateUrl: 'views/templates/header.temp.html' },
