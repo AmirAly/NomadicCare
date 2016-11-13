@@ -170,7 +170,8 @@ a.spmenu-button {
 
 /* Vertical menu that slides from the left or right */
 .spmenu-left {
-    left: -250px;
+    /*left: -250px;*/
+    left: -270px;
     border-right: 1px solid #65cff0;
 }
 

@@ -25,6 +25,9 @@
         $scope.messageStatus = 'warning';
     });
 
+    $scope.showCreateOrganization = function () {
+        $state.go('organization', { orgid: "" });
+    }
 
     $scope.showOrganizationDetails = function (_id) {
         $state.go('organization', { orgid: _id });

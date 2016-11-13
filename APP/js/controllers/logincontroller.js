@@ -22,8 +22,8 @@
                 console.log(_res.data);
                 if (_res.data.code == 100) { // Provider | coordinator
                     //function login get coordinatorId here
-                    $rootScope.currentUser = $scope.txtEmail;
-                    $rootScope.currentUserName = 'Adam Mark';
+                    $rootScope.currentProviderId = _res.data.data._id;
+                    $rootScope.currentProviderName = _res.data.data.Name;
                     $rootScope.userType = 'admin';
 
                     $scope.showMessage = true;
@@ -33,8 +33,8 @@
                     $state.go('clients');
                 }
                 else if (_res.data.code == 101) { // system admin
-                    $rootScope.currentUser = $scope.txtEmail;
-                    $rootScope.currentUserName = 'Amir aly';
+                    //$rootScope.currentProviderId = _res.data.data._id;
+                    $rootScope.currentProviderName = 'System Admin';
                     $rootScope.userType = 'system';
 
                     $scope.showMessage = true;

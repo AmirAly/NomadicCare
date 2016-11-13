@@ -23,10 +23,10 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="provider in providers">
-                                    <td><img src="{{provider.img}}">&nbsp;<span>{{provider.name}}</span></td>
+                                    <td><img src="{{provider.img || 'images/unknown.png'}}">&nbsp;<span>{{provider.Name}}</span></td>
                                     <td>
-                                        <span>{{provider.address}}</span>
-                                        <a class="tableicon" ng-click="showProviderDetails($index)"><span class="glyphicon glyphicon-edit"></span></a>
+                                        <span>{{provider.Location}}</span>
+                                        <a class="tableicon" ng-click="showProviderDetails(provider._id)"><span class="glyphicon glyphicon-edit"></span></a>
                                     </td>
                                 </tr>
 
@@ -36,8 +36,8 @@
                 </div>
             </div>
             <!-- Table End -->
-            <div ng-show="!providers.length" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hide text-center">
-                <h1>No Providers found</h1>
+            <div ng-show="!providers.length" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h3>No Providers found</h3>
             </div>
         </div>
     </div>

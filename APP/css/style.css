@@ -406,7 +406,7 @@ option {
 
     .spmenu .sidebar-nav {
         list-style: none;
-        padding-left: 10px;
+        /*padding-left: 10px;*/
     }
 
         .spmenu .sidebar-nav .sidebar-brand {

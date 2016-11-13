@@ -1,7 +1,11 @@
 var ehs = angular.module("ehs", ['ui.router', 'ui.bootstrap.datetimepicker', 'ngAnimate', 'ui.dateTimeInput', 'uiSwitch']);
 
-ehs.run(function ($rootScope, $state) {
+ehs.run(function ($rootScope, $state, slidePush) {
     $rootScope.logout = function () {
+        // if menu opened , close it first before  logout
+        slidePush.pushForceClose(angular.element(document.querySelector('#menu')), angular.element(document.querySelector('#menuIcon')));
+        $rootScope.currentProviderId = "";
+        $rootScope.currentProviderName = "";
         $state.go('login');
     };
     $rootScope.DeleteConfirmed = false;
@@ -11,6 +15,7 @@ ehs.run(function ($rootScope, $state) {
 ehs.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
     .state('login', {
+        cache: false,
         url: '/login',
         views: {
             '': { templateUrl: 'views/login.html', controller: 'LoginController' },
@@ -20,6 +25,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
 
 /*System routes*/
     .state('listorganizations', {
+        cache: false,
         url: '/listorganizations',
         views: {
             '': { templateUrl: 'views/listorganizations.html', controller: 'ListorganizationsController' },
@@ -27,6 +33,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
         }
     })
     .state('organization', {
+        cache: false,
         url: '/organization/:orgid?',
         views: {
             '': { templateUrl: 'views/organization.html', controller: 'OrganizationController' },
@@ -34,6 +41,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
         }
     })
     .state('listproviderssystem', {
+        cache: false,
         url: '/listproviderssystem/:orgid?',
         views: {
             '': { templateUrl: 'views/listproviderssystem.html', controller: 'ListproviderssystemController' },
@@ -41,6 +49,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
         }
     })
     .state('providerssystem', {
+        cache: false,
         url: '/providerssystem/:orgid/:providerid?',
         views: {
             '': { templateUrl: 'views/providerssystem.html', controller: 'providerssystemController' },
@@ -50,6 +59,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
 
         /*Admin routes*/
     .state('clients', {
+        cache: false,
         url: '/clients',
         views: {
             '': { templateUrl: 'views/clients.html', controller: 'ClientsController' },
@@ -57,6 +67,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
         }
     })
     .state('client', {
+        cache: false,
         url: '/client/:clientid?',//index.html#/client/10
         views: {
             '': { templateUrl: 'views/client.html', controller: 'ClientController' },
@@ -64,6 +75,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
         }
     })
     .state('listproviders', {
+        cache: false,
         url: '/listproviders',
         views: {
             '': { templateUrl: 'views/listproviders.html', controller: 'ListprovidersController' },
@@ -71,6 +83,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
         }
     })
     .state('provider', {
+        cache: false,
         url: '/provider/:providerid?',
         views: {
             '': { templateUrl: 'views/provider.html', controller: 'ProviderController' },
@@ -78,6 +91,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
         }
     })
     .state('careplanslist', {
+        cache: false,
         url: '/careplanslist',
         views: {
             '': { templateUrl: 'views/careplanslist.html', controller: 'CareplanslistController' },

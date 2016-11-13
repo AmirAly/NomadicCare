@@ -87,3 +87,26 @@ ehs.directive('stringToNumber', function () {
         }
     };
 });
+
+ehs.directive('confirmOnExit', function () {
+    return {
+        link: function ($scope, elem, attrs) {
+            console.log(elem[0].name);
+            var formName = elem[0].name;
+            window.onbeforeunload = function () {
+                console.log('onbeforeunload');
+                if ($scope[formName].$dirty) {
+                    return "The form is dirty, do you want to leave the page?";
+                }
+            }
+            $scope.$on('$stateChangeStart', function (event, next, current) {
+                console.log('stateChangeStart');
+                if ($scope[formName].$dirty) {
+                    if (!confirm("The form is dirty, do you want to leave the page?")) {
+                        event.preventDefault();
+                    }
+                }
+            });
+        }
+    };
+});

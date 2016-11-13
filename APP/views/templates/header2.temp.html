@@ -1,4 +1,4 @@
-﻿<div class="col-lg-10 col-md-10 col-sm-9 col-xs-6 noPaddingRight" ng-push-menu="menu">
+﻿<div class="col-lg-10 col-md-10 col-sm-9 col-xs-6 noPaddingRight" id="menuIcon" ng-push-menu="menu">
     <span class="glyphicon glyphicon-menu-hamburger listIcon cursorPointer"></span>
     <span class="pageHeader">
         &nbsp;{{clientname}}&nbsp;<img class="img-circle hidden-xs" src="{{clientImg}}">
@@ -9,5 +9,5 @@
 	</span>
 </div>
 <div class="rightHeader mun col-lg-2 col-md-2 col-sm-3 col-xs-6">
-    <b><span class="userName">{{currentUserName}}</span>&nbsp;|&nbsp;<a ng-click="logout()">Logout</a></b>
+    <b><span class="userName">{{currentProviderName}}</span>&nbsp;|&nbsp;<a ng-click="logout()">Logout</a></b>
 </div>

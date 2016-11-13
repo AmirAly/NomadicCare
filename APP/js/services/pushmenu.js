@@ -62,13 +62,17 @@
                 bodyLeft = (bodyLeft ? bodyLeft : 0);
                 if (menu.hasClass("spmenu-open")) {
                     body.css("left", bodyLeft - spmenuVerticalWidth);
+                    body.addClass("menuIsOpened");
                 } else {
                     body.css("left", bodyLeft + spmenuVerticalWidth);
+                    body.removeClass("menuIsOpened");
                 }
                 if (menu.hasClass("spmenu-open")) {
                     menu.css("left", parseInt(menu.css("left")) - spmenuVerticalWidth);
+                    body.addClass("menuIsOpened");
                 } else {
                     menu.css("left", parseInt(menu.css("left")) + spmenuVerticalWidth);
+                    body.removeClass("menuIsOpened");
                 }
             }
             if (menu.hasClass("spmenu-right")) {
@@ -163,7 +167,6 @@
 
 .directive("ngPushMenu", [
 'slidePush', function (slidePush) {
-    
     return {
         restrict: "A",
         link: function (scope, elem, attrs) {

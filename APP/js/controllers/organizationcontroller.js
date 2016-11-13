@@ -1,5 +1,6 @@
 ﻿ehs.controller("OrganizationController", function ($scope, $state, $rootScope, $stateParams, API, $window) {
     console.log($stateParams.orgid);
+    $scope.txtSMS = false;
     if ($stateParams.orgid == "") {
         // Create client
         $scope.createMode = true;
@@ -69,21 +70,22 @@
         console.log($scope.createMode);
         if (form.$valid) {
 
-            ////loader
-            //$scope.loading = true;
-            $scope.orgObj = {
-                Name: $scope.txtOrganizationName,
-                Location: $scope.txtOrganizationAddress,
-                PostalCode: $scope.txtPostalCode,
-                Phone: $scope.txtPhone,
-                Mobile: $scope.txtMobile,
-                Email: $scope.txtEmail,
-                Speciality: $scope.speciality,
-                SmsNotificationsEnabled: $scope.txtSMS,
-                _id: $stateParams.orgid
-            }
-            console.log($scope.orgObj);
+            
             if ($scope.createMode == true) {
+                ////loader
+                //$scope.loading = true;
+                $scope.orgObj = {
+                    Name: $scope.txtOrganizationName,
+                    Location: $scope.txtOrganizationAddress,
+                    PostalCode: $scope.txtPostalCode,
+                    Phone: $scope.txtPhone,
+                    Mobile: $scope.txtMobile,
+                    Email: $scope.txtEmail,
+                    Speciality: $scope.speciality,
+                    SmsNotificationsEnabled: $scope.txtSMS,
+                    _id: null
+                }
+                console.log($scope.orgObj);
                 console.log('create Mode');
                 var req = { // create
                     method: 'post',
@@ -97,6 +99,7 @@
                         $scope.showMessage = true;
                         $scope.messageTxt = 'Saved ...';
                         $scope.messageStatus = 'success';
+                        $scope.frmAddOrganization.$setPristine();
                         $state.go('listorganizations');
                     }
                     else {
@@ -113,6 +116,20 @@
 
             }
             else { // edit
+                ////loader
+                //$scope.loading = true;
+                $scope.orgObj = {
+                    Name: $scope.txtOrganizationName,
+                    Location: $scope.txtOrganizationAddress,
+                    PostalCode: $scope.txtPostalCode,
+                    Phone: $scope.txtPhone,
+                    Mobile: $scope.txtMobile,
+                    Email: $scope.txtEmail,
+                    Speciality: $scope.speciality,
+                    SmsNotificationsEnabled: $scope.txtSMS,
+                    _id: $stateParams.orgid
+                }
+                console.log($scope.orgObj);
                 console.log('edit Mode');
                 var req = {
                     method: 'put',
@@ -125,6 +142,7 @@
                         $scope.showMessage = true;
                         $scope.messageTxt = 'Saved ...';
                         $scope.messageStatus = 'success';
+                        $scope.frmAddOrganization.$setPristine();
                         $state.go('listorganizations');
                     }
                     else {
@@ -162,30 +180,5 @@
             }
         });
     }
-
-
-    //var win = $window;
-    //$scope.$watch('frmAddOrganization.$dirty', function (value) {
-    //    if (value) {
-    //        win.onbeforeunload = function () {
-    //            return 'Your message here';
-    //        };
-    //    }
-    //});
-    //$scope.$on("$destroy", function () {
-    //    alert('out');
-    //    //window.onbeforeunload = function () {
-    //    //    return "Your text string you want displayed in the box";
-    //    //}
-
-    //    //var win = $window;
-    //    //$scope.$watch('frmAddOrganization.$dirty', function (value) {
-    //    //    if (value) {
-    //    //        win.onbeforeunload = function () {
-    //    //            return 'Your message here';
-    //    //        };
-    //    //    }
-    //    //});
-    //});
 
 });
