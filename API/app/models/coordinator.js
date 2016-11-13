@@ -43,7 +43,7 @@ var Coordinator = new Schema({
     Status: { type: String },
     RetrivalCode: { type: String },
     Email: { type: String, required: 'Email is required' },
-    Password: { type: String, required: 'Email is required', min: [5, 'Must be more than 5 charachters'] }
+    Password: { type: String, required: 'Password is required', min: [5, 'Must be more than 5 charachters'] }
 
 });
 module.exports = Mongoose.model('Coordinator', Coordinator);

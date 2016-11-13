@@ -11,7 +11,7 @@ module.exports = function (app, express) {
     api.get('/Coordinator/List/:OrganizationId', function (req, res) {
         var _id = req.params.OrganizationId;
         console.log(_id);
-        Coordinator.find({ 'Organization': _id }, 'Name Phone _id Email', function (err, Obj) {
+        Coordinator.find({ 'Organization': _id }, 'Name Location _id ', function (err, Obj) {
             if (err)
                 return res.json({ code: '1', data: err });
             else {
@@ -180,6 +180,7 @@ module.exports = function (app, express) {
             }
         });
     });
+
     api.put('/Organization/:id/:total', function (req, res) {
         var _id = req.params.id
         console.log(req.params);
@@ -191,6 +192,7 @@ module.exports = function (app, express) {
             }
         });
     });
+
     api.post('/Login', function (req, res) {
         var UserAccount = { Email: req.body.Email, Password: req.body.Password };
         if (UserAccount.Email && UserAccount.Password) {
