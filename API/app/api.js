@@ -65,21 +65,26 @@ module.exports = function (app, express) {
     });
     api.post('/Coordinator', function (req, res) {
         var _newObj = new Coordinator(req.body);
-        console.log(_newObj);
         Coordinator.findOne({ 'Email': _newObj.Email, 'Phone': _newObj.Phone, 'Name': _newObj.Name }, '', function (err, Obj) {
             if (err)
                 return res.json({ code: '1', data: err });
             else {
-                console.log(Obj);
                 if (Obj)
                     return res.json({ code: '20', data: 'Duplicae data, check email, phone and name' });
-                else
+                else {
+                    if (_newObj.Img && _newObj.Img.length > 5) {
+                        var base64Data = _newObj.Img.replace(/^data:image\/png;base64,/, "");
+                        require("fs").writeFile("images/" + _newObj._id + ".png", base64Data, 'base64', function (err) {
+                            console.log(err);
+                        });
+                    }
                     _newObj.save(function (err, Obj) {
                         if (err)
                             return res.json({ code: '1', data: err });
                         else
                             return res.json({ code: '100', data: Obj });
                     })
+                }
             }
         });
     });
@@ -95,8 +100,12 @@ module.exports = function (app, express) {
             else {
                 if (Obj) {
                     Obj = req.body;
+                    var base64Data = req.body.Img.replace(/^data:image\/png;base64,/, "");
+                    require("fs").writeFile("images/" + req.body._id + ".png", base64Data, 'base64', function (err) {
+                        console.log(err);
+                    });
                     Coordinator.update({ _id: Obj._id }, Obj, { upsert: true }, function (err) {
-                        return res.json({ code: '100', data: Obj });
+                        return res.json({ code: '100', data: 'Updated' });
                     });
                 }
                 else
@@ -114,8 +123,6 @@ module.exports = function (app, express) {
             }
         });
     });
-
-
     api.put('/Organization', function (req, res) {
         Organization.findOne({ Name: req.body.Name, Phone: req.body.Phone, PostalCode: req.body.PostalCode }, '', function (err, Obj) {
             if (Obj && Obj._id != req.body._id) {
@@ -232,13 +239,121 @@ module.exports = function (app, express) {
                 console.log(Obj);
                 if (Obj)
                     return res.json({ code: '20', data: 'Duplicae data, check email, phone and name' });
-                else
+                else {
+                    if (_newObj.Img && _newObj.Img.length > 5) {
+                        var base64Data = _newObj.Img.replace(/^data:image\/png;base64,/, "");
+                        require("fs").writeFile("images/" + _newObj._id + ".png", base64Data, 'base64', function (err) {
+                            console.log(err);
+                        });
+                    }
                     _newObj.save(function (err, Obj) {
                         if (err)
                             return res.json({ code: '1', data: err });
                         else
                             return res.json({ code: '100', data: Obj });
                     })
+                }
+            }
+        });
+    });
+    api.post('/HealthNotes/:id', function (req, res) {
+        var _id = req.params.id
+        Client.findOne({ '_id': _id }, '', function (err, Obj) {
+            if (err)
+                return res.json({ code: '1', data: err });
+            else {
+                if (Obj) {
+                    if (Obj.HealthNotes) {
+                        Obj.HealthNotes.push(req.body);
+                    }
+                    else {
+                        Obj.HealthNotes = [];
+                        Obj.HealthNotes.push(req.body);
+                    }
+                    Client.update({ _id: Obj._id }, Obj, { upsert: true }, function (err) {
+                        return res.json({ code: '100', data: 'Updated' });
+                    });
+
+                }
+                else {
+                    return res.json({ code: '20', data: 'No client with such id' });
+                }
+            }
+        });
+    });
+    api.get('/HealthNotes/:id/:type', function (req, res) {
+        var _id = req.params.id
+        Client.findOne({ '_id': _id }, 'HealthNotes', function (err, Obj) {
+            if (err)
+                return res.json({ code: '1', data: err });
+            else {
+                if (Obj) {
+                    var _lst = []
+                    for (var i = 0 ; i < Obj.HealthNotes.length; i++) {
+                        if (Obj.HealthNotes[i].HNType && Obj.HealthNotes[i].HNType == req.params.type) {
+                            _lst.push(Obj.HealthNotes[i]);
+                        }
+                    }
+                    return res.json({ code: '100', data: _lst });
+                }
+                else {
+                    return res.json({ code: '20', data: 'No data available' });
+                }
+            }
+        });
+    });
+    api.get('/HealthNotes/:id/', function (req, res) {
+        var _id = req.params.id
+        Client.findOne({ '_id': _id }, 'HealthNotes', function (err, Obj) {
+            if (err)
+                return res.json({ code: '1', data: err });
+            else {
+                if (Obj) {
+                    return res.json({ code: '100', data: Obj.HealthNotes });
+                }
+                else {
+                    return res.json({ code: '20', data: 'No data available' });
+                }
+            }
+        });
+    });
+    api.post('/ConsultationNotes/:id', function (req, res) {
+        var _id = req.params.id
+        Client.findOne({ '_id': _id }, '', function (err, Obj) {
+            if (err)
+                return res.json({ code: '1', data: err });
+            else {
+                if (Obj) {
+                    if (Obj.ConsultationNotes) {
+                        Obj.ConsultationNotes.push(req.body);
+                    }
+                    else {
+                        Obj.ConsultationNotes = [];
+                        Obj.ConsultationNotes.push(req.body);
+                    }
+                    Client.update({ _id: Obj._id }, Obj, { upsert: true }, function (err) {
+                        return res.json({ code: '100', data: 'Updated' });
+                    });
+
+                }
+                else {
+                    return res.json({ code: '20', data: 'No client with such id' });
+                }
+            }
+        });
+    });
+    api.get('/ConsultationNotes/:id', function (req, res) {
+        var _id = req.params.id
+        Client.findOne({ '_id': _id }, 'ConsultationNotes', function (err, Obj) {
+            if (err)
+                return res.json({ code: '1', data: err });
+            else {
+                if (Obj) {
+                    return res.json({ code: '100', data: Obj.ConsultationNotes });
+                }
+                else {
+                    return res.json({ code: '20', data: 'No data available' });
+                }
             }
         });
     });

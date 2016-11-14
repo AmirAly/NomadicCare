@@ -7,7 +7,7 @@ var Coordinator = new Schema({
     },
     Name: {
         type: String,
-        required: [true, 'User phone number required']
+        required: [true, 'User name required']
     },
     Location: { type: String },
     PostalCode: { type: String },
@@ -26,7 +26,7 @@ var Coordinator = new Schema({
             validator: function (v) {
                 return /\d{3}-\d{3}-\d/.test(v);
             },
-            message: '{VALUE} is not a valid phone number!'
+            message: '{VALUE} is not a valid mobile number!'
         },
     },
     SmsNotificationsEnabled: { type: String },
@@ -43,6 +43,7 @@ var Coordinator = new Schema({
     Status: { type: String },
     RetrivalCode: { type: String },
     Email: { type: String, required: 'Email is required' },
+    Img: { type: String },
     Password: { type: String, required: 'Password is required', min: [5, 'Must be more than 5 charachters'] }
 
 });

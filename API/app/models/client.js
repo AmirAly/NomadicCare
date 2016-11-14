@@ -27,6 +27,17 @@ var Client = new Schema({
     BloodType: { type: String },
     Img: { type: String },
     RetrivalCode: { type: String },
+    HealthNotes: [{}],
+    ConsultationNotes: [
+        {
+            Date: { type: Date, default: new Date() },
+            ClinicalReason: { type: String },
+            Examination: { type: String },
+            Treatment: { type: String },
+            Status: { type: Number },
+            Type: { type: String }
+        }
+    ],
 
 });
 module.exports = Mongoose.model('Client', Client);
