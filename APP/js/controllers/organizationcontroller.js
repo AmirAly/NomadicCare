@@ -21,7 +21,7 @@
             data: {}
         }
         ////loader
-        //$scope.loading = true;
+        $rootScope.loading = true;
 
         API.execute(req).then(function (_res) {
             console.log(_res.data);
@@ -44,11 +44,12 @@
                 $scope.messageTxt = 'No Such Organisation ...';
                 $scope.messageStatus = 'warning';
             }
-            //$scope.loading = false;
         }, function (error) {
             $scope.showMessage = true;
             $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
             $scope.messageStatus = 'warning';
+        }).finally(function () {
+            $rootScope.loading = false;
         });
 
     }
@@ -69,11 +70,10 @@
         });
         console.log($scope.createMode);
         if (form.$valid) {
+            ////loader
+            $rootScope.loading = true;
 
-            
             if ($scope.createMode == true) {
-                ////loader
-                //$scope.loading = true;
                 $scope.orgObj = {
                     Name: $scope.txtOrganizationName,
                     Location: $scope.txtOrganizationAddress,
@@ -107,17 +107,16 @@
                         $scope.messageTxt = 'Organization Already Exist ...';
                         $scope.messageStatus = 'danger';
                     }
-                    //$scope.loading = false;
                 }, function (error) {
                     $scope.showMessage = true;
                     $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
                     $scope.messageStatus = 'warning';
+                }).finally(function () {
+                    $rootScope.loading = false;
                 });
 
             }
             else { // edit
-                ////loader
-                //$scope.loading = true;
                 $scope.orgObj = {
                     Name: $scope.txtOrganizationName,
                     Location: $scope.txtOrganizationAddress,
@@ -150,11 +149,12 @@
                         $scope.messageTxt = 'Organization Not Exist ...';
                         $scope.messageStatus = 'danger';
                     }
-                    //$scope.loading = false;
                 }, function (error) {
                     $scope.showMessage = true;
                     $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
                     $scope.messageStatus = 'warning';
+                }).finally(function () {
+                    $rootScope.loading = false;
                 });
             }
         }

@@ -26,7 +26,7 @@
             data: {}
         }
         ////loader
-        //$scope.loading = true;
+        $rootScope.loading = true;
 
         API.execute(req).then(function (_res) {
             console.log(_res.data);
@@ -54,6 +54,8 @@
             $scope.showMessage = true;
             $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
             $scope.messageStatus = 'warning';
+        }).finally(function () {
+            $rootScope.loading = false;
         });
     }
 
@@ -68,6 +70,8 @@
         });
 
         if (form.$valid) {
+                ////loader
+                $rootScope.loading = true;
             if ($scope.createMode == true) {
                 $scope.orgObj = {
                     Name: $scope.txtProviderName,
@@ -93,8 +97,7 @@
                     data: $scope.orgObj
                 }
 
-                ////loader
-                //$scope.loading = true;
+
 
                 API.execute(req).then(function (_res) {
                     console.log(_res.data);
@@ -115,8 +118,9 @@
                     $scope.showMessage = true;
                     $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
                     $scope.messageStatus = 'warning';
+                }).finally(function () {
+                    $rootScope.loading = false;
                 });
-             //$scope.loading = false;
             }
             else { //edit mode
                 $scope.orgObj = {
@@ -143,9 +147,6 @@
                     data: $scope.orgObj
                 }
 
-                ////loader
-                //$scope.loading = true;
-
                 API.execute(req).then(function (_res) {
                     console.log(_res.data);
                     if (_res.data.code == 100) { // Provider | coordinator
@@ -165,8 +166,9 @@
                     $scope.showMessage = true;
                     $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
                     $scope.messageStatus = 'warning';
+                }).finally(function () {
+                    $rootScope.loading = false;
                 });
-                //$scope.loading = false;
             }
 
            

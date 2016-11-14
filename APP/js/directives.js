@@ -96,13 +96,13 @@ ehs.directive('confirmOnExit', function () {
             window.onbeforeunload = function () {
                 console.log('onbeforeunload');
                 if ($scope[formName].$dirty) {
-                    return "The form is dirty, do you want to leave the page?";
+                    return "Do you want to leave the page without saving changes?";
                 }
             }
             $scope.$on('$stateChangeStart', function (event, next, current) {
                 console.log('stateChangeStart');
                 if ($scope[formName].$dirty) {
-                    if (!confirm("The form is dirty, do you want to leave the page?")) {
+                    if (!confirm("Do you want to leave the page without saving changes?")) {
                         event.preventDefault();
                     }
                 }

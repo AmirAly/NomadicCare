@@ -3,8 +3,8 @@
     $scope.submit = function (form) {
         $scope.showMessage = false;
         angular.forEach($scope.frmLogin.$error.required, function (field) {
-                field.$setDirty();
-            });
+            field.$setDirty();
+        });
 
         if (form.$valid) {
             var req = {
@@ -16,7 +16,7 @@
                 }
             }
             ////loader
-            //$scope.loading = true;
+            $rootScope.loading = true;
 
             API.execute(req).then(function (_res) {
                 console.log(_res.data);
@@ -58,11 +58,13 @@
                     $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
                     $scope.messageStatus = 'warning';
                 }
-                //$scope.loading = false;
             }, function (error) {
                 $scope.showMessage = true;
                 $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
                 $scope.messageStatus = 'warning';
+            })
+            .finally(function () {
+                $rootScope.loading = false;
             });
         }
 

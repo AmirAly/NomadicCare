@@ -8,7 +8,7 @@
         data: {}
     }
     ////loader
-    //$scope.loading = true;
+    $rootScope.loading = true;
 
     API.execute(req).then(function (_res) {
         console.log(_res.data);
@@ -23,6 +23,9 @@
         $scope.showMessage = true;
         $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
         $scope.messageStatus = 'warning';
+    })
+    .finally(function () {
+        $rootScope.loading = false;
     });
 
     $scope.showCreateOrganization = function () {
