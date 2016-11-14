@@ -80,6 +80,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
     })
     .state('listproviders', {
         cache: false,
+        // url: '/listproviderssystem/:orgid?',
         url: '/listproviders',
         views: {
             '': { templateUrl: 'views/listproviders.html', controller: 'ListprovidersController' },
@@ -88,6 +89,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
     })
     .state('provider', {
         cache: false,
+        // url: '/providerssystem/:orgid/:providerid?',
         url: '/provider/:providerid?',
         views: {
             '': { templateUrl: 'views/provider.html', controller: 'ProviderController' },
