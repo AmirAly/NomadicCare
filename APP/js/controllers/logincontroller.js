@@ -24,6 +24,7 @@
                     //function login get coordinatorId here
                     $rootScope.currentProviderId = _res.data.data._id;
                     $rootScope.currentProviderName = _res.data.data.Name;
+                    $rootScope.OrganizationId = _res.data.data.Organization;
                     $rootScope.userType = 'admin';
 
                     $scope.showMessage = true;
@@ -33,7 +34,6 @@
                     $state.go('clients');
                 }
                 else if (_res.data.code == 101) { // system admin
-                    //$rootScope.currentProviderId = _res.data.data._id;
                     $rootScope.currentProviderName = 'System Admin';
                     $rootScope.userType = 'system';
 

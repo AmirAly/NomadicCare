@@ -14,6 +14,7 @@ ehs.run(function ($rootScope, $state, slidePush) {
     };
     $rootScope.DeleteConfirmed = false;
     $rootScope.DeleteConfirmed2 = false;
+    $rootScope.OrganizationId = 0;
 });
 
 ehs.config(function ($stateProvider, $urlRouterProvider) {
@@ -80,8 +81,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
     })
     .state('listproviders', {
         cache: false,
-        // url: '/listproviderssystem/:orgid?',
-        url: '/listproviders',
+        url: '/listproviders/:orgid?',
         views: {
             '': { templateUrl: 'views/listproviders.html', controller: 'ListprovidersController' },
             'headerView@listproviders': { templateUrl: 'views/templates/header.temp.html' },
@@ -89,8 +89,8 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
     })
     .state('provider', {
         cache: false,
-        // url: '/providerssystem/:orgid/:providerid?',
-        url: '/provider/:providerid?',
+        url: '/provider/:orgid/:providerid?',
+        //url: '/provider/:providerid?',
         views: {
             '': { templateUrl: 'views/provider.html', controller: 'ProviderController' },
             'headerView@provider': { templateUrl: 'views/templates/header.temp.html' },

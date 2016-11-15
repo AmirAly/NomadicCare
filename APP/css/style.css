@@ -10,6 +10,11 @@
     font-size: 14px !important;
 }
 
+/*calender*/
+.datetimepicker .table > thead > tr:first-child > th.switch {
+    display: table-cell;
+}
+
 /*animation*/
 .ng-enter:not(.animated) {
     transition: all linear 500ms;

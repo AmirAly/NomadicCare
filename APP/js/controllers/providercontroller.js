@@ -1,7 +1,6 @@
-﻿ehs.controller("ProviderController", function ($scope, $state, $rootScope, $stateParams) {
-    $rootScope.pageHeader = '';
+﻿ehs.controller("ProviderController", function ($scope, $state, $rootScope, $stateParams , API) {
     console.log($stateParams.providerid);
-
+    $scope.txtSMS = false;
     if ($stateParams.providerid == "") {
         // Create client
         $scope.createMode = true;
@@ -12,26 +11,60 @@
         $scope.txtPhone = "";
         $scope.txtMobile = "";
         $scope.txtEmail = "";
-        $scope.speciality = [{ name: '', desc: '' }];
-        $scope.practices = [{ name: '' }];
+        $scope.speciality = [{ Name: '', Description: '' }];
+        $scope.practices = [{ Name: '', Description: '' }];
     }
     else {
         //Edit client
         $rootScope.pageHeader = 'Provider Edit';
         $scope.createMode = false;
-        $scope.txtProviderName = "Kamelia";
-        $scope.txtProviderAddress = "Egypt, Cairo 20 Masr St.";
-        $scope.txtPostalCode = "123456";
-        $scope.txtPhone = "01245415844";
-        $scope.txtMobile = "03510685";
-        $scope.txtEmail = "Kamelia@mail.com";
-        $scope.speciality = [{ name: 'spec 1 ', desc: 'desc 1' }];
-        $scope.practices = [{ name: 'practice 1' }];
+
+        // get curret client
+        var req = {
+            method: 'get',
+            url: '/Coordinator/' + $stateParams.providerid,
+            data: {}
+        }
+        ////loader
+        $rootScope.loading = true;
+
+        API.execute(req).then(function (_res) {
+            console.log(_res.data);
+            if (_res.data.code == 100) {
+                console.log(_res.data.data[0].Name);
+                $scope.txtProviderName = _res.data.data[0].Name;
+                $scope.txtProviderAddress = _res.data.data[0].Location;
+                $scope.txtPostalCode = _res.data.data[0].PostalCode;
+                $scope.txtPhone = _res.data.data[0].Phone;
+                $scope.txtMobile = _res.data.data[0].Mobile;
+                $scope.txtEmail = _res.data.data[0].Email;
+                $scope.speciality = _res.data.data[0].Speciality;
+                $scope.practices = _res.data.data[0].Practice;
+                if (_res.data.data[0].SmsNotificationsEnabled == "false" || _res.data.data[0].SmsNotificationsEnabled == false)
+                    $scope.txtSMS = false;
+                else $scope.txtSMS = true;
+                $scope.Password = _res.data.data[0].Password;
+                $scope.Status = _res.data.data[0].Status;
+                $scope.Img = _res.data.data[0].Img;
+            }
+            else {
+                $scope.showMessage = true;
+                $scope.messageTxt = 'No Such Provider ...';
+                $scope.messageStatus = 'warning';
+            }
+            //$scope.loading = false;
+        }, function (error) {
+            $scope.showMessage = true;
+            $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
+            $scope.messageStatus = 'warning';
+        }).finally(function () {
+            $rootScope.loading = false;
+        });
     }
 
 
     $scope.cancelProvider = function () {
-        $state.go('listproviders');
+        $state.go('listproviders', { orgid: $stateParams.orgid });
     }
 
     $scope.submit = function (form) {
@@ -40,28 +73,116 @@
         });
 
         if (form.$valid) {
-            $scope.orgObj = {
-                ProviderName: $scope.txtProviderName,
-                ProviderAddress: $scope.txtProviderAddress,
-                PostalCode: $scope.txtPostalCode,
-                Phone: $scope.txtPhone,
-                Mobile: $scope.txtMobile,
-                Email: $scope.txtEmail,
-                Speciality: $scope.speciality,
-                Practice: $scope.practices
-            }
-            console.log($scope.orgObj);
-            console.log('valid');
+            ////loader
+            $rootScope.loading = true;
+            if ($scope.createMode == true) {
+                $scope.orgObj = {
+                    Name: $scope.txtProviderName,
+                    Location: $scope.txtProviderAddress,
+                    PostalCode: $scope.txtPostalCode,
+                    Phone: $scope.txtPhone,
+                    Mobile: $scope.txtMobile,
+                    Email: $scope.txtEmail,
+                    Speciality: $scope.speciality,
+                    Practice: $scope.practices,
+                    SmsNotificationsEnabled: $scope.txtSMS,
+                    Organization: $stateParams.orgid,
+                    _id: null,
+                    //DateOfBirth: '',
+                    //Gender: '',
+                    RetrivalCode: '123456retrival',
+                    Img: "",
+                    Status: 'Pending',
+                    Password: '12345'
+                }
+                var req = {
+                    method: 'post',
+                    url: '/Coordinator',
+                    data: $scope.orgObj
+                }
 
-            $scope.showMessage = true;
-            $scope.messageTxt = 'Saved ...';
-            $scope.messageStatus = 'success';
+
+
+                API.execute(req).then(function (_res) {
+                    console.log(_res.data);
+                    if (_res.data.code == 100) { // Provider | coordinator
+                        $scope.showMessage = true;
+                        $scope.messageTxt = 'Saved ...';
+                        $scope.messageStatus = 'success';
+                        $scope.frmAddProvider.$setPristine();
+                    }
+
+                    else {
+                        $scope.showMessage = true;
+                        $scope.messageTxt = _res.data.data;
+                        $scope.messageStatus = 'danger';
+                    }
+
+                }, function (error) { // another error may be connection error
+                    $scope.showMessage = true;
+                    $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
+                    $scope.messageStatus = 'warning';
+                }).finally(function () {
+                    $rootScope.loading = false;
+                });
+            }
+            else { //edit mode
+                $scope.orgObj = {
+                    Name: $scope.txtProviderName,
+                    Location: $scope.txtProviderAddress,
+                    PostalCode: $scope.txtPostalCode,
+                    Phone: $scope.txtPhone,
+                    Mobile: $scope.txtMobile,
+                    Email: $scope.txtEmail,
+                    Speciality: $scope.speciality,
+                    Practice: $scope.practices,
+                    SmsNotificationsEnabled: $scope.txtSMS,
+                    Organization: $stateParams.orgid,
+                    _id: $stateParams.providerid,
+                    //DateOfBirth: '',
+                    //Gender: '',
+                    //RetrivalCode: '',
+                    Img: $scope.Img,
+                    Status: $scope.Status,
+                    Password: $scope.Password
+                }
+                var req = {
+                    method: 'put',
+                    url: '/Coordinator',
+                    data: $scope.orgObj
+                }
+
+                API.execute(req).then(function (_res) {
+                    console.log(_res.data);
+                    if (_res.data.code == 100) { // Provider | coordinator
+                        $scope.showMessage = true;
+                        $scope.messageTxt = 'Saved ...';
+                        $scope.messageStatus = 'success';
+                        $scope.frmAddProvider.$setPristine();
+                    }
+
+                    else {
+                        $scope.showMessage = true;
+                        $scope.messageTxt = _res.data.data;
+                        $scope.messageStatus = 'danger';
+                    }
+
+                }, function (error) { // another error may be connection error
+                    $scope.showMessage = true;
+                    $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
+                    $scope.messageStatus = 'warning';
+                }).finally(function () {
+                    $rootScope.loading = false;
+                });
+            }
+
+
         }
 
     }
 
     $scope.addSpeciality = function () {
-        $scope.speciality.push({ name: '', desc: '' });
+        $scope.speciality.push({ Name: '', Description: '' });
     }
 
     $scope.deleteSpeciality = function (_spec, _type) {
@@ -76,7 +197,7 @@
                 $scope.speciality.splice(index, 1);
                 console.log($scope.speciality);
                 if ($scope.speciality.length == 0) { // if no speciality add empty row
-                    $scope.speciality.push({ name: '', desc: '' });
+                    $scope.speciality.push({ Name: '', Description: '' });
                 }
                 $rootScope.DeleteConfirmed = false;
             }
@@ -85,7 +206,7 @@
     }
 
     $scope.addPractice = function () {
-        $scope.practices.push({ name: '' });
+        $scope.practices.push({ Name: '', Description: '' });
     }
 
     $scope.deletePractice = function (_practice, _type) {
@@ -100,7 +221,7 @@
                 $scope.practices.splice(index, 1);
                 console.log($scope.practices);
                 if ($scope.practices.length == 0) { // if no practice add empty row
-                    $scope.practices.push({ name: '' });
+                    $scope.practices.push({ Name: '', Description: '' });
                 }
                 $rootScope.DeleteConfirmed2 = false;
             }

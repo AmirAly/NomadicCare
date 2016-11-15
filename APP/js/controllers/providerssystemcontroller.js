@@ -40,9 +40,13 @@
                 $scope.txtEmail = _res.data.data[0].Email;
                 $scope.speciality = _res.data.data[0].Speciality;
                 $scope.practices = _res.data.data[0].Practice;
-                $scope.txtSMS = _res.data.data[0].SmsNotificationsEnabled;
+                //$scope.txtSMS = _res.data.data[0].SmsNotificationsEnabled;
+                if (_res.data.data[0].SmsNotificationsEnabled == "false" || _res.data.data[0].SmsNotificationsEnabled == false)
+                    $scope.txtSMS = false;
+                else $scope.txtSMS = true;
                 $scope.Password = _res.data.data[0].Password;
                 $scope.Status = _res.data.data[0].Status;
+                $scope.Img = _res.data.data[0].Img;
             }
             else {
                 $scope.showMessage = true;
@@ -88,6 +92,7 @@
                     //DateOfBirth: '',
                     //Gender: '',
                     //RetrivalCode: '',
+                    Img: "",
                     Status: 'Pending',
                     Password: '12345'
                 }
@@ -138,6 +143,7 @@
                     //DateOfBirth: '',
                     //Gender: '',
                     //RetrivalCode: '',
+                    Img: $scope.Img,
                     Status: $scope.Status,
                     Password: $scope.Password
                 }

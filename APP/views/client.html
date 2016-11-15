@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="clear2"></div>
-            <form name="frmAddClient" novalidate>
+            <form name="frmAddClient" novalidate confirm-on-exit>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-6">
@@ -40,11 +40,11 @@
 
                                     <div class="group">
                                         <select ng-select-effect-class ng-model="cmbGender"
-                                                ng-class="{'used': cmbGender != '0'}" 
+                                                ng-class="{'used': cmbGender != 10}" convert-to-number
                                                 id="cmbGender" name="cmbGender" class="input-form" required>
-                                            <option value="0" disabled selected></option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
+                                            <option value='10' disabled selected></option>
+                                            <option value='0'>Male</option>
+                                            <option value='1'>Female</option>
                                         </select>
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
@@ -65,10 +65,11 @@
                     <div class="row">
                         <div class="input-group-lg  col-md-6 col-sm-6 col-xs-6">
                             <div class="group">
-                                <input ng-input-effect-class is-required ng-model="txtPhone" ng-class="{errorBorder : frmAddClient.txtPhone.$dirty == true && frmAddClient.txtPhone.$invalid == true ,'used': txtPhone.length > 0}" type="number" string-to-number pattern=".{1,80}" id="txtPhone" name="txtPhone" required>
+                                <input ng-input-effect-class is-required pattern="^\d{3}-\d{3}-\d{4}$" ng-model="txtPhone" ng-class="{errorBorder : frmAddClient.txtPhone.$dirty == true && frmAddClient.txtPhone.$invalid == true ,'used': txtPhone.length > 0}" type="text" pattern=".{1,80}" id="txtPhone" name="txtPhone" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label ng-class="{errorFont : frmAddClient.txtPhone.$dirty == true && frmAddClient.txtPhone.$invalid == true }">Mobile</label>
+                                <span class="errorFont" ng-show="frmAddClient.txtPhone.$error.pattern && frmAddClient.txtPhone.$touched == true">Invalid Syntax ,It Should Look Like xxx-xxx-xxxx</span>
                             </div>
                         </div>
                         <div class="input-group-lg col-md-6 col-sm-6 col-xs-6">
@@ -106,8 +107,8 @@
 
                             <div class="group">
                                 <select ng-select-effect-class required ng-model="cmbBloodType"
-                                        ng-class="{'used': cmbBloodType != '0'}" id="cmbBloodType" name="cmbBloodType" class="input-form">
-                                    <option value='0' disabled selected></option>
+                                        ng-class="{'used': cmbBloodType != '10'}" id="cmbBloodType" name="cmbBloodType" class="input-form">
+                                    <option value='10' disabled selected></option>
                                     <option value="A+">A+</option>
                                     <option value="A-">A-</option>
                                     <option value="B+">B+</option>
@@ -135,15 +136,15 @@
 
 
                     <!--<div class="input-group">
-                        <input type="text" class="form-control" data-ng-model="finalDate | date:' MMM dd, yyyy'" ng-click="showPicker = true">
-                        <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-calendar"></i>
-                        </span>
-                    </div>
-                    <datetimepicker data-ng-model="data.date"
-                                    ng-show="showPicker == true"
-                                    data-datetimepicker-config="datepickerconfigurations"
-                                    data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>-->
+                <input type="text" class="form-control" data-ng-model="finalDate | date:' MMM dd, yyyy'" ng-click="showPicker = true">
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </span>
+            </div>
+            <datetimepicker data-ng-model="data.date"
+                            ng-show="showPicker == true"
+                            data-datetimepicker-config="datepickerconfigurations"
+                            data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>-->
 
 
                     <div class="clear"></div>
