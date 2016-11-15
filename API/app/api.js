@@ -379,7 +379,7 @@ module.exports = function (app, express) {
     api.get('/Client/List/:CoordinatorId', function (req, res) {
         var _id = req.params.CoordinatorId;
         console.log(_id);
-        Client.find({ 'Coordinator': _id }, 'FirstName LastName Mobile _id', function (err, Obj) {
+        Client.find({ 'Coordinator': _id }, 'FirstName LastName Img _id', function (err, Obj) {
             if (err)
                 return res.json({ code: '1', data: err });
             else {
