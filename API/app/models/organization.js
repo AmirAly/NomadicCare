@@ -25,6 +25,7 @@ var Organization = new Schema({
             message: '{VALUE} is not a valid mobile number!'
         },
     },
+    Email: { type: String },
     SmsNotificationsEnabled: { type: String },
     Speciality: [{
         Name: { type: String },

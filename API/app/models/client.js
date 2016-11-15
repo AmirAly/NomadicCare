@@ -7,11 +7,11 @@ var Client = new Schema({
     },
     FirstName: {
         type: String,
-        required: [true, 'User phone number required']
+        required: [true, 'Firstname is required']
     },
     LastName: {
         type: String,
-        required: [true, 'User phone number required']
+        required: [true, 'Lastname is required']
     },
     Mobile: {
         type: String,
@@ -27,7 +27,9 @@ var Client = new Schema({
     BloodType: { type: String },
     Img: { type: String },
     RetrivalCode: { type: String },
+    Email: { type: String },
     HealthNotes: [{}],
+    HealthMeasurments: [{}],
     ConsultationNotes: [
         {
             Date: { type: Date, default: new Date() },
@@ -38,6 +40,29 @@ var Client = new Schema({
             Type: { type: String }
         }
     ],
+    CarePlans: [
+        {
+            PlanName: { type: String },
+            ToImprove: { type: String },
+            ToAchieve1: { type: String },
+            ToAchieve2: { type: String },
+            AgreedActions1: { type: Number },
+            AgreedActions2: { type: Number },
+            ByWho1: { type: String },
+            ByWho2: { type: String },
+            ByWhen1: { type: String },
+            ByWhen2: { type: String },
+            Progress: { type: String },
+            OtherPlan: { type: String },
+            OtherConsideration: { type: String },
+            Reason: { type: String },
+            Provider: {
+                type: Schema.Types.ObjectId,
+                ref: 'Coordinator'
+            }, Status: { type: String },
+
+        }
+    ]
 
 });
 module.exports = Mongoose.model('Client', Client);
