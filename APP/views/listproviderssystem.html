@@ -4,9 +4,9 @@
         <div class="col-xs-12">
             <div class="clear2"></div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left noPaddingRight">
-                <span class="pageTitle">Providers &nbsp;<span class="glyphicon glyphicon-plus-sign" ng-click="showCreateProviderSystem()"></span></span>
+                <span class="pageTitle">Providers &nbsp;<span class="glyphicon glyphicon-plus-sign" ng-hide="showAllProviders" ng-click="showCreateProviderSystem()"></span></span>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right noPaddingLeft">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right noPaddingLeft" ng-hide="showAllProviders">
                 <button class="btn btn-invert" type="button" ng-click="showOrganization()">Back To Organisation</button>
             </div>
             <div class="clear2"></div>

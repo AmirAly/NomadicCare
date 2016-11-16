@@ -44,10 +44,11 @@
                 $scope.txtLastName = _res.data.data[0].LastName;
                 $scope.txtPhone = _res.data.data[0].Mobile;
                 $scope.userImg = _res.data.data[0].Img;
+                BaseImg64 = _res.data.data[0].Img;
             }
             else {
                 $scope.showMessage = true;
-                $scope.messageTxt = 'No Such Provider ...';
+                $scope.messageTxt = 'No Such Client ...';
                 $scope.messageStatus = 'warning';
             }
             //$scope.loading = false;

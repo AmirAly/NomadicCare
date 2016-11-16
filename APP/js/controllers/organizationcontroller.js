@@ -36,7 +36,7 @@
                 $scope.txtEmail = _res.data.data.Email;
                 $scope.speciality = _res.data.data.Speciality;
                 //$scope.txtSMS = _res.data.data.SmsNotificationsEnabled;
-                if (_res.data.data.SmsNotificationsEnabled == "false" || _res.data.data[0].SmsNotificationsEnabled == false)
+                if (_res.data.data.SmsNotificationsEnabled == "false" || _res.data.data.SmsNotificationsEnabled == false)
                     $scope.txtSMS = false;
                 else $scope.txtSMS = true;
             }

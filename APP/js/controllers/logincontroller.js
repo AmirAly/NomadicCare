@@ -35,6 +35,7 @@
                 }
                 else if (_res.data.code == 101) { // system admin
                     $rootScope.currentProviderName = 'System Admin';
+                    $rootScope.OrganizationId = 1000;
                     $rootScope.userType = 'system';
 
                     $scope.showMessage = true;

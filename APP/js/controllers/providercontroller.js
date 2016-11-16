@@ -1,4 +1,4 @@
-﻿ehs.controller("ProviderController", function ($scope, $state, $rootScope, $stateParams , API) {
+﻿ehs.controller("ProviderController", function ($scope, $state, $rootScope, $stateParams, API) {
     console.log($stateParams.providerid);
     $scope.txtSMS = false;
     if ($stateParams.providerid == "") {
@@ -90,7 +90,7 @@
                     _id: null,
                     //DateOfBirth: '',
                     //Gender: '',
-                    RetrivalCode: '123456retrival',
+                    RetrivalCode: $scope.txtEmail + '12345',
                     Img: "",
                     Status: 'Pending',
                     Password: '12345'
@@ -151,7 +151,7 @@
                     url: '/Coordinator',
                     data: $scope.orgObj
                 }
-
+                console.log($scope.orgObj);
                 API.execute(req).then(function (_res) {
                     console.log(_res.data);
                     if (_res.data.code == 100) { // Provider | coordinator

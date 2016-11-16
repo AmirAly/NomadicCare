@@ -47,6 +47,7 @@
                 $scope.Password = _res.data.data[0].Password;
                 $scope.Status = _res.data.data[0].Status;
                 $scope.Img = _res.data.data[0].Img;
+                $scope.Organization = _res.data.data[0].Organization;
             }
             else {
                 $scope.showMessage = true;
@@ -91,7 +92,7 @@
                     _id: null,
                     //DateOfBirth: '',
                     //Gender: '',
-                    //RetrivalCode: '',
+                    RetrivalCode: $scope.txtEmail + '12345',
                     Img: "",
                     Status: 'Pending',
                     Password: '12345'
@@ -138,7 +139,7 @@
                     Speciality: $scope.speciality,
                     Practice: $scope.practices,
                     SmsNotificationsEnabled: $scope.txtSMS,
-                    Organization: $stateParams.orgid,
+                    Organization: $scope.Organization,
                     _id: $stateParams.providerid,
                     //DateOfBirth: '',
                     //Gender: '',
@@ -152,7 +153,7 @@
                     url: '/Coordinator',
                     data: $scope.orgObj
                 }
-
+                console.log($scope.orgObj);
                 API.execute(req).then(function (_res) {
                     console.log(_res.data);
                     if (_res.data.code == 100) { // Provider | coordinator

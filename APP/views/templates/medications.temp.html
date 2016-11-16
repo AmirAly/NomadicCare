@@ -1,12 +1,12 @@
 ﻿<div class="row">
     <div class="col-xs-6 col-xs-offset-6 col-sm-3 col-sm-offset-9  text-right">
-        <input type="text" placeholder="Type to filter" class="input-form txtSearchNotes" id="txtSearchNotes" name="txtSearchNotes" />
+        <input type="text" placeholder="Type to filter" class="input-form" ng-model="searchText" />
     </div>
 </div>
 <div class="clear2"></div>
 <!-- Table Start -->
 <div class="table-responsive">
-    <table class="table table-bordered tblWhite">
+    <table class="table table-bordered tblWhite" ng-hide="filteredArray.length == 0">
         <thead>
             <tr>
                 <th>Date&nbsp;Prescribed</th>
@@ -18,118 +18,131 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Lyrica</td>
-                <td>Pain killer</td>
-                <td>For management of back pain</td>
-                <td>Current</td>
-                <td>1 April2014. 10:00 Am</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Oxycontin</td>
-                <td>Pain killer</td>
-                <td>For management of hamstringsorreness</td>
-                <td>Current</td>
-                <td>1 April2014. 10:00 Am</td>
+            <tr ng-repeat="med in medications | filter:searchText as filteredArray">
+                <td>{{med.DatePrescribed | date:'mediumDate'}}</td> <!-- 'mediumDate' equivalent to 'MMM d, y' -->
+                <td>{{med.Description}}</td>
+                <td>{{med.Type}}</td>
+                <td>{{med.Indication}}</td>
+                <td>{{med.Status}}</td>
+                <td>{{med.RelatedConsultation}}</td>
             </tr>
         </tbody>
     </table>
 </div>
 <!-- Table End -->
-
+<div ng-show="filteredArray.length == 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+    <h3>No Medications found</h3>
+</div>
 
 <button class="btn btn-success adjustNewButton" data-toggle="modal" data-target="#medicationsModal" type="button">
     <span class="glyphicon glyphicon-plus"></span>
 </button>
 
 <!-- Medication Modal Start -->
-<div id="medicationsModal" class="modal fade" role="dialog">
+<div id="medicationsModal" class="modal fade" role="dialog" my-modal>
     <div class="modal-dialog">
-        <!-- Medication Modal content Start-->
-        <div class="modal-content">
-            <!-- Medication Modal Body Start -->
-            <div class="modal-body">
-                <!-- Medication Modal Header Start -->
-                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
-                <h4 class="text-center">New Medication</h4>
-                <!-- Medication Modal Header End -->
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group groupMedicationModal">
-                            <input type="text" class="fontBlack" name="txtDateMedication" pattern=".{1,80}" id="txtDateMedication" required readonly>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label id="lblDOB">Date Prescribed</label>
+        <form name="frmMedications" novalidate confirm-on-exit>
+            <!-- Medication Modal content Start-->
+            <div class="modal-content">
+                <!-- Medication Modal Body Start -->
+                <div class="modal-body">
+                    <!-- Medication Modal Header Start -->
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
+                    <h4 class="text-center">New Medication</h4>
+                    <!-- Medication Modal Header End -->
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <a data-toggle="dropdown" class="dropdown-toggle" id="dropdown">
+                                    <input ng-input-effect-class is-required
+                                           data-ng-model="txtDateMedication" data-date-time-input="MMM DD, YYYY"
+                                           ng-class="{errorBorder : frmMedications.txtDateMedication.$dirty == true && frmMedications.txtDateMedication.$invalid == true ,'used': txtDateMedication.length > 0}"
+                                           type="text" name="txtDateMedication" pattern=".{1,80}" id="txtDateMedication" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label ng-class="{errorFont : frmMedications.txtDateMedication.$dirty == true && frmMedications.txtDateMedication.$invalid == true }">Date Prescribed</label>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="txtDateMedication"
+                                                    data-datetimepicker-config="datepickerconfigurations"
+                                                    data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtDescription" ng-class="{errorBorder : frmMedications.txtDescription.$dirty == true && frmMedications.txtDescription.$invalid == true ,'used': txtDescription.length > 0}" type="text" pattern=".{1,80}" name="txtDescription" id="txtDescription" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmMedications.txtDescription.$dirty == true && frmMedications.txtDescription.$invalid == true }">Description</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtType" ng-class="{errorBorder : frmMedications.txtType.$dirty == true && frmMedications.txtType.$invalid == true ,'used': txtType.length > 0}" type="text" pattern=".{1,80}" name="txtType" id="txtType" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmMedications.txtType.$dirty == true && frmMedications.txtType.$invalid == true }">Type</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtIndication" ng-class="{errorBorder : frmMedications.txtIndication.$dirty == true && frmMedications.txtIndication.$invalid == true ,'used': txtIndication.length > 0}" type="text" pattern=".{1,80}" name="txtIndication" id="txtIndication" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmMedications.txtIndication.$dirty == true && frmMedications.txtIndication.$invalid == true }">Indication</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtStatus" ng-class="{errorBorder : frmMedications.txtStatus.$dirty == true && frmMedications.txtStatus.$invalid == true ,'used': txtStatus.length > 0}" type="text" pattern=".{1,80}" name="txtStatus" id="txtStatus" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmMedications.txtStatus.$dirty == true && frmMedications.txtStatus.$invalid == true }">Status</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtRelatedConsultation" ng-class="{errorBorder : frmMedications.txtRelatedConsultation.$dirty == true && frmMedications.txtRelatedConsultation.$invalid == true ,'used': txtRelatedConsultation.length > 0}" type="text" pattern=".{1,80}" name="txtRelatedConsultation" id="txtRelatedConsultation" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmMedications.txtRelatedConsultation.$dirty == true && frmMedications.txtRelatedConsultation.$invalid == true }">Related Consultation</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div ng-class="{'alert-success' : messageStatus == 'success' ,'alert-danger' : messageStatus == 'danger' ,'alert-warning' : messageStatus == 'warning'}" class="alert alert-dismissible text-center" ng-show="showMessage == true" id="dvMSG" role="alert">
+                                <span>{{messageTxt}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" id="txtDescription" class="txtDescription" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Description</label>
-                        </div>
-                    </div>
+                <!-- Medication Modal Body End -->
+                <!-- Medication Modal Footer Start -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
+                    <button ng-click="submit(frmMedications)" type="submit" class="btn btn-default">Save</button>
                 </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtType" id="txtType" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Type</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtIndication" id="txtIndication" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Indication</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtStatus" id="txtStatus" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Status</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtRelatedConsultation" id="txtRelatedConsultation" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Related Consultation</label>
-                        </div>
-                    </div>
-                </div>
+                <!-- Medication Modal Footer End -->
             </div>
-            <!-- Medication Modal Body End -->
-            <!-- Medication Modal Footer Start -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-            </div>
-            <!-- Medication Modal Footer End -->
-        </div>
-        <!-- Medication Modal Content End -->
+            <!-- Medication Modal Content End -->
+        </form>
     </div>
 </div>
 <!-- Medication Modal End -->
