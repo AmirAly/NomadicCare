@@ -6,6 +6,26 @@
     }, 500);
     console.log($rootScope.activetab);
 
+    $scope.showFileSelector = function () {
+        console.log('enter');
+        var fileuploader = angular.element("#uploadDocumentFile");
+        fileuploader.trigger('click');
+    }
+
+    $scope.fileAttached = "";
+
+    $scope.fileSelected = function (element) {
+        $scope.fileAttached = element.files[0];
+        console.log(element.files[0]);
+        r = new FileReader();
+        r.onloadend = function (e) {
+            $scope.fileAttached = e.target.result;
+            console.log($scope.fileAttached);
+        }
+        r.readAsBinaryString($scope.fileAttached);
+    };
+
+
     // date picker settings
     $scope.datepickerconfigurations = {
         startView: 'year',
@@ -23,7 +43,7 @@
     // fill table with data
     var req = {
         method: 'get',
-        url: '/HealthNotes/' + $scope.currentClientInfo._id + '/' + 'Medication',
+        url: '/HealthNotes/' + $scope.currentClientInfo._id + '/' + 'Document',
         data: {}
     }
     ////loader
@@ -32,10 +52,10 @@
     API.execute(req).then(function (_res) {
         console.log(_res.data);
         if (_res.data.code == 100) {
-            $scope.medications = _res.data.data;
+            $scope.documents = _res.data.data;
         }
         else {
-            $scope.medications = [];
+            $scope.documents = [];
         }
         //$scope.loading = false;
     }, function (error) {
@@ -49,27 +69,27 @@
 
 
     $scope.submit = function (form) {
-        angular.forEach($scope.frmMedications.$error.required, function (field) {
+        angular.forEach($scope.frmDocuments.$error.required, function (field) {
             field.$setDirty();
         });
 
         if (form.$valid) {
             console.log('valid');
-            $scope.medicationObj = {
-                HNType: 'Medication',
+            $scope.documentObj = {
+                HNType: 'Document',
                 HNStatus: 1,
-                DatePrescribed: $scope.txtDateMedication,
+                DateEntered: $scope.txtDateDocument,
                 Description: $scope.txtDescription,
-                Type: $scope.txtType,
-                Indication: $scope.txtIndication,
+                DocumentName: $scope.txtDocumentName,
                 Status: $scope.txtStatus,
-                RelatedConsultation: $scope.txtRelatedConsultation
+                SourceOrganisations: $scope.txtSourceOrganisations,
+                File: $scope.fileAttached
             }
 
             var req = {
                 method: 'post',
                 url: '/HealthNotes/' + $scope.currentClientInfo._id,
-                data: $scope.medicationObj
+                data: $scope.documentObj
             }
             $rootScope.loading = true;
 
@@ -77,8 +97,8 @@
                 console.log(_res);
                 if (_res.data.code == 100) {
                     $scope.dismiss();
-                    $scope.frmMedications.$setPristine();
-                    $scope.medications.push($scope.medicationObj);
+                    $scope.frmDocuments.$setPristine();
+                    $scope.documents.push($scope.documentObj);
                 }
                 else {
                     $scope.showMessage = true;

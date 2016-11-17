@@ -1,127 +1,141 @@
 ﻿<div class="row">
     <div class="col-xs-6 col-xs-offset-6 col-sm-3 col-sm-offset-9  text-right">
-        <input type="text" placeholder="Type to filter" class="input-form txtSearchNotes" id="txtSearchNotes" name="txtSearchNotes" />
+        <input type="text" placeholder="Type to filter" class="input-form" ng-model="searchText" />
     </div>
 </div>
 <div class="clear2"></div>
 <!-- Table Start -->
-<div class="table-responsive">
+<div class="table-responsive" ng-hide="filteredArray.length == 0">
     <table class="table table-bordered tblWhite">
         <thead>
             <tr>
                 <th>Date&nbsp;Entered</th>
                 <th>Description</th>
-                <th>Document</th>
+                <th>Document Name</th>
                 <th>Status</th>
-                <th>Source&nbsp;Organisations</th>
+                <th>Source Organisations</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Steve Smith's mystery virus from pakistan</td>
-                <td>Virs report.pdf</td>
-                <td>Opened/Unopened</td>
-                <td>Melbourne immunologist</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Steve Smith's mystery virus from pakistan</td>
-                <td>Virs report.pdf</td>
-                <td>Opened/Unopened</td>
-                <td>Melbourne immunologist</td>
+            <tr ng-repeat="item in documents | filter:searchText as filteredArray">
+                <td>{{item.DateEntered | date:'mediumDate'}}</td> <!-- 'mediumDate' equivalent to 'MMM d, y' -->
+                <td>{{item.Description}}</td>
+                <td>{{item.DocumentName}}</td>
+                <td>{{item.Status}}</td>
+                <td>{{item.SourceOrganisations}}</td>
             </tr>
         </tbody>
     </table>
-
-    <!-- Table End -->
-
+</div>
+<!-- Table End -->
+<div ng-show="filteredArray.length == 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+    <h3>No Documents found</h3>
 </div>
 
 <button class="btn btn-success adjustNewButton" data-toggle="modal" data-target="#documentsModal" type="button">
     <span class="glyphicon glyphicon-plus"></span>
 </button>
 
-<!-- Documents Modal Start -->
-<div id="documentsModal" class="modal fade" role="dialog">
+<!-- Document Modal Start -->
+<div id="documentsModal" class="modal fade" role="dialog" my-modal>
     <div class="modal-dialog">
-        <!-- Documents Modal content Start-->
-        <div class="modal-content">
-            <!-- Documents Modal Body Start -->
-            <div class="modal-body">
-                <!-- Documents Modal Header Start -->
-                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
-                <h4 class="text-center">New Document</h4>
-                <!-- Documents Modal Header End -->
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group groupDocumentModal">
-                            <input type="text" class="fontBlack" name="txtDateDocument" pattern=".{1,80}" id="txtDateDocument" required readonly>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label id="lblDOB">Date Entered</label>
+        <form name="frmDocuments" novalidate confirm-on-exit>
+            <!-- Document Modal content Start-->
+            <div class="modal-content">
+                <!-- Document Modal Body Start -->
+                <div class="modal-body">
+                    <!-- Document Modal Header Start -->
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
+                    <h4 class="text-center">New Document</h4>
+                    <!-- Document Modal Header End -->
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <a data-toggle="dropdown" class="dropdown-toggle" id="dropdown">
+                                    <input ng-input-effect-class is-required
+                                           data-ng-model="txtDateDocument" data-date-time-input="MMM DD, YYYY"
+                                           ng-class="{errorBorder : frmDocuments.txtDateDocument.$dirty == true && frmDocuments.txtDateDocument.$invalid == true ,'used': txtDateDocument.length > 0}"
+                                           type="text" name="txtDateDocument" pattern=".{1,80}" id="txtDateDocument" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label ng-class="{errorFont : frmDocuments.txtDateDocument.$dirty == true && frmDocuments.txtDateDocument.$invalid == true }">Date Entered</label>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="txtDateDocument"
+                                                    data-datetimepicker-config="datepickerconfigurations"
+                                                    data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtDescription" ng-class="{errorBorder : frmDocuments.txtDescription.$dirty == true && frmDocuments.txtDescription.$invalid == true ,'used': txtDescription.length > 0}" type="text" pattern=".{1,80}" name="txtDescription" id="txtDescription" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmDocuments.txtDescription.$dirty == true && frmDocuments.txtDescription.$invalid == true }">Description</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-11 col-sm-11 col-xs-11">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtDocumentName" ng-class="{errorBorder : frmDocuments.txtDocumentName.$dirty == true && frmDocuments.txtDocumentName.$invalid == true ,'used': txtDocumentName.length > 0}" type="text" pattern=".{1,80}" name="txtDocumentName" id="txtDocumentName" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmDocuments.txtDocumentName.$dirty == true && frmDocuments.txtDocumentName.$invalid == true }">Document Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-1 col-sm-1 col-xs-1 noPaddingLeft">
+                            <button class="btn modalIcon" type="button" ng-click="showFileSelector()">
+                                <i class="glyphicon glyphicon-paperclip"></i>
+                            </button>
+                            <input type="file" onchange="angular.element(this).scope().fileSelected(this)" id="uploadDocumentFile" class="hide" />
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtStatus" ng-class="{errorBorder : frmDocuments.txtStatus.$dirty == true && frmDocuments.txtStatus.$invalid == true ,'used': txtStatus.length > 0}" type="text" pattern=".{1,80}" name="txtStatus" id="txtStatus" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmDocuments.txtStatus.$dirty == true && frmDocuments.txtStatus.$invalid == true }">Status</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtSourceOrganisations" ng-class="{errorBorder : frmDocuments.txtSourceOrganisations.$dirty == true && frmDocuments.txtSourceOrganisations.$invalid == true ,'used': txtSourceOrganisations.length > 0}" type="text" pattern=".{1,80}" name="txtSourceOrganisations" id="txtSourceOrganisations" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmDocuments.txtSourceOrganisations.$dirty == true && frmDocuments.txtSourceOrganisations.$invalid == true }">Source Organisations</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div ng-class="{'alert-success' : messageStatus == 'success' ,'alert-danger' : messageStatus == 'danger' ,'alert-warning' : messageStatus == 'warning'}" class="alert alert-dismissible text-center" ng-show="showMessage == true" id="dvMSG" role="alert">
+                                <span>{{messageTxt}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" id="txtDescription" class="txtDescription" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Description</label>
-                        </div>
-                    </div>
+                <!-- Document Modal Body End -->
+                <!-- Document Modal Footer Start -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
+                    <button ng-click="submit(frmDocuments)" type="submit" class="btn btn-default">Save</button>
                 </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-11 col-sm-11 col-xs-11">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtDocument" id="txtDocument" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Document Name</label>
-                        </div>
-                    </div>
-                    <div class="col-md-1 col-sm-1 col-xs-1">
-                        <label>
-                            <span class="glyphicon glyphicon-paperclip"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtStatus" id="txtStatus" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Status</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtSourceOrganisations" id="txtSourceOrganisations" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Source Organisations</label>
-                        </div>
-                    </div>
-                </div>
+                <!-- Document Modal Footer End -->
             </div>
-            <!-- Documents Modal Body End -->
-            <!-- Documents Modal Footer Start -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-            </div>
-            <!-- Documents Modal Footer End -->
-        </div>
-        <!-- Documents Modal Content End -->
+            <!-- Document Modal Content End -->
+        </form>
     </div>
 </div>
-<!-- Documents Modal End -->
+<!-- Document Modal End -->
