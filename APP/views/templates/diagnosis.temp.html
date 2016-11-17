@@ -1,11 +1,11 @@
 ﻿<div class="row">
     <div class="col-xs-6 col-xs-offset-6 col-sm-3 col-sm-offset-9  text-right">
-        <input type="text" placeholder="Type to filter" class="input-form txtSearchNotes" id="txtSearchNotes" name="txtSearchNotes" />
+        <input type="text" placeholder="Type to filter" class="input-form" ng-model="searchText" />
     </div>
 </div>
 <div class="clear2"></div>
 <!-- Table Start -->
-<div class="table-responsive">
+<div class="table-responsive" ng-hide="filteredArray.length == 0">
     <table class="table table-bordered tblWhite">
         <thead>
             <tr>
@@ -17,104 +17,119 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Bronshitis</td>
-                <td>Acute/Moderate/Long-term</td>
-                <td>Current/Resolved/On-going/Non-existant</td>
-                <td>Dr.Kountoris</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Bronshitis</td>
-                <td>Acute/Moderate/Long-term</td>
-                <td>Current/Resolved/On-going/Non-existant</td>
-                <td>Dr.Kountoris</td>
+            <tr ng-repeat="item in diagnosis | filter:searchText as filteredArray">
+                <td>{{item.DateEntered | date:'mediumDate'}}</td> <!-- 'mediumDate' equivalent to 'MMM d, y' -->
+                <td>{{item.Diagnosis}}</td>
+                <td>{{item.Nature}}</td>
+                <td>{{item.Status}}</td>
+                <td>{{item.Clinician}}</td>
             </tr>
         </tbody>
     </table>
 </div>
 <!-- Table End -->
+<div ng-show="filteredArray.length == 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+    <h3>No Diagnosis found</h3>
+</div>
 
 <button class="btn btn-success adjustNewButton" data-toggle="modal" data-target="#diagnosisModal" type="button">
     <span class="glyphicon glyphicon-plus"></span>
 </button>
 
 <!-- Diagnosis Modal Start -->
-<div id="diagnosisModal" class="modal fade" role="dialog">
+<div id="diagnosisModal" class="modal fade" role="dialog" my-modal>
     <div class="modal-dialog">
-        <!-- Diagnosis Modal content Start-->
-        <div class="modal-content">
-            <!-- Diagnosis Modal Body Start -->
-            <div class="modal-body">
-                <!-- Diagnosis Modal Header Start -->
-                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
-                <h4 class="text-center">New Diagnosis</h4>
-                <!-- Diagnosis Modal Header End -->
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group groupDiagnosisModal">
-                            <input type="text" class="fontBlack" name="txtDateDiagnosis" pattern=".{1,80}" id="txtDateDiagnosis" required readonly>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label id="lblDOB">Date Entered</label>
+        <form name="frmDiagnosis" novalidate confirm-on-exit>
+            <!-- Diagnosis Modal content Start-->
+            <div class="modal-content">
+                <!-- Diagnosis Modal Body Start -->
+                <div class="modal-body">
+                    <!-- Diagnosis Modal Header Start -->
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
+                    <h4 class="text-center">New Diagnosis</h4>
+                    <!-- Diagnosis Modal Header End -->
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <a data-toggle="dropdown" class="dropdown-toggle" id="dropdown">
+                                    <input ng-input-effect-class is-required
+                                           data-ng-model="txtDateDiagnosis" data-date-time-input="MMM DD, YYYY"
+                                           ng-class="{errorBorder : frmDiagnosis.txtDateDiagnosis.$dirty == true && frmDiagnosis.txtDateDiagnosis.$invalid == true ,'used': txtDateDiagnosis.length > 0}"
+                                           type="text" name="txtDateDiagnosis" pattern=".{1,80}" id="txtDateDiagnosis" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label ng-class="{errorFont : frmDiagnosis.txtDateDiagnosis.$dirty == true && frmDiagnosis.txtDateDiagnosis.$invalid == true }">Date Entered</label>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="txtDateDiagnosis"
+                                                    data-datetimepicker-config="datepickerconfigurations"
+                                                    data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtDiagnosis" ng-class="{errorBorder : frmDiagnosis.txtDiagnosis.$dirty == true && frmDiagnosis.txtDiagnosis.$invalid == true ,'used': txtDiagnosis.length > 0}" type="text" pattern=".{1,80}" name="txtDiagnosis" id="txtDiagnosis" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmDiagnosis.txtDiagnosis.$dirty == true && frmDiagnosis.txtDiagnosis.$invalid == true }">Diagnosis</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtNature" ng-class="{errorBorder : frmDiagnosis.txtNature.$dirty == true && frmDiagnosis.txtNature.$invalid == true ,'used': txtNature.length > 0}" type="text" pattern=".{1,80}" name="txtNature" id="txtNature" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmDiagnosis.txtNature.$dirty == true && frmDiagnosis.txtNature.$invalid == true }">Nature</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtStatus" ng-class="{errorBorder : frmDiagnosis.txtStatus.$dirty == true && frmDiagnosis.txtStatus.$invalid == true ,'used': txtStatus.length > 0}" type="text" pattern=".{1,80}" name="txtStatus" id="txtStatus" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmDiagnosis.txtStatus.$dirty == true && frmDiagnosis.txtStatus.$invalid == true }">Status</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtClinician" ng-class="{errorBorder : frmDiagnosis.txtClinician.$dirty == true && frmDiagnosis.txtClinician.$invalid == true ,'used': txtClinician.length > 0}" type="text" pattern=".{1,80}" name="txtClinician" id="txtClinician" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmDiagnosis.txtClinician.$dirty == true && frmDiagnosis.txtClinician.$invalid == true }">Related Consultation</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div ng-class="{'alert-success' : messageStatus == 'success' ,'alert-danger' : messageStatus == 'danger' ,'alert-warning' : messageStatus == 'warning'}" class="alert alert-dismissible text-center" ng-show="showMessage == true" id="dvMSG" role="alert">
+                                <span>{{messageTxt}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" id="txtDiagnosis" class="txtDiagnosis" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Diagnosis</label>
-                        </div>
-                    </div>
+                <!-- Diagnosis Modal Body End -->
+                <!-- Diagnosis Modal Footer Start -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
+                    <button ng-click="submit(frmDiagnosis)" type="submit" class="btn btn-default">Save</button>
                 </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtNature" id="txtNature" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Nature</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtStatus" id="txtStatus" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Status</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtClinician" id="txtClinician" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Clinician</label>
-                        </div>
-                    </div>
-                </div>
+                <!-- Diagnosis Modal Footer End -->
             </div>
-            <!-- Diagnosis Modal Body End -->
-            <!-- Diagnosis Modal Footer Start -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-            </div>
-            <!-- Diagnosis Modal Footer End -->
-        </div>
-        <!-- Diagnosis Modal Content End -->
+            <!-- Diagnosis Modal Content End -->
+        </form>
     </div>
 </div>
 <!-- Diagnosis Modal End -->

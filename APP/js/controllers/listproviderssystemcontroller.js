@@ -55,7 +55,7 @@
             $rootScope.loading = false;
         });
     }
-
+    console.log($scope.showAllProviders);
     $scope.showOrganization = function (_id) {
         $state.go('organization', { orgid: $stateParams.orgid });
     }

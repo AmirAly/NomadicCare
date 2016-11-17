@@ -176,7 +176,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
          // inner tabs headers (add template here)
          templateUrl: 'views/templates/healthnotes.innertabs.temp.html',
          controller: function ($scope) {
-             $scope.activetab = 'medications';
+             //$scope.activetab = 'medications';
          }
      })
 

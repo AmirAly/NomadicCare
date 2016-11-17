@@ -1,247 +1,148 @@
 ﻿<div class="row">
-    <div class="col-xs-6 col-xs-offset-6 col-sm-3 col-sm-offset-9 text-right">
-        <input type="text" placeholder="Type to filter" class="input-form txtSearchNotes" id="txtSearchNotes" name="txtSearchNotes" />
+    <div class="col-xs-6 col-xs-offset-6 col-sm-3 col-sm-offset-9  text-right">
+        <input type="text" placeholder="Type to filter" class="input-form" ng-model="searchText" />
     </div>
 </div>
 <div class="clear2"></div>
 <!-- Table Start -->
-<div class="table-responsive">
+<div class="table-responsive" ng-hide="filteredArray.length == 0">
     <table class="table table-bordered tblWhite">
         <thead>
             <tr>
-                <th>Date Entered</th>
+                <th>Date&nbsp;Prescribed</th>
                 <th>Allergy Description</th>
-                <th>AllergyType</th>
+                <th>Allergy Type</th>
                 <th>Prescribed Therapy</th>
                 <th>Status</th>
                 <th>Therapist</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass 1</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>Grass</td>
-                <td>Plant</td>
-                <td>Claratyne</td>
-                <td>Lapsed</td>
-                <td>Dr.Sneeze</td>
+            <tr ng-repeat="item in allergies | filter:searchText as filteredArray">
+                <td>{{item.DatePrescribed | date:'mediumDate'}}</td> <!-- 'mediumDate' equivalent to 'MMM d, y' -->
+                <td>{{item.Description}}</td>
+                <td>{{item.Type}}</td>
+                <td>{{item.PrescribedTherapy}}</td>
+                <td>{{item.Status}}</td>
+                <td>{{item.Therapist}}</td>
             </tr>
         </tbody>
     </table>
 </div>
 <!-- Table End -->
+<div ng-show="filteredArray.length == 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+    <h3>No Allergies found</h3>
+</div>
 
 <button class="btn btn-success adjustNewButton" data-toggle="modal" data-target="#allergiesModal" type="button">
     <span class="glyphicon glyphicon-plus"></span>
 </button>
 
-<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-<!-- Allergy Modal Start -->
-<div id="allergiesModal" class="modal fade" role="dialog">
+<!-- Allergies Modal Start -->
+<div id="allergiesModal" class="modal fade" role="dialog" my-modal>
     <div class="modal-dialog">
-        <!-- Allergy Modal content Start-->
-        <div class="modal-content">
-            <!-- Allergy Modal Body Start -->
-            <div class="modal-body">
-                <!-- Allergy Modal Header Start -->
-                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
-                <h4 class="text-center">New Allergy</h4>
-                <!-- Allergy Modal Header End -->
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group groupAllergyModal">
-                            <input type="text" class="fontBlack" name="txtDateAllergy" pattern=".{1,80}" id="txtDateAllergy" required readonly>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label id="lblDOB">Date Entered</label>
+        <form name="frmAllergies" novalidate confirm-on-exit>
+            <!-- Allergies Modal content Start-->
+            <div class="modal-content">
+                <!-- Allergies Modal Body Start -->
+                <div class="modal-body">
+                    <!-- Allergies Modal Header Start -->
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
+                    <h4 class="text-center">New Allergy</h4>
+                    <!-- Allergies Modal Header End -->
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <a data-toggle="dropdown" class="dropdown-toggle" id="dropdown">
+                                    <input ng-input-effect-class is-required
+                                           data-ng-model="txtDateAllergies" data-date-time-input="MMM DD, YYYY"
+                                           ng-class="{errorBorder : frmAllergies.txtDateAllergies.$dirty == true && frmAllergies.txtDateAllergies.$invalid == true ,'used': txtDateAllergies.length > 0}"
+                                           type="text" name="txtDateAllergies" pattern=".{1,80}" id="txtDateAllergies" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label ng-class="{errorFont : frmAllergies.txtDateAllergies.$dirty == true && frmAllergies.txtDateAllergies.$invalid == true }">Date Entered</label>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="txtDateAllergies"
+                                                    data-datetimepicker-config="datepickerconfigurations"
+                                                    data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtDescription" ng-class="{errorBorder : frmAllergies.txtDescription.$dirty == true && frmAllergies.txtDescription.$invalid == true ,'used': txtDescription.length > 0}" type="text" pattern=".{1,80}" name="txtDescription" id="txtDescription" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmAllergies.txtDescription.$dirty == true && frmAllergies.txtDescription.$invalid == true }">Allergy Description</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtType" ng-class="{errorBorder : frmAllergies.txtType.$dirty == true && frmAllergies.txtType.$invalid == true ,'used': txtType.length > 0}" type="text" pattern=".{1,80}" name="txtType" id="txtType" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmAllergies.txtType.$dirty == true && frmAllergies.txtType.$invalid == true }">Allergy Type</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtPrescribedTherapy" ng-class="{errorBorder : frmAllergies.txtPrescribedTherapy.$dirty == true && frmAllergies.txtPrescribedTherapy.$invalid == true ,'used': txtPrescribedTherapy.length > 0}" type="text" pattern=".{1,80}" name="txtPrescribedTherapy" id="txtPrescribedTherapy" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmAllergies.txtPrescribedTherapy.$dirty == true && frmAllergies.txtPrescribedTherapy.$invalid == true }">Prescribed Therapy</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtStatus" ng-class="{errorBorder : frmAllergies.txtStatus.$dirty == true && frmAllergies.txtStatus.$invalid == true ,'used': txtStatus.length > 0}" type="text" pattern=".{1,80}" name="txtStatus" id="txtStatus" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmAllergies.txtStatus.$dirty == true && frmAllergies.txtStatus.$invalid == true }">Status</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtTherapist" ng-class="{errorBorder : frmAllergies.txtTherapist.$dirty == true && frmAllergies.txtTherapist.$invalid == true ,'used': txtTherapist.length > 0}" type="text" pattern=".{1,80}" name="txtTherapist" id="txtTherapist" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmAllergies.txtTherapist.$dirty == true && frmAllergies.txtTherapist.$invalid == true }">Therapist</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div ng-class="{'alert-success' : messageStatus == 'success' ,'alert-danger' : messageStatus == 'danger' ,'alert-warning' : messageStatus == 'warning'}" class="alert alert-dismissible text-center" ng-show="showMessage == true" id="dvMSG" role="alert">
+                                <span>{{messageTxt}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" id="txtDescription" class="txtDescription" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Allergy Description</label>
-                        </div>
-                    </div>
+                <!-- Allergies Modal Body End -->
+                <!-- Allergies Modal Footer Start -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
+                    <button ng-click="submit(frmAllergies)" type="submit" class="btn btn-default">Save</button>
                 </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtType" id="txtType" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Allergy Type</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtPrescribedTherapy" id="txtPrescribedTherapy" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Prescribed Therapy</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtStatus" id="txtStatus" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Status</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtTherapist" id="txtTherapist" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Therapist</label>
-                        </div>
-                    </div>
-                </div>
+                <!-- Allergies Modal Footer End -->
             </div>
-            <!-- Allergy Modal Body End -->
-            <!-- Allergy Modal Footer Start -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-            </div>
-            <!-- Allergy Modal Footer End -->
-        </div>
-        <!-- Allergy Modal Content End -->
+            <!-- Allergies Modal Content End -->
+        </form>
     </div>
 </div>
-<!-- Allergy Modal End -->
+<!-- Allergies Modal End -->

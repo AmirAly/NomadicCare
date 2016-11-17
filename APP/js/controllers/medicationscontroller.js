@@ -1,7 +1,11 @@
 ﻿ehs.controller("MedicationsController", function ($scope, $state, $rootScope, $stateParams, API, $timeout) {
-    console.log($scope.currentClientInfo);
-    //console.log($scope.currentClientInfo.HealthNotes);
-    //console.log($scope.currentClientInfo.HealthNotes);// type madication
+   
+    $timeout(function () {
+        console.log($scope.currentClientInfo);
+        $rootScope.activeoutertab = 'healthnotes';
+        $rootScope.activetab = 'medications';
+    },500);
+    console.log($rootScope.activetab);
 
     // date picker settings
     $scope.datepickerconfigurations = {
@@ -94,14 +98,4 @@
 
     }
 
-});
-ehs.directive('myModal', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attr) {
-            scope.dismiss = function () {
-                element.modal('hide');
-            };
-        }
-    }
 });

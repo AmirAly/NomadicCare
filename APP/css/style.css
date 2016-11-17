@@ -1354,3 +1354,11 @@ canvas {
     color: #999;
     font-size: 12px;
 }
+
+/*Modal icon*/
+.modalIcon{
+        background: transparent;
+    color: #555;
+    border: none;
+    font-size: 16px;
+}

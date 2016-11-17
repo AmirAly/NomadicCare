@@ -111,7 +111,6 @@ ehs.directive('confirmOnExit', function () {
     };
 });
 
-
 ehs.directive('convertToNumber', function () {
     return {
         require: 'ngModel',
@@ -124,4 +123,16 @@ ehs.directive('convertToNumber', function () {
             });
         }
     };
+});
+
+//directive with function to close the modal
+ehs.directive('myModal', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            scope.dismiss = function () {
+                element.modal('hide');
+            };
+        }
+    }
 });

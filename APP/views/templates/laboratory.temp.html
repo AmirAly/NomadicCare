@@ -1,11 +1,11 @@
 ﻿<div class="row">
     <div class="col-xs-6 col-xs-offset-6 col-sm-3 col-sm-offset-9  text-right">
-        <input type="text" placeholder="Type to filter" class="input-form txtSearchNotes" id="txtSearchNotes" name="txtSearchNotes" />
+        <input type="text" placeholder="Type to filter" class="input-form" ng-model="searchText" />
     </div>
 </div>
 <div class="clear2"></div>
 <!-- Table Start -->
-<div class="table-responsive">
+<div class="table-responsive" ng-hide="filteredArray.length == 0">
     <table class="table table-bordered tblWhite">
         <thead>
             <tr>
@@ -17,109 +17,126 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>HbA1c blood tested result:All Ok</td>
-                <td>Blood test/Urine test/Stool test/Biopsy</td>
-                <td>Pending/Received/Lapsed</td>
-                <td>Melbourne Pathology</td>
-            </tr>
-            <tr>
-                <td>1 Apr 2014</td>
-                <td>HbA1c blood tested result:All Ok</td>
-                <td>Blood test/Urine test/Stool test/Biopsy</td>
-                <td>Pending/Received/Lapsed</td>
-                <td>Melbourne Pathology</td>
+            <tr ng-repeat="item in laboratories | filter:searchText as filteredArray">
+                <td>{{item.DateEntered | date:'mediumDate'}}</td> <!-- 'mediumDate' equivalent to 'MMM d, y' -->
+                <td>{{item.Notes}}</td>
+                <td>{{item.Type}}</td>
+                <td>{{item.Status}}</td>
+                <td>{{item.Organisation}}</td>
             </tr>
         </tbody>
     </table>
 </div>
 <!-- Table End -->
+<div ng-show="filteredArray.length == 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+    <h3>No Laboratories found</h3>
+</div>
 
-<button class="btn btn-success adjustNewButton" data-toggle="modal" data-target="#laboratoryModal" type="button">
+<button class="btn btn-success adjustNewButton" data-toggle="modal" data-target="#laboratoriesModal" type="button">
     <span class="glyphicon glyphicon-plus"></span>
 </button>
 
 <!-- Laboratory Modal Start -->
-<div id="laboratoryModal" class="modal fade" role="dialog">
+<div id="laboratoriesModal" class="modal fade" role="dialog" my-modal>
     <div class="modal-dialog">
-        <!-- Laboratory Modal content Start-->
-        <div class="modal-content">
-            <!-- Laboratory Modal Body Start -->
-            <div class="modal-body">
-                <!-- Laboratory Modal Header Start -->
-                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
-                <h4 class="text-center">New Laboratory</h4>
-                <!-- Laboratory Modal Header End -->
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group groupLaboratoryModal">
-                            <input type="text" class="fontBlack" name="txtDateLaboratory" pattern=".{1,80}" id="txtDateLaboratory" required readonly>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label id="lblDOB">Date Entered</label>
+        <form name="frmLaboratories" novalidate confirm-on-exit>
+            <!-- Laboratory Modal content Start-->
+            <div class="modal-content">
+                <!-- Laboratory Modal Body Start -->
+                <div class="modal-body">
+                    <!-- Laboratory Modal Header Start -->
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
+                    <h4 class="text-center">New Laboratory</h4>
+                    <!-- Laboratory Modal Header End -->
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <a data-toggle="dropdown" class="dropdown-toggle" id="dropdown">
+                                    <input ng-input-effect-class is-required
+                                           data-ng-model="txtDateLaboratory" data-date-time-input="MMM DD, YYYY"
+                                           ng-class="{errorBorder : frmLaboratories.txtDateLaboratory.$dirty == true && frmLaboratories.txtDateLaboratory.$invalid == true ,'used': txtDateLaboratory.length > 0}"
+                                           type="text" name="txtDateLaboratory" pattern=".{1,80}" id="txtDateLaboratory" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label ng-class="{errorFont : frmLaboratories.txtDateLaboratory.$dirty == true && frmLaboratories.txtDateLaboratory.$invalid == true }">Date Entered</label>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="txtDateLaboratory"
+                                                    data-datetimepicker-config="datepickerconfigurations"
+                                                    data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-11 col-sm-11 col-xs-11">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtNotes" ng-class="{errorBorder : frmLaboratories.txtNotes.$dirty == true && frmLaboratories.txtNotes.$invalid == true ,'used': txtNotes.length > 0}" type="text" pattern=".{1,80}" name="txtNotes" id="txtNotes" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmLaboratories.txtNotes.$dirty == true && frmLaboratories.txtNotes.$invalid == true }">Notes</label>
+                            </div>
+                        </div>
+                        <div class="col-md-1 col-sm-1 col-xs-1 noPaddingLeft">
+                            <button class="btn modalIcon" type="button" ng-click="showFileSelector()">
+                                <i class="glyphicon glyphicon-paperclip"></i>
+                            </button>
+                            <input type="file" onchange="angular.element(this).scope().fileSelected(this)" id="uploadLaboratoryNotes" class="hide" />
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtType" ng-class="{errorBorder : frmLaboratories.txtType.$dirty == true && frmLaboratories.txtType.$invalid == true ,'used': txtType.length > 0}" type="text" pattern=".{1,80}" name="txtType" id="txtType" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmLaboratories.txtType.$dirty == true && frmLaboratories.txtType.$invalid == true }">Type</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                   
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtStatus" ng-class="{errorBorder : frmLaboratories.txtStatus.$dirty == true && frmLaboratories.txtStatus.$invalid == true ,'used': txtStatus.length > 0}" type="text" pattern=".{1,80}" name="txtStatus" id="txtStatus" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmLaboratories.txtStatus.$dirty == true && frmLaboratories.txtStatus.$invalid == true }">Status</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtOrganisation" ng-class="{errorBorder : frmLaboratories.txtOrganisation.$dirty == true && frmLaboratories.txtOrganisation.$invalid == true ,'used': txtOrganisation.length > 0}" type="text" pattern=".{1,80}" name="txtOrganisation" id="txtOrganisation" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmLaboratories.txtOrganisation.$dirty == true && frmLaboratories.txtOrganisation.$invalid == true }">Organisation</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div ng-class="{'alert-success' : messageStatus == 'success' ,'alert-danger' : messageStatus == 'danger' ,'alert-warning' : messageStatus == 'warning'}" class="alert alert-dismissible text-center" ng-show="showMessage == true" id="dvMSG" role="alert">
+                                <span>{{messageTxt}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-11 col-sm-11 col-xs-11">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" id="txtNotes" class="txtNotes" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Notes</label>
-                        </div>
-                    </div>
-                    <div class="col-md-1 col-sm-1 col-xs-1">
-                        <label>
-                            <span class="glyphicon glyphicon-paperclip"></span>
-                        </label>
-                    </div>
+                <!-- Laboratory Modal Body End -->
+                <!-- Laboratory Modal Footer Start -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
+                    <button ng-click="submit(frmLaboratories)" type="submit" class="btn btn-default">Save</button>
                 </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtType" id="txtType" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Type</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtStatus" id="txtStatus" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Status</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtOrganisation" id="txtOrganisation" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Organisation</label>
-                        </div>
-                    </div>
-                </div>
+                <!-- Laboratory Modal Footer End -->
             </div>
-            <!-- Laboratory Modal Body End -->
-            <!-- Laboratory Modal Footer Start -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-            </div>
-            <!-- Laboratory Modal Footer End -->
-        </div>
-        <!-- Laboratory Modal Content End -->
+            <!-- Laboratory Modal Content End -->
+        </form>
     </div>
 </div>
 <!-- Laboratory Modal End -->

@@ -5,8 +5,8 @@
 </div>
 <div class="clear2"></div>
 <!-- Table Start -->
-<div class="table-responsive">
-    <table class="table table-bordered tblWhite" ng-hide="filteredArray.length == 0">
+<div class="table-responsive" ng-hide="filteredArray.length == 0">
+    <table class="table table-bordered tblWhite">
         <thead>
             <tr>
                 <th>Date&nbsp;Prescribed</th>
@@ -18,13 +18,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="med in medications | filter:searchText as filteredArray">
-                <td>{{med.DatePrescribed | date:'mediumDate'}}</td> <!-- 'mediumDate' equivalent to 'MMM d, y' -->
-                <td>{{med.Description}}</td>
-                <td>{{med.Type}}</td>
-                <td>{{med.Indication}}</td>
-                <td>{{med.Status}}</td>
-                <td>{{med.RelatedConsultation}}</td>
+            <tr ng-repeat="item in medications | filter:searchText as filteredArray">
+                <td>{{item.DatePrescribed | date:'mediumDate'}}</td> <!-- 'mediumDate' equivalent to 'MMM d, y' -->
+                <td>{{item.Description}}</td>
+                <td>{{item.Type}}</td>
+                <td>{{item.Indication}}</td>
+                <td>{{item.Status}}</td>
+                <td>{{item.RelatedConsultation}}</td>
             </tr>
         </tbody>
     </table>
