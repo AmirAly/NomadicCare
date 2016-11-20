@@ -4,13 +4,13 @@
     //Chart
 
     var chartDateArrayAnalytic = [
-            { month: 'January', bloodGlucose: '60', date: '07/01/2016 01:49 pm' },
-            { month: 'February', bloodGlucose: '70', date: '03/02/2016 01:30 pm' },
-            { month: 'March', bloodGlucose: '80', date: '12/03/2016 01:49 pm' },
-            { month: 'April', bloodGlucose: '85', date: '22/04/2016 01:49 pm' },
-            { month: 'May', bloodGlucose: '90', date: '15/05/2016 01:15 pm' },
-            { month: 'June', bloodGlucose: '80', date: '09/06/2016 01:10 pm' },
-            { month: 'July', bloodGlucose: '70', date: '03/07/2016 01:02 pm' }
+            { month: 'January', bloodGlucose: '60', date: '07/01/2016 01:49 pm', Notes: 'aaaa' },
+            { month: 'February', bloodGlucose: '70', date: '03/02/2016 01:30 pm', Notes: 'aaaa' },
+            { month: 'March', bloodGlucose: '80', date: '12/03/2016 01:49 pm', Notes: 'aaaa' },
+            { month: 'April', bloodGlucose: '85', date: '22/04/2016 01:49 pm', Notes: 'aaaa' },
+            { month: 'May', bloodGlucose: '90', date: '15/05/2016 01:15 pm', Notes: 'aaaa' },
+            { month: 'June', bloodGlucose: '80', date: '09/06/2016 01:10 pm', Notes: 'aaaa' },
+            { month: 'July', bloodGlucose: '70', date: '03/07/2016 01:02 pm', Notes: 'aaaa' }
     ];
     var chartMonth = [];
     var chartValue = [];
@@ -47,7 +47,7 @@
                     },
                     beforeLabel: function (x, y) {
                         var data = chartDateArrayAnalytic[x.index];
-                        return data.date;
+                        return data.Notes;
                     }
                 },
             },

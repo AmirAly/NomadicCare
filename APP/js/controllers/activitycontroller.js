@@ -4,14 +4,15 @@
     //Chart
 
     var chartDateArray = [
-            { month: 'January', weight: '90', date: '07/01/2016 12:49 pm' },
-            { month: 'February', weight: '80', date: '03/02/2016 03:30 pm' },
-            { month: 'March', weight: '85', date: '12/03/2016 01:49 pm' },
-            { month: 'April', weight: '75', date: '22/04/2016 02:49 pm' },
-            { month: 'May', weight: '70', date: '15/05/2016 01:15 pm' },
-            { month: 'June', weight: '65', date: '09/06/2016 03:10 pm' },
-            { month: 'July', weight: '67', date: '03/07/2016 02:02 pm' }
+            { month: 'January', weight: '90', date: '07/01/2016 12:49 pm',Notes:'aaaa' },
+            { month: 'February', weight: '80', date: '03/02/2016 03:30 pm', Notes: 'aaaa' },
+            { month: 'March', weight: '85', date: '12/03/2016 01:49 pm', Notes: 'aaaa' },
+            { month: 'April', weight: '75', date: '22/04/2016 02:49 pm', Notes: 'aaaa' },
+            { month: 'May', weight: '70', date: '15/05/2016 01:15 pm', Notes: 'aaaa' },
+            { month: 'June', weight: '65', date: '09/06/2016 03:10 pm', Notes: 'aaaa' },
+            { month: 'July', weight: '67', date: '03/07/2016 02:02 pm', Notes: 'aaaa' }
     ];
+
     var chartMonth = [];
     var chartValue = [];
     for (i = 0; i < chartDateArray.length; i++) {
@@ -47,7 +48,7 @@
                     },
                     beforeLabel: function (x, y) {
                         var data = chartDateArray[x.index];
-                        return data.date;
+                        return data.Notes;
                     }
                 },
             },

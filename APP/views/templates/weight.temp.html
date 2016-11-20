@@ -10,75 +10,87 @@
 
 <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <!-- Weight Modal Start -->
-<div id="weightModal" class="modal fade" role="dialog">
+<div id="weightModal" class="modal fade" role="dialog" my-modal>
     <div class="modal-dialog">
-        <!-- Weight Modal content Start-->
-        <div class="modal-content">
-            <!-- Weight Modal Body Start -->
-            <div class="modal-body">
-                <!-- Weight Modal Header Start -->
-                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
-                <h4 class="text-center">New Weight</h4>
-                <!-- Weight Modal Header End -->
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group groupWeightModal">
-                            <input type="text" class="fontBlack" name="txtDateWeight" pattern=".{1,80}" id="txtDateWeight" required readonly>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label id="lblDOB">Date/Time Entered</label>
+        <form name="frmNewWeight" novalidate confirm-on-exit>
+            <!-- Weight Modal content Start-->
+            <div class="modal-content">
+                <!-- Weight Modal Body Start -->
+                <div class="modal-body">
+                    <!-- Weight Modal Header Start -->
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+                    <h4 class="text-center">New Weight</h4>
+                    <!-- Weight Modal Header End -->
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <a data-toggle="dropdown" class="dropdown-toggle" id="dropdown">
+                                    <input ng-input-effect-class is-required
+                                           data-ng-model="txtDateWeight" data-date-time-input="MMM DD, YYYY"
+                                           ng-class="{errorBorder : frmNewWeight.txtDateWeight.$dirty == true && frmNewWeight.txtDateWeight.$invalid == true ,'used': txtDateWeight.length > 0}"
+                                           type="text" name="txtDateWeight" pattern=".{1,80}" id="txtDateWeight" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label ng-class="{errorFont : frmNewWeight.txtDateWeight.$dirty == true && frmNewWeight.txtDateWeight.$invalid == true }">Date/Time Entered</label>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="txtDateWeight"
+                                                    data-datetimepicker-config="datepickerconfigurations"
+                                                    data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-11 col-sm-11 col-xs-11">
-                        <div class="group">
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-11 col-sm-11 col-xs-11">
+                            <!--<div class="group">
                             <input type="number" pattern=".{1,80}" id="txtWeight" class="txtWeight" required>
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>Weight</label>
+                        </div>-->
+                        </div>
+                        <div class="col-md-1 col-sm-1 col-xs-1 noPaddingLeft">
+                            <h4>Kg</h4>
                         </div>
                     </div>
-                    <div class="col-md-1 col-sm-1 col-xs-1 noPaddingLeft">
-                        <h4>Kg</h4>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-11 col-sm-11 col-xs-11">
-                        <div class="group">
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-11 col-sm-11 col-xs-11">
+                            <!--<div class="group">
                             <input type="number" pattern=".{1,80}" name="txtHeight" id="txtHeight" required>
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>Height</label>
+                        </div>-->
+                        </div>
+                        <div class="col-md-1 col-sm-1 col-xs-1 noPaddingLeft">
+                            <h4>Cm</h4>
                         </div>
                     </div>
-                    <div class="col-md-1 col-sm-1 col-xs-1 noPaddingLeft">
-                        <h4>Cm</h4>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <!--<div class="group">
                             <input type="text" pattern=".{1,80}" name="txtNotes" id="txtNotes" required>
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label>Notes</label>
+                        </div>-->
                         </div>
                     </div>
                 </div>
+                <!-- Weight Modal Body End -->
+                <!-- Weight Modal Footer Start -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
+                    <button ng-click="submit(frmNewWeight)" type="submit" class="btn btn-default">Save</button>
+                </div>
+                <!-- Weight Modal Footer End -->
             </div>
-            <!-- Weight Modal Body End -->
-            <!-- Weight Modal Footer Start -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-            </div>
-            <!-- Weight Modal Footer End -->
-            <!-- Weightt Modal Content End -->
-        </div>
+            <!-- Weight Modal content End-->
+        </form>
     </div>
 </div>
 <!-- Weight Modal End -->

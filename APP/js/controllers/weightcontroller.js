@@ -1,19 +1,48 @@
-﻿ehs.controller("WeightController", function ($scope, $state, $rootScope, $stateParams) {
+﻿ehs.controller("WeightController", function ($scope, $state, $rootScope, $stateParams, API, $timeout) {
+ 
+    // start here
+    var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var yAxesLabel = 'Weight(KG)';
 
-    //Chart
+    $timeout(function () {
+        console.log($scope.currentClientInfo);
+        $rootScope.activeoutertab = 'healthmeasurment';
+        $rootScope.activetab = 'weight';
+    }, 500);
+    console.log($rootScope.activetab);
+
+    // date picker settings
+    $scope.datepickerconfigurations = {
+        startView: 'year',
+        minView: 'day',
+        dropdownSelector: '#dropdown'
+    };
+
+    $scope.onTimeSet = function (_newDate, _oldDate) {
+        console.log(_newDate);
+        $timeout(function () {
+            angular.element(document.getElementById('txtDateWeight')).addClass('used');
+        });
+    }
+
+    
     var chartDateArray = [
-            { month: 'January', weight: '90', date: '07/01/2016 12:49 pm' },
-            { month: 'February', weight: '80', date: '03/02/2016 03:30 pm' },
-            { month: 'March', weight: '85', date: '12/03/2016 01:49 pm' },
-            { month: 'April', weight: '75', date: '22/04/2016 02:49 pm' },
-            { month: 'May', weight: '70', date: '15/05/2016 01:15 pm' },
-            { month: 'June', weight: '65', date: '09/06/2016 03:10 pm' },
-            { month: 'July', weight: '67', date: '03/07/2016 02:02 pm' }
+            { weight: '90', date: new Date('01/07/2016'), Notes: 'sssss' },
+            { weight: '80', date: new Date('02/03/2016'), Notes: 'aaaa' },
+            { weight: '85', date: new Date('03/12/2016'), Notes: 'eeeee' },
+            { weight: '75', date: new Date('04/22/2016'), Notes: 'hhhhh' },
+            { weight: '70', date: new Date('05/15/2016'), Notes: 'ffff' },
+            { weight: '65', date: new Date('06/09/2016'), Notes: 'ddd' },
+            { weight: '67', date: new Date('07/03/2016'), Notes: 'zzzzz' },
+            { weight: '67', date: new Date('07/21/2016'), Notes: 'asdsadasd' },
+            { weight: '67', date: new Date('08/21/2016'), Notes: 'asdsadasd' }
     ];
+
+   //Chart
     var chartMonth = [];
     var chartValue = [];
     for (i = 0; i < chartDateArray.length; i++) {
-        chartMonth.push(chartDateArray[i].month);
+        chartMonth.push(chartDateArray[i].date);
         chartValue.push(chartDateArray[i].weight);
     }
     var config = {
@@ -38,14 +67,19 @@
                 //text: 'Weight'
             },
             tooltips: {
-                mode: 'label',
                 callbacks: {
-                    beforeTitle: function () {
-                        return ['Any data here', 'Any data here2'];
+                    title: function (tooltipItem, data) {
+                        var d = (chartDateArray[tooltipItem[0].index]).date;
+                        var wholeDate = d.getDate() + " " + monthShortNames[d.getMonth()] + " " + d.getFullYear();
+                        return "Date: " + wholeDate;
                     },
-                    beforeLabel: function (x, y) {
-                        var data = chartDateArray[x.index];
-                        return data.date;
+                    label: function (tooltipItem, data) {
+                        var obj = chartDateArray[tooltipItem.index];
+                        return yAxesLabel + [obj.weight];
+                    },
+                    afterLabel: function (tooltipItem, data) {
+                        var obj = chartDateArray[tooltipItem.index];
+                        return "Notes: " + [obj.Notes];
                     }
                 },
             },
@@ -62,18 +96,29 @@
                     gridLines: {
                         color: "rgba(255,255,255,0.2)",
                         zeroLineColor: "rgba(255,255,255,0.2)"
+                    },
+                    type: 'time',
+                    time: {
+                        unit: 'month',
+                        unitStepSize: 1,
+                        displayFormats: {
+                            'millisecond': 'MMM',
+                            'second': 'MMM',
+                            'minute': 'MMM',
+                            'hour': 'MMM',
+                            'day': 'MMM',
+                            'week': 'MMM',
+                            'month': 'MMM',
+                            'quarter': 'MMM',
+                            'year': 'MMM',
+                        }
                     }
-
                 }],
                 yAxes: [{
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: 'Weight (KG)'
-                    },
-                    ticks: {
-                        suggestedMin: 0,
-                        suggestedMax: 250,
+                        labelString: yAxesLabel
                     },
                     gridLines: {
                         color: "rgba(255,255,255,0.2)",
@@ -102,5 +147,7 @@
     });
     var ctx = document.getElementById("canvasWeight").getContext("2d");
     window.myLine = new Chart(ctx, config);
+
+
 
 });
