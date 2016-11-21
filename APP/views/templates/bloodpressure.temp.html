@@ -1,67 +1,84 @@
 ﻿<div class="row col-xs-12">
-    <div class="col-xs-12">
+    <div ng-show="chartDataArray.length == 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <h3>No Data found</h3>
+    </div>
+    <div class="col-xs-12" ng-hide="chartDataArray.length == 0">
         <canvas id="canvasBloodPressure"></canvas>
     </div>
 </div>
 
-<button class="btn btn-success adjustNewButton" data-toggle="modal" data-target="#bloodpressureModal" type="button">
+<button class="btn btn-success adjustNewButton" data-toggle="modal" data-target="#bloodPressureModal" type="button">
     <span class="glyphicon glyphicon-plus"></span>
 </button>
 
 <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 <!-- BloodPressure Modal Start -->
-<div id="bloodpressureModal" class="modal fade" role="dialog">
+<div id="bloodPressureModal" class="modal fade" role="dialog" my-modal>
     <div class="modal-dialog">
-        <!-- BloodPressure Modal content Start-->
-        <div class="modal-content">
-            <!-- BloodPressure Modal Body Start -->
-            <div class="modal-body">
-                <!-- BloodPressure Modal Header Start -->
-                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
-                <h4 class="text-center">New Blood Pressure</h4>
-                <!-- BloodPressure Modal Header End -->
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group groupBloodPressureModal">
-                            <input type="text" class="fontBlack" name="txtDateBloodPressure" pattern=".{1,80}" id="txtDateBloodPressure" required readonly>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label id="lblDOB">Date/Time Entered</label>
+        <form name="frmNewBloodPressure" novalidate confirm-on-exit>
+            <!-- BloodPressure Modal content Start-->
+            <div class="modal-content">
+                <!-- BloodPressure Modal Body Start -->
+                <div class="modal-body">
+                    <!-- BloodPressure Modal Header Start -->
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+                    <h4 class="text-center">New Blood Pressure</h4>
+                    <!-- BloodPressure Modal Header End -->
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <a data-toggle="dropdown" class="dropdown-toggle" id="dropdown">
+                                    <input ng-input-effect-class is-required
+                                           data-ng-model="txtDate" data-date-time-input="MMM DD, YYYY"
+                                           ng-class="{errorBorder : frmNewBloodPressure.txtDate.$dirty == true && frmNewBloodPressure.txtDate.$invalid == true ,'used': txtDate.length > 0}"
+                                           type="text" name="txtDate" pattern=".{1,80}" id="txtDate" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label ng-class="{errorFont : frmNewBloodPressure.txtDate.$dirty == true && frmNewBloodPressure.txtDate.$invalid == true }">Date/Time Entered</label>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="txtDate"
+                                                    data-datetimepicker-config="datepickerconfigurations"
+                                                    data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtValue" ng-class="{errorBorder : frmNewBloodPressure.txtValue.$dirty == true && frmNewBloodPressure.txtValue.$invalid == true ,'used': txtValue.length > 0}"
+                                       type="number" pattern=".{1,80}" name="txtValue" id="txtValue" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmNewBloodPressure.txtValue.$dirty == true && frmNewBloodPressure.txtValue.$invalid == true }">Blood Pressure(mmHg)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                   
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtNotes" ng-class="{errorBorder : frmNewBloodPressure.txtNotes.$dirty == true && frmNewBloodPressure.txtNotes.$invalid == true ,'used': txtNotes.length > 0}" type="text" pattern=".{1,80}" name="txtNotes" id="txtNotes" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmNewBloodPressure.txtNotes.$dirty == true && frmNewBloodPressure.txtNotes.$invalid == true }">Notes</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" id="txtBloodPressure" class="txtBloodPressure" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Blood&nbsp;Pressure(mmHg)</label>
-                        </div>
-                    </div>
+                <!-- BloodPressure Modal Body End -->
+                <!-- BloodPressure Modal Footer Start -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
+                    <button ng-click="submit(frmNewBloodPressure)" type="submit" class="btn btn-default">Save</button>
                 </div>
-                <div class="clear"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtBloodPressureNotes" id="txtBloodPressureNotes" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Notes</label>
-                        </div>
-                    </div>
-                </div>
+                <!-- BloodPressure Modal Footer End -->
             </div>
-            <!-- BloodPressure Modal Body End -->
-            <!-- BloodPressure Modal Footer Start -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-            </div>
-            <!-- BloodPressure Modal Footer End -->
-            <!-- BloodPressure Modal Content End -->
-        </div>
+            <!-- BloodPressure Modal content End-->
+        </form>
     </div>
 </div>
 <!-- BloodPressure Modal End -->

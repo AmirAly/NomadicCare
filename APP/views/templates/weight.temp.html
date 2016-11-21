@@ -1,5 +1,8 @@
 ﻿<div class="row col-xs-12">
-    <div class="col-xs-12">
+    <div ng-show="chartDataArray.length == 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <h3>No Data found</h3>
+    </div>
+    <div class="col-xs-12" ng-hide="chartDataArray.length == 0">
         <canvas id="canvasWeight"></canvas>
     </div>
 </div>
@@ -26,15 +29,15 @@
                             <div class="group">
                                 <a data-toggle="dropdown" class="dropdown-toggle" id="dropdown">
                                     <input ng-input-effect-class is-required
-                                           data-ng-model="txtDateWeight" data-date-time-input="MMM DD, YYYY"
-                                           ng-class="{errorBorder : frmNewWeight.txtDateWeight.$dirty == true && frmNewWeight.txtDateWeight.$invalid == true ,'used': txtDateWeight.length > 0}"
-                                           type="text" name="txtDateWeight" pattern=".{1,80}" id="txtDateWeight" required>
+                                           data-ng-model="txtDate" data-date-time-input="MMM DD, YYYY"
+                                           ng-class="{errorBorder : frmNewWeight.txtDate.$dirty == true && frmNewWeight.txtDate.$invalid == true ,'used': txtDate.length > 0}"
+                                           type="text" name="txtDate" pattern=".{1,80}" id="txtDate" required>
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
-                                    <label ng-class="{errorFont : frmNewWeight.txtDateWeight.$dirty == true && frmNewWeight.txtDateWeight.$invalid == true }">Date/Time Entered</label>
+                                    <label ng-class="{errorFont : frmNewWeight.txtDate.$dirty == true && frmNewWeight.txtDate.$invalid == true }">Date/Time Entered</label>
                                 </a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <datetimepicker data-ng-model="txtDateWeight"
+                                    <datetimepicker data-ng-model="txtDate"
                                                     data-datetimepicker-config="datepickerconfigurations"
                                                     data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>
                                 </ul>
@@ -44,12 +47,13 @@
                     <div class="clear"></div>
                     <div class="row">
                         <div class="col-md-11 col-sm-11 col-xs-11">
-                            <!--<div class="group">
-                            <input type="number" pattern=".{1,80}" id="txtWeight" class="txtWeight" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Weight</label>
-                        </div>-->
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtValue" ng-class="{errorBorder : frmNewWeight.txtValue.$dirty == true && frmNewWeight.txtValue.$invalid == true ,'used': txtValue.length > 0}" 
+                                       type="number" pattern=".{1,80}" name="txtValue" id="txtValue" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmNewWeight.txtValue.$dirty == true && frmNewWeight.txtValue.$invalid == true }">Weight</label>
+                            </div>
                         </div>
                         <div class="col-md-1 col-sm-1 col-xs-1 noPaddingLeft">
                             <h4>Kg</h4>
@@ -58,12 +62,13 @@
                     <div class="clear"></div>
                     <div class="row">
                         <div class="col-md-11 col-sm-11 col-xs-11">
-                            <!--<div class="group">
-                            <input type="number" pattern=".{1,80}" name="txtHeight" id="txtHeight" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Height</label>
-                        </div>-->
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtHeight" ng-class="{errorBorder : frmNewWeight.txtHeight.$dirty == true && frmNewWeight.txtHeight.$invalid == true ,'used': txtHeight.length > 0}"
+                                       type="number" pattern=".{1,80}" name="txtHeight" id="txtHeight" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmNewWeight.txtHeight.$dirty == true && frmNewWeight.txtHeight.$invalid == true }">Height</label>
+                            </div>
                         </div>
                         <div class="col-md-1 col-sm-1 col-xs-1 noPaddingLeft">
                             <h4>Cm</h4>
@@ -72,12 +77,12 @@
                     <div class="clear"></div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            <!--<div class="group">
-                            <input type="text" pattern=".{1,80}" name="txtNotes" id="txtNotes" required>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Notes</label>
-                        </div>-->
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtNotes" ng-class="{errorBorder : frmNewWeight.txtNotes.$dirty == true && frmNewWeight.txtNotes.$invalid == true ,'used': txtNotes.length > 0}" type="text" pattern=".{1,80}" name="txtNotes" id="txtNotes" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmNewWeight.txtNotes.$dirty == true && frmNewWeight.txtNotes.$invalid == true }">Notes</label>
+                            </div>
                         </div>
                     </div>
                 </div>

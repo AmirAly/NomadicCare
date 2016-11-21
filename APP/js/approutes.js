@@ -98,6 +98,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
 ///////////////////////// TABS /////////////////////////
 
     .state('healthrecord', {
+        cache: false,
         url: '/healthrecord',
         views: {
             '': { templateUrl: 'views/healthrecord.html', controller: 'HealthrecordController' },
@@ -109,41 +110,48 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
 
     // nested list with custom controller
     .state('healthrecord.healthmeasurment', {
+        cache: false,
         url: '/healthmeasurment',
         // inner tabs headers (add template here)
         templateUrl: 'views/templates/healthmeasurment.innertabs.temp.html',
         controller: function ($scope) {
-            $scope.activetab = 'weight';
+            //$scope.activetab = 'weight';
 
         }
     })
         // inner tabs for healthmeasurment
         .state('healthrecord.healthmeasurment.weight', {
+            cache: false,
             url: '/weight',
             templateUrl: 'views/templates/weight.temp.html',
             controller: 'WeightController'
         })
         .state('healthrecord.healthmeasurment.activity', {
+            cache: false,
             url: '/activity',
             templateUrl: 'views/templates/activity.temp.html',
             controller: 'ActivityController'
         })
         .state('healthrecord.healthmeasurment.bloodpressure', {
+            cache: false,
             url: '/bloodpressure',
             templateUrl: 'views/templates/bloodpressure.temp.html',
             controller: 'BloodpressureController'
         })
         .state('healthrecord.healthmeasurment.cholesterol', {
+            cache: false,
             url: '/cholesterol',
             templateUrl: 'views/templates/cholesterol.temp.html',
             controller: 'CholesterolController'
         })
         .state('healthrecord.healthmeasurment.hba1c', {
+            cache: false,
             url: '/hba1c',
             templateUrl: 'views/templates/hba1c.temp.html',
             controller: 'Hba1cController'
         })
         .state('healthrecord.healthmeasurment.bloodglucose', {
+            cache: false,
             url: '/bloodglucose',
             templateUrl: 'views/templates/bloodglucose.temp.html',
             controller: 'BloodglucoseController'
@@ -153,6 +161,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
 
 
      .state('healthrecord.healthnotes', {
+         cache: false,
          url: '/healthnotes',
          // inner tabs headers (add template here)
          templateUrl: 'views/templates/healthnotes.innertabs.temp.html',
@@ -163,37 +172,44 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
 
         // inner tabs for healthnotes
     .state('healthrecord.healthnotes.medications', {
+        cache: false,
         url: '/medications',
         templateUrl: 'views/templates/medications.temp.html',
         controller: 'MedicationsController'
     })
 
         .state('healthrecord.healthnotes.allergies', {
+            cache: false,
             url: '/allergies',
             templateUrl: 'views/templates/allergies.temp.html',
             controller: 'AllergiesController'
         })
         .state('healthrecord.healthnotes.vaccinations', {
+            cache: false,
             url: '/vaccinations',
             templateUrl: 'views/templates/vaccinations.temp.html',
             controller: 'VaccinationsController'
         })
         .state('healthrecord.healthnotes.diagnosis', {
+            cache: false,
             url: '/diagnosis',
             templateUrl: 'views/templates/diagnosis.temp.html',
             controller: 'DiagnosisController'
         })
         .state('healthrecord.healthnotes.laboratory', {
+            cache: false,
             url: '/laboratory',
             templateUrl: 'views/templates/laboratory.temp.html',
             controller: 'LaboratoryController'
         })
         .state('healthrecord.healthnotes.followup', {
+            cache: false,
             url: '/followup',
             templateUrl: 'views/templates/followup.temp.html',
             controller: 'FollowupController'
         })
         .state('healthrecord.healthnotes.documents', {
+            cache: false,
             url: '/documents',
             templateUrl: 'views/templates/documents.temp.html',
             controller: 'DocumentsController'
@@ -201,6 +217,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
 
 
     .state('healthrecord.consultationnotes', {
+        cache: false,
         url: '/consultationnotes',
         // inner tabs headers (add template here)
         templateUrl: 'views/templates/consultationnotes.temp.html',
@@ -208,6 +225,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
     })
 
     .state('healthrecord.analytics', {
+        cache: false,
         url: '/analytics',
         // inner tabs headers (add template here)
         templateUrl: 'views/templates/analytics.temp.html',
@@ -215,6 +233,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
     })
 
      .state('healthrecord.careplans', {
+         cache: false,
          url: '/careplans/:planid?',
          // inner tabs headers (add template here)
          templateUrl: 'views/templates/careplans.temp.html',

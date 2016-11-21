@@ -203,6 +203,10 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 0;
 }
 
+.noMargin{
+    margin:0;
+}
+
 .whiteBackground {
     background-color: #ffffff;
     color: #336699;
