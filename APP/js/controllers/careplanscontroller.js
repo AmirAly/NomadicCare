@@ -25,10 +25,6 @@
 
     }, 500);
 
-    $scope.setBywhoData = function () {
-        console.log($scope.activePlan);
-    }
-
 
 
     $scope.newPlan = {
@@ -43,20 +39,22 @@
         console.log('add');
         $scope.plans.push($scope.newPlan);
         console.log($scope.plans);
-        //// save now 
+        //// save now to db
 
         //$scope.activePlanTab = 999;
         //$stateParams.planid = 999;
         //$scope.activePlan = $scope.plans[3];
     }
 
-    $scope.deletePlan = function (_plan) {
+    $scope.deletePlan = function () {
         // show modal / confirmation + modal
         //..
         console.log('delete');
-        var index = $scope.plans.indexOf(_plan);
+        var index = $scope.plans.indexOf(activePlan);
         $scope.plans.splice(index, 1);
         console.log($scope.plans);
+        //// save now to db
+
         $scope.activePlanTab = 1;
         $scope.activePlan = $scope.plans[0];
 
