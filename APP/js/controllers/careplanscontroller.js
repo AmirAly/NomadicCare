@@ -1,48 +1,53 @@
-﻿ehs.controller("CareplansController", function ($scope, $state, $rootScope, $stateParams, $timeout) {
+﻿ehs.controller("CareplansController", function ($scope, $state, $rootScope, $stateParams, $timeout, API) {
     $rootScope.EditPlanConfirmed = false;
-    $scope.plans = [
-        {
-            id: 1, status: 'Active', careProvider: 'Amir Aly', reason: 'has lot of fats',
-            otherConsideration: 'high blood glucose', otherplans: 'Cardiologist (Dr.Beats) has client on plan.',
-            planName: 'weight loss', toImprove: 'overall shape', howItsGoing: 'fine \n good',
-            firstAcheive: 'lose 10 kg.', firstAction: 'Diet', firstProvider: { name: 'Dr.Mahmoud', email: 'M@mailcom' }, firstWhen: new moment('Oct 30, 2016'),
-            secondAcheive: 'improve health', secondAction: 'go to GYM', secondProvider: { name: 'Mr.Nabil', email: 'N@mailcom' }, secondWhen: new moment('Nov 15, 2016')
-        },
-        {
-            id: 2, status: 'Stopped', careProvider: 'Ahmed Alaa', reason: 'has lot of fats222',
-            otherConsideration: 'high blood glucose22', otherplans: 'Cardiologist (Dr.Beats) has client on plan 22.',
-            planName: 'weight loss 2', toImprove: 'overall shape 2', howItsGoing: 'fine \n good 2',
-            firstAcheive: 'lose 10 kg  2.', firstAction: 'Diet 2', firstProvider: { name: 'Dr.Mahmoud 2', email: 'M2@mailcom' }, firstWhen: new moment('Oct 10, 2016'),
-            secondAcheive: 'improve health 2', secondAction: 'go to GYM 2', secondProvider: { name: 'Mr.Nabil  2', email: 'N2@mailcom' }, secondWhen: new moment('Nov 20, 2016')
-        },
-        {
-            id: 3, status: 'Not Now', careProvider: 'Saeed AlMasry', reason: 'has lot of fats 3',
-            otherConsideration: 'high blood glucose 3', otherplans: 'Cardiologist (Dr.Beats) has client on plan 3.',
-            planName: 'weight loss 3', toImprove: 'overall shape 3', howItsGoing: 'fine \n good 3',
-            firstAcheive: 'lose 10 kg 3.', firstAction: 'Diet 3', firstProvider: { name: 'Dr.Mahmoud 3 ', email: 'M3@mailcom' }, firstWhen: new moment('Oct 20, 2016'),
-            secondAcheive: 'improve health 3', secondAction: 'go to GYM 3', secondProvider: { name: 'Mr.Nabil 3', email: 'N3@mailcom' }, secondWhen: new moment('Nov 20, 2016')
+    $timeout(function () {
+        $rootScope.activeoutertab = 'careplans';
+        console.log($scope.currentClientInfo.CarePlans);
+        if ($scope.currentClientInfo.CarePlans.length == 0) {
+            $scope.plans = [{
+                _id: '', Status: '', Provider: '', Reason: '',
+                OtherConsideration: '', OtherPlan: '',
+                PlanName: 'Plan', ToImprove: '', Progress: '',
+                ToAchieve1: '', AgreedActions1: '', ByWho1: { Name: '', Email: '' }, ByWhen1: new moment(),
+                ToAchieve2: '', AgreedActions2: '', ByWho2: { Name: '', Email: '' }, ByWhen2: new moment()
+            }];
         }
-    ];
+        else { $scope.plans = $scope.currentClientInfo.CarePlans; }
 
-    $scope.activePlanTab = $stateParams.planid;
-    console.log($scope.activePlanTab);
-    $scope.activePlan = $scope.plans[$scope.activePlanTab - 1];
+        $scope.activePlan = $scope.plans[0];
+        if ($stateParams.planid == "") {
+            $scope.activePlanTab = $scope.plans[0]._id;
+        }
+        else {
+            $scope.activePlanTab = $stateParams.planid;
+        }
+        console.log($scope.activePlanTab);
 
- $scope.newPlan = {
-            id: 999, status: 'Not Now', careProvider: 'Saeed AlMasry', reason: 'has lot of fats 993',
-            otherConsideration: 'high blood glucose 993', otherplans: 'Cardiologist (Dr.Beats) has client on plan 993.',
-            planName: 'weight loss 999', toImprove: 'overall shape 993', howItsGoing: 'fine \n good 993',
-            firstAcheive: 'lose 10 kg 999.', firstAction: 'Diet 993', firstProvider: { name: 'Dr.Mahmoud 993 ', email: 'M993@mailcom' }, firstWhen: new moment('Oct 20, 2016'),
-            secondAcheive: 'improve health 993', secondAction: 'go to GYM 993', secondProvider: { name: 'Mr.Nabil 993', email: 'N9993@mailcom' }, secondWhen: new moment('Nov 20, 2016')
- };
+    }, 500);
+
+    $scope.setBywhoData = function () {
+        console.log($scope.activePlan);
+    }
+
+
+
+    $scope.newPlan = {
+        _id: '', Status: '', Provider: '', Reason: '',
+        OtherConsideration: '', OtherPlan: '',
+        PlanName: 'Plan', ToImprove: '', Progress: '',
+        ToAchieve1: '', AgreedActions1: '', ByWho1: { Name: '', Email: '' }, ByWhen1: new moment(),
+        ToAchieve2: '', AgreedActions2: '', ByWho2: { Name: '', Email: '' }, ByWhen2: new moment()
+    };
 
     $scope.createPlan = function () {
         console.log('add');
         $scope.plans.push($scope.newPlan);
         console.log($scope.plans);
-        $scope.activePlanTab = 999;
-        $stateParams.planid = 999;
-        $scope.activePlan = $scope.plans[3];
+        //// save now 
+
+        //$scope.activePlanTab = 999;
+        //$stateParams.planid = 999;
+        //$scope.activePlan = $scope.plans[3];
     }
 
     $scope.deletePlan = function (_plan) {
@@ -58,11 +63,48 @@
     }
 
     $scope.setActivePlan = function (_plan) {
-        $scope.activePlanTab = _plan.id;
+        $scope.activePlanTab = _plan._id;
         $scope.activePlan = _plan;
     }
 
+    $scope.submit = function (form) {
+        angular.forEach($scope.frmPlan.$error.required, function (field) {
+            field.$setDirty();
+        });
+        if ($scope.newPlan.Provider == '10') {
+            angular.element(document.getElementById('cmbProvider')).addClass('errorBorder');
+            angular.element(document.getElementById('lblProvider')).addClass('errorFont');
+        }
+        if (form.$valid) {
+            var req = {
+                method: 'put',
+                url: '/CarePlans',
+                data: $scope.plans
+            }
+            console.log($scope.plans);
 
+            //API.execute(req).then(function (_res) {
+            //    console.log(_res.data);
+            //    if (_res.data.code == 100) { // Client
+            //        $scope.showMessage = true;
+            //        $scope.messageTxt = 'Saved ...';
+            //        $scope.messageStatus = 'success';
+            //        $scope.frmAddClient.$setPristine();
+            //    }
+            //    else {
+            //        $scope.showMessage = true;
+            //        $scope.messageTxt = _res.data.data;
+            //        $scope.messageStatus = 'danger';
+            //    }
+            //}, function (error) { // another error may be connection error
+            //    $scope.showMessage = true;
+            //    $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
+            //    $scope.messageStatus = 'warning';
+            //}).finally(function () {
+            //    $rootScope.loading = false;
+            //});
+        }
+    }
 
 
 
@@ -94,10 +136,9 @@
         $('#byWhoModal').modal('show');
         $timeout(function () {
             angular.element(document.getElementById('byWhoModal')).addClass('showMe');
-            console.log('eeeeeeee');
-        },3000);
+        }, 1000);
 
     }
 });
 
-//console.log($scope.plans[_id].firstWhen);
+//console.log($scope.plans[_id].ByWhen1);

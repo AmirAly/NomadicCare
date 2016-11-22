@@ -10,7 +10,7 @@
                         <h5>Status</h5>
                     </div>
                     <div class="row text-left">
-                        <h6>{{activePlan.status}}</h6>
+                        <h6>{{activePlan.Status}}</h6>
                     </div>
                 </div>
                 <div class="col-xs-2">
@@ -18,7 +18,7 @@
                         <h5>Care&nbsp;Provider</h5>
                     </div>
                     <div class="row text-left">
-                        <h6 id="txtCareCoordinatorName">{{activePlan.careProvider}}</h6>
+                        <h6 id="txtCareCoordinatorName">{{activePlan.Provider}}</h6>
                     </div>
                 </div>
 
@@ -27,7 +27,7 @@
                         <h5>Reason</h5>
                     </div>
                     <div class="row text-left">
-                        <h6 id="txtPlanReason">{{activePlan.reason}}</h6>
+                        <h6 id="txtPlanReason">{{activePlan.Reason}}</h6>
                     </div>
                 </div>
                 <div class="col-xs-3">
@@ -35,7 +35,7 @@
                         <h5>Other&nbsp;Consideration</h5>
                     </div>
                     <div class="row text-left">
-                        <h6 id="txtPlanOtherCoordinator">{{activePlan.otherConsideration}}</h6>
+                        <h6 id="txtPlanOtherCoordinator">{{activePlan.OtherConsideration}}</h6>
                     </div>
                 </div>
                 <div class="col-xs-3">
@@ -43,7 +43,7 @@
                         <h5>Other&nbsp;Plans</h5>
                     </div>
                     <div class="row text-left">
-                        <h6 id="statusH">{{activePlan.otherplans}}</h6>
+                        <h6 id="StatusH">{{activePlan.OtherPlan}}</h6>
                     </div>
                 </div>
 
@@ -84,8 +84,8 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" id="planTabs">
                              
-                            <li ng-repeat="plan in plans track by $index" ng-click="setActivePlan(plan)" ng-class="{'active' : activePlanTab == plan.id}" id="planLi{{plan.id}}">
-                                <a href="#/healthrecord/careplans/{{plan.id}}" data-toggle="tab">{{plan.planName}}</a>
+                            <li ng-repeat="plan in plans track by $index" ng-click="setActivePlan(plan)" ng-class="{'active' : activePlanTab == plan._id}" id="planLi{{plan._id}}">
+                                <a href="#/healthrecord/careplans/{{plan._id}}" data-toggle="tab">{{plan.PlanName}}</a>
                             </li>
 
                             <li class="text-center">
@@ -98,12 +98,152 @@
                     <div class="row pageCustomMargin">
                         <!-- Tab panes -->
                         <div class="tab-content" id="innerTabs">
+                            <form name="frmPlan" novalidate confirm-on-exit>
 
-                            <div ng-repeat="plan in plans track by $index">
-                                <!-- this should be filled with template & ng-repeat -->
-                                <div ng-show="activePlanTab == plan.id" ng-include="'/views/templates/plan.partial.temp.html'"></div>
-                            </div>
-                           
+                                <div ng-repeat="plan in plans track by $index">
+                                    <!-- this should be filled with template & ng-repeat -->
+                                    <!--<div ng-show="activePlanTab == plan._id" ng-include="'/views/templates/plan.partial.temp.html'"></div>-->
+                                    <div>
+                                        <div class="tab-pane active">
+                                            <div class="row">
+                                                <div class="col-md-12 text-right">
+                                                    <a class="btn btn-danger" ng-click="deletePlan(plan)" data-plan="1" style="color:#fff">Remove</a>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="group">
+                                                        <input ng-input-effect-class is-required ng-model="plan.PlanName" ng-class="{errorBorder : txtPlanName.$dirty == true && txtPlanName.$invalid == true ,'used': txtPlanName.length > 0}" type="text" pattern=".{1,80}" name="txtPlanName" id="txtPlanName" required>
+                                                        <span class="highlight"></span>
+                                                        <span class="bar"></span>
+                                                        <label ng-class="{errorFont : txtPlanName.$dirty == true && txtPlanName.$invalid == true }">Plan Name</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="group">
+                                                        <input ng-input-effect-class is-required ng-model="plan.ToImprove" ng-class="{errorBorder : txtImprove.$dirty == true && txtImprove.$invalid == true ,'used': txtImprove.length > 0}" type="text" pattern=".{1,80}" name="txtImprove" id="txtImprove" required>
+                                                        <span class="highlight"></span>
+                                                        <span class="bar"></span>
+                                                        <label ng-class="{errorFont : txtImprove.$dirty == true && txtImprove.$invalid == true }">What i would like to improve</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="group">
+                                                        <input ng-input-effect-class is-required ng-model="plan.ToAchieve1" ng-class="{errorBorder : txtAcheive.$dirty == true && txtAcheive.$invalid == true ,'used': txtAcheive.length > 0}" type="text" pattern=".{1,80}" name="txtAcheive" id="txtAcheive" required>
+                                                        <span class="highlight"></span>
+                                                        <span class="bar"></span>
+                                                        <label ng-class="{errorFont : txtAcheive.$dirty == true && txtAcheive.$invalid == true }">What i would like to acheive</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="group">
+                                                        <input ng-input-effect-class is-required ng-model="plan.ToAchieve2" ng-class="{errorBorder : txtAcheive2.$dirty == true && txtAcheive2.$invalid == true ,'used': txtAcheive2.length > 0}" type="text" pattern=".{1,80}" name="txtAcheive2" id="txtAcheive2" required>
+                                                        <span class="highlight"></span>
+                                                        <span class="bar"></span>
+                                                        <label ng-class="{errorFont : txtAcheive2.$dirty == true && txtAcheive2.$invalid == true }">What i would like to acheive</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="group">
+                                                        <input ng-input-effect-class is-required ng-model="plan.AgreedActions1" ng-class="{errorBorder : txtActions.$dirty == true && txtActions.$invalid == true ,'used': txtActions.length > 0}" type="text" pattern=".{1,80}" name="txtActions" id="txtActions" required>
+                                                        <span class="highlight"></span>
+                                                        <span class="bar"></span>
+                                                        <label ng-class="{errorFont : txtActions.$dirty == true && txtActions.$invalid == true }">Agreed actions to be taken</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="group">
+                                                        <input ng-input-effect-class is-required ng-model="plan.AgreedActions2" ng-class="{errorBorder : txtActions2.$dirty == true && txtActions2.$invalid == true ,'used': txtActions2.length > 0}" type="text" pattern=".{1,80}" name="txtActions2" id="txtActions2" required>
+                                                        <span class="highlight"></span>
+                                                        <span class="bar"></span>
+                                                        <label ng-class="{errorFont : txtActions2.$dirty == true && txtActions2.$invalid == true }">Agreed actions to be taken</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="group">
+                                                        <input ng-input-effect-class data-toggle="modal" data-target="#byWhoModal1" value="{{plan.ByWho1.Name}} [{{plan.ByWho1.Email}}]" ng-class="{errorBorder : txtByWho.$dirty == true && txtByWho.$invalid == true ,'used': txtByWho.length > 0}" type="text" pattern=".{1,80}" name="txtByWho" id="txtByWho" required>
+                                                        <span class="highlight"></span>
+                                                        <span class="bar"></span>
+                                                        <label ng-class="{errorFont : txtByWho.$dirty == true && txtByWho.$invalid == true }">By Who</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="group">
+                                                        <input ng-input-effect-class data-toggle="modal" data-target="#byWhoModal2" value="{{plan.ByWho2.Name}} [{{plan.ByWho2.Email}}]" ng-class="{errorBorder : txtByWho2.$dirty == true && txtByWho2.$invalid == true ,'used': txtByWho2.length > 0}" type="text" pattern=".{1,80}" name="txtByWho2" id="txtByWho2" required>
+                                                        <span class="highlight"></span>
+                                                        <span class="bar"></span>
+                                                        <label ng-class="{errorFont : txtByWho2.$dirty == true && txtByWho2.$invalid == true }">By Who</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="group">
+                                                        <a data-toggle="dropdown" class="dropdown-toggle" id="dropdownByWhen1">
+                                                            <input ng-input-effect-class is-required
+                                                                   data-ng-model="plan.ByWhen1" data-date-time-input="MMM DD, YYYY"
+                                                                   ng-class="{errorBorder : txtByWhen1.$dirty == true && txtByWhen1.$invalid == true ,'used': txtByWhen1.length > 0}"
+                                                                   type="text" name="txtByWhen1" pattern=".{1,80}" id="txtByWhen1" required>
+
+
+                                                            <span class="highlight"></span>
+                                                            <span class="bar"></span>
+                                                            <label ng-class="{errorFont : txtByWhen1.$dirty == true && txtByWhen1.$invalid == true }">By When</label>
+                                                        </a>
+                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                            <datetimepicker data-ng-model="plan.ByWhen1"
+                                                                            data-datetimepicker-config="datepickerconfigurations1"
+                                                                            data-on-set-time="onTimeSetPlan(newDate, oldDate, 1)"></datetimepicker>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="group">
+                                                        <a data-toggle="dropdown" class="dropdown-toggle" id="dropdownByWhen2">
+                                                            <input ng-input-effect-class is-required
+                                                                   data-ng-model="plan.ByWhen2" data-date-time-input="MMM DD, YYYY"
+                                                                   ng-class="{errorBorder : txtByWhen2.$dirty == true && txtByWhen2.$invalid == true ,'used': txtByWhen2.length > 0}"
+                                                                   type="text" name="txtByWhen2" pattern=".{1,80}" id="txtByWhen2" required>
+                                                            <span class="highlight"></span>
+                                                            <span class="bar"></span>
+                                                            <label ng-class="{errorFont : txtByWhen2.$dirty == true && txtByWhen2.$invalid == true }">By When</label>
+                                                        </a>
+                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                            <datetimepicker data-ng-model="plan.ByWhen2"
+                                                                            data-datetimepicker-config="datepickerconfigurations2"
+                                                                            data-on-set-time="onTimeSetPlan(newDate, oldDate, 2)"></datetimepicker>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                            <div class="row" data-toggle="modal" data-target="#prgrsModal">
+                                                <div class="col-xs-12 prgrsDvLbl">How is it going?</div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12 prgrsDv">{{plan.Progress}}</div>
+                                            </div>
+
+                                            <div class="clear"></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
 
                         </div>
 
@@ -120,7 +260,7 @@
             <button class="btn btn-dismiss" ng-click="dismiss()">Dismiss</button>
         </div>
         <div class="text-right col-md-6 col-sm-6 col-xs-6">
-            <button class="btn btn-invert saveBtn" ng-click="savePlan()">Save</button>
+            <button class="btn btn-invert saveBtn" type="submit" ng-click="submit(frmPlan)">Save</button>
         </div>
     </div>
 
@@ -137,7 +277,7 @@
                 <div class="modal-body">
                     <!-- Plan Modal Header Start -->
                     <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
-                    <h4 class="text-center modal-title">Edit Plan</h4>
+                    <h4 class="text-center modal-title">New Plan</h4>
                     <!-- Plan Modal Header End -->
                     <div class="clear"></div>
                     <div class="row">
@@ -149,7 +289,7 @@
                         <label>Plan Name</label>
                     </div>-->
                             <div class="group">
-                                <input ng-input-effect-class is-required ng-model="newPlan.planName" ng-class="{errorBorder : frmNewPlan.txtName.$dirty == true && frmNewPlan.txtName.$invalid == true ,'used': txtName.length > 0}" type="text" pattern=".{1,80}" name="txtName" id="txtName" required>
+                                <input ng-input-effect-class is-required ng-model="newPlan.PlanName" ng-class="{errorBorder : frmNewPlan.txtName.$dirty == true && frmNewPlan.txtName.$invalid == true ,'used': txtName.length > 0}" type="text" pattern=".{1,80}" name="txtName" id="txtName" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label ng-class="{errorFont : frmNewPlan.txtName.$dirty == true && frmNewPlan.txtName.$invalid == true }">Plan Name</label>
@@ -166,7 +306,7 @@
                         <label>Reason</label>
                     </div>-->
                             <div class="group">
-                                <input ng-input-effect-class is-required ng-model="newPlan.reason" ng-class="{errorBorder : frmNewPlan.txtReason.$dirty == true && frmNewPlan.txtReason.$invalid == true ,'used': txtReason.length > 0}"
+                                <input ng-input-effect-class is-required ng-model="newPlan.Reason" ng-class="{errorBorder : frmNewPlan.txtReason.$dirty == true && frmNewPlan.txtReason.$invalid == true ,'used': txtReason.length > 0}"
                                        type="text" pattern=".{1,80}" name="txtReason" id="txtReason" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
@@ -188,15 +328,15 @@
                         <label>Provider</label>
                     </div>-->
                             <div class="group">
-                                <select ng-select-effect-class is-required-select ng-model="newPlan.careProvider" ng-class="{'errorBorder' : cmbGender == '0' ,'used': cmbGender != '0'}" id="cmbGender" name="cmbGender" class="input-form" required>
-                                    <option value="0" disabled selected></option>
+                                <select ng-select-effect-class is-required-select ng-model="newPlan.Provider" ng-class="{'errorBorder' : cmbProvider == '0' ,'used': cmbProvider != '0'}" id="cmbProvider" name="cmbProvider" class="input-form" required>
+                                    <option value="10" disabled selected></option>
                                     <option value="Amir Aly">Amir Aly</option>
                                     <option value="Ahmed Alaa">Ahmed Alaa</option>
                                     <option value="Saeed AlMasry">Saeed AlMasry</option>
                                 </select>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label ng-class="{'errorFont' : cmbGender == '0'}">Provider</label>
+                                <label id="lblProvider">Provider</label>
                             </div>
                         </div>
                     </div>
@@ -210,7 +350,7 @@
                         <label>Other&nbsp;Consideration</label>
                     </div>-->
                             <div class="group">
-                                <input ng-input-effect-class is-required ng-model="newPlan.otherConsideration" ng-class="{errorBorder : frmNewPlan.txtOtherConsideration.$dirty == true && frmNewPlan.txtOtherConsideration.$invalid == true ,'used': txtOtherConsideration.length > 0}"
+                                <input ng-input-effect-class is-required ng-model="newPlan.OtherConsideration" ng-class="{errorBorder : frmNewPlan.txtOtherConsideration.$dirty == true && frmNewPlan.txtOtherConsideration.$invalid == true ,'used': txtOtherConsideration.length > 0}"
                                        type="text" pattern=".{1,80}" name="txtOtherConsideration" id="txtOtherConsideration" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
@@ -222,18 +362,18 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <!--<div class="group">
-                        <input type="text" pattern=".{1,80}" name="txtOtherPlans" id="txtOtherPlans" required>
+                        <input type="text" pattern=".{1,80}" name="txtOtherPlan" id="txtOtherPlan" required>
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <label>Other&nbsp;Plans (not listed in Nomadic Care)</label>
                     </div>-->
 
                             <div class="group">
-                                <input ng-input-effect-class is-required ng-model="newPlan.otherConsideration" ng-class="{errorBorder : frmNewPlan.txtOtherPlans.$dirty == true && frmNewPlan.txtOtherPlans.$invalid == true ,'used': txtOtherPlans.length > 0}"
-                                       type="text" pattern=".{1,80}" name="txtOtherPlans" id="txtOtherPlans" required>
+                                <input ng-input-effect-class is-required ng-model="newPlan.OtherPlan" ng-class="{errorBorder : frmNewPlan.txtOtherPlan.$dirty == true && frmNewPlan.txtOtherPlan.$invalid == true ,'used': txtOtherPlan.length > 0}"
+                                       type="text" pattern=".{1,80}" name="txtOtherPlan" id="txtOtherPlan" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label ng-class="{errorFont : frmNewPlan.txtOtherPlans.$dirty == true && frmNewPlan.txtOtherPlans.$invalid == true }">Other&nbsp;Plans (not listed in Nomadic Care)</label>
+                                <label ng-class="{errorFont : frmNewPlan.txtOtherPlan.$dirty == true && frmNewPlan.txtOtherPlan.$invalid == true }">Other&nbsp;Plans (not listed in Nomadic Care)</label>
                             </div>
                         </div>
                     </div>
@@ -272,19 +412,13 @@
                 <div class="modal-body">
                     <!-- Plan Modal Header Start -->
                     <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">x</button>
-                    <h4 class="text-center modal-title">Edit Plan</h4>
+                    <h4 class="text-center modal-title">Edit Plan Info</h4>
                     <!-- Plan Modal Header End -->
                     <div class="clear"></div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            <!--<div class="group">
-                                <input type="text" pattern=".{1,80}" id="txtName" class="txtName" required>
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Plan Name</label>
-                            </div>-->
                             <div class="group">
-                                <input ng-input-effect-class is-required ng-model="activePlan.planName" ng-class="{errorBorder : frmEditPlan.txtName.$dirty == true && frmEditPlan.txtName.$invalid == true ,'used': txtName.length > 0}" type="text" pattern=".{1,80}" name="txtName" id="txtName" required>
+                                <input ng-input-effect-class is-required ng-model="activePlan.PlanName" ng-class="{errorBorder : frmEditPlan.txtName.$dirty == true && frmEditPlan.txtName.$invalid == true ,'used': txtName.length > 0}" type="text" pattern=".{1,80}" name="txtName" id="txtName" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label ng-class="{errorFont : frmEditPlan.txtName.$dirty == true && frmEditPlan.txtName.$invalid == true }">Plan Name</label>
@@ -294,14 +428,8 @@
                     <div class="clear"></div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            <!--<div class="group">
-                                <input type="text" pattern=".{1,80}" id="txtReason" class="txtReason" required>
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Reason</label>
-                            </div>-->
                             <div class="group">
-                                <input ng-input-effect-class is-required ng-model="activePlan.reason" ng-class="{errorBorder : frmEditPlan.txtReason.$dirty == true && frmEditPlan.txtReason.$invalid == true ,'used': txtReason.length > 0}"
+                                <input ng-input-effect-class is-required ng-model="activePlan.Reason" ng-class="{errorBorder : frmEditPlan.txtReason.$dirty == true && frmEditPlan.txtReason.$invalid == true ,'used': txtReason.length > 0}"
                                         type="text" pattern=".{1,80}" name="txtReason" id="txtReason" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
@@ -312,18 +440,8 @@
                     <div class="clear"></div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            <!--<div class="group">
-                                <select id="txtConsideration" name="txtConsideration" class="input-form" required>
-                                    <option value="0" disabled selected></option>
-                                    <option value="1">Provider 1</option>
-                                    <option value="2">Provider 2</option>
-                                </select>
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Provider</label>
-                            </div>-->
                             <div class="group">
-                                <select ng-select-effect-class is-required-select ng-model="activePlan.careProvider" ng-class="{'errorBorder' : cmbGender == '0' ,'used': cmbGender != '0'}" id="cmbGender" name="cmbGender" class="input-form" required>
+                                <select ng-select-effect-class is-required-select ng-model="activePlan.Provider" ng-class="{'errorBorder' : cmbProvider == '0' ,'used': cmbProvider != '0'}" id="cmbProvider" name="cmbProvider" class="input-form" required>
                                     <option value="0" disabled selected></option>
                                     <option value="Amir Aly">Amir Aly</option>
                                     <option value="Ahmed Alaa">Ahmed Alaa</option>
@@ -331,21 +449,15 @@
                                 </select>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label ng-class="{'errorFont' : cmbGender == '0'}">Provider</label>
+                                <label id="lblProvider">Provider</label>
                             </div>
                         </div>
                     </div>
                     <div class="clear"></div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            <!--<div class="group">
-                                <input type="text" pattern=".{1,80}" name="txtOtherConsideration" id="txtOtherConsideration" required>
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Other&nbsp;Consideration</label>
-                            </div>-->
                             <div class="group">
-                                <input ng-input-effect-class is-required ng-model="activePlan.otherConsideration" ng-class="{errorBorder : frmEditPlan.txtOtherConsideration.$dirty == true && frmEditPlan.txtOtherConsideration.$invalid == true ,'used': txtOtherConsideration.length > 0}"
+                                <input ng-input-effect-class is-required ng-model="activePlan.OtherConsideration" ng-class="{errorBorder : frmEditPlan.txtOtherConsideration.$dirty == true && frmEditPlan.txtOtherConsideration.$invalid == true ,'used': txtOtherConsideration.length > 0}"
                                        type="text" pattern=".{1,80}" name="txtOtherConsideration" id="txtOtherConsideration" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
@@ -356,19 +468,12 @@
                     <div class="clear"></div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            <!--<div class="group">
-                                <input type="text" pattern=".{1,80}" name="txtOtherPlans" id="txtOtherPlans" required>
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Other&nbsp;Plans (not listed in Nomadic Care)</label>
-                            </div>-->
-
                             <div class="group">
-                                <input ng-input-effect-class is-required ng-model="activePlan.otherConsideration" ng-class="{errorBorder : frmEditPlan.txtOtherPlans.$dirty == true && frmEditPlan.txtOtherPlans.$invalid == true ,'used': txtOtherPlans.length > 0}"
-                                       type="text" pattern=".{1,80}" name="txtOtherPlans" id="txtOtherPlans" required>
+                                <input ng-input-effect-class is-required ng-model="activePlan.txtOtherPlan" ng-class="{errorBorder : frmEditPlan.txtOtherPlan.$dirty == true && frmEditPlan.txtOtherPlan.$invalid == true ,'used': txtOtherPlan.length > 0}"
+                                       type="text" pattern=".{1,80}" name="txtOtherPlan" id="txtOtherPlan" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label ng-class="{errorFont : frmEditPlan.txtOtherPlans.$dirty == true && frmEditPlan.txtOtherPlans.$invalid == true }">Other&nbsp;Plans (not listed in Nomadic Care)</label>
+                                <label ng-class="{errorFont : frmEditPlan.txtOtherPlan.$dirty == true && frmEditPlan.txtOtherPlan.$invalid == true }">Other&nbsp;Plans (not listed in Nomadic Care)</label>
                             </div>
                         </div>
                     </div>
@@ -397,7 +502,7 @@
 </div>
 <!-- Plan Modal End -->
 
-<div id="byWhoModal" class="modal fade" role="dialog">
+<div id="byWhoModal1" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -406,12 +511,12 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="clear"></div>
-                        <!--<input type="text" class="input-form darkInput txtName" id="txtName" placeholder="Name" aria-describedby="sizing-addon2">-->
+                        <div class="clear"></div>
                         <div class="group">
-                            <input type="text" pattern=".{1,80}" id="txtName" class="txtName" required>
+                            <input ng-input-effect-class is-required ng-model="activePlan.ByWho1.Name" ng-class="{errorBorder : txtName.$dirty == true && txtName.$invalid == true ,'used': txtName.length > 0}" type="text" pattern=".{1,80}" name="txtName" id="txtName" required>
                             <span class="highlight"></span>
                             <span class="bar"></span>
-                            <label>Name</label>
+                            <label ng-class="{errorFont : txtName.$dirty == true && txtName.$invalid == true }">Name</label>
                         </div>
                     </div>
                 </div>
@@ -419,12 +524,11 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="clear"></div>
-                        <!--<input type="text" class="input-form darkInput txtEmail" id="txtEmail" placeholder="Email" aria-describedby="sizing-addon2">-->
                         <div class="group">
-                            <input type="text" pattern="[a-zA-Z0-9_]+(?:\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" class="txtEmail" id="txtEmail" required>
+                            <input ng-input-effect-class is-required ng-model="activePlan.ByWho1.Email" ng-class="{errorBorder : txtEmail.$dirty == true && txtEmail.$invalid == true ,'used': txtEmail.length > 0}" type="email" pattern="[a-zA-Z0-9_]+(?:\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" id="txtEmail" name="txtEmail" required>
                             <span class="highlight"></span>
                             <span class="bar"></span>
-                            <label>Email</label>
+                            <label ng-class="{errorFont : txtEmail.$dirty == true && txtEmail.$invalid == true }">Mail</label>
                         </div>
                     </div>
                 </div>
@@ -432,14 +536,53 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-warning" data-dismiss="modal">Dismiss</button>
-                <button type="button" class="btn btn-default" onclick="appendByWho()">Ok</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="setBywho1Data()">Ok</button>
             </div>
         </div>
 
     </div>
 </div>
 
+<div id="byWhoModal2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="clear"></div>
+                        <div class="clear"></div>
+                        <div class="group">
+                            <input ng-input-effect-class is-required ng-model="activePlan.ByWho2.Name" ng-class="{errorBorder : txtName.$dirty == true && txtName.$invalid == true ,'used': txtName.length > 0}" type="text" pattern=".{1,80}" name="txtName" id="txtName" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label ng-class="{errorFont : txtName.$dirty == true && txtName.$invalid == true }">Name</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear2"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="clear"></div>
+                        <div class="group">
+                            <input ng-input-effect-class is-required ng-model="activePlan.ByWho2.Email" ng-class="{errorBorder : txtEmail.$dirty == true && txtEmail.$invalid == true ,'used': txtEmail.length > 0}" type="email" pattern="[a-zA-Z0-9_]+(?:\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" id="txtEmail" name="txtEmail" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label ng-class="{errorFont : txtEmail.$dirty == true && txtEmail.$invalid == true }">Mail</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear2"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Dismiss</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="setBywho2Data()">Ok</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <div id="prgrsModal" class="modal fade" role="dialog">
     <div class="modal-dialog">

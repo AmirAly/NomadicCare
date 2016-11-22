@@ -10,6 +10,10 @@
     font-size: 14px !important;
 }
 
+.btn-danger.active, .btn-danger.focus, .btn-danger:active, .btn-danger:focus, .btn-danger:hover, .open > .dropdown-toggle.btn-danger {
+    color: #fff !important;
+}
+
 /*calender*/
 .datetimepicker .table > thead > tr:first-child > th.switch {
     display: table-cell;
@@ -36,45 +40,56 @@
 }
 
 /*Loader*/
-.loaderContainer{
-    position:absolute;
+.loaderContainer {
+    position: absolute;
     background-color: #000;
     opacity: 0.7;
-    top:0;
-    bottom:0;
-    right:0;
-    left:0;
-    z-index:9999;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 9999;
     -webkit-animation-duration: 0.9s;
     animation-duration: 0.9s;
 }
+
 .loader {
-  position: absolute;
-  left: 50%;
-  top: 48%;
-  z-index: 10000;
-  /*width: 150px;
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    z-index: 10000;
+    /*width: 150px;
   height: 150px;
   margin: -75px 0 0 -75px;*/
-  width: 60px;
-  height: 60px;
-  margin: -30px 0 0 -30px;
-  border: 16px solid #f3f3f3;
-  border-top: 16px solid #777;
-  border-bottom: 16px solid #777;
-  border-radius: 50%;
-  -webkit-animation: spin 0.9s linear infinite;
-  animation: spin 0.9s linear infinite;
+    width: 60px;
+    height: 60px;
+    margin: -30px 0 0 -30px;
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #777;
+    border-bottom: 16px solid #777;
+    border-radius: 50%;
+    -webkit-animation: spin 0.9s linear infinite;
+    animation: spin 0.9s linear infinite;
 }
 
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 
@@ -119,6 +134,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #000;
     width: 250px !important;
     height: 280px !important;
+    border: 0;
 }
 
 #loginContainer {
@@ -203,8 +219,8 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 0;
 }
 
-.noMargin{
-    margin:0;
+.noMargin {
+    margin: 0;
 }
 
 .whiteBackground {
@@ -775,9 +791,9 @@ canvas {
     font-size: 20px;
 }
 
-    .pageOrganization table input {
-        border: 0px !important;
-    }
+.pageOrganization table input {
+    border: 0px !important;
+}
 
 .pageOrganization thead th {
     background-color: #7f8c8d;
@@ -834,10 +850,11 @@ canvas {
 *******************************************************************************
 *******************************************************************************/
 .pageHealthRrecords .nav-tabs > li.active > a,
-.pageHealthRrecords  .nav-tabs > li.active > a:focus,
-.pageHealthRrecords  .nav-tabs > li.active > a:hover{
-        box-shadow: 0px -1px 3px #fbfbfb;
+.pageHealthRrecords .nav-tabs > li.active > a:focus,
+.pageHealthRrecords .nav-tabs > li.active > a:hover {
+    box-shadow: 0px -1px 3px #fbfbfb;
 }
+
 .pageHealthRrecords .customHeader1 {
     position: absolute !important;
     top: 40px;
@@ -936,16 +953,17 @@ canvas {
     height: 56px;
 }
 
-.pageHealthRrecords .innerOptions .panel-heading {
-    border: 1px solid #e67e22;
-    padding: 5px !important;
-    right: 23px;
-    left: 23px;
-    top: -1px;
-    border-radius: 0;
-    position: absolute;
-    background: #e67e22;
-}
+    .pageHealthRrecords .innerOptions .panel-heading {
+        border: 1px solid #e67e22;
+        padding: 5px !important;
+        right: 23px;
+        left: 23px;
+        top: -1px;
+        border-radius: 0;
+        position: absolute;
+        background: #e67e22;
+    }
+
     .pageHealthRrecords .innerOptions ul {
         border-bottom: 0px !important;
     }
@@ -987,16 +1005,16 @@ canvas {
     height: 56px;
 }
 
-.pageHealthRrecords .innerOptionsMeasurments .panel-heading {
-    border: 1px solid #3498db;
-    padding: 5px !important;
-    right: 23px;
-    left: 23px;
-    top: -1px;
-    border-radius: 0;
-    position: absolute;
-    background: #3498db;
-}
+    .pageHealthRrecords .innerOptionsMeasurments .panel-heading {
+        border: 1px solid #3498db;
+        padding: 5px !important;
+        right: 23px;
+        left: 23px;
+        top: -1px;
+        border-radius: 0;
+        position: absolute;
+        background: #3498db;
+    }
 
     .pageHealthRrecords .innerOptionsMeasurments ul {
         border-bottom: 0px !important;
@@ -1031,7 +1049,7 @@ canvas {
         .pageHealthRrecords .innerOptionsMeasurments li.active a:hover {
             background-color: #fff !important;
             color: #000 !important;
-            border:0 !important;
+            border: 0 !important;
         }
 
 .innerSingleTab {
@@ -1360,8 +1378,8 @@ canvas {
 }
 
 /*Modal icon*/
-.modalIcon{
-        background: transparent;
+.modalIcon {
+    background: transparent;
     color: #555;
     border: none;
     font-size: 16px;
