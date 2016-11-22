@@ -58,7 +58,10 @@ var Client = new Schema({
             },
             ByWhen1: { type: Date },
             ByWhen2: { type: Date },
-            Progress: { type: String },
+            Progress: [{
+                Text: { type: String },
+                Date: { type: Date, default: new Date() }
+            }],
             OtherPlan: { type: String },
             OtherConsideration: { type: String },
             Reason: { type: String },
