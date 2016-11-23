@@ -46,8 +46,8 @@ var Client = new Schema({
             ToImprove: { type: String },
             ToAchieve1: { type: String },
             ToAchieve2: { type: String },
-            AgreedActions1: { type: Number },
-            AgreedActions2: { type: Number },
+            AgreedActions1: { type: String },
+            AgreedActions2: { type: String },
             ByWho1: {
                 Name: {type: String},
                 Email: {type: String}
@@ -58,10 +58,7 @@ var Client = new Schema({
             },
             ByWhen1: { type: Date },
             ByWhen2: { type: Date },
-            Progress: [{
-                Text: { type: String },
-                Date: { type: Date, default: new Date() }
-            }],
+            Progress: [],
             OtherPlan: { type: String },
             OtherConsideration: { type: String },
             Reason: { type: String },
@@ -70,6 +67,7 @@ var Client = new Schema({
                 ref: 'Coordinator'
             },
             Status: { type: String },
+            PatientAgree: { type: String }
 
         }
     ]
