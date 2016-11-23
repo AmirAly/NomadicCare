@@ -540,10 +540,6 @@ option {
 }
 
 
-.modal .modal-title {
-    color: #337ab7 !important;
-}
-
 .rightHeader {
     line-height: 3;
     text-align: right;
@@ -1217,6 +1213,15 @@ canvas {
 ******************************* Modals ****************************
 *******************************************************************************
 *******************************************************************************/
+
+.modal {
+    z-index: 10000;
+}
+
+    .modal .modal-title {
+        color: #337ab7 !important;
+    }
+
 .modal-content input {
     color: #000 !important;
 }
@@ -1229,6 +1234,10 @@ canvas {
     background-color: #fff !important;
 }
 
+/******************************************************************************
+******************************* page Plan *************************************
+*******************************************************************************
+*******************************************************************************/
 .pagePlan .grayButton {
     color: #fff;
 }
@@ -1375,6 +1384,20 @@ canvas {
 .prgrsDvLbl {
     color: #999;
     font-size: 12px;
+    min-height: 20px;
+}
+
+.noPalnsToShow {
+    position: absolute !important;
+    top: 100px;
+    right: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    padding-right: 40px;
+    padding-left: 20px;
+    z-index: 999;
 }
 
 /*Modal icon*/

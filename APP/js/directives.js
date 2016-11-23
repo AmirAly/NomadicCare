@@ -101,6 +101,7 @@ ehs.directive('confirmOnExit', function () {
             }
             $scope.$on('$stateChangeStart', function (event, next, current) {
                 console.log('stateChangeStart');
+                console.log(formName);
                 if ($scope[formName].$dirty) {
                     if (!confirm("Do you want to leave the page without saving changes?")) {
                         event.preventDefault();

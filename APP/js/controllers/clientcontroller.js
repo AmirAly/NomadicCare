@@ -89,14 +89,7 @@
                     BloodType: $scope.cmbBloodType,
                     Img: BaseImg64,
                     Email: $scope.txtEmail,
-                    _id: null,
-                    //CarePlans : [{
-                    //    Status: '', Provider: '', Reason: '',
-                    //    OtherConsideration: '', OtherPlan: '',
-                    //    PlanName: 'Plan 1', ToImprove: '', Progress: '',
-                    //    ToAchieve1: '', AgreedActions1: '', ByWho1: { Name: '', Email: '' }, ByWhen1: new moment(),
-                    //    ToAchieve2: '', AgreedActions2: '', ByWho2: { Name: '', Email: '' }, ByWhen2: new moment()
-                    //}]
+                    _id: null
                 }
                 console.log($scope.clientObj);
                 var req = {

@@ -1,68 +1,209 @@
-﻿ehs.controller("CareplansController", function ($scope, $state, $rootScope, $stateParams, $timeout, API) {
+﻿ehs.controller("CareplansController", function ($scope, $state, $rootScope, $stateParams, $timeout, API, $location) {
     $rootScope.EditPlanConfirmed = false;
     $timeout(function () {
         $rootScope.activeoutertab = 'careplans';
         console.log($scope.currentClientInfo.CarePlans);
-        if ($scope.currentClientInfo.CarePlans.length == 0) {
-            $scope.plans = [{
-                _id: '', Status: '', Provider: '', Reason: '',
-                OtherConsideration: '', OtherPlan: '',
-                PlanName: 'Plan', ToImprove: '', Progress: '',
-                ToAchieve1: '', AgreedActions1: '', ByWho1: { Name: '', Email: '' }, ByWhen1: new moment(),
-                ToAchieve2: '', AgreedActions2: '', ByWho2: { Name: '', Email: '' }, ByWhen2: new moment()
-            }];
+        $scope.plans = $scope.currentClientInfo.CarePlans;
+        if ($scope.currentClientInfo.CarePlans.length != 0) {
+            if ($stateParams.planid == "") {
+                $scope.activePlanTab = $scope.plans[0]._id;
+                $scope.activePlan = $scope.plans[0];
+            }
+            else { // certain plan
+                $scope.activePlanTab = $stateParams.planid;
+                for (var i = 0; i < $scope.plans.length; i++) {
+                    if ($scope.plans[i]._id == $stateParams.planid) {
+                        $scope.activePlanTab = $scope.plans[i]._id;
+                        $scope.activePlan = $scope.plans[i];
+                        return;
+                    }
+                }
+            }
         }
-        else { $scope.plans = $scope.currentClientInfo.CarePlans; }
-
-        $scope.activePlan = $scope.plans[0];
-        if ($stateParams.planid == "") {
-            $scope.activePlanTab = $scope.plans[0]._id;
-        }
-        else {
-            $scope.activePlanTab = $stateParams.planid;
-        }
-        console.log($scope.activePlanTab);
-
     }, 500);
 
+    // get all providers
+    var req = {
+        method: 'get',
+        url: '/Coordinator/List/' + $rootScope.OrganizationId,
+        data: {}
+    }
+    API.execute(req).then(function (_res) {
+        console.log(_res.data);
+        if (_res.data.code == 100) {
+            $scope.providers = _res.data.data;
+        }
+        else {
+            $scope.providers = [];
+        }
+    });
+
+    $scope.setProgressData = function (form, _activePlan) {
+        var newProgressText = $scope.activePlan.Progress.Text;
+        var newProgressDate = new Date();
+        var newObj = { Text: newProgressText, Date: newProgressDate };
+        console.log(newObj);
+        for (i = 0; i < $scope.plans.length; i++) {
+            if ($scope.plans[i] === _activePlan) {
+                console.log($scope.plans[i]);
+                $scope.plans[i].Progress.push(newObj);
+                console.log($scope.plans[i]);
+                return;
+            }
+        }
+        $scope.activePlan.Progress.Text = "";
+        $scope.frmProgress.$setPristine();
+    }
 
 
     $scope.newPlan = {
-        _id: '', Status: '', Provider: '', Reason: '',
-        OtherConsideration: '', OtherPlan: '',
-        PlanName: 'Plan', ToImprove: '', Progress: '',
+        Status: '', Provider: '', Reason: '',
+        OtherConsideration: '', OtherPlan: '', PatientAgree: false,
+        PlanName: '', ToImprove: '', Progress: [],
         ToAchieve1: '', AgreedActions1: '', ByWho1: { Name: '', Email: '' }, ByWhen1: new moment(),
         ToAchieve2: '', AgreedActions2: '', ByWho2: { Name: '', Email: '' }, ByWhen2: new moment()
     };
 
-    $scope.createPlan = function () {
-        console.log('add');
-        $scope.plans.push($scope.newPlan);
-        console.log($scope.plans);
-        //// save now to db
+    $scope.createPlan = function (form) {
+        angular.forEach($scope.frmNewPlan.$error.required, function (field) {
+            field.$setDirty();
+        });
+        if ($scope.cmbBloodType == '10') {
+            angular.element(document.getElementById('cmbProvider')).addClass('errorBorder');
+            angular.element(document.getElementById('lblProvider')).addClass('errorFont');
+        }
+        if (form.$valid) {
+            console.log('add');
+            ////loader
+            $rootScope.loading = true;
+            $scope.plans.push($scope.newPlan);
+            var req = {
+                method: 'put',
+                url: '/CarePlans',
+                data: {
+                    _id: $scope.currentClientInfo._id,
+                    CarePlans: $scope.plans
+                }
+            }
+            //// save now to db
+            API.execute(req).then(function (_res) {
+                console.log(_res.data);
+                if (_res.data.code == 100) {
+                    $scope.frmNewPlan.$setPristine();
+                    $scope.dismiss();
+                    $scope.newPlan = {
+                        Status: '', Provider: '', Reason: '',
+                        OtherConsideration: '', OtherPlan: '', PatientAgree: '',
+                        PlanName: '', ToImprove: '', Progress: [],
+                        ToAchieve1: '', AgreedActions1: '', ByWho1: { Name: '', Email: '' }, ByWhen1: new moment(),
+                        ToAchieve2: '', AgreedActions2: '', ByWho2: { Name: '', Email: '' }, ByWhen2: new moment()
+                    };
 
-        //$scope.activePlanTab = 999;
-        //$stateParams.planid = 999;
-        //$scope.activePlan = $scope.plans[3];
+                    // get client data 
+                    var req = {
+                        method: 'get',
+                        url: '/Client/' + $scope.currentClientInfo._id,
+                        data: {}
+                    }
+
+                    API.execute(req).then(function (_res) {
+                        console.log(_res.data);
+                        if (_res.data.code == 100) {
+                            $scope.plans = _res.data.data[0].CarePlans;
+                            console.log($scope.plans);
+                        }
+                    })
+                }
+                else {
+                    console.log('error');
+                }
+            }, function (error) { // another error may be connection error
+               
+            }).finally(function () {
+                $rootScope.loading = false;
+            });
+        }
+
     }
 
     $scope.deletePlan = function () {
-        // show modal / confirmation + modal
-        //..
+        $rootScope.loading = true;
         console.log('delete');
-        var index = $scope.plans.indexOf(activePlan);
+        var index = $scope.plans.indexOf($scope.activePlan);
         $scope.plans.splice(index, 1);
         console.log($scope.plans);
+        var req = {
+            method: 'put',
+            url: '/CarePlans',
+            data: {
+                _id: $scope.currentClientInfo._id,
+                CarePlans: $scope.plans
+            }
+        }
         //// save now to db
+        API.execute(req).then(function (_res) {
+            console.log(_res.data);
+            if (_res.data.code == 100) {
+                // get client data 
+                var req = {
+                    method: 'get',
+                    url: '/Client/' + $scope.currentClientInfo._id,
+                    data: {}
+                }
 
-        $scope.activePlanTab = 1;
-        $scope.activePlan = $scope.plans[0];
+                API.execute(req).then(function (_res) {
+                    console.log(_res.data);
+                    if (_res.data.code == 100) {
+                        $scope.plans = _res.data.data[0].CarePlans;
+                        console.log($scope.plans);
+                    }
+                })
+            }
+            else {
+                console.log('error');
+            }
+        }, function (error) { 
 
+        }).finally(function () {
+            $rootScope.loading = false;
+        });
+
+    }
+
+    $scope.editPlan = function (form) {
+        $rootScope.loading = true;
+        console.log($scope.plans);
+        if (form.$valid) {
+            $rootScope.loading = true;
+            var req = {
+                method: 'put',
+                url: '/CarePlans',
+                data: {
+                    _id: $scope.currentClientInfo._id,
+                    CarePlans: $scope.plans
+                }
+            }
+            API.execute(req).then(function (_res) {
+                console.log(_res.data);
+                if (_res.data.code == 100) {
+                    $scope.frmEditPlan.$setPristine();
+                }
+                else {
+                    console.log('error');
+                }
+            }, function (error) {
+            }).finally(function () {
+                $rootScope.loading = false;
+            });
+        }
     }
 
     $scope.setActivePlan = function (_plan) {
         $scope.activePlanTab = _plan._id;
         $scope.activePlan = _plan;
+        $scope.currentClientInfo.CarePlans = $scope.plans;
+        $location.path('/healthrecord/careplans/' + _plan._id);
+        $state.reload();
     }
 
     $scope.submit = function (form) {
@@ -74,42 +215,29 @@
             angular.element(document.getElementById('lblProvider')).addClass('errorFont');
         }
         if (form.$valid) {
+            $rootScope.loading = true;
             var req = {
                 method: 'put',
                 url: '/CarePlans',
-                data: $scope.plans
+                data: {
+                    _id: $scope.currentClientInfo._id,
+                    CarePlans: $scope.plans
+                }
             }
-            console.log($scope.plans);
-
-            //API.execute(req).then(function (_res) {
-            //    console.log(_res.data);
-            //    if (_res.data.code == 100) { // Client
-            //        $scope.showMessage = true;
-            //        $scope.messageTxt = 'Saved ...';
-            //        $scope.messageStatus = 'success';
-            //        $scope.frmAddClient.$setPristine();
-            //    }
-            //    else {
-            //        $scope.showMessage = true;
-            //        $scope.messageTxt = _res.data.data;
-            //        $scope.messageStatus = 'danger';
-            //    }
-            //}, function (error) { // another error may be connection error
-            //    $scope.showMessage = true;
-            //    $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
-            //    $scope.messageStatus = 'warning';
-            //}).finally(function () {
-            //    $rootScope.loading = false;
-            //});
+            API.execute(req).then(function (_res) {
+                console.log(_res.data);
+                if (_res.data.code == 100) { 
+                    $scope.frmPlan.$setPristine();
+                }
+                else {
+                    console.log('error');
+                }
+            }, function (error) { 
+            }).finally(function () {
+                $rootScope.loading = false;
+            });
         }
     }
-
-
-
-
-
-
-
 
 
     $scope.datepickerconfigurations1 = {
@@ -138,5 +266,3 @@
 
     }
 });
-
-//console.log($scope.plans[_id].ByWhen1);
