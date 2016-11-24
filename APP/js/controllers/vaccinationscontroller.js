@@ -27,7 +27,7 @@
 
     $('#vaccinationsModal').on('hidden.bs.modal', function () {
         $(this).find('form').trigger('reset');
-        $(this).find('input').removeClass('used');
+        $(this).find('#txtDateVaccination').removeClass('used');
     })
 
     // fill table with data
@@ -86,9 +86,17 @@
             API.execute(req).then(function (_res) {
                 console.log(_res);
                 if (_res.data.code == 100) {
-                    $scope.dismiss();
+                    $scope.txtDateVaccination = '';
+                    $scope.txtDescription = '';
+                    $scope.txtType = '';
+                    $scope.txtBrand = '';
+                    $scope.txtStatus = '';
+                    $scope.txtClinician = '';
+
                     $scope.frmVaccinations.$setPristine();
                     $scope.vaccinations.push($scope.vaccinationObj);
+                    $scope.dismiss();
+
                 }
                 else {
                     $scope.showMessage = true;

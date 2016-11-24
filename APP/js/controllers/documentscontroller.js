@@ -48,7 +48,7 @@
 
     $('#documentsModal').on('hidden.bs.modal', function () {
         $(this).find('form').trigger('reset');
-        $(this).find('input').removeClass('used');
+        $(this).find('#txtDateDocument').removeClass('used');
     })
 
     // fill table with data
@@ -107,9 +107,17 @@
             API.execute(req).then(function (_res) {
                 console.log(_res);
                 if (_res.data.code == 100) {
-                    $scope.dismiss();
+                    $scope.txtDateDocument = '';
+                    $scope.txtDescription = '';
+                    $scope.txtDocumentName = '';
+                    $scope.txtStatus = '';
+                    $scope.txtSourceOrganisations = '';
+                    $scope.fileAttached = '';
+
                     $scope.frmDocuments.$setPristine();
                     $scope.documents.push($scope.documentObj);
+                    $scope.dismiss();
+
                 }
                 else {
                     $scope.showMessage = true;

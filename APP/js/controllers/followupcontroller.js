@@ -28,7 +28,7 @@
 
     $('#followupModal').on('hidden.bs.modal', function () {
         $(this).find('form').trigger('reset');
-        $(this).find('input').removeClass('used');
+        $(this).find('#txtDateFollowup').removeClass('used');
     })
 
 
@@ -87,9 +87,16 @@
             API.execute(req).then(function (_res) {
                 console.log(_res);
                 if (_res.data.code == 100) {
-                    $scope.dismiss();
+                    $scope.txtDateFollowup = '';
+                    $scope.txtReason = '';
+                    $scope.txtRelatedConsultation = '';
+                    $scope.txtStatus = '';
+                    $scope.txtClinician = '';
+
                     $scope.frmFollowup.$setPristine();
                     $scope.followup.push($scope.followupObj);
+                    $scope.dismiss();
+
                 }
                 else {
                     $scope.showMessage = true;

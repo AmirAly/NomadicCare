@@ -27,7 +27,7 @@
 
     $('#diagnosisModal').on('hidden.bs.modal', function () {
         $(this).find('form').trigger('reset');
-        $(this).find('input').removeClass('used');
+        $(this).find('#txtDateDiagnosis').removeClass('used');
     })
 
     // fill table with data
@@ -85,9 +85,16 @@
             API.execute(req).then(function (_res) {
                 console.log(_res);
                 if (_res.data.code == 100) {
-                    $scope.dismiss();
+                    $scope.txtDateDiagnosis = '';
+                    $scope.txtDiagnosis = '';
+                    $scope.txtNature = '';
+                    $scope.txtStatus = '';
+                    $scope.txtClinician = '';
+
                     $scope.frmDiagnosis.$setPristine();
                     $scope.diagnosis.push($scope.medicationObj);
+                    $scope.dismiss();
+
                 }
                 else {
                     $scope.showMessage = true;

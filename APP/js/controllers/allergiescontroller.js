@@ -23,7 +23,7 @@
 
     $('#allergiesModal').on('hidden.bs.modal', function () {
         $(this).find('form').trigger('reset');
-        $(this).find('input').removeClass('used');
+        $(this).find('#txtDateAllergies').removeClass('used');
     })
 
     $scope.onTimeSet = function (_newDate, _oldDate) {
@@ -89,9 +89,17 @@
             API.execute(req).then(function (_res) {
                 console.log(_res);
                 if (_res.data.code == 100) {
-                    $scope.dismiss();
+                    $scope.txtDateAllergies = '';
+                    $scope.txtDescription = '';
+                    $scope.txtType = '';
+                    $scope.txtPrescribedTherapy = '';
+                    $scope.txtStatus = '';
+                    $scope.txtTherapist = '';
+
                     $scope.frmAllergies.$setPristine();
                     $scope.allergies.push($scope.allergiesObj);
+                    $scope.dismiss();
+
                 }
                 else {
                     $scope.showMessage = true;
