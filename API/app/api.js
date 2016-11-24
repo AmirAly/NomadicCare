@@ -295,6 +295,29 @@ module.exports = function (app, express) {
             }
         });
     });
+    api.get('/CarePlans/:organizationId', function (req, res) {
+        Client.find({}, 'CarePlans', function (err, lst) {
+            if (err)
+                return res.json({ code: '1', data: err });
+            else {
+                if (lst) {
+                    var _lst = [];
+                    for (var i = 0 ; i < lst.length; i++) {
+                        console.log(req.params.organizationId);
+                        if (lst[i].Organization)
+                            console.log(lst[i].Coordinator.Organization);
+                        if (lst[i].Coordinator && lst[i].Coordinator.Organization.equals(req.params.organizationId)) {
+                            if (lst[i].CarePlans && lst[i].CarePlans.length > 0)
+                                _lst = _lst.concat(lst[i].CarePlans);
+                        }
+                    }
+                    return res.json({ code: '100', data: _lst });
+                }
+                else
+                    return res.json({ code: '20', data: 'Care plans not exist' });
+            }
+        }).populate('Coordinator');
+    });
 
     api.post('/Client', function (req, res) {
         var _newObj = new Client(req.body);
