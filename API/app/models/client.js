@@ -67,7 +67,7 @@ var Client = new Schema({
                 ref: 'Coordinator'
             },
             Status: { type: String },
-            PatientAgree: { type: String },
+            PatientAgree: { type: Boolean },
             LastUpdated: {
                 type: Date, default: new Date()
             }
