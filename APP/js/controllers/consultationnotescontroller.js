@@ -17,7 +17,16 @@
             angular.element(document.getElementById('txtDate')).addClass('used');
         });
     }
+    $scope.setDateToTodayUI = function () {
+        $timeout(function () {
+            angular.element(document.getElementById('txtDate')).addClass('used');
+        });
+    }
 
+    $('#consultationnotesModal').on('hidden.bs.modal', function () {
+        $(this).find('form').trigger('reset');
+        $(this).find('#txtDate').removeClass('used');
+    })
     // fill table with data
     var req = {
         method: 'get',
@@ -76,9 +85,16 @@
             API.execute(req).then(function (_res) {
                 console.log(_res);
                 if (_res.data.code == 100) {
-                    $scope.dismiss();
+                    $scope.txtDate = '';
+                    $scope.txtClinicalReason = '';
+                    $scope.txtExamination = '';
+                    $scope.txtTreatment = '';
+                    $scope.status = 0;
+
                     $scope.frmConsultationnotes.$setPristine();
                     $scope.notes.push($scope.notesObj);
+                    $scope.dismiss();
+
                 }
                 else {
                     $scope.showMessage = true;
