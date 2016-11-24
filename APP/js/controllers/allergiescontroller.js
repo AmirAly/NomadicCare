@@ -15,6 +15,17 @@
         dropdownSelector: '#dropdown'
     };
 
+    $scope.setDateToTodayUI = function () {
+        $timeout(function () {
+            angular.element(document.getElementById('txtDateAllergies')).addClass('used');
+        });
+    }
+
+    $('#allergiesModal').on('hidden.bs.modal', function () {
+        $(this).find('form').trigger('reset');
+        $(this).find('input').removeClass('used');
+    })
+
     $scope.onTimeSet = function (_newDate, _oldDate) {
         console.log(_newDate);
         $timeout(function () {

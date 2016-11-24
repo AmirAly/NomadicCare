@@ -1,7 +1,7 @@
 ﻿ehs.controller("MedicationsController", function ($scope, $state, $rootScope, $stateParams, API, $timeout) {
-   
+    console.log($scope.currentClientInfo);
+
     $timeout(function () {
-        console.log($scope.currentClientInfo);
         $rootScope.activeoutertab = 'healthnotes';
         $rootScope.activetab = 'medications';
     },500);
@@ -13,6 +13,17 @@
         minView: 'day',
         dropdownSelector: '#dropdown'
     };
+
+    $scope.setDateToTodayUI = function () {
+        $timeout(function () {
+            angular.element(document.getElementById('txtDateMedication')).addClass('used');
+        });
+    }
+
+    $('#medicationsModal').on('hidden.bs.modal', function () {
+        $(this).find('form').trigger('reset');
+        $(this).find('#txtDateMedication').removeClass('used');
+    })
 
     $scope.onTimeSet = function (_newDate, _oldDate) {
         console.log(_newDate);
@@ -77,9 +88,16 @@
             API.execute(req).then(function (_res) {
                 console.log(_res);
                 if (_res.data.code == 100) {
-                    $scope.dismiss();
+                    $scope.txtDateMedication = '';
+                    $scope.txtDescription = '';
+                    $scope.txtType = '';
+                    $scope.txtIndication = '';
+                    $scope.txtStatus = '';
+                    $scope.txtRelatedConsultation = '';
+
                     $scope.frmMedications.$setPristine();
                     $scope.medications.push($scope.medicationObj);
+                    $scope.dismiss();
                 }
                 else {
                     $scope.showMessage = true;

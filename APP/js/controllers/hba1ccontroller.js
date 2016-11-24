@@ -15,6 +15,16 @@
         });
     }
 
+    $scope.setDateToTodayUI = function () {
+        $timeout(function () {
+            angular.element(document.getElementById('txtDate')).addClass('used');
+        });
+    }
+
+    $('#HBA1cModal').on('hidden.bs.modal', function () {
+        $(this).find('form').trigger('reset');
+    })
+
     // start here
     var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     var yAxesLabel = 'HBA1c (mmol/ mol)';

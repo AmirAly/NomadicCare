@@ -19,6 +19,16 @@
             angular.element(document.getElementById('txtDateDiagnosis')).addClass('used');
         });
     }
+    $scope.setDateToTodayUI = function () {
+        $timeout(function () {
+            angular.element(document.getElementById('txtDateDiagnosis')).addClass('used');
+        });
+    }
+
+    $('#diagnosisModal').on('hidden.bs.modal', function () {
+        $(this).find('form').trigger('reset');
+        $(this).find('input').removeClass('used');
+    })
 
     // fill table with data
     var req = {

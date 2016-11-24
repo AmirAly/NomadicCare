@@ -297,6 +297,18 @@
         });
     }
 
+    $scope.setDateToTodayUI1 = function () {
+        $timeout(function () {
+            angular.element(document.getElementById('txtByWhen1')).addClass('used');
+        });
+    }
+
+    $scope.setDateToTodayUI2 = function () {
+        $timeout(function () {
+            angular.element(document.getElementById('txtByWhen2')).addClass('used');
+        });
+    }
+
     $scope.openModalByWho = function (_provider) {
         $('#byWhoModal').modal('show');
         $timeout(function () {
