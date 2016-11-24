@@ -84,22 +84,27 @@
                     <div class="clear row"></div>
                     <div class="row">
                         <div class="input-group-lg col-md-6 col-sm-6 col-xs-6">
-                            <div class="col-md-12 col-sm-12 col-xs-12 row">
-                                <div class="group">
-                                    <a data-toggle="dropdown" class="dropdown-toggle" id="dropdown">
-                                        <input ng-input-effect-class is-required
-                                               data-ng-model="txtDob" data-date-time-input="MMM DD, YYYY"
-                                               ng-class="{errorBorder : frmAddClient.txtDob.$dirty == true && frmAddClient.txtDob.$invalid == true ,'used': txtDob.length > 0}"
-                                               type="text" name="txtDob" pattern=".{1,80}" id="txtDob" required>
-                                        <span class="highlight"></span>
-                                        <span class="bar"></span>
-                                        <label ng-class="{errorFont : frmAddClient.txtDob.$dirty == true && frmAddClient.txtDob.$invalid == true }">Date Of Birth</label>
-                                    </a>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                        <datetimepicker data-ng-model="txtDob"
-                                                        data-datetimepicker-config="datepickerconfigurations"
-                                                        data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>
-                                    </ul>
+                            <div class="row">
+                                <div class="col-md-9 col-sm-9 col-xs-9">
+                                    <div class="group">
+                                        <a data-toggle="dropdown" class="dropdown-toggle" id="dropdown">
+                                            <input ng-input-effect-class is-required
+                                                   data-ng-model="txtDob" data-date-time-input="MMM DD, YYYY"
+                                                   ng-class="{errorBorder : frmAddClient.txtDob.$dirty == true && frmAddClient.txtDob.$invalid == true ,'used': txtDob.length > 0}"
+                                                   type="text" name="txtDob" pattern=".{1,80}" id="txtDob" required>
+                                            <span class="highlight"></span>
+                                            <span class="bar"></span>
+                                            <label ng-class="{errorFont : frmAddClient.txtDob.$dirty == true && frmAddClient.txtDob.$invalid == true }">Date Of Birth</label>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                            <datetimepicker data-ng-model="txtDob"
+                                                            data-datetimepicker-config="datepickerconfigurations"
+                                                            data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-3 noPaddingLeft">
+                                    <button class="btn btn-default btnTodayDate" ng-click="txtDob=DateIsToday;setDateToTodayUI()">Today</button>
                                 </div>
                             </div>
                         </div>
@@ -133,20 +138,6 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <!--<div class="input-group">
-                <input type="text" class="form-control" data-ng-model="finalDate | date:' MMM dd, yyyy'" ng-click="showPicker = true">
-                <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-calendar"></i>
-                </span>
-            </div>
-            <datetimepicker data-ng-model="data.date"
-                            ng-show="showPicker == true"
-                            data-datetimepicker-config="datepickerconfigurations"
-                            data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>-->
-
-
                     <div class="clear"></div>
                 </div>
                 <div class="clear row"></div>

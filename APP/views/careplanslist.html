@@ -18,12 +18,12 @@
                     <tbody>
                         <tr ng-repeat="plan in careplans">
                             <td class="linkCarePlans">
-                                <img src="{{plan.client.img}}">&nbsp;<a ng-click="viewClient(plan.client.id)">{{plan.client.name}}</a>
+                                <img src="{{plan.clientImg}}">&nbsp;&nbsp;<a ng-click="viewClient(plan.clientId)">{{plan.clientName}}</a>
                             </td>
-                            <td class="linkCarePlans"><a ng-click="viewPlan(plan.client.id,plan.planId )">{{plan.planName}}</a></td>
-                            <td class="linkCarePlans"><img src="{{plan.provider.img}}">&nbsp;<a ng-click="viewProvider(plan.provider.id)">{{plan.provider.name}}</a></td>
+                            <td class="linkCarePlans"><a ng-click="viewPlan(plan.clientId,plan.planId )">{{plan.planName}}</a></td>
+                            <td class="linkCarePlans"><img src="{{plan.providerImg || 'images/unknown.png'}}">&nbsp;<a ng-click="viewProvider(plan.providerId)">{{plan.providerName}}</a></td>
                             <td>{{plan.planStatus}}</td>
-                            <td>{{plan.lastUpdated}}</td>
+                            <td>{{plan.lastUpdated | date:'MMM dd, yyyy'}}</td>
                         </tr>
                     </tbody>
                 </table>

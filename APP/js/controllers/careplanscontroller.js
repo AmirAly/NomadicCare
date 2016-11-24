@@ -118,7 +118,7 @@
                     console.log('error');
                 }
             }, function (error) { // another error may be connection error
-               
+
             }).finally(function () {
                 $rootScope.loading = false;
             });
@@ -162,7 +162,7 @@
             else {
                 console.log('error');
             }
-        }, function (error) { 
+        }, function (error) {
 
         }).finally(function () {
             $rootScope.loading = false;
@@ -226,19 +226,58 @@
             }
             API.execute(req).then(function (_res) {
                 console.log(_res.data);
-                if (_res.data.code == 100) { 
+                if (_res.data.code == 100) {
                     $scope.frmPlan.$setPristine();
                 }
                 else {
                     console.log('error');
                 }
-            }, function (error) { 
+            }, function (error) {
             }).finally(function () {
                 $rootScope.loading = false;
             });
         }
     }
 
+    $scope.reassign = function () {
+        console.log($scope.activePlan.Provider);
+        console.log($rootScope.currentProviderId);
+        $scope.activePlan.Provider = $rootScope.currentProviderId;  // should add current provider: $rootScope.currentProviderId;
+        console.log($scope.activePlan);
+        console.log($scope.plans);
+
+        $rootScope.loading = true;
+        var req = {
+            method: 'put',
+            url: '/CarePlans',
+            data: {
+                _id: $scope.currentClientInfo._id,
+                CarePlans: $scope.plans
+            }
+        }
+        API.execute(req).then(function (_res) {
+            console.log(_res.data);
+            if (_res.data.code == 100) {
+                console.log('done');
+            }
+            else {
+                console.log('error');
+            }
+        }, function (error) {
+        }).finally(function () {
+            $rootScope.loading = false;
+        });
+    }
+
+    //$scope.activePlan.Provider
+    $scope.$watch('activePlan.Provider', function () {
+        for (var i = 0; i < $scope.providers.length; i++) {
+            if ($scope.providers[i]._id == $scope.activePlan.Provider) {
+                $scope.provideName = $scope.providers[i].Name;
+            }
+        }
+
+    });
 
     $scope.datepickerconfigurations1 = {
         startView: 'year',
@@ -263,6 +302,10 @@
         $timeout(function () {
             angular.element(document.getElementById('byWhoModal')).addClass('showMe');
         }, 1000);
-
     }
+
+    $('#prgrsModal').on('hidden.bs.modal', function () {
+        $(this).find('form').trigger('reset');
+    })
+
 });

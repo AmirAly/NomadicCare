@@ -15,4 +15,5 @@ ehs.run(function ($rootScope, $state, slidePush) {
     $rootScope.DeleteConfirmed = false;
     $rootScope.DeleteConfirmed2 = false;
     $rootScope.OrganizationId = 0;
+    $rootScope.DateIsToday = new Date();
 });

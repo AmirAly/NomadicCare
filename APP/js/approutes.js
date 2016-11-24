@@ -79,7 +79,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
     })
     .state('careplanslist', {
         cache: false,
-        url: '/careplanslist',
+        url: '/careplanslist/:orgid?',
         views: {
             '': { templateUrl: 'views/careplanslist.html', controller: 'CareplanslistController' },
             'headerView@careplanslist': { templateUrl: 'views/templates/header.temp.html' },

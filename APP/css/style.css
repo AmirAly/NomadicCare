@@ -14,6 +14,11 @@
     color: #fff !important;
 }
 
+/*btnTodayDate*/
+.btnTodayDate{
+
+}
+
 /*calender*/
 .datetimepicker .table > thead > tr:first-child > th.switch {
     display: table-cell;
@@ -1232,6 +1237,10 @@ canvas {
 
 .modal-content option {
     background-color: #fff !important;
+}
+
+#editPlanModal .group label{
+    top:-20px;
 }
 
 /******************************************************************************

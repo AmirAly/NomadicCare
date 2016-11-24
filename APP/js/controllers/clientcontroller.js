@@ -195,7 +195,11 @@
         });
     }
 
-
+    $scope.setDateToTodayUI = function () {
+        $timeout(function () {
+            angular.element(document.getElementById('txtDob')).addClass('used');
+        });
+    }
 
     //img uploader
 
