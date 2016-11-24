@@ -46,19 +46,13 @@ var Client = new Schema({
             ToImprove: { type: String },
             ToAchieve1: { type: String },
             ToAchieve2: { type: String },
-            AgreedActions1: { type: String },
-            AgreedActions2: { type: String },
-            ByWho1: {
-                Name: {type: String},
-                Email: {type: String}
-            },
-            ByWho2: {
-                Name: { type: String },
-                Email: { type: String }
-            },
-            ByWhen1: { type: Date },
-            ByWhen2: { type: Date },
-            Progress: [],
+            AgreedActions1: { type: Number },
+            AgreedActions2: { type: Number },
+            ByWho1: { type: String },
+            ByWho2: { type: String },
+            ByWhen1: { type: String },
+            ByWhen2: { type: String },
+            Progress: { type: String },
             OtherPlan: { type: String },
             OtherConsideration: { type: String },
             Reason: { type: String },
@@ -67,7 +61,9 @@ var Client = new Schema({
                 ref: 'Coordinator'
             },
             Status: { type: String },
-            PatientAgree: { type: String }
+            LastUpdated: {
+                type: Date, default: new Date()
+            },
 
         }
     ]
