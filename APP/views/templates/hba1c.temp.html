@@ -25,7 +25,7 @@
                     <h4 class="text-center">New HBA1c</h4>
                     <!-- HBA1c Modal Header End -->
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-9 col-sm-9 col-xs-9">
                             <div class="group">
                                 <a data-toggle="dropdown" class="dropdown-toggle" id="dropdown">
                                     <input ng-input-effect-class is-required
@@ -42,6 +42,9 @@
                                                     data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>
                                 </ul>
                             </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 noPaddingLeft">
+                            <button class="btn btn-default btnTodayDate" ng-click="txtDate=DateIsToday;setDateToTodayUI()">Today</button>
                         </div>
                     </div>
                     <div class="clear"></div>

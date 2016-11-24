@@ -193,7 +193,7 @@
                                             </div>
                                             <div class="clear"></div>
                                             <div class="row">
-                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                <div class="col-md-3 col-sm-3 col-xs-3">
                                                     <div class="group">
                                                         <a data-toggle="dropdown" class="dropdown-toggle" id="dropdownByWhen1">
                                                             <input ng-input-effect-class is-required
@@ -213,9 +213,12 @@
                                                         </ul>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-3 col-sm-3 col-xs-3 noPaddingLeft">
+                                                    <button class="btn btn-default btnTodayDate" ng-click="plan.ByWhen1=DateIsToday;setDateToTodayUI1()">Today</button>
+                                                </div>
 
 
-                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                <div class="col-md-3 col-sm-3 col-xs-3">
                                                     <div class="group">
                                                         <a data-toggle="dropdown" class="dropdown-toggle" id="dropdownByWhen2">
                                                             <input ng-input-effect-class is-required
@@ -233,6 +236,9 @@
                                                         </ul>
                                                     </div>
 
+                                                </div>
+                                                <div class="col-md-3 col-sm-3 col-xs-3 noPaddingLeft">
+                                                    <button class="btn btn-default btnTodayDate" ng-click="plan.ByWhen2=DateIsToday;setDateToTodayUI2()">Today</button>
                                                 </div>
                                             </div>
                                             <div class="clear"></div>
