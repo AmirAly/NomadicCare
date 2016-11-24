@@ -93,7 +93,7 @@
                     $scope.dismiss();
                     $scope.newPlan = {
                         Status: '', Provider: '', Reason: '',
-                        OtherConsideration: '', OtherPlan: '', PatientAgree: '',
+                        OtherConsideration: '', OtherPlan: '', PatientAgree: false,
                         PlanName: '', ToImprove: '', Progress: [],
                         ToAchieve1: '', AgreedActions1: '', ByWho1: { Name: '', Email: '' }, ByWhen1: new moment(),
                         ToAchieve2: '', AgreedActions2: '', ByWho2: { Name: '', Email: '' }, ByWhen2: new moment()
