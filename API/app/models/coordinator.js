@@ -44,7 +44,9 @@ var Coordinator = new Schema({
     RetrivalCode: { type: String },
     Email: { type: String, required: 'Email is required' },
     Img: { type: String },
-    Password: { type: String, required: 'Password is required', min: [5, 'Must be more than 5 charachters'] }
+    Password: { type: String, required: 'Password is required', min: [5, 'Must be more than 5 charachters'] },
+    ClinicName: { type: String }
+
 
 });
 module.exports = Mongoose.model('Coordinator', Coordinator);
