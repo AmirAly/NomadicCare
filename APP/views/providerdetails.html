@@ -1,0 +1,267 @@
+﻿<div class="row header" ui-view="headerView"></div>
+<div class="pageBody pageClient pageOrganization">
+    <div class="row animated fadeInRight">
+        <div class="container">
+            <div class="clear2"></div>
+            {{text}}
+            <div class="clear2"></div>
+            <form name="frmAddPrvider" id="frmAddPrvider">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <!-- First Row Start -->
+                    <div class="row">
+                        <!-- Left Row Start -->
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <!-- Sub Row2 Start -->
+                            <div class="row">
+                                <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                    <div class="group">
+                                        <input ng-input-effect-class is-required ng-model="txtProviderName" ng-class="{errorBorder : frmAddProvider.txtProviderName.$dirty == true && frmAddProvider.txtProviderName.$invalid == true ,'used': txtProviderName.length > 0}" type="text" pattern=".{1,80}" name="txtProviderName" id="txtProviderName" required>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label ng-class="{errorFont : frmAddProvider.txtProviderName.$dirty == true && frmAddProvider.txtProviderName.$invalid == true }">Provider Name</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Sub Row2 End -->
+                            <div class="clear row "></div>
+                            <!-- Sub Row4 Start -->
+                            <div class="row">
+                                <div class="input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                    <div class="group">
+                                        <select ng-select-effect-class ng-model="cmbGender"
+                                                ng-class="{'used': cmbGender != 10}" convert-to-number
+                                                id="cmbGender" name="cmbGender" class="input-form" required>
+                                            <option value='10' disabled selected></option>
+                                            <option value='0'>Male</option>
+                                            <option value='1'>Female</option>
+                                        </select>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label id="lblGender">Gender</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Sub Row4 End -->
+                            <div class="clear row "></div>
+                            <!-- Sub Row5 Start -->
+                            <div class="row">
+                                <div class="input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                    <div class="group">
+                                        <input ng-input-effect-class is-required ng-model="txtClinicName" ng-class="{errorBorder : frmAddProvider.txtClinicName.$dirty == true && frmAddProvider.txtClinicName.$invalid == true ,'used': txtClinicName.length > 0}" type="text" pattern=".{1,80}" name="txtClinicName" id="txtClinicName" required>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label ng-class="{errorFont : frmAddProvider.txtClinicName.$dirty == true && frmAddProvider.txtClinicName.$invalid == true }">Clinic Name</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Sub Row5 End -->
+                        </div>
+                        <!-- Left Row End -->
+                        <!-- Right Row Start -->
+                       
+                        <div class="text-center col-md-6 col-sm-6 col-xs-6 imgClient">
+                            <img id="imgClient" ng-click="ShowFileSelector()" class="cursorPointer" ng-src="{{userImg}}" />
+                            <input type="file" onchange="convertImgToBase64URL(event)" id="uploadClientImage" class="hide" />
+                        </div>
+                        <!-- Right Row End -->
+                    </div>
+                    <!-- First Row End -->
+                    <div class="clear row"></div>
+                    <!-- Second Row Start -->
+                    <div class="row">
+                        <div class="input-group-lg  col-md-6 col-sm-6 col-xs-6">
+                            <div class="group">
+                                <input ng-input-effect-class is-required pattern="^\d{3}-\d{3}-\d{4}$" ng-model="txtMobile" ng-class="{errorBorder : frmAddProvider.txtMobile.$dirty == true && frmAddProvider.txtMobile.$invalid == true ,'used': txtMobile.length > 0}" type="text" pattern=".{1,80}" id="txtMobile" name="txtMobile" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmAddProvider.txtMobile.$dirty == true && frmAddProvider.txtMobile.$invalid == true }">Mobile</label>
+                                <span class="errorFont" ng-show="frmAddProvider.txtMobile.$error.pattern && frmAddProvider.txtMobile.$touched == true">Invalid Syntax ,It Should Look Like xxx-xxx-xxxx</span>
+                            </div>
+                        </div>
+                        <div class="input-group-lg col-md-6 col-sm-6 col-xs-6">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtEmail" ng-class="{errorBorder : frmAddProvider.txtEmail.$dirty == true && frmAddProvider.txtEmail.$invalid == true ,'used': txtEmail.length > 0}" type="email" pattern="[a-zA-Z0-9_]+(?:\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" id="txtEmail" name="txtEmail" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : frmAddProvider.txtEmail.$dirty == true && frmAddProvider.txtEmail.$invalid == true }">Email</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Second Row End -->
+                    <div class="clear row"></div>
+                    <!-- Third Row Start -->
+                    <div class="row">
+                        <div class="input-group-lg col-md-6 col-sm-6 col-xs-6">
+                            <div class="row">
+                                <div class="col-md-9 col-sm-9 col-xs-9">
+                                    <div class="group">
+                                        <a data-toggle="dropdown" class="dropdown-toggle" id="dropdown">
+                                            <input ng-input-effect-class is-required
+                                                   data-ng-model="txtDob" data-date-time-input="MMM DD, YYYY"
+                                                   ng-class="{errorBorder : frmAddProvider.txtDob.$dirty == true && frmAddProvider.txtDob.$invalid == true ,'used': txtDob.length > 0}"
+                                                   type="text" name="txtDob" pattern=".{1,80}" id="txtDob" required>
+                                            <span class="highlight"></span>
+                                            <span class="bar"></span>
+                                            <label ng-class="{errorFont : frmAddProvider.txtDob.$dirty == true && frmAddProvider.txtDob.$invalid == true }">Date Of Birth</label>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                            <datetimepicker data-ng-model="txtDob"
+                                                            data-datetimepicker-config="datepickerconfigurations"
+                                                            data-on-set-time="onTimeSet(newDate, oldDate)"></datetimepicker>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-3 noPaddingLeft">
+                                    <button class="btn btn-default btnTodayDate" ng-click="txtDob=DateIsToday;setDateToTodayUI()">Today</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Third Row End -->                    
+                    <div class="clear"></div>
+                    <!-- Row5 Start -->
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="table-responsive">
+                                <table id="table" class="table table-bordered tblSpeciality">
+                                    <thead>
+                                        <tr>
+                                            <th>Specialty Name</th>
+                                            <th>Description<span class="glyphicon glyphicon-plus-sign pull-right spnAddRow" ng-click="addSpeciality()"></span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="spec in speciality">
+                                            <td>
+                                                <div class="row">
+                                                    <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="group">
+                                                            <input type="text" pattern=".{1,80}" name="txt1" ng-model="spec.Name" class="txtSpecialityName">
+                                                            <span class="highlight"></span>
+                                                            <span class="bar"></span>
+                                                            <label></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="col-xs-11">
+                                                    <div class="row">
+                                                        <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
+                                                            <div class="group">
+                                                                <input type="text" pattern=".{1,80}" ng-model="spec.Description" name="txt2" class="txtSpecialityDescription">
+                                                                <span class="highlight"></span>
+                                                                <span class="bar"></span>
+                                                                <label></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a class="tableicon" ng-click="deleteSpeciality(spec,'speciality')"><span class="glyphicon glyphicon-trash"></span></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row5 End -->
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div ng-class="{'alert-success' : messageStatus == 'success' ,'alert-danger' : messageStatus == 'danger' ,'alert-warning' : messageStatus == 'warning'}" class="alert alert-dismissible text-center" ng-show="showMessage == true" id="dvMSG" role="alert">
+                                <span>{{messageTxt}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </form>
+            <!-- Table Start -->
+            <div class="col-xs-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered tblWhite">
+                        <thead>
+                            <tr>
+                                <th>Client Name</th>
+                                <th>Care Plan Name</th>
+                                <th>Status</th>
+                                <th>Last Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="images/unknown.png">&nbsp;<span>Sara Jane</span></td>
+                                <td>Weight Loss</td>
+                                <td>Active</td>
+                                <td>12/3/2016</td>
+                            </tr>
+                            <tr>
+                                <td><img src="images/unknown.png">&nbsp;<span>Dr.Ali</span></td>
+                                <td>Plan 2</td>
+                                <td>Inactive</td>
+                                <td>1/1/2016</td>
+                            </tr>
+                            <tr>
+                                <td><img src="images/unknown.png">&nbsp;<span>Dr.Ali</span></td>
+                                <td>Botox</td>
+                                <td>Please Review</td>
+                                <td>1/1/2016</td>
+                            </tr>
+                            <tr>
+                                <td><img src="images/unknown.png">&nbsp;<span>Dr.Ahmed</span></td>
+                                <td>Mental Health</td>
+                                <td>Please Review</td>
+                                <td>5/3/2016</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Table Start -->
+            <div class="clear"></div>
+            <div class="clear"></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div class="row footer2">
+        <div class="text-left col-md-6 col-sm-6 col-xs-6">
+            <button class="btn btn-dismiss" type="button" ng-click="cancelClient()">Dismiss</button>
+        </div>
+        <div class="text-right col-md-6 col-sm-6 col-xs-6">
+            <button class="btn btn-invert saveBtn" ng-click="submit(frmAddPrvider)" type="submit">Save</button>
+        </div>
+    </div>
+    <div id="libModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="clear2"></div>
+                    <div class="clear2"></div>
+                    <div class="clear2"></div>
+                    <div class="clear2"></div>
+                    <div class="col-xs-5 col-xs-offset-2 text-center" ng-click="CamSource()">
+                        <img src="images/camicon.png" class="img-responsive" style="max-width:40%" />
+                    </div>
+                    <div class="col-xs-5 text-right" style="padding-left:7.5%" ng-click="ImgSource()">
+                        <img src="images/galleryicon.png" class="img-responsive" style="max-width:40%" />
+                    </div>
+                    <div class="col-xs-5 col-xs-offset-2" ng-click="CamSource()">
+                        <h3 style="color:#333">Camera</h3>
+                    </div>
+                    <div class="col-xs-5 text-left" ng-click="ImgSource()">
+                        <h3 style="color:#333;">Photo Gallery</h3>
+                    </div>
+                    <div class="clear2"></div>
+                    <div class="clear2"></div>
+                    <div class="clear2"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning btn-block" data-dismiss="modal">Dismiss</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

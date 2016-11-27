@@ -3,5 +3,5 @@
     <span class="pageHeader">{{pageHeader}}</span>
 </div>
 <div class="rightHeader mun col-lg-2 col-md-2 col-sm-3 col-xs-6">
-    <b><span class="userName">{{currentProviderName}}</span>&nbsp;|&nbsp;<a ng-click="logout()">Logout</a></b>
+    <b><span class="userName" ui-sref="providerdetails({orgid: OrganizationId , providerid: currentProviderId})">{{currentProviderName}}</span>&nbsp;|&nbsp;<a ng-click="logout()">Logout</a></b>
 </div>

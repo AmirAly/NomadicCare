@@ -15,8 +15,7 @@
 }
 
 /*btnTodayDate*/
-.btnTodayDate{
-
+.btnTodayDate {
 }
 
 /*calender*/
@@ -742,7 +741,7 @@ canvas {
         }
 
 .pageListOrganizations thead th {
-    background-color: #7f8c8d;
+    background-color: #bdc3c7;
     color: #fff;
 }
 
@@ -768,11 +767,6 @@ canvas {
     max-width: 30px;
 }
 
-.pageListOrganizations thead th {
-    background-color: #bdc3c7;
-    color: #fff;
-}
-
 /******************************************************************************
 ********************************* pageOrganization ****************************
 *******************************************************************************
@@ -796,8 +790,12 @@ canvas {
     border: 0px !important;
 }
 
+.pageOrganization table img {
+    max-width: 30px;
+}
+
 .pageOrganization thead th {
-    background-color: #7f8c8d;
+    background-color: #bdc3c7;
     color: #fff;
 }
 
@@ -1239,8 +1237,8 @@ canvas {
     background-color: #fff !important;
 }
 
-#editPlanModal .group label{
-    top:-20px;
+#editPlanModal .group label {
+    top: -20px;
 }
 
 /******************************************************************************
