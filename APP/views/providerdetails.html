@@ -5,7 +5,7 @@
             <div class="clear2"></div>
             {{text}}
             <div class="clear2"></div>
-            <form name="frmAddPrvider" id="frmAddPrvider">
+            <form name="frmAddProvider" id="frmAddProvider" novalidate confirm-on-exit>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <!-- First Row Start -->
                     <div class="row">
@@ -58,9 +58,9 @@
                         </div>
                         <!-- Left Row End -->
                         <!-- Right Row Start -->
-                       
+
                         <div class="text-center col-md-6 col-sm-6 col-xs-6 imgClient">
-                            <img id="imgClient" ng-click="ShowFileSelector()" class="cursorPointer" ng-src="{{userImg}}" />
+                            <img id="imgClient" ng-click="ShowFileSelector()" class="cursorPointer" src="images/{{providerId}}.png" ng-src="{{userImg}}" />
                             <input type="file" onchange="convertImgToBase64URL(event)" id="uploadClientImage" class="hide" />
                         </div>
                         <!-- Right Row End -->
@@ -71,7 +71,7 @@
                     <div class="row">
                         <div class="input-group-lg  col-md-6 col-sm-6 col-xs-6">
                             <div class="group">
-                                <input ng-input-effect-class is-required pattern="^\d{3}-\d{3}-\d{4}$" ng-model="txtMobile" ng-class="{errorBorder : frmAddProvider.txtMobile.$dirty == true && frmAddProvider.txtMobile.$invalid == true ,'used': txtMobile.length > 0}" type="text" pattern=".{1,80}" id="txtMobile" name="txtMobile" required>
+                                <input ng-input-effect-class is-required pattern="^\d{3}-\d{3}-\d{4}$" ng-model="txtMobile" ng-class="{errorBorder : frmAddProvider.txtMobile.$dirty == true && frmAddProvider.txtMobile.$invalid == true ,'used': txtMobile.length > 0}" type="text" id="txtMobile" name="txtMobile" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label ng-class="{errorFont : frmAddProvider.txtMobile.$dirty == true && frmAddProvider.txtMobile.$invalid == true }">Mobile</label>
@@ -117,7 +117,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Third Row End -->                    
+                    <!-- Third Row End -->
                     <div class="clear"></div>
                     <!-- Row5 Start -->
                     <div class="row">
@@ -230,7 +230,7 @@
             <button class="btn btn-dismiss" type="button" ng-click="cancelClient()">Dismiss</button>
         </div>
         <div class="text-right col-md-6 col-sm-6 col-xs-6">
-            <button class="btn btn-invert saveBtn" ng-click="submit(frmAddPrvider)" type="submit">Save</button>
+            <button class="btn btn-invert saveBtn" ng-click="submit(frmAddProvider)" type="submit">Save</button>
         </div>
     </div>
     <div id="libModal" class="modal fade" role="dialog">

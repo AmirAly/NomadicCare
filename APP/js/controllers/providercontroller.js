@@ -68,6 +68,7 @@
     }
 
     $scope.submit = function (form) {
+        console.log($scope.frmAddProvider);
         angular.forEach($scope.frmAddProvider.$error.required, function (field) {
             field.$setDirty();
         });

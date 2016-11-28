@@ -794,12 +794,12 @@ canvas {
     max-width: 30px;
 }
 
-.pageOrganization thead th {
+.pageOrganization table:not(.year-view):not(.month-view):not(.day-view) thead th {
     background-color: #bdc3c7;
     color: #fff;
 }
 
-.pageOrganization td {
+.pageOrganization table:not(.year-view):not(.month-view):not(.day-view) td {
     color: #fff;
 }
 

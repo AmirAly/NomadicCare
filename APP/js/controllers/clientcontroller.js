@@ -35,7 +35,7 @@
             console.log(_res.data);
             if (_res.data.code == 100) {
                 console.log(_res.data.data[0].FirstName);
-
+                $scope.clientId = _res.data.data[0]._id;
                 $scope.cmbBloodType = _res.data.data[0].BloodType;
                 $scope.cmbGender = _res.data.data[0].Gender;
                 $scope.txtClientName = _res.data.data[0].FirstName;
