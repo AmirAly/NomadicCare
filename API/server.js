@@ -12,6 +12,7 @@ var db = require('./config/config');
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
 var port = process.env.PORT || 8007;
+var path = require("path");
 mongoose.connect(db.url, function (err) {
     if (err) {
         console.log(err);
@@ -24,9 +25,15 @@ mongoose.connect(db.url, function (err) {
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             next();
         });
-        app.use(express.static('public'));
         app.use('/', api);
+        app.use(express.static('../APP'));
+        //my local host express configuration to serve angular app on this server 
+        //without visual studio run at http://localhost:8007/index.html
+        app.get('*', function (req, res) {
+            res.sendFile('index.html', { root: path.join(__dirname, '../APP') });
+        });
         app.listen(port);
+        
         console.log('connected  to  database and server is listeining ');
     }
 });
