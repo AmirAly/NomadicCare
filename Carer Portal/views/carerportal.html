@@ -4,18 +4,32 @@
             <span class="txtPageHeader">Carer Portal</span>
         </div>
         <div class="text-right col-xs-6">
-            <b><span class="userName">Adam Mark</span>&nbsp;|&nbsp;<a href="#">Logout</a></b>
+            <b><span class="userName">{{providerName}}</span>&nbsp;|&nbsp;<a href="#">Logout</a></b>
         </div>
     </div>
 
     <div class="pageBody">
         <div class="row">
             <div class="col-xs-6 col-xs-offset-6 text-right">
-                <input ng-model="filtirationTxt.name" placeholder="Type to filter" class="input-form txtFillterClients" />
+                <input type="text" placeholder="Type to filter" class="input-form txtFillterClients" ng-model="searchText.clientName" />
             </div>
         </div>
         <div class="spacer1"></div>
         <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 dvClientsContainer">
+                <div class="col-lg-4 col-md-4 col-sm-3 col-xs-4 filterable" ng-repeat="plan in careplans | filter:searchText as filteredArray">
+                    <div class="dvCliensData" ng-click="openPatientModal(plan.planId)">
+                        <div><img src="{{plan.clientImg}}" /></div>
+                        <div class="clientName"><span>({{plan.clientName}} - {{plan.planName}})</span></div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="filteredArray.length == 0" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h3>No Data Found</h3>
+            </div>
+
+        </div>
+        <!--<div class="row">
             <div class="col-xs-4" ng-repeat="patient in patients | filter : filtirationTxt as filteredPatients" ng-click="openPatientModal(patient.id)">
                 <div class="dvClientsData">
                     <div><img src="{{patient.img}}" class="img-responsive clientImg" /></div>
@@ -27,7 +41,7 @@
             <div class="col-xs-12 text-center">
                 <h1>No clients found</h1>
             </div>
-        </div>
+        </div>-->
     </div>
 
     <div class="footer">

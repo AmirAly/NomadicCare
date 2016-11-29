@@ -101,7 +101,7 @@
                     console.log(_res.data);
                     if (_res.data.code == 100) { // Client
                         $scope.showMessage = true;
-                        $scope.messageTxt = 'Saved ...';
+                        $scope.messageTxt = 'Client has been created';
                         $scope.messageStatus = 'success';
                         $scope.frmAddClient.$setPristine();
                     }
@@ -147,7 +147,7 @@
                     console.log(_res.data);
                     if (_res.data.code == 100) { // Client
                         $scope.showMessage = true;
-                        $scope.messageTxt = 'Saved ...';
+                        $scope.messageTxt = 'Client has been updated';
                         $scope.messageStatus = 'success';
                         $scope.frmAddClient.$setPristine();
                     }

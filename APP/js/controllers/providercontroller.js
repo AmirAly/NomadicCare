@@ -108,7 +108,7 @@
                     console.log(_res.data);
                     if (_res.data.code == 100) { // Provider | coordinator
                         $scope.showMessage = true;
-                        $scope.messageTxt = 'Saved ...';
+                        $scope.messageTxt = 'Provider has been created';
                         $scope.messageStatus = 'success';
                         $scope.frmAddProvider.$setPristine();
                     }
@@ -157,7 +157,7 @@
                     console.log(_res.data);
                     if (_res.data.code == 100) { // Provider | coordinator
                         $scope.showMessage = true;
-                        $scope.messageTxt = 'Saved ...';
+                        $scope.messageTxt = 'Provider has been updated';
                         $scope.messageStatus = 'success';
                         $scope.frmAddProvider.$setPristine();
                     }

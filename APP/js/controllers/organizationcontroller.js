@@ -100,7 +100,7 @@
                     console.log(_res.data);
                     if (_res.data.code == 100) {
                         $scope.showMessage = true;
-                        $scope.messageTxt = 'Saved ...';
+                        $scope.messageTxt = 'Organisation has been created';
                         $scope.messageStatus = 'success';
                         $scope.frmAddOrganization.$setPristine();
                         $state.go('listorganizations');
@@ -142,7 +142,7 @@
                     console.log(_res.data);
                     if (_res.data.code == 100) {
                         $scope.showMessage = true;
-                        $scope.messageTxt = 'Saved ...';
+                        $scope.messageTxt = 'Organisation has been updated';
                         $scope.messageStatus = 'success';
                         $scope.frmAddOrganization.$setPristine();
                         $state.go('listorganizations');

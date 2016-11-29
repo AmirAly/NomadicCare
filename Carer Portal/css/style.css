@@ -114,7 +114,38 @@ h1, h2, h3, h4, h5, h6 {
         margin: 1%;
     }
 
-.dvClientsData {
+.dvClientsContainer {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.dvCliensData {
+    margin-bottom: 18%;
+    background-color: #fff;
+    padding: 2px;
+    border: 1px solid #ccc;
+    border-radius: 20%;
+    text-align: center;
+    height: 97px;
+    max-height: 97px;
+    margin-bottom: 50px;
+    width: auto !important;
+    padding: 4px;
+    max-width: 100px;
+}
+
+    .dvCliensData img {
+        width: 100% !important;
+        max-width: 85px;
+        height: 85px;
+        width: 85px;
+        max-height: 85px;
+        border-radius: 15%;
+        margin-bottom: 5px;
+    }
+
+/*.dvClientsData {
     margin: 10px auto;
     background: #fff;
     border-radius: 10px;
@@ -143,7 +174,7 @@ h1, h2, h3, h4, h5, h6 {
         overflow: hidden;
         text-overflow: ellipsis;
         font-weight: bold;
-    }
+    }*/
 
 .txtFillterClients {
     padding: 10px 10px 10px 5px;
