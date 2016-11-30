@@ -41,7 +41,8 @@
     $scope.setProgressData = function (form, _activePlan) {
         var newProgressText = $scope.activePlan.Progress.Text;
         var newProgressDate = new Date();
-        var newObj = { Text: newProgressText, Date: newProgressDate };
+        var newProgressProvider = $rootScope.currentProviderName;
+        var newObj = { Text: newProgressText, Date: newProgressDate , Provider: newProgressProvider};
         console.log(newObj);
         for (i = 0; i < $scope.plans.length; i++) {
             if ($scope.plans[i] === _activePlan) {

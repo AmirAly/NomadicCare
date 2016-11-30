@@ -1,6 +1,9 @@
 ﻿carerportal.controller("CarerportalController", function ($scope, $state, $rootScope, $stateParams, API) {
     console.log($stateParams.providerid);
-    // get curret client
+    //if ($stateParams.providerid == '') {
+    //    $stateParams.providerid = "58284325d74fc70e34336e06";
+    //}
+    // get curret provider
     var req = {
         method: 'get',
         url: '/Coordinator/' + $stateParams.providerid,
@@ -20,7 +23,7 @@
             $scope.messageTxt = 'No Such Provider ...';
             $scope.messageStatus = 'warning';
         }
-        //$scope.loading = false;
+        
     }, function (error) {
         $scope.showMessage = true;
         $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
@@ -33,8 +36,6 @@
             url: '/CarePlans/' + $scope.Organization,
             data: {}
         }
-        ////loader
-        $rootScope.loading = true;
 
         API.execute(req).then(function (_res) {
             console.log(_res.data);
@@ -69,6 +70,7 @@
                                    }
                                }
                                if ($scope.result[i].CarePlans[j].Provider == $stateParams.providerid) {
+                                   console.log($scope.result[i]);
                                    $scope.careplans.push({
                                        clientId: $scope.result[i]._id,
                                        clientName: $scope.result[i].FirstName + " " + $scope.result[i].LastName,
@@ -80,12 +82,17 @@
                                        planName: $scope.result[i].CarePlans[j].PlanName,
                                        planStatus: $scope.result[i].CarePlans[j].Status,
                                        lastUpdated: $scope.result[i].CarePlans[j].LastUpdated,
+                                       toImprove: $scope.result[i].CarePlans[j].ToImprove,
+                                       carerObjective: $scope.result[i].CarePlans[j].ToAchieve1 + " - " + $scope.result[i].CarePlans[j].ToAchieve2,
+                                       note: $scope.result[i].CarePlans[j].Progress,
+                                       date: $scope.result[i].CarePlans[j].ByWhen1
                                    });
                                }
                            }
                        }
                        console.log($scope.careplans);
-
+                       $rootScope.loading = false;
+                       console.log($rootScope.loading);
                    });
             }
             else {
@@ -97,39 +104,25 @@
         });
     });
 
-    //$scope.patients = [
-    //    { id: 1, name: 'Sally Sally', img: 'images/unknown.png', plan: 'Manage Weight', startDate: '1/1/2016', endDate: '12/12/2016', Goal: 'Lose 10 kg', carerObjective: 'Perersonal Trainer once a week' },
-    //    { id: 2, name: 'John John', img: 'images/1.jpg', plan: 'Manage Weight', startDate: '1/1/2016', endDate: '12/12/2016', Goal: 'Lose 10 kg', carerObjective: 'Perersonal Trainer once a week' },
-    //    { id: 3, name: 'Jake John John', img: 'images/2.jpg', plan: 'Manage Weight', startDate: '1/1/2016', endDate: '12/12/2016', Goal: 'Lose 10 kg', carerObjective: 'Perersonal Trainer once a week' },
-    //    { id: 4, name: 'Luke Luke', img: 'images/3.jpg', plan: 'Manage Weight', startDate: '1/1/2016', endDate: '12/12/2016', Goal: 'Lose 10 kg', carerObjective: 'Perersonal Trainer once a week' },
-    //    { id: 5, name: 'Ahmed Ahmed Ahmed', img: 'images/4.jpg', plan: 'Manage Weight', startDate: '1/1/2016', endDate: '12/12/2016', Goal: 'Lose 10 kg', carerObjective: 'Perersonal Trainer once a week' }
-    //];
 
     $scope.openPatientModal = function (_id) {
         $('.detailsModal').modal('show');
         for (var i = 0; i < $scope.careplans.length; i++) {
             if ($scope.careplans[i].planId == _id) {
-                $scope.currentPatient = $scope.careplans[i];
+                $scope.currentPlan = $scope.careplans[i];
             }
         }
-        console.log($scope.currentPatient);
+        console.log($scope.currentPlan);
     }
-
-    $scope.notes = [{ text: 'Pretty good' }, { text: 'fine' }];
 
     $scope.addNotes = false;
     $scope.addProgressNote = function () {
-        $scope.notes.push({ text: $scope.txtNote });
+        if ($scope.txtNote != null || $scope.txtNote != '') {
+            $scope.currentPlan.note.push({ Text: $scope.txtNote, Provider: $rootScope.providerName, Date: new Date() });
+            $scope.txtNote = '';
+        }
         $scope.addNotes = false;
-        $scope.txtNote = '';
     }
     $scope.showDetails = true;
 });
 
-
-
-
-// local storage update 
-//var updatedUser = localstorage.getObject('currentUser');
-//updatedUser.FirstName = "eeeeee";
-//localstorage.resetObject('currentUser', updatedUser);

@@ -244,12 +244,9 @@
                                             <div class="clear"></div>
                                             <div class="row" data-toggle="modal" data-target="#prgrsModal">
                                                 <div class="col-xs-12 prgrsDvLbl">How is it going?</div>
-                                                <!--<textarea class="form-control" id="prgrsTxt" rows="5"
-                          is-required required ng-model="plan.Progress | unbreakFilter"
-                          placeholder="How its going" aria-describedby="sizing-addon2"></textarea>-->
                                                 <div class="row col-xs-12" ng-repeat="progress in plan.Progress">
-                                                    <span class="col-xs-9 text-left">{{progress.Text}}</span>
-                                                    <span class="col-xs-3 text-right text-muted">{{progress.Date | date:'MMM dd, yyyy'}}</span>
+                                                    <span class="col-xs-9 text-left progressTxt">{{progress.Text}}</span>
+                                                    <span class="col-xs-3 text-right text-muted progressDetails">{{progress.Provider}} - {{progress.Date | date:'MMM dd, yyyy'}}</span>
                                                 </div>
                                             </div>
 

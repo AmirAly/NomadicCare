@@ -4,7 +4,7 @@
             <span class="txtPageHeader">Carer Portal</span>
         </div>
         <div class="text-right col-xs-6">
-            <b><span class="userName">{{providerName}}</span>&nbsp;|&nbsp;<a href="#">Logout</a></b>
+            <b><span class="userName">{{providerName}}</span>&nbsp;|&nbsp;<a ng-click="logout()">Logout</a></b>
         </div>
     </div>
 
@@ -29,19 +29,6 @@
             </div>
 
         </div>
-        <!--<div class="row">
-            <div class="col-xs-4" ng-repeat="patient in patients | filter : filtirationTxt as filteredPatients" ng-click="openPatientModal(patient.id)">
-                <div class="dvClientsData">
-                    <div><img src="{{patient.img}}" class="img-responsive clientImg" /></div>
-                    <div class="clientName text-center text-capitalize"><span>{{patient.name}}</span></div>
-                </div>
-            </div>
-        </div>
-        <div class="row" ng-show="!filteredPatients.length">
-            <div class="col-xs-12 text-center">
-                <h1>No clients found</h1>
-            </div>
-        </div>-->
     </div>
 
     <div class="footer">
@@ -61,18 +48,18 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="closeIcon" aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">
-                    <img src="{{currentPatient.img}}" class="img-circle img-responsive pull-left" />&nbsp;&nbsp;{{currentPatient.name}} | Plan Details</h4>
+                    <img src="{{currentPlan.clientImg}}" class="img-circle img-responsive pull-left" />&nbsp;&nbsp;{{currentPlan.clientName}} | Plan Details</h4>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-xs-12 text-center">
-                                <h3 class="text-capitalize">{{currentPatient.plan}}</h3>
+                                <h3 class="text-capitalize">{{currentPlan.planName}}</h3>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 text-center">
-                                <span>{{currentPatient.startDate}}&nbsp;-&nbsp;{{currentPatient.endDate}}</span>
+                                <span>{{currentPlan.date| date:'MMM dd, yyyy'}}</span>
                             </div>
                         </div>
                         <div class="spacer3"></div>
@@ -87,7 +74,7 @@
                                                 <b>Goal</b>
                                             </div>
                                             <div class="col-xs-11 col-xs-offset-1">
-                                                <span>{{currentPatient.Goal}}</span>
+                                                <span>{{currentPlan.toImprove}}</span>
                                             </div>
                                         </div>
                                         <div class="row dvPlanItem">
@@ -95,7 +82,7 @@
                                                 <b>Carer's Objective</b>
                                             </div>
                                             <div class="col-xs-11 col-xs-offset-1">
-                                                <span>{{currentPatient.carerObjective}}</span>
+                                                <span>{{currentPlan.carerObjective}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -125,9 +112,9 @@
                             <div class="row">
                                 <div class="col-xs-12 prgrsDvLbl" style="color:#999;font-size:12px">How is it going?</div>
                                 <div class="col-md-12 col-sm-12 col-xs-12 prgrsDv" ng-click="addNotes = true">
-                                    <div class="row" ng-repeat="note in notes">
-                                        <span class="col-xs-7 col-sm-8 col-md-10 blueFont">{{note.text}}</span>
-                                        <span style="font-size: 10px;" class="col-xs-5 col-sm-4 col-md-2 text-muted text-right">Adam Mark - 03/10/2016</span>
+                                    <div class="row" ng-repeat="note in currentPlan.note">
+                                        <span class="col-xs-7 col-sm-8 col-md-10 blueFont">{{note.Text}}</span>
+                                        <span style="font-size: 10px;" class="col-xs-5 col-sm-4 col-md-2 text-muted text-right">{{note.Provider}} - {{note.Date| date:'MMM dd, yyyy'}}</span>
                                     </div>
                                 </div>
                             </div>
