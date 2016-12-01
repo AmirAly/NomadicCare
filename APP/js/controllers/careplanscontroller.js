@@ -5,22 +5,28 @@
         console.log($scope.currentClientInfo.CarePlans);
         $scope.plans = $scope.currentClientInfo.CarePlans;
         if ($scope.currentClientInfo.CarePlans.length != 0) {
-            if ($stateParams.planid == "") {
+            if ($stateParams.planid == "" || $stateParams.planid == 'undefined') {
+                console.log('if');
                 $scope.activePlanTab = $scope.plans[0]._id;
                 $scope.activePlan = $scope.plans[0];
+                $location.path('/healthrecord/careplans/' + $scope.plans[0]._id);
             }
             else { // certain plan
+                console.log('else');
+                console.log($stateParams.planid);
                 $scope.activePlanTab = $stateParams.planid;
                 for (var i = 0; i < $scope.plans.length; i++) {
                     if ($scope.plans[i]._id == $stateParams.planid) {
                         $scope.activePlanTab = $scope.plans[i]._id;
                         $scope.activePlan = $scope.plans[i];
-                        return;
+                        //$location.path('/healthrecord/careplans/' + $scope.plans[i]._id);
+                        //$state.reload();
+
                     }
                 }
             }
         }
-    }, 500);
+    }, 1000);
 
     // get all providers
     var req = {
@@ -42,7 +48,7 @@
         var newProgressText = $scope.activePlan.Progress.Text;
         var newProgressDate = new Date();
         var newProgressProvider = $rootScope.currentProviderName;
-        var newObj = { Text: newProgressText, Date: newProgressDate , Provider: newProgressProvider};
+        var newObj = { Text: newProgressText, Date: newProgressDate, Provider: newProgressProvider };
         console.log(newObj);
         for (i = 0; i < $scope.plans.length; i++) {
             if ($scope.plans[i] === _activePlan) {
@@ -58,21 +64,23 @@
 
 
     $scope.newPlan = {
-        Status: '', Provider: '', Reason: '',
+        Status: '', Provider: '10', Reason: '',
         OtherConsideration: '', OtherPlan: '', PatientAgree: false,
         PlanName: '', ToImprove: '', Progress: [],
-        ToAchieve1: '', AgreedActions1: '', ByWho1: { Name: '', Email: '' }, ByWhen1: new moment(),
-        ToAchieve2: '', AgreedActions2: '', ByWho2: { Name: '', Email: '' }, ByWhen2: new moment()
+        ToAchieve1: '', AgreedActions1: '', ByWho1: { Name: 'Name', Email: 'example@mail.com' }, ByWhen1: new moment(),
+        ToAchieve2: '', AgreedActions2: '', ByWho2: { Name: 'Name', Email: 'example@mail.com' }, ByWhen2: new moment()
     };
 
     $scope.createPlan = function (form) {
         angular.forEach($scope.frmNewPlan.$error.required, function (field) {
             field.$setDirty();
         });
-        if ($scope.cmbBloodType == '10') {
+        //console.log($scope.cmbProvider);
+        if ($scope.newPlan.Provider == '10') {
             angular.element(document.getElementById('cmbProvider')).addClass('errorBorder');
             angular.element(document.getElementById('lblProvider')).addClass('errorFont');
         }
+        //$scope.newPlan.Provider = $scope.cmbProvider;
         if (form.$valid) {
             console.log('add');
             ////loader
@@ -93,11 +101,11 @@
                     $scope.frmNewPlan.$setPristine();
                     $scope.dismiss();
                     $scope.newPlan = {
-                        Status: '', Provider: '', Reason: '',
+                        Status: '', Provider: '10', Reason: '',
                         OtherConsideration: '', OtherPlan: '', PatientAgree: false,
                         PlanName: '', ToImprove: '', Progress: [],
-                        ToAchieve1: '', AgreedActions1: '', ByWho1: { Name: '', Email: '' }, ByWhen1: new moment(),
-                        ToAchieve2: '', AgreedActions2: '', ByWho2: { Name: '', Email: '' }, ByWhen2: new moment()
+                        ToAchieve1: '', AgreedActions1: '', ByWho1: { Name: 'Name', Email: 'example@mail.com' }, ByWhen1: new moment(),
+                        ToAchieve2: '', AgreedActions2: '', ByWho2: { Name: 'Name', Email: 'example@mail.com' }, ByWhen2: new moment()
                     };
 
                     // get client data 
@@ -112,7 +120,15 @@
                         if (_res.data.code == 100) {
                             $scope.plans = _res.data.data[0].CarePlans;
                             console.log($scope.plans);
-                $rootScope.loading = false;
+                            $rootScope.loading = false;
+                            // if this is first plan
+                            if ($stateParams.planid == "" || $stateParams.planid == 'undefined') {
+                                console.log('iffff');
+                                $scope.activePlanTab = $scope.plans[0]._id;
+                                $scope.activePlan = $scope.plans[0];
+                                $location.path('/healthrecord/careplans/' + $scope.plans[0]._id);
+                                $state.reload();
+                            }
                         }
                     })
                 }
@@ -126,6 +142,36 @@
             });
         }
 
+    }
+
+    $scope.ConfirmCreateModal = function () {
+        // if not first plan
+        if ($scope.currentClientInfo.CarePlans.length != 0) {
+            console.log('if1');
+            for (var i = 0; i < $scope.currentClientInfo.CarePlans.length; i++) {
+                if ($scope.currentClientInfo.CarePlans[i].ToImprove == "" || $scope.currentClientInfo.CarePlans[i].ToAchieve1 == "" || $scope.currentClientInfo.CarePlans[i].ToAchieve2 == "" || $scope.currentClientInfo.CarePlans[i].AgreedActions1 == "" || $scope.currentClientInfo.CarePlans[i].AgreedActions2 == "") {
+                    $scope.test = 'tt';
+                    $scope.unFinishedplanName = $scope.currentClientInfo.CarePlans[i].PlanName;
+                }
+            }
+            if ($scope.test == 'tt') {
+                // show finish plan first modal
+                console.log('if2');
+                $scope.openFinishModal();
+                $scope.test = '';
+
+            } else {
+                console.log('else2');
+                $scope.openConfirmCreateModal();
+                $scope.test = '';
+            }
+        }
+
+        else //if first plan
+        {
+            console.log('else1');
+            $scope.openConfirmCreateModal();
+        }
     }
 
     $scope.deletePlan = function () {
@@ -158,7 +204,7 @@
                     if (_res.data.code == 100) {
                         $scope.plans = _res.data.data[0].CarePlans;
                         console.log($scope.plans);
-            $rootScope.loading = false;
+                        $rootScope.loading = false;
                     }
                 })
             }
@@ -190,7 +236,7 @@
                 console.log(_res.data);
                 if (_res.data.code == 100) {
                     $scope.frmEditPlan.$setPristine();
-                $rootScope.loading = false;
+                    $rootScope.loading = false;
                 }
                 else {
                     console.log('error');
@@ -242,6 +288,10 @@
                 //$('#innerTabs').scrollTop(document.body.scrollHeight);
             });
         }
+    }
+
+    $scope.exportPDF = function () {
+        // export PDF here for $scope.activePlan OR $scope.plans
     }
 
     $scope.reassign = function () {

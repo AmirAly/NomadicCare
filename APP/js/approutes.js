@@ -15,7 +15,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
         url: '/listorganizations',
         views: {
             '': { templateUrl: 'views/listorganizations.html', controller: 'ListorganizationsController' },
-            'headerView@listorganizations': { templateUrl: 'views/templates/header.temp.html' },
+            'headerView@listorganizations': { templateUrl: 'views/templates/systemheader.temp.html' },
         }
     })
     .state('organization', {
@@ -23,7 +23,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
         url: '/organization/:orgid?',
         views: {
             '': { templateUrl: 'views/organization.html', controller: 'OrganizationController' },
-            'headerView@organization': { templateUrl: 'views/templates/header.temp.html' },
+            'headerView@organization': { templateUrl: 'views/templates/systemheader.temp.html' },
         }
     })
     .state('listproviderssystem', {
@@ -31,7 +31,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
         url: '/listproviderssystem/:orgid?',
         views: {
             '': { templateUrl: 'views/listproviderssystem.html', controller: 'ListproviderssystemController' },
-            'headerView@listproviderssystem': { templateUrl: 'views/templates/header.temp.html' },
+            'headerView@listproviderssystem': { templateUrl: 'views/templates/systemheader.temp.html' },
         }
     })
     .state('providerssystem', {
@@ -39,11 +39,11 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
         url: '/providerssystem/:orgid/:providerid?',
         views: {
             '': { templateUrl: 'views/providerssystem.html', controller: 'providerssystemController' },
-            'headerView@providerssystem': { templateUrl: 'views/templates/header.temp.html' },
+            'headerView@providerssystem': { templateUrl: 'views/templates/systemheader.temp.html' },
         }
     })
 
-        /*Admin routes*/
+/*Admin routes*/
     .state('clients', {
         cache: false,
         url: '/clients',

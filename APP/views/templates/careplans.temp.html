@@ -1,6 +1,6 @@
 ﻿<div ng-show="plans.length == 0" class="noPalnsToShow">
     <h3>No Data Found</h3>
-    <button class="btn btn-default" data-toggle="modal" data-target="#CreatePlanConfirmationModal">
+    <button class="btn btn-default" ng-click="ConfirmCreateModal()">
         <span>Click here to start add plans</span>
         <span class="glyphicon glyphicon-plus-sign greenFont"></span>
     </button>
@@ -61,7 +61,7 @@
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 subBar">
                 <div class="row">
                     <div class="col-xs-12">
-                        <button type="button" class="btn btn-sm btn-success"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp;<span>Export</span></button>
+                        <button type="button" class="btn btn-sm btn-success" ng-click="exportPDF()"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp;<span>Export</span></button>
                     </div>
                 </div>
                 <div class="clear2"></div>
@@ -92,7 +92,7 @@
                                 </li>
 
                                 <li class="text-center">
-                                    <a class="newPlanLi" data-toggle="modal" data-target="#CreatePlanConfirmationModal">
+                                    <a class="newPlanLi" ng-click="ConfirmCreateModal()">
                                         <span class="glyphicon glyphicon-plus-sign greenFont"></span>
                                     </a>
                                 </li>
@@ -448,7 +448,7 @@
                                 </select>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label id="lblProvider">Provider</label>
+                                <label class="used" id="lblProvider">Provider</label>
                             </div>
                         </div>
                     </div>
@@ -522,10 +522,10 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="group">
-                                <input ng-input-effect-class is-required ng-model="activePlan.ByWho1.Name" ng-class="{errorBorder : frmByWho1.txtName.$dirty == true && frmByWho1.txtName.$invalid == true ,'used': activePlan.Name.length > 0}" type="text" pattern=".{1,80}" name="txtName" id="txtName" required>
+                                <input placeholder="Name" ng-input-effect-class is-required ng-model="activePlan.ByWho1.Name" ng-class="{errorBorder : frmByWho1.txtName.$dirty == true && frmByWho1.txtName.$invalid == true ,'used': activePlan.Name.length > 0}" type="text" pattern=".{1,80}" name="txtName" id="txtName" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label ng-class="{errorFont : frmByWho1.txtName.$dirty == true && frmByWho1.txtName.$invalid == true }">Name</label>
+                                <!--<label ng-class="{errorFont : frmByWho1.txtName.$dirty == true && frmByWho1.txtName.$invalid == true }">Name</label>-->
                             </div>
                         </div>
                     </div>
@@ -534,10 +534,10 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="group">
-                                <input ng-input-effect-class is-required ng-model="activePlan.ByWho1.Email" ng-class="{errorBorder : frmByWho1.txtEmail.$dirty == true && frmByWho1.txtEmail.$invalid == true ,'used': activePlan.Email.length > 0}" type="email" pattern="[a-zA-Z0-9_]+(?:\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" id="txtEmail" name="txtEmail" required>
+                                <input placeholder="Mail" ng-input-effect-class is-required ng-model="activePlan.ByWho1.Email" ng-class="{errorBorder : frmByWho1.txtEmail.$dirty == true && frmByWho1.txtEmail.$invalid == true ,'used': activePlan.Email.length > 0}" type="email" pattern="[a-zA-Z0-9_]+(?:\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" id="txtEmail" name="txtEmail" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label ng-class="{errorFont : frmByWho1.txtEmail.$dirty == true && frmByWho1.txtEmail.$invalid == true }">Mail</label>
+                                <!--<label ng-class="{errorFont : frmByWho1.txtEmail.$dirty == true && frmByWho1.txtEmail.$invalid == true }">Mail</label>-->
                             </div>
                         </div>
                     </div>
@@ -562,10 +562,10 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="group">
-                                <input ng-input-effect-class is-required ng-model="activePlan.ByWho2.Name" ng-class="{errorBorder : frmByWho2.txtName.$dirty == true && frmByWho2.txtName.$invalid == true ,'used': activePlan.Name.length > 0}" type="text" pattern=".{1,80}" name="txtName" id="txtName" required>
+                                <input placeholder="Name" ng-input-effect-class is-required class="used" ng-model="activePlan.ByWho2.Name" ng-class="{errorBorder : frmByWho2.txtName.$dirty == true && frmByWho2.txtName.$invalid == true ,'used': activePlan.Name.length > 0}" type="text" pattern=".{1,80}" name="txtName" id="txtName" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label ng-class="{errorFont : frmByWho2.txtName.$dirty == true && frmByWho2.txtName.$invalid == true }">Name</label>
+                                <!--<label ng-class="{errorFont : frmByWho2.txtName.$dirty == true && frmByWho2.txtName.$invalid == true }">Name</label>-->
                             </div>
                         </div>
                     </div>
@@ -574,10 +574,10 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="group">
-                                <input ng-input-effect-class is-required ng-model="activePlan.ByWho2.Email" ng-class="{errorBorder : frmByWho2.txtEmail.$dirty == true && frmByWho2.txtEmail.$invalid == true ,'used': activePlan.Email.length > 0}" type="email" pattern="[a-zA-Z0-9_]+(?:\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" id="txtEmail" name="txtEmail" required>
+                                <input placeholder="Mail" ng-input-effect-class is-required class="used" ng-model="activePlan.ByWho2.Email" ng-class="{errorBorder : frmByWho2.txtEmail.$dirty == true && frmByWho2.txtEmail.$invalid == true ,'used': activePlan.Email.length > 0}" type="email" pattern="[a-zA-Z0-9_]+(?:\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" id="txtEmail" name="txtEmail" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label ng-class="{errorFont : frmByWho2.txtEmail.$dirty == true && frmByWho2.txtEmail.$invalid == true }">Mail</label>
+                                <!--<label ng-class="{errorFont : frmByWho2.txtEmail.$dirty == true && frmByWho2.txtEmail.$invalid == true }">Mail</label>-->
                             </div>
                         </div>
                     </div>
@@ -632,7 +632,7 @@
     </div>
 </div>
 
-<div id="CreatePlanConfirmationModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div id="CreatePlanConfirmationModal" confirm-create-modal class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -657,6 +657,20 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="deletePlan()">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="FinishOpenPlanModal" confirm-finish-modal class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">You have to finish and save current plan ( {{unFinishedplanName}} ) first</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
             </div>
         </div>
     </div>

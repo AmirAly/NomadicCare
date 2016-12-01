@@ -186,6 +186,9 @@
                     $scope.speciality.push({ Name: '', Description: '' });
                 }
                 $rootScope.DeleteConfirmed = false;
+                $scope.showMessage = true;
+                $scope.messageTxt = 'You have to click save button to save the change you made in speciality table.';
+                $scope.messageStatus = 'warning';
             }
         });
     }

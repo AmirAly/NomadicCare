@@ -24,6 +24,7 @@ ehs.directive('ngInputEffectClass', function ($timeout) {
     });
 });
 
+
 ehs.directive('ngSelectEffectClass', function () {
     return ({
         restrict: 'A',
@@ -134,6 +135,31 @@ ehs.directive('myModal', function () {
             scope.dismiss = function () {
                 console.log('here');
                 element.modal('hide');
+            };
+        }
+    }
+});
+
+// show create confirmation modal
+ehs.directive('confirmCreateModal', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            scope.openConfirmCreateModal = function () {
+                console.log('here');
+                element.modal('show');
+            };
+        }
+    }
+});
+// show create confirmation modal
+ehs.directive('confirmFinishModal', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            scope.openFinishModal = function () {
+                console.log('here');
+                element.modal('show');
             };
         }
     }

@@ -1,5 +1,5 @@
 ﻿ehs.controller("ClientsController", function ($scope, $state, $rootScope,$timeout, API) {
-    $rootScope.pageHeader = '';
+    $rootScope.pageHeader = 'Clients';
 
     var req = {
         method: 'get',
