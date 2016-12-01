@@ -1,4 +1,4 @@
-﻿ehs.controller("LoginController", function ($scope, $state, $rootScope, API) {
+﻿ehs.controller("LoginController", function ($scope, $state, $rootScope, API, $timeout) {
     $scope.loginFormError = false;
     $scope.submit = function (form) {
         $scope.showMessage = false;

@@ -244,14 +244,13 @@
                                             <div class="clear"></div>
                                             <div class="row" data-toggle="modal" data-target="#prgrsModal">
                                                 <div class="col-xs-12 prgrsDvLbl">How is it going?</div>
-                                                <div class="row col-xs-12" ng-repeat="progress in plan.Progress">
-                                                    <span class="col-xs-9 text-left progressTxt">{{progress.Text}}</span>
-                                                    <span class="col-xs-3 text-right text-muted progressDetails">{{progress.Provider}} - {{progress.Date | date:'MMM dd, yyyy'}}</span>
+                                                <div class="dvProgressContainer">
+                                                    <div class="row col-xs-12" ng-repeat="progress in plan.Progress">
+                                                        <span class="col-sm-9 col-xs-6 text-left progressTxt">{{progress.Text}}</span>
+                                                        <span class="col-sm-3 col-xs-6 text-right text-muted progressDetails">{{progress.Provider}} - {{progress.Date | date:'MMM dd, yyyy'}}</span>
+                                                    </div>
                                                 </div>
                                             </div>
-
-                                            <div class="clear"></div>
-
                                         </div>
                                     </div>
                                 </div>

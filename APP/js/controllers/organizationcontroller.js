@@ -1,4 +1,4 @@
-﻿ehs.controller("OrganizationController", function ($scope, $state, $rootScope, $stateParams, API, $window) {
+﻿ehs.controller("OrganizationController", function ($scope, $state, $rootScope, $stateParams, API, $timeout) {
     console.log($stateParams.orgid);
     $scope.txtSMS = false;
     if ($stateParams.orgid == "") {
@@ -116,6 +116,9 @@
                     $scope.messageStatus = 'warning';
                 }).finally(function () {
                     $rootScope.loading = false;
+                    $timeout(function () {
+                        window.scrollTo(0, document.body.scrollHeight);
+                    }, 1500);
                 });
 
             }
@@ -158,6 +161,9 @@
                     $scope.messageStatus = 'warning';
                 }).finally(function () {
                     $rootScope.loading = false;
+                    $timeout(function () {
+                        window.scrollTo(0, document.body.scrollHeight);
+                    }, 1500);
                 });
             }
         }

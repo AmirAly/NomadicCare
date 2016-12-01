@@ -1,4 +1,4 @@
-﻿ehs.controller("ProviderController", function ($scope, $state, $rootScope, $stateParams, API) {
+﻿ehs.controller("ProviderController", function ($scope, $state, $rootScope,$timeout, $stateParams, API) {
     console.log($stateParams.providerid);
     $scope.txtSMS = false;
     if ($stateParams.providerid == "") {
@@ -125,6 +125,9 @@
                     $scope.messageStatus = 'warning';
                 }).finally(function () {
                     $rootScope.loading = false;
+                    $timeout(function () {
+                        window.scrollTo(0, document.body.scrollHeight);
+                    }, 1500);
                 });
             }
             else { //edit mode
@@ -174,6 +177,9 @@
                     $scope.messageStatus = 'warning';
                 }).finally(function () {
                     $rootScope.loading = false;
+                    $timeout(function () {
+                        window.scrollTo(0, document.body.scrollHeight);
+                    }, 1500);
                 });
             }
 

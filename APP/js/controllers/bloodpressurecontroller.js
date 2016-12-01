@@ -226,6 +226,9 @@
                 $scope.messageStatus = 'warning';
             }).finally(function () {
                 $rootScope.loading = false;
+                $timeout(function () {
+                    $('.innerSingleTab').scrollTop(document.body.scrollHeight);
+                }, 1500);
             });
         }
 

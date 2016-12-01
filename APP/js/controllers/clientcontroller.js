@@ -116,6 +116,9 @@
                     $scope.messageStatus = 'warning';
                 }).finally(function () {
                     $rootScope.loading = false;
+                    $timeout(function () {
+                        window.scrollTo(0, document.body.scrollHeight);
+                    }, 1500);
                 });
 
 
@@ -161,7 +164,10 @@
                     $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
                     $scope.messageStatus = 'warning';
                 }).finally(function () {
-                   $rootScope.loading = false;
+                    $rootScope.loading = false;
+                    $timeout(function () {
+                        window.scrollTo(0, document.body.scrollHeight);
+                    }, 1500);
                 });
 
 

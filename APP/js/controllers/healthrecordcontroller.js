@@ -1,4 +1,4 @@
-﻿ehs.controller("HealthrecordController", function ($scope, $state, $rootScope, $stateParams, API) {
+﻿ehs.controller("HealthrecordController", function ($scope, $state, $rootScope,$timeout, $stateParams, API) {
 
     // get curret client
     var req = {

@@ -138,15 +138,3 @@ ehs.directive('myModal', function () {
         }
     }
 });
-
-ehs.filter('breakFilter', function () {
-    return function (text) {
-        if (text !== undefined) return text.replace(/\n/g, '<br />');
-    };
-});
-
-ehs.filter('unbreakFilter', function () {
-    return function (text) {
-        if (text !== undefined) return text.replace('<br />',/\n/g);
-    };
-});

@@ -1,4 +1,4 @@
-﻿ehs.controller("ListproviderssystemController", function ($scope, $state, $rootScope, $stateParams, API) {
+﻿ehs.controller("ListproviderssystemController", function ($scope, $state, $rootScope, $stateParams, API, $timeout) {
     $rootScope.pageHeader = 'Providers List';
     if ($stateParams.orgid != 1000) {
 

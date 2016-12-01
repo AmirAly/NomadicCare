@@ -1,10 +1,5 @@
-﻿ehs.controller("ListprovidersController", function ($scope, $state, $rootScope, $stateParams, API) {
+﻿ehs.controller("ListprovidersController", function ($scope, $state, $rootScope, $stateParams, API, $timeout) {
     $rootScope.pageHeader = 'Providers List';
-    //$scope.providers = [{ name: 'Ali Ahmed', address: 'Egypt, Cairo 20 Masr St.', img: 'images/unknown.png' },
-    //{ name: 'Samar Johns', address: 'Egypt, Cairo 30 Masr St.', img: 'images/user9.jpg' },
-    //{ name: 'Majed Sayed', address: 'Egypt, Cairo 40 Masr St.', img: 'images/user8.jpg' },
-    //{ name: 'Kamelia Alaa', address: 'Egypt, Cairo 50 Masr St.', img: 'images/user7.jpg' }];
-
     var req = {
         method: 'get',
         url: '/Coordinator/List/' + $stateParams.orgid,

@@ -108,6 +108,9 @@
                 $scope.messageStatus = 'warning';
             }).finally(function () {
                 $rootScope.loading = false;
+                $timeout(function () {
+                    $('.innerSingleTabNoTabs').scrollTop(document.body.scrollHeight);
+                }, 1500);
             });
         }
 

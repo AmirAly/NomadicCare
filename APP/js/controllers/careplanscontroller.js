@@ -122,6 +122,7 @@
 
             }).finally(function () {
                 $rootScope.loading = false;
+                //$('#innerTabs').scrollTop(document.body.scrollHeight);
             });
         }
 
@@ -167,6 +168,7 @@
 
         }).finally(function () {
             $rootScope.loading = false;
+            //$('#innerTabs').scrollTop(document.body.scrollHeight);
         });
 
     }
@@ -195,6 +197,7 @@
             }, function (error) {
             }).finally(function () {
                 $rootScope.loading = false;
+                //$('#innerTabs').scrollTop(document.body.scrollHeight);
             });
         }
     }
@@ -236,6 +239,7 @@
             }, function (error) {
             }).finally(function () {
                 $rootScope.loading = false;
+                //$('#innerTabs').scrollTop(document.body.scrollHeight);
             });
         }
     }
@@ -319,6 +323,8 @@
 
     $('#prgrsModal').on('hidden.bs.modal', function () {
         $(this).find('form').trigger('reset');
+        $('#innerTabs').scrollTop(document.body.scrollHeight);
+        $('.dvProgressContainer').scrollTop(document.body.scrollHeight);
     })
 
 });

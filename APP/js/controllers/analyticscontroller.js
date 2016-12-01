@@ -1,4 +1,4 @@
-﻿ehs.controller("AnalyticsController", function ($scope, $state, $rootScope, $stateParams) {
+﻿ehs.controller("AnalyticsController", function ($scope, $state, $rootScope, $stateParams,$timeout,API) {
 
     //Chart
 
@@ -123,4 +123,5 @@
         var ctx = document.getElementById("canvasAnalytics").getContext("2d");
         window.myLine = new Chart(ctx, configAnalytics);
 
+        $('.innerSingleTabNoTabs').scrollTop(document.body.scrollHeight);
 });

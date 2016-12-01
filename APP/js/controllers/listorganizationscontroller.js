@@ -1,4 +1,4 @@
-﻿ehs.controller("ListorganizationsController", function ($scope, $state, $rootScope, API) {
+﻿ehs.controller("ListorganizationsController", function ($scope, $state, $rootScope, API, $timeout) {
     $rootScope.pageHeader = 'Organisations List';
 
 
