@@ -112,6 +112,7 @@
                         if (_res.data.code == 100) {
                             $scope.plans = _res.data.data[0].CarePlans;
                             console.log($scope.plans);
+                $rootScope.loading = false;
                         }
                     })
                 }
@@ -121,7 +122,6 @@
             }, function (error) { // another error may be connection error
 
             }).finally(function () {
-                $rootScope.loading = false;
                 //$('#innerTabs').scrollTop(document.body.scrollHeight);
             });
         }
@@ -158,6 +158,7 @@
                     if (_res.data.code == 100) {
                         $scope.plans = _res.data.data[0].CarePlans;
                         console.log($scope.plans);
+            $rootScope.loading = false;
                     }
                 })
             }
@@ -167,7 +168,6 @@
         }, function (error) {
 
         }).finally(function () {
-            $rootScope.loading = false;
             //$('#innerTabs').scrollTop(document.body.scrollHeight);
         });
 
@@ -190,13 +190,13 @@
                 console.log(_res.data);
                 if (_res.data.code == 100) {
                     $scope.frmEditPlan.$setPristine();
+                $rootScope.loading = false;
                 }
                 else {
                     console.log('error');
                 }
             }, function (error) {
             }).finally(function () {
-                $rootScope.loading = false;
                 //$('#innerTabs').scrollTop(document.body.scrollHeight);
             });
         }
@@ -232,13 +232,13 @@
                 console.log(_res.data);
                 if (_res.data.code == 100) {
                     $scope.frmPlan.$setPristine();
+                    $rootScope.loading = false;
                 }
                 else {
                     console.log('error');
                 }
             }, function (error) {
             }).finally(function () {
-                $rootScope.loading = false;
                 //$('#innerTabs').scrollTop(document.body.scrollHeight);
             });
         }
