@@ -95,7 +95,7 @@
                     RetrivalCode: $scope.txtEmail + '12345',
                     Img: "",
                     Status: 'Pending',
-                    Password: '12345'
+                    Password: $rootScope.generatePassword()
                 }
                 var req = {
                     method: 'post',
