@@ -128,16 +128,16 @@ module.exports = function (app, express) {
                         to: _newObj.Email,
                         subject: 'Nomadic Care | New Provider Activation Mail',
                         text: 'Dear ' + _newObj.Name + '<br/><br/>\
-                                               This is an activation mail for your account in Nomadic Care <br/>\
-                                               Your Login Data: <br/><br/>\
-                                               Email :' + _newObj.Email + '<br/>\
-                                               Password :' + _newObj.Password + '<br/>\
-                                               <br/>\
-                                                <b>Please click the following link to confirm your Email<b> then use your login data To login<br/>\
-                                                http://localhost:8007/index.html#/login/' + _newObj.RetrivalCode + ' \
-                                               <br/>\
-                                               <br/>\
-                                               Nomadic Care Team'
+                                This is an activation mail for your account in Nomadic Care <br/><br/>\
+                                Your Login Data: <br/>\
+                                Email :' + _newObj.Email + '<br/>\
+                                Password :' + _newObj.Password + '<br/>\
+                                <br/>\
+                                <b>Please click the following link to confirm your Email<b> then use your login data To login<br/>\
+                                http://localhost:8007/index.html#/login/' + _newObj.RetrivalCode + ' \
+                                <br/>\
+                                <br/>\
+                                Nomadic Care Team'
                     }
                     console.log(mail);
                     sendEmail(mail);

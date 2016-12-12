@@ -92,7 +92,7 @@
                     _id: null,
                     //DateOfBirth: '',
                     //Gender: '',
-                    RetrivalCode: $scope.txtEmail + '12345',
+                    RetrivalCode: $rootScope.generatePassword(),
                     Img: "",
                     Status: 'Pending',
                     Password: $rootScope.generatePassword()

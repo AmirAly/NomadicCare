@@ -20,12 +20,12 @@ ehs.run(function ($rootScope, $state, slidePush, $location) {
     $rootScope.OrganizationId = 0;
     $rootScope.DateIsToday = new Date();
 
-    // when userType is undefined ,redirect to login 
-    $rootScope.$watch('$root.userType', function () {
-        if (typeof $rootScope.userType === 'undefined') {
-            $location.path("/login");
-        }
-    });
+    //// when userType is undefined ,redirect to login 
+    //$rootScope.$watch('$root.userType', function () {
+    //    if (typeof $rootScope.userType === 'undefined') {
+    //        $location.path("/login");
+    //    }
+    //});
 
     $rootScope.generatePassword = function () {
         var length = 8,

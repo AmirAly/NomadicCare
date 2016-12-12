@@ -1,4 +1,8 @@
 ehs.config(function ($stateProvider, $urlRouterProvider) {
+
+    $urlRouterProvider.otherwise('/login/0');
+    //$urlRouterProvider.otherwise('/login/');
+
     $stateProvider
     .state('login', {
         cache: false,
@@ -249,5 +253,4 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
          controller: 'CareplansController'
      })
     ;
-    //$urlRouterProvider.otherwise('/login/0');
 });
