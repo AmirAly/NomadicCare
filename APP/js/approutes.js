@@ -2,7 +2,7 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
     .state('login', {
         cache: false,
-        url: '/login',
+        url: '/login/:confirmationcode?',
         views: {
             '': { templateUrl: 'views/login.html', controller: 'LoginController' },
             'footerView@login': { templateUrl: 'views/templates/footer.temp.html' }
@@ -249,5 +249,5 @@ ehs.config(function ($stateProvider, $urlRouterProvider) {
          controller: 'CareplansController'
      })
     ;
-    $urlRouterProvider.otherwise('/login');
+    //$urlRouterProvider.otherwise('/login/0');
 });

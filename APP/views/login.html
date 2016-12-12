@@ -1,5 +1,15 @@
 ﻿<div class="text-center">
-    <div class="row animated fadeInRight" id="loginContainer">
+    <div class="clear"></div>
+    <div class="row" >
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div ng-class="{'alert-success' : messageStatus == 'success' ,'alert-danger' : messageStatus == 'danger' ,'alert-warning' : messageStatus == 'warning'}"
+                 class="alert alert-dismissible text-center" ng-show="showMessage2 == true" role="alert">
+                <span>{{messageTxt}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row animated fadeInRight" id="loginContainer" ng-show="hidelogin == false">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <form class="form-horizontal" id="frmLogin" name="frmLogin" novalidate>
                 <div class="row">
@@ -42,7 +52,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div ng-class="{'alert-success' : messageStatus == 'success' ,'alert-danger' : messageStatus == 'danger' ,'alert-warning' : messageStatus == 'warning'}"
-                                          class="alert alert-dismissible text-center" ng-show="showMessage == true" role="alert">
+                                         class="alert alert-dismissible text-center" ng-show="showMessage == true" role="alert">
                                         <span>{{messageTxt}}</span>
                                     </div>
                                 </div>
