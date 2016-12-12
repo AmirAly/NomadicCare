@@ -1,10 +1,39 @@
-﻿//======================== add Doctor and Patient schemas ============================
+﻿var nodemailer = require('nodemailer');
+//======================== add Doctor and Patient schemas ============================
 var Organization = require('./models/organization');
 var Coordinator = require('./models/coordinator');
 var Client = require('./models/client');
 //====================================================================================
 module.exports = function (app, express) {
     var api = express.Router();
+
+    function sendEmail(email) {
+        var smtpTransport = nodemailer.createTransport({
+            transport: "SMTP",
+            host: 'smtp.gmail.com',
+            secureConnection: true,
+            port: 587,
+            requiresAuth: true,
+            auth: {
+                user: 'eng.samar.bakr@gmail.com',
+                pass: '01007160747Z@z'
+            }
+        });
+        var mailOptions = {
+            to: email.to,
+            subject: email.subject,
+            html: email.text
+        }
+        smtpTransport.sendMail(mailOptions, function (err, response) {
+            if (err) {
+                console.log(err);
+                return err;
+            }
+            else
+                return 100;
+        });
+    }
+
     api.get('/', function (req, res) {
         return res.json({ code: '100', data: 'API is working great' });
     });
@@ -25,7 +54,6 @@ module.exports = function (app, express) {
             }
         });
     });
-
     api.get('/Coordinator/List/:OrganizationId', function (req, res) {
         var _id = req.params.OrganizationId;
         console.log(_id);
@@ -96,6 +124,23 @@ module.exports = function (app, express) {
                             console.log(err);
                         });
                     }
+                    var mail = {
+                        to: _newObj.Email,
+                        subject: 'Nomadic Care | New Provider Activation Mail',
+                        text: 'Dear ' + _newObj.Name + '<br/><br/>\
+                                               This is an activation mail for your account in Nomadic Care <br/>\
+                                               Your Login Data: <br/><br/>\
+                                               Email :' + _newObj.Email + '<br/>\
+                                               Password :' + _newObj.Password + '<br/>\
+                                               <br/>\
+                                                <b>Please click the following link to confirm your Email<b> then use your login data To login<br/>\
+                                                http://localhost:8007/index.html#/login/' + _newObj.RetrivalCode + ' \
+                                               <br/>\
+                                               <br/>\
+                                               Nomadic Care Team'
+                    }
+                    console.log(mail);
+                    sendEmail(mail);
                     _newObj.save(function (err, Obj) {
                         if (err)
                             return res.json({ code: '1', data: err });
@@ -141,6 +186,8 @@ module.exports = function (app, express) {
             }
         });
     });
+
+
     api.put('/Organization', function (req, res) {
         Organization.findOne({ Name: req.body.Name, Phone: req.body.Phone, PostalCode: req.body.PostalCode }, '', function (err, Obj) {
             if (Obj && Obj._id != req.body._id) {
@@ -216,6 +263,8 @@ module.exports = function (app, express) {
             }
         });
     });
+
+
     api.post('/Login', function (req, res) {
         var UserAccount = { Email: req.body.Email, Password: req.body.Password };
         if (UserAccount.Email && UserAccount.Password) {
@@ -245,6 +294,8 @@ module.exports = function (app, express) {
         }
 
     });
+
+
     api.put('/Client', function (req, res) {
         Coordinator.findOne({ FirstName: req.body.FirstName, LastName: req.body.LastName, Phone: req.body.Phone, PostalCode: req.body.PostalCode }, '', function (err, Obj) {
             if (Obj && Obj._id != req.body._id) {
@@ -278,6 +329,34 @@ module.exports = function (app, express) {
             }
         }));
     });
+    api.post('/Client', function (req, res) {
+        var _newObj = new Client(req.body);
+        Client.findOne({ 'LastName': _newObj.LastName, 'FirstName': _newObj.FirstName }, '', function (err, Obj) {
+            if (err)
+                return res.json({ code: '1', data: err });
+            else {
+                console.log(Obj);
+                if (Obj)
+                    return res.json({ code: '20', data: 'Duplicae data, check email, phone and name' });
+                else {
+                    if (_newObj.Img && _newObj.Img.length > 5) {
+                        var base64Data = _newObj.Img.replace(/^data:image\/png;base64,/, "");
+                        require("fs").writeFile("images/" + _newObj._id + ".png", base64Data, 'base64', function (err) {
+                            console.log(err);
+                        });
+                    }
+                    _newObj.save(function (err, Obj) {
+                        if (err)
+                            return res.json({ code: '1', data: err });
+                        else
+                            return res.json({ code: '100', data: Obj });
+                    })
+                }
+            }
+        });
+    });
+
+
     api.put('/CarePlans', function (req, res) {
         Client.findOne({ _id: req.body._id }, '', function (err, Obj) {
             if (err)
@@ -321,32 +400,45 @@ module.exports = function (app, express) {
         }).populate('Coordinator');
     });
 
-    api.post('/Client', function (req, res) {
-        var _newObj = new Client(req.body);
-        Client.findOne({ 'LastName': _newObj.LastName, 'FirstName': _newObj.FirstName }, '', function (err, Obj) {
+
+    api.get('/Client/:ClientId', function (req, res) {
+        var _id = req.params.ClientId;
+        console.log(_id);
+        Client.find({ '_id': _id }, '', function (err, Obj) {
             if (err)
                 return res.json({ code: '1', data: err });
             else {
-                console.log(Obj);
-                if (Obj)
-                    return res.json({ code: '20', data: 'Duplicae data, check email, phone and name' });
-                else {
-                    if (_newObj.Img && _newObj.Img.length > 5) {
-                        var base64Data = _newObj.Img.replace(/^data:image\/png;base64,/, "");
-                        require("fs").writeFile("images/" + _newObj._id + ".png", base64Data, 'base64', function (err) {
-                            console.log(err);
-                        });
-                    }
-                    _newObj.save(function (err, Obj) {
-                        if (err)
-                            return res.json({ code: '1', data: err });
-                        else
-                            return res.json({ code: '100', data: Obj });
-                    })
+                if (Obj) {
+                    if (Obj.length > 0)
+                        return res.json({ code: '100', data: Obj });
+                    else
+                        return res.json({ code: '21', data: 'No Client with such id' });
                 }
+                else
+                    return res.json({ code: '20', data: 'No Client with such id' });
             }
         });
     });
+    api.get('/Client/List/:CoordinatorId', function (req, res) {
+        var _id = req.params.CoordinatorId;
+        console.log(_id);
+        Client.find({ 'Coordinator': _id }, 'FirstName LastName Img _id', function (err, Obj) {
+            if (err)
+                return res.json({ code: '1', data: err });
+            else {
+                if (Obj) {
+                    if (Obj.length > 0)
+                        return res.json({ code: '100', data: Obj });
+                    else
+                        return res.json({ code: '21', data: 'No Clients in this organization' });
+                }
+                else
+                    return res.json({ code: '20', data: 'No such Coordinator' });
+            }
+        });
+    });
+
+
     api.post('/HealthNotes/:id', function (req, res) {
         var _id = req.params.id
         Client.findOne({ '_id': _id }, '', function (err, Obj) {
@@ -408,6 +500,8 @@ module.exports = function (app, express) {
             }
         });
     });
+
+
     api.post('/HealthMeasurments/:id', function (req, res) {
         var _id = req.params.id
         Client.findOne({ '_id': _id }, '', function (err, Obj) {
@@ -469,6 +563,8 @@ module.exports = function (app, express) {
             }
         });
     });
+
+
     api.post('/ConsultationNotes/:id', function (req, res) {
         var _id = req.params.id
         Client.findOne({ '_id': _id }, '', function (err, Obj) {
@@ -509,42 +605,7 @@ module.exports = function (app, express) {
             }
         });
     });
-    api.get('/Client/:ClientId', function (req, res) {
-        var _id = req.params.ClientId;
-        console.log(_id);
-        Client.find({ '_id': _id }, '', function (err, Obj) {
-            if (err)
-                return res.json({ code: '1', data: err });
-            else {
-                if (Obj) {
-                    if (Obj.length > 0)
-                        return res.json({ code: '100', data: Obj });
-                    else
-                        return res.json({ code: '21', data: 'No Client with such id' });
-                }
-                else
-                    return res.json({ code: '20', data: 'No Client with such id' });
-            }
-        });
-    });
-    api.get('/Client/List/:CoordinatorId', function (req, res) {
-        var _id = req.params.CoordinatorId;
-        console.log(_id);
-        Client.find({ 'Coordinator': _id }, 'FirstName LastName Img _id', function (err, Obj) {
-            if (err)
-                return res.json({ code: '1', data: err });
-            else {
-                if (Obj) {
-                    if (Obj.length > 0)
-                        return res.json({ code: '100', data: Obj });
-                    else
-                        return res.json({ code: '21', data: 'No Clients in this organization' });
-                }
-                else
-                    return res.json({ code: '20', data: 'No such Coordinator' });
-            }
-        });
-    });
+
 
     return api;
 };
