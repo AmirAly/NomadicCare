@@ -1,6 +1,6 @@
 ﻿var ehs = angular.module("ehs", ['ui.router', 'ui.bootstrap.datetimepicker', 'ngAnimate', 'ui.dateTimeInput', 'uiSwitch']);
 
-ehs.run(function ($rootScope, $state, slidePush, $location) {
+ehs.run(function ($rootScope, $state, slidePush, $location, $timeout) {
     $rootScope.logout = function () {
         if (confirm("Are you sure you want to logout ?") == true) {
             // if menu opened , close it first before  logout
@@ -20,12 +20,16 @@ ehs.run(function ($rootScope, $state, slidePush, $location) {
     $rootScope.OrganizationId = 0;
     $rootScope.DateIsToday = new Date();
 
-    //// when userType is undefined ,redirect to login 
-    //$rootScope.$watch('$root.userType', function () {
-    //    if (typeof $rootScope.userType === 'undefined') {
-    //        $location.path("/login");
-    //    }
-    //});
+
+    // when userType is undefined ,redirect to login 
+    $rootScope.$watch('$root.userType', function () {
+        $timeout(function () {
+            if (typeof $rootScope.userType === 'undefined') {
+                $location.path("/login/");
+            }
+        }, 1500);
+
+    });
 
     $rootScope.generatePassword = function () {
         var length = 8,
