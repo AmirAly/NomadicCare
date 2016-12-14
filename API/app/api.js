@@ -6,6 +6,7 @@ var Client = require('./models/client');
 //====================================================================================
 module.exports = function (app, express) {
     var api = express.Router();
+    var Base64 = { _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) { var t = ""; var n, r, i, s, o, u, a; var f = 0; e = Base64._utf8_encode(e); while (f < e.length) { n = e.charCodeAt(f++); r = e.charCodeAt(f++); i = e.charCodeAt(f++); s = n >> 2; o = (n & 3) << 4 | r >> 4; u = (r & 15) << 2 | i >> 6; a = i & 63; if (isNaN(r)) { u = a = 64 } else if (isNaN(i)) { a = 64 } t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a) } return t }, decode: function (e) { var t = ""; var n, r, i; var s, o, u, a; var f = 0; e = e.replace(/[^A-Za-z0-9+/=]/g, ""); while (f < e.length) { s = this._keyStr.indexOf(e.charAt(f++)); o = this._keyStr.indexOf(e.charAt(f++)); u = this._keyStr.indexOf(e.charAt(f++)); a = this._keyStr.indexOf(e.charAt(f++)); n = s << 2 | o >> 4; r = (o & 15) << 4 | u >> 2; i = (u & 3) << 6 | a; t = t + String.fromCharCode(n); if (u != 64) { t = t + String.fromCharCode(r) } if (a != 64) { t = t + String.fromCharCode(i) } } t = Base64._utf8_decode(t); return t }, _utf8_encode: function (e) { e = e.replace(/rn/g, "n"); var t = ""; for (var n = 0; n < e.length; n++) { var r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r) } else if (r > 127 && r < 2048) { t += String.fromCharCode(r >> 6 | 192); t += String.fromCharCode(r & 63 | 128) } else { t += String.fromCharCode(r >> 12 | 224); t += String.fromCharCode(r >> 6 & 63 | 128); t += String.fromCharCode(r & 63 | 128) } } return t }, _utf8_decode: function (e) { var t = ""; var n = 0; var r = c1 = c2 = 0; while (n < e.length) { r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r); n++ } else if (r > 191 && r < 224) { c2 = e.charCodeAt(n + 1); t += String.fromCharCode((r & 31) << 6 | c2 & 63); n += 2 } else { c2 = e.charCodeAt(n + 1); c3 = e.charCodeAt(n + 2); t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63); n += 3 } } return t } }
 
     function sendEmail(email) {
         var smtpTransport = nodemailer.createTransport({
@@ -90,6 +91,26 @@ module.exports = function (app, express) {
             }
         });
     });
+
+    api.get('/CoordinatorByEmail/:CoordinatorEmail', function (req, res) {
+        var _Email = req.params.CoordinatorEmail;
+        console.log(_Email);
+        Coordinator.find({ 'Email': _Email }, '', function (err, Obj) {
+            if (err)
+                return res.json({ code: '1', data: err });
+            else {
+                if (Obj) {
+                    if (Obj.length > 0)
+                        return res.json({ code: '100', data: Obj });
+                    else
+                        return res.json({ code: '21', data: 'No coordinator with such id' });
+                }
+                else
+                    return res.json({ code: '20', data: 'No coordinator with such id' });
+            }
+        });
+    });
+
     api.get('/Coordinator/Confirm/:code', function (req, res) {
         var _code = req.params.code;
         Coordinator.findOne({ 'RetrivalCode': _code }, '', function (err, Obj) {
@@ -314,6 +335,7 @@ module.exports = function (app, express) {
                     Obj.DateOfBirth = req.body.DateOfBirth;
                     Obj.Gender = req.body.Gender;
                     Obj.BloodType = req.body.BloodType;
+                    Obj.Email = req.body.Email;
                     if (req.body.Img) {
                         var base64Data = req.body.Img.replace(/^data:image\/png;base64,/, "");
                         require("fs").writeFile("images/" + req.body._id + ".png", base64Data, 'base64', function (err) {
@@ -365,6 +387,40 @@ module.exports = function (app, express) {
                 if (Obj) {
                     Obj.CarePlans = req.body.CarePlans;
                     Client.update({ _id: Obj._id }, Obj, { upsert: true }, function (err) {
+                        // get provider data & redirect to carer portal
+                        for (var i = 0; i < req.body.emailTo.length; i++) {
+
+                            // send email to client and provider to enter their portals (by email)
+                            var mail = {
+                                to: req.body.emailTo[i],
+                                subject: 'Nomadic Care | Care Plans Changed',
+                                text: 'Dear ' + req.body.emailTo[i] + '<br/><br/>\
+                                There is some changes happened in your care plans in Nomadic Care, <br/><br/>\
+                                Please click the following link to login and find out what has been changed .<br/>\
+                                http://localhost:1169/index.html#/' + Base64.encode(req.body.emailTo[i]) + ' \
+                                <br/>\
+                                <br/>\
+                                Nomadic Care Team'
+                            }
+                            console.log(mail);
+                            sendEmail(mail);
+                        }
+
+                        // send email to client & redirect to client portal (by Id)
+                        var mail = {
+                            to: Obj.Email,
+                            subject: 'Nomadic Care | Care Plans Changed',
+                            text: 'Dear ' + Obj.FirstName + ' ' + Obj.LastName + '<br/><br/>\
+                                There is some changes happened in your care plans in Nomadic Care, <br/><br/>\
+                                Please click the following link to login and find out what has been changed .<br/>\
+                                http://localhost:1169/index.html#/' + Obj._id + ' \
+                                <br/>\
+                                <br/>\
+                                Nomadic Care Team'
+                        }
+                        console.log(mail);
+                        sendEmail(mail);
+
                         return res.json({ code: '100', data: 'Updated' });
                         //Send required emails
                     });
@@ -446,6 +502,13 @@ module.exports = function (app, express) {
                 return res.json({ code: '1', data: err });
             else {
                 if (Obj) {
+                    if (req.body.File) {
+                        console.log(req.body.File);
+                        var base64Data = req.body.File.replace(/^data:application\/pdf;base64,/, "");
+                        require("fs").writeFile("pdfs/" + req.body.FileName, base64Data, 'base64', function (err) {
+                            console.log(err);
+                        });
+                    }
                     if (Obj.HealthNotes) {
                         Obj.HealthNotes.push(req.body);
                     }
