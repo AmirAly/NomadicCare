@@ -86,14 +86,30 @@
             ////loader
             $rootScope.loading = true;
             $scope.plans.push($scope.newPlan);
-            var req = {
-                method: 'put',
-                url: '/CarePlans',
-                data: {
-                    _id: $scope.currentClientInfo._id,
-                    CarePlans: $scope.plans
+            if ($scope.activePlan) {
+                var req = {
+                    method: 'put',
+                    url: '/CarePlans',
+                    data: {
+                        _id: $scope.currentClientInfo._id,
+                        CarePlans: $scope.plans,
+                        emailTo: [$scope.activePlan.ByWho1.Email, $scope.activePlan.ByWho2.Email]
+                    }
                 }
             }
+            else { // this is the first plan
+                var req = {
+                    method: 'put',
+                    url: '/CarePlans',
+                    data: {
+                        _id: $scope.currentClientInfo._id,
+                        CarePlans: $scope.plans,
+                        emailTo: []
+                    }
+                }
+            }
+
+            console.log(req.data);
             //// save now to db
             API.execute(req).then(function (_res) {
                 console.log(_res.data);
@@ -185,9 +201,11 @@
             url: '/CarePlans',
             data: {
                 _id: $scope.currentClientInfo._id,
-                CarePlans: $scope.plans
+                CarePlans: $scope.plans,
+                emailTo: [$scope.activePlan.ByWho1.Email, $scope.activePlan.ByWho2.Email]
             }
         }
+        console.log(req.data);
         //// save now to db
         API.execute(req).then(function (_res) {
             console.log(_res.data);
@@ -229,9 +247,11 @@
                 url: '/CarePlans',
                 data: {
                     _id: $scope.currentClientInfo._id,
-                    CarePlans: $scope.plans
+                    CarePlans: $scope.plans,
+                    emailTo: [$scope.activePlan.ByWho1.Email, $scope.activePlan.ByWho2.Email]
                 }
             }
+            console.log(req.data);
             API.execute(req).then(function (_res) {
                 console.log(_res.data);
                 if (_res.data.code == 100) {
@@ -271,9 +291,11 @@
                 url: '/CarePlans',
                 data: {
                     _id: $scope.currentClientInfo._id,
-                    CarePlans: $scope.plans
+                    CarePlans: $scope.plans,
+                    emailTo: [$scope.activePlan.ByWho1.Email, $scope.activePlan.ByWho2.Email]
                 }
             }
+            console.log(req.data);
             API.execute(req).then(function (_res) {
                 console.log(_res.data);
                 if (_res.data.code == 100) {
@@ -297,7 +319,7 @@
     $scope.reassign = function () {
         console.log($scope.activePlan.Provider);
         console.log($rootScope.currentProviderId);
-        $scope.activePlan.Provider = $rootScope.currentProviderId;  // should add current provider: $rootScope.currentProviderId;
+        $scope.activePlan.Provider = $rootScope.currentProviderId;  // add current provider: $rootScope.currentProviderId;
         console.log($scope.activePlan);
         console.log($scope.plans);
 
@@ -307,9 +329,11 @@
             url: '/CarePlans',
             data: {
                 _id: $scope.currentClientInfo._id,
-                CarePlans: $scope.plans
+                CarePlans: $scope.plans,
+                emailTo: [$rootScope.currentProviderEmail]
             }
         }
+        console.log(req.data);
         API.execute(req).then(function (_res) {
             console.log(_res.data);
             if (_res.data.code == 100) {

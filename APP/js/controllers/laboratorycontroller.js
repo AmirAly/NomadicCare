@@ -14,16 +14,22 @@
     }
 
     $scope.fileAttached = "";
-
+    var filename;
     $scope.fileSelected = function (element) {
         $scope.fileAttached = element.files[0];
         console.log(element.files[0]);
-             r = new FileReader();
-            r.onloadend = function (e) {
-                $scope.fileAttached = e.target.result;
-                console.log($scope.fileAttached);
+        r = new FileReader();
+        r.onloadend = function (e) {
+            $scope.fileAttached = e.target.result;
+            //console.log($scope.fileAttached);
+            filename = document.getElementById('uploadLaboratoryNotes').value;
+            var lastIndex = filename.lastIndexOf("\\");
+            if (lastIndex >= 0) {
+                filename = filename.substring(lastIndex + 1);
             }
-            r.readAsBinaryString($scope.fileAttached);
+        }
+        r.readAsDataURL($scope.fileAttached);
+
     };
 
     // date picker settings
@@ -87,48 +93,49 @@
         if (form.$valid) {
             console.log('valid');
 
-                $scope.laboratoryObj = {
-                    HNType: 'Laboratory',
-                    HNStatus: 1,
-                    DateEntered: $scope.txtDateLaboratory,
-                    Notes: $scope.txtNotes,
-                    Type: $scope.txtType,
-                    Status: $scope.txtStatus,
-                    Organisation: $scope.txtOrganisation,
-                    File: $scope.fileAttached
-                }
-                console.log($scope.laboratoryObj);
-                var req = {
-                    method: 'post',
-                    url: '/HealthNotes/' + $scope.currentClientInfo._id,
-                    data: $scope.laboratoryObj
-                }
-                $rootScope.loading = true;
+            $scope.laboratoryObj = {
+                HNType: 'Laboratory',
+                HNStatus: 1,
+                DateEntered: $scope.txtDateLaboratory,
+                Notes: $scope.txtNotes,
+                Type: $scope.txtType,
+                Status: $scope.txtStatus,
+                Organisation: $scope.txtOrganisation,
+                File: $scope.fileAttached,
+                FileName: filename
+            }
+            console.log($scope.laboratoryObj);
+            var req = {
+                method: 'post',
+                url: '/HealthNotes/' + $scope.currentClientInfo._id,
+                data: $scope.laboratoryObj
+            }
+            $rootScope.loading = true;
 
-                API.execute(req).then(function (_res) {
-                    console.log(_res);
-                    if (_res.data.code == 100) {
-                        $scope.dismiss();
-                        $scope.frmLaboratories.$setPristine();
-                        $scope.laboratories.push($scope.laboratoryObj);
-                    }
-                    else {
-                        $scope.showMessage = true;
-                        $scope.messageTxt = _res.data.data;
-                        $scope.messageStatus = 'danger';
-                    }
-                    //$scope.loading = false;
-                }, function (error) {
+            API.execute(req).then(function (_res) {
+                console.log(_res);
+                if (_res.data.code == 100) {
+                    $scope.dismiss();
+                    $scope.frmLaboratories.$setPristine();
+                    $scope.laboratories.push($scope.laboratoryObj);
+                }
+                else {
                     $scope.showMessage = true;
-                    $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
-                    $scope.messageStatus = 'warning';
-                }).finally(function () {
-                    $rootScope.loading = false;
-                    $timeout(function () {
-                        $('.innerSingleTab').scrollTop(document.body.scrollHeight);
-                    }, 1500);
-                });
-            
+                    $scope.messageTxt = _res.data.data;
+                    $scope.messageStatus = 'danger';
+                }
+                //$scope.loading = false;
+            }, function (error) {
+                $scope.showMessage = true;
+                $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
+                $scope.messageStatus = 'warning';
+            }).finally(function () {
+                $rootScope.loading = false;
+                $timeout(function () {
+                    $('.innerSingleTab').scrollTop(document.body.scrollHeight);
+                }, 1500);
+            });
+
         }
 
     }

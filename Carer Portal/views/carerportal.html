@@ -7,8 +7,17 @@
             <b><span class="userName">{{providerName}}</span>&nbsp;|&nbsp;<a ng-click="logout()">Logout</a></b>
         </div>
     </div>
-
-    <div class="pageBody">
+    <!-- Error msg -->
+    <div class="row" ng-show="notUser">
+        <div class="spacer1"></div><div class="spacer1"></div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div ng-class="{'alert-success' : messageStatus == 'success' ,'alert-danger' : messageStatus == 'danger' ,'alert-warning' : messageStatus == 'warning'}" class="alert alert-dismissible text-center" ng-show="showMessage == true" id="dvMSG" role="alert">
+                <span>{{messageTxt}}</span>
+            </div>
+        </div>
+    </div>
+    <!-- Error msg End-->
+    <div class="pageBody" ng-hide="notUser">
         <div class="row">
             <div class="col-xs-6 col-xs-offset-6 text-right">
                 <input type="text" placeholder="Type to filter" class="input-form txtFillterClients" ng-model="searchText.clientName" />

@@ -13,16 +13,22 @@
     }
 
     $scope.fileAttached = "";
-
+    var filename;
     $scope.fileSelected = function (element) {
         $scope.fileAttached = element.files[0];
         console.log(element.files[0]);
         r = new FileReader();
         r.onloadend = function (e) {
             $scope.fileAttached = e.target.result;
-            console.log($scope.fileAttached);
+            //console.log($scope.fileAttached);
+            filename = document.getElementById('uploadDocumentFile').value;
+            var lastIndex = filename.lastIndexOf("\\");
+            if (lastIndex >= 0) {
+                filename = filename.substring(lastIndex + 1);
+            }
         }
-        r.readAsBinaryString($scope.fileAttached);
+        r.readAsDataURL($scope.fileAttached);
+
     };
 
 
@@ -94,7 +100,8 @@
                 DocumentName: $scope.txtDocumentName,
                 Status: $scope.txtStatus,
                 SourceOrganisations: $scope.txtSourceOrganisations,
-                File: $scope.fileAttached
+                File: $scope.fileAttached,
+                FileName: filename
             }
 
             var req = {

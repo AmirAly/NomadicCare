@@ -91,6 +91,7 @@
                     //function login get coordinatorId here
                     $rootScope.currentProviderId = _res.data.data._id;
                     $rootScope.currentProviderName = _res.data.data.Name;
+                    $rootScope.currentProviderEmail = _res.data.data.Email;
                     $rootScope.OrganizationId = _res.data.data.Organization;
                     $rootScope.userType = 'admin';
 
