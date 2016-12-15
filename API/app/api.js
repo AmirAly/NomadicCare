@@ -336,6 +336,7 @@ module.exports = function (app, express) {
                     Obj.Gender = req.body.Gender;
                     Obj.BloodType = req.body.BloodType;
                     Obj.Email = req.body.Email;
+                    obj.Img = req.body.Img;
                     if (req.body.Img) {
                         var base64Data = req.body.Img.replace(/^data:image\/png;base64,/, "");
                         require("fs").writeFile("images/" + req.body._id + ".png", base64Data, 'base64', function (err) {
@@ -390,7 +391,7 @@ module.exports = function (app, express) {
                         // get provider data & redirect to carer portal
                         for (var i = 0; i < req.body.emailTo.length; i++) {
 
-                            // send email to client and provider to enter their portals (by email)
+                            // send email to provider to enter their portals (by email)
                             var mail = {
                                 to: req.body.emailTo[i],
                                 subject: 'Nomadic Care | Care Plans Changed',
@@ -413,7 +414,7 @@ module.exports = function (app, express) {
                             text: 'Dear ' + Obj.FirstName + ' ' + Obj.LastName + '<br/><br/>\
                                 There is some changes happened in your care plans in Nomadic Care, <br/><br/>\
                                 Please click the following link to login and find out what has been changed .<br/>\
-                                http://localhost:1169/index.html#/' + Obj._id + ' \
+                                http://localhost:1406/index.html#/' + Obj._id + ' \
                                 <br/>\
                                 <br/>\
                                 Nomadic Care Team'
@@ -454,6 +455,28 @@ module.exports = function (app, express) {
                     return res.json({ code: '20', data: 'Care plans not exist' });
             }
         }).populate('Coordinator');
+    });
+
+    api.put('/CarePlans/ProgressNotes', function (req, res) {
+        Client.findOne({ _id: req.body.clientId }, '', function (err, FoundClient) {
+            if (err)
+                return res.json({ code: '1', data: err });
+            else {
+                if (FoundClient) {
+                    for (var i = 0; i < FoundClient.CarePlans.length; i++) {
+                        if (FoundClient.CarePlans[i]._id == req.body.planId) {
+                            FoundClient.CarePlans[i].Progress = req.body.notes;
+                            console.log(FoundClient.CarePlans[i].Progress);
+                            Client.update({ _id: req.body.clientId }, FoundClient, { upsert: true }, function (err) {
+                                return res.json({ code: '100', data: 'Updated' });
+                            });
+                        }
+                    }
+                }
+                else
+                    return res.json({ code: '20', data: 'Client not exist' });
+            }
+        });
     });
 
 

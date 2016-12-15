@@ -1,8 +1,4 @@
-﻿clientportal.controller("ClientportalController", function ($scope, $state, $rootScope, $stateParams, API) {
-    //$scope.plans = [
-    //    { id: 1, name: 'Lose Weight', startDate: '1/1/2016', endDate: '12/12/2016', Goal: 'Lose 10 kg', carerObjective: 'Perersonal Trainer once a week' },
-    //    { id: 2, name: 'Mental health', startDate: '1/1/2016', endDate: '12/12/2016', Goal: 'Check Mental health', carerObjective: 'Perersonal Trainer once a week' }
-    //];
+﻿clientportal.controller("ClientportalController", function ($scope, $state, $rootScope, $stateParams, API, $timeout) {
 
     // get curret client
     var req = {
@@ -18,11 +14,18 @@
         if (_res.data.code == 100) {
             $scope.clientName = _res.data.data[0].FirstName + " " + _res.data.data[0].LastName;
             $scope.plans = _res.data.data[0].CarePlans;
+            $scope.notUser = false;
         }
         else {
-            $scope.plans = [];
+            $scope.notUser = true;
+            $scope.showMessage = true;
+            $scope.messageTxt = 'No Such Client ...';
+            $scope.messageStatus = 'warning';
         }
     }, function (error) {
+        $scope.showMessage = true;
+        $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
+        $scope.messageStatus = 'warning';
     }).finally(function () {
         $rootScope.loading = false;
     });
@@ -35,6 +38,7 @@
             }
         }
         console.log($scope.currentPlan);
+        $scope.showDetails = true;
     }
 
     $scope.notes = [];
@@ -44,11 +48,45 @@
         if ($scope.txtNote != null || $scope.txtNote != '') {
             $scope.currentPlan.Progress.push({ Text: $scope.txtNote, Provider: $scope.clientName, Date: new Date() });
             $scope.txtNote = '';
+            $timeout(function () {
+                $('.prgrsDv').scrollTop(document.body.scrollHeight);
+            }, 500);
         }
         $scope.addNotes = false;
     }
-    $scope.showDetails = true;
 
+    $scope.save = function () {
+        var req = {
+            method: 'put',
+            url: '/CarePlans/ProgressNotes',
+            data: {
+                clientId: $stateParams.clientid,
+                planId: $scope.currentPlan._id,
+                notes: $scope.currentPlan.Progress
+            }
+        }
+        console.log(req);
+        $rootScope.loading = true;
+        API.execute(req).then(function (_res) {
+            console.log(_res);
+            if (_res.data.code == 100) {
+                $scope.showDetails = !$scope.showDetails;
+                $scope.dismiss();
+            }
+            else {
+                $scope.showMessage2 = true;
+                $scope.messageTxt2 = _res.data.data;
+                $scope.messageStatus2 = 'danger';
+            }
+            //$scope.loading = false;
+        }, function (error) {
+            $scope.showMessage2 = true;
+            $scope.messageTxt2 = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
+            $scope.messageStatus2 = 'warning';
+        }).finally(function () {
+            $rootScope.loading = false;
+        });
+    }
 });
 
 
