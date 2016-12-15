@@ -279,10 +279,12 @@
     $scope.setBywho1Data = function (form) {
         angular.element(document.getElementsByClassName('txtByWho')).removeClass('errorBorder');
         angular.element(document.getElementsByClassName('lblByWho')).removeClass('errorFont');
+        form.$valid = true;
     }
     $scope.setBywho2Data = function (form) {
         angular.element(document.getElementsByClassName('txtByWho2')).removeClass('errorBorder');
         angular.element(document.getElementsByClassName('lblByWho2')).removeClass('errorFont');
+        form.$valid = true;
     }
 
     $scope.submit = function (form) {

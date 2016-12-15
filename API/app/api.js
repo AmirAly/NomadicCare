@@ -336,7 +336,7 @@ module.exports = function (app, express) {
                     Obj.Gender = req.body.Gender;
                     Obj.BloodType = req.body.BloodType;
                     Obj.Email = req.body.Email;
-                    obj.Img = req.body.Img;
+                    Obj.Img = req.body.Img;
                     if (req.body.Img) {
                         var base64Data = req.body.Img.replace(/^data:image\/png;base64,/, "");
                         require("fs").writeFile("images/" + req.body._id + ".png", base64Data, 'base64', function (err) {
