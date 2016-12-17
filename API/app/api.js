@@ -1,4 +1,5 @@
-﻿var nodemailer = require('nodemailer');
+﻿var schedule = require('node-schedule');
+var nodemailer = require('nodemailer');
 //======================== add Doctor and Patient schemas ============================
 var Organization = require('./models/organization');
 var Coordinator = require('./models/coordinator');
@@ -17,7 +18,7 @@ module.exports = function (app, express) {
             requiresAuth: true,
             auth: {
                 user: 'eng.samar.bakr@gmail.com',
-                pass: '01007160747Z@z'
+                pass: '0111007160747000000'
             }
         });
         var mailOptions = {
@@ -386,44 +387,95 @@ module.exports = function (app, express) {
                 return res.json({ code: '1', data: err });
             else {
                 if (Obj) {
+                    //schedual
+                    for (var i = 0; i < req.body.CarePlans.length; i++) {
+                        if (req.body.CarePlans[i].IsNew == true && req.body.CarePlans[i].ByWho1.Email != 'example@mail.com') {
+                            req.body.CarePlans[i].IsNew = false;
+                            //send schedual emails 1
+                            var mail = {
+                                to: req.body.CarePlans[i].ByWho1.Email,
+                                subject: 'Nomadic Care | Plan Reminder',
+                                text: 'Dear ' + req.body.CarePlans[i].ByWho1.Email + '<br/><br/>\
+                                               This is a gentle reminder about your plan due date on <br/>\
+                                               ' + req.body.CarePlans[i].ByWhen1 + '<br/>\
+                                               <br/>\
+                                               Nomadic Care Team'
+                            }
+                            var j = schedule.scheduleJob('* * 8 * ' + new Date(req.body.CarePlans[i].ByWhen1).getDay(), function () {
+                                sendEmail(mail);
+                            });
+                            var result = new Date(req.body.CarePlans[i].ByWhen1); console.log(result);
+                            result.setDate(result.getDate() + 7); console.log(result);
+                            var j = schedule.scheduleJob(result, function () {
+                                console.log('doooooooone');
+                                sendEmail(mail);
+                            });
+
+                            // send schedual emails 2
+                            var mail2 = {
+                                to: req.body.CarePlans[i].ByWho2.Email,
+                                subject: 'Nomadic Care | Plan Reminder',
+                                text: 'Dear ' + req.body.CarePlans[i].ByWho2.Email + '<br/><br/>\
+                                               This is a gentle reminder about your plan due date on <br/>\
+                                               ' + req.body.CarePlans[i].ByWhen2 + '<br/>\
+                                               <br/>\
+                                               Nomadic Care Team'
+                            }
+                            var j = schedule.scheduleJob('* * 8 * ' + new Date(req.body.CarePlans[i].ByWhen2).getDay(), function () {
+                                sendEmail(mail);
+                            });
+                            var result2 = new Date(req.body.CarePlans[i].ByWhen2);
+                            result2.setDate(result2.getDate() + 7);
+                            var j2 = schedule.scheduleJob(result2, function () {
+                                sendEmail(mail2);
+                            });
+
+                        }
+                        
+                    }
                     Obj.CarePlans = req.body.CarePlans;
                     Client.update({ _id: Obj._id }, Obj, { upsert: true }, function (err) {
-                        // get provider data & redirect to carer portal
-                        for (var i = 0; i < req.body.emailTo.length; i++) {
-
-                            // send email to provider to enter their portals (by email)
-                            var mail = {
-                                to: req.body.emailTo[i],
-                                subject: 'Nomadic Care | Care Plans Changed',
-                                text: 'Dear ' + req.body.emailTo[i] + '<br/><br/>\
+                        if (err) {
+                            res.json({ code: '1', data: err });
+                            return;
+                        }
+                        else {
+                            // get provider data & redirect to carer portal
+                            for (var i = 0; i < req.body.emailTo.length; i++) {
+                                // send email to provider to enter their portals (by email)
+                                var mail = {
+                                    to: req.body.emailTo[i],
+                                    subject: 'Nomadic Care | Care Plans Changed',
+                                    text: 'Dear ' + req.body.emailTo[i] + '<br/><br/>\
                                 There is some changes happened in your care plans in Nomadic Care, <br/><br/>\
                                 Please click the following link to login and find out what has been changed .<br/>\
                                 http://localhost:1169/index.html#/' + Base64.encode(req.body.emailTo[i]) + ' \
                                 <br/>\
                                 <br/>\
                                 Nomadic Care Team'
+                                }
+                                console.log(mail);
+                                sendEmail(mail);
                             }
-                            console.log(mail);
-                            sendEmail(mail);
-                        }
 
-                        // send email to client & redirect to client portal (by Id)
-                        var mail = {
-                            to: Obj.Email,
-                            subject: 'Nomadic Care | Care Plans Changed',
-                            text: 'Dear ' + Obj.FirstName + ' ' + Obj.LastName + '<br/><br/>\
+                            // send email to client & redirect to client portal (by Id)
+                            var mail = {
+                                to: Obj.Email,
+                                subject: 'Nomadic Care | Care Plans Changed',
+                                text: 'Dear ' + Obj.FirstName + ' ' + Obj.LastName + '<br/><br/>\
                                 There is some changes happened in your care plans in Nomadic Care, <br/><br/>\
                                 Please click the following link to login and find out what has been changed .<br/>\
                                 http://localhost:1406/index.html#/' + Obj._id + ' \
                                 <br/>\
                                 <br/>\
                                 Nomadic Care Team'
-                        }
-                        console.log(mail);
-                        sendEmail(mail);
+                            }
+                            console.log(mail);
+                            sendEmail(mail);
 
-                        return res.json({ code: '100', data: 'Updated' });
-                        //Send required emails
+                            return res.json({ code: '100', data: 'Updated' });
+                            //Send required emails
+                        }
                     });
                 }
                 else

@@ -70,8 +70,8 @@ var Client = new Schema({
             PatientAgree: { type: Boolean },
             LastUpdated: {
                 type: Date, default: new Date()
-            }
-
+            },
+            IsNew: { type: Boolean }
         }
     ]
 

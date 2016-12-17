@@ -85,6 +85,9 @@
             console.log('add');
             ////loader
             $rootScope.loading = true;
+            $scope.newPlan.IsNew = true;
+            console.log($scope.newPlan);
+
             $scope.plans.push($scope.newPlan);
             if ($scope.activePlan) {
                 var req = {
@@ -276,37 +279,34 @@
         $state.reload();
     }
 
-    $scope.setBywho1Data = function (form) {
-        angular.element(document.getElementsByClassName('txtByWho')).removeClass('errorBorder');
-        angular.element(document.getElementsByClassName('lblByWho')).removeClass('errorFont');
-        form.$valid = true;
-    }
-    $scope.setBywho2Data = function (form) {
-        angular.element(document.getElementsByClassName('txtByWho2')).removeClass('errorBorder');
-        angular.element(document.getElementsByClassName('lblByWho2')).removeClass('errorFont');
-        form.$valid = true;
-    }
+    //$scope.setBywho1Data = function (form) {
+    //    angular.element(document.getElementsByClassName('txtByWho')).removeClass('errorBorder');
+    //    angular.element(document.getElementsByClassName('lblByWho')).removeClass('errorFont');
+    //    form.$valid = true;
+    //}
+    //$scope.setBywho2Data = function (form) {
+    //    angular.element(document.getElementsByClassName('txtByWho2')).removeClass('errorBorder');
+    //    angular.element(document.getElementsByClassName('lblByWho2')).removeClass('errorFont');
+    //    form.$valid = true;
+    //}
 
     $scope.submit = function (form) {
         angular.forEach($scope.frmPlan.$error.required, function (field) {
             field.$setDirty();
         });
-        if ($scope.newPlan.Provider == '10') {
-            angular.element(document.getElementById('cmbProvider')).addClass('errorBorder');
-            angular.element(document.getElementById('lblProvider')).addClass('errorFont');
-        }
-        if ($scope.newPlan.ByWho1.Email == 'example@mail.com') {
-            console.log('here');
-            angular.element(document.getElementsByClassName('txtByWho')).addClass('errorBorder');
-            angular.element(document.getElementsByClassName('lblByWho')).addClass('errorFont');
-            form.$valid = false;
-        }
-        if ($scope.newPlan.ByWho2.Email == 'example@mail.com') {
-            console.log('here2');
-            angular.element(document.getElementsByClassName('txtByWho2')).addClass('errorBorder');
-            angular.element(document.getElementsByClassName('lblByWho2')).addClass('errorFont');
-            form.$valid = false;
-        }
+
+        //if ($scope.activePlan.ByWho1.Email == 'example@mail.com') {
+        //    console.log('here');
+        //    angular.element(document.getElementsByClassName('txtByWho')).addClass('errorBorder');
+        //    angular.element(document.getElementsByClassName('lblByWho')).addClass('errorFont');
+        //    form.$valid = false;
+        //}
+        //if ($scope.activePlan.ByWho2.Email == 'example@mail.com') {
+        //    console.log('here2');
+        //    angular.element(document.getElementsByClassName('txtByWho2')).addClass('errorBorder');
+        //    angular.element(document.getElementsByClassName('lblByWho2')).addClass('errorFont');
+        //    form.$valid = false;
+        //}
         if (form.$valid) {
             $rootScope.loading = true;
             var req = {
