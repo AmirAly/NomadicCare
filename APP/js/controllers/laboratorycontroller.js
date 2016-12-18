@@ -14,7 +14,7 @@
     }
 
     $scope.fileAttached = "";
-    var filename;
+    //var filename;
     $scope.fileSelected = function (element) {
         $scope.fileAttached = element.files[0];
         console.log(element.files[0]);
@@ -22,11 +22,11 @@
         r.onloadend = function (e) {
             $scope.fileAttached = e.target.result;
             //console.log($scope.fileAttached);
-            filename = document.getElementById('uploadLaboratoryNotes').value;
-            var lastIndex = filename.lastIndexOf("\\");
-            if (lastIndex >= 0) {
-                filename = filename.substring(lastIndex + 1);
-            }
+            //filename = document.getElementById('uploadLaboratoryNotes').value;
+            //var lastIndex = filename.lastIndexOf("\\");
+            //if (lastIndex >= 0) {
+            //    filename = filename.substring(lastIndex + 1);
+            //}
         }
         r.readAsDataURL($scope.fileAttached);
 
@@ -102,7 +102,7 @@
                 Status: $scope.txtStatus,
                 Organisation: $scope.txtOrganisation,
                 File: $scope.fileAttached,
-                FileName: filename
+                FileName: $rootScope.generateRandomName()
             }
             console.log($scope.laboratoryObj);
             var req = {

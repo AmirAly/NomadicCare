@@ -18,6 +18,11 @@
 .btnTodayDate {
 }
 
+.downloadLink ,.downloadLink:hover, .downloadLink:focus,.downloadLink:visited, .downloadLink:active {
+    color: #fff !important;
+    text-decoration: underline;
+}
+
 /*calender*/
 .datetimepicker .table > thead > tr:first-child > th.switch {
     display: table-cell;
@@ -1399,7 +1404,7 @@ canvas {
     font-size: 10px;
 }
 
-.dvProgressContainer{
+.dvProgressContainer {
     height: 100px;
     width: 98%;
     overflow: auto;

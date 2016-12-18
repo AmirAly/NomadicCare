@@ -35,7 +35,15 @@ module.exports = function (app, express) {
                 return 100;
         });
     }
-
+    //function generateRandomName() {
+    //    var length = 12,
+    //        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+    //        retVal = "";
+    //    for (var i = 0, n = charset.length; i < length; ++i) {
+    //        retVal += charset.charAt(Math.floor(Math.random() * n));
+    //    }
+    //    return retVal;
+    //};
     api.get('/', function (req, res) {
         return res.json({ code: '100', data: 'API is working great' });
     });
@@ -406,7 +414,7 @@ module.exports = function (app, express) {
                             });
                             var result = new Date(req.body.CarePlans[i].ByWhen1); console.log(result);
                             result.setDate(result.getDate() + 7); console.log(result);
-                            var j = schedule.scheduleJob(result, function () {
+                            var jj = schedule.scheduleJob(result, function () {
                                 console.log('doooooooone');
                                 sendEmail(mail);
                             });
@@ -578,9 +586,9 @@ module.exports = function (app, express) {
             else {
                 if (Obj) {
                     if (req.body.File) {
-                        console.log(req.body.File);
+                        console.log(req.body._id); // undefined 
                         var base64Data = req.body.File.replace(/^data:application\/pdf;base64,/, "");
-                        require("fs").writeFile("pdfs/" + req.body.FileName, base64Data, 'base64', function (err) {
+                        require("fs").writeFile("pdfs/" + req.body.FileName + ".pdf", base64Data, 'base64', function (err) {
                             console.log(err);
                         });
                     }

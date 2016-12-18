@@ -20,7 +20,7 @@
             <tr ng-repeat="item in documents | filter:searchText as filteredArray">
                 <td>{{item.DateEntered | date:'mediumDate'}}</td> <!-- 'mediumDate' equivalent to 'MMM d, y' -->
                 <td>{{item.Description}}</td>
-                <td>{{item.DocumentName}}</td>
+                <td><a class="downloadLink" href="pdfs/{{item.FileName}}.pdf" target="_blank">{{item.DocumentName}}</a></td>
                 <td>{{item.Status}}</td>
                 <td>{{item.SourceOrganisations}}</td>
             </tr>

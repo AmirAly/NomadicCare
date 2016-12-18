@@ -26,7 +26,8 @@ mongoose.connect(db.url, function (err) {
             next();
         });
         app.use('/', api);
-        app.use(express.static('../APP'));
+        app.use(express.static(path.join('../APP')));
+        app.use(express.static(path.join('../API')));
         //my local host express configuration to serve angular app on this server 
         //without visual studio run at http://localhost:8007/index.html
         app.get('*', function (req, res) {
