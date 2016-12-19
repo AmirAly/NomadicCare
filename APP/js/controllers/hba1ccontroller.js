@@ -31,44 +31,53 @@
     $scope.chartDataArray = [];
     var myLine;
 
-    $timeout(function () {
-        console.log($scope.currentClientInfo);
-        $rootScope.activeoutertab = 'healthmeasurment';
-        $rootScope.activetab = 'hba1c';
-        // Get data
-        var req = {
-            method: 'get',
-            url: '/HealthMeasurments/' + $scope.currentClientInfo._id + '/' + 'HBA1c',
-            data: {}
-        }
-        ////loader
-        $rootScope.loading = true;
+    
 
-        API.execute(req).then(function (_res) {
-            console.log(_res.data.data);
-            if (_res.data.code == 100) {
-                $scope.chartDataArray = _res.data.data;
-                $scope.chartDataArray.sort(function (a, b) {
-                    // Turn your strings into dates, and then subtract them to get a value that is either negative, positive, or zero.
-                    return new Date(b.Date) - new Date(a.Date);
+    $scope.$watch('currentClientInfo', function () {
+        if (typeof $scope.currentClientInfo === 'undefined') { }
+        else {
+            $timeout(function () {
+                console.log($scope.currentClientInfo);
+                $rootScope.activeoutertab = 'healthmeasurment';
+                $rootScope.activetab = 'hba1c';
+                // Get data
+                var req = {
+                    method: 'get',
+                    url: '/HealthMeasurments/' + $scope.currentClientInfo._id + '/' + 'HBA1c',
+                    data: {}
+                }
+                ////loader
+                $rootScope.loading = true;
+
+                API.execute(req).then(function (_res) {
+                    console.log(_res.data.data);
+                    if (_res.data.code == 100) {
+                        $scope.chartDataArray = _res.data.data;
+                        $rootScope.HBA1cArray = _res.data.data;
+                        $scope.chartDataArray.sort(function (a, b) {
+                            // Turn your strings into dates, and then subtract them to get a value that is either negative, positive, or zero.
+                            return new Date(b.Date) - new Date(a.Date);
+                        });
+                    }
+                    else {
+                        $scope.chartDataArray = [];
+                    }
+                    //$scope.loading = false;
+                }, function (error) {
+                    $scope.showMessage = true;
+                    $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
+                    $scope.messageStatus = 'warning';
+                }).finally(function () {
+                    $scope.drawChart().then(function () {
+                        console.log('then');
+                    });
+                    $rootScope.loading = false;
                 });
-            }
-            else {
-                $scope.chartDataArray = [];
-            }
-            //$scope.loading = false;
-        }, function (error) {
-            $scope.showMessage = true;
-            $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
-            $scope.messageStatus = 'warning';
-        }).finally(function () {
-            $scope.drawChart().then(function () {
-                console.log('then');
-            });
-            $rootScope.loading = false;
-        });
 
-    }, 500);
+            }, 500);
+        }
+    });
+
 
     $scope.drawChart = function () {
         //Chart
@@ -233,6 +242,12 @@
             });
         }
 
+    }
+
+    $scope.SetAnalytics = function (_secondParameter) {
+        $rootScope.firstArray = $rootScope.HBA1cArray;
+        $rootScope.secondArrayName = _secondParameter;
+        $state.go('healthrecord.analytics');
     }
 
 });

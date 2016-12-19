@@ -3,6 +3,25 @@
         <h3>No Data found</h3>
     </div>
     <div class="col-xs-12" ng-hide="chartDataArray.length == 0">
+
+        <div class="clear2"></div>
+        <div class="text-center">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Analytics <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a ng-click="SetAnalytics('Weight')">Weight</a></li>
+                    <li><a ng-click="SetAnalytics('Activity')">Activity</a></li>
+                    <li><a ng-click="SetAnalytics('BloodPressure')">Blood Pressure</a></li>
+                    <li><a ng-click="SetAnalytics('Cholesterol')">Cholesterol</a></li>
+                    <!--<li><a ng-click="SetAnalytics('HBA1c')">HBA1c</a></li>-->
+                    <li><a ng-click="SetAnalytics('BloodGlucose')">Blood Glucose</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear3"></div>
+
         <canvas id="canvasHBA1c"></canvas>
     </div>
 </div>
