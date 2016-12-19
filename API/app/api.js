@@ -17,8 +17,8 @@ module.exports = function (app, express) {
             port: 587,
             requiresAuth: true,
             auth: {
-                user: 'eng.samar.bakr@gmail.com',
-                pass: '0111007160747000000'
+                user: 'care.nomadiccare@gmail.com',
+                pass: 'nomadic@care'
             }
         });
         var mailOptions = {
