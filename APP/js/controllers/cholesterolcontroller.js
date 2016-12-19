@@ -246,6 +246,7 @@
 
     $scope.SetAnalytics = function (_secondParameter) {
         $rootScope.firstArray = $rootScope.CholesterolArray;
+        $rootScope.firstArrayName = 'Cholesterol';
         $rootScope.secondArrayName = _secondParameter;
         $state.go('healthrecord.analytics');
     }

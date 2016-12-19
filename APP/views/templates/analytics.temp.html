@@ -1,7 +1,16 @@
 ﻿<div class="innerSingleTabNoTabs">
-    <div class="row col-xs-12">
+
+    <div class="text-center" ng-show="noAnalyticsData">
+        <div class="clear"></div>
+        <h5>There is no data to show</h5>
+    </div>
+    <div class="row col-xs-12" ng-hide="noAnalyticsData">
         <div class="col-xs-12">
             <canvas id="canvasAnalytics"></canvas>
+            <div class="clear2"></div>
+            <div class="text-center">
+                <h5>{{firstArrayName}} Vs {{secondArrayName}}</h5>
+            </div>
         </div>
     </div>
 </div>

@@ -244,6 +244,7 @@
 
     $scope.SetAnalytics = function (_secondParameter) {
         $rootScope.firstArray = $rootScope.BloodPressureArray;
+        $rootScope.firstArrayName = 'Blood Pressure';
         $rootScope.secondArrayName = _secondParameter;
         $state.go('healthrecord.analytics');
     }

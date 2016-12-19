@@ -19,7 +19,7 @@ ehs.run(function ($rootScope, $state, slidePush, $location, $timeout) {
     $rootScope.DeleteConfirmed2 = false;
     $rootScope.OrganizationId = 0;
     $rootScope.DateIsToday = new Date();
-
+    $rootScope.secondArrayName = "";
 
     // when userType is undefined ,redirect to login 
     $rootScope.$watch('$root.userType', function () {
