@@ -1,6 +1,5 @@
 ﻿ehs.controller("LoginController", function ($scope, $state, $rootScope, API, $timeout, $stateParams) {
     $rootScope.userType = 'login';
-
     $scope.loginFormError = false;
     console.log($stateParams.confirmationcode);
     console.log($stateParams);

@@ -1,6 +1,7 @@
 ﻿var ehs = angular.module("ehs", ['ui.router', 'ui.bootstrap.datetimepicker', 'ngAnimate', 'ui.dateTimeInput', 'uiSwitch']);
 
 ehs.run(function ($rootScope, $state, slidePush, $location, $timeout) {
+
     $rootScope.logout = function () {
         if (confirm("Are you sure you want to logout ?") == true) {
             // if menu opened , close it first before  logout

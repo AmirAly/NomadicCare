@@ -5,7 +5,7 @@
     // get curret provider
     var req = {
         method: 'get',
-        url: '/CoordinatorByEmail/' + Base64.decode($stateParams.providerid),
+        url: '/CarerPlansByEmail/' + Base64.decode($stateParams.providerid),
         data: {}
     }
     console.log(req);
@@ -16,14 +16,30 @@
         console.log(_res.data);
         if (_res.data.code == 100) {
             $scope.notUser = false;
-            $rootScope.providerName = _res.data.data[0].Name;
-            $scope.Organization = _res.data.data[0].Organization;
-            $scope.providerid = _res.data.data[0]._id;
+            $scope.careplans = [];
+            $rootScope.providerName = Base64.decode($stateParams.providerid);
+            for (var i = 0; i < _res.data.data.length; i++) {
+                console.log('for');
+                $scope.careplans.push({
+                    clientId: _res.data.data[i].clientId,
+                    clientName: _res.data.data[i].clientName,
+                    clientImg: _res.data.data[i].clientImg,
+                    planId: _res.data.data[i].plan._id,
+                    planName: _res.data.data[i].plan.PlanName,
+                    planStatus: _res.data.data[i].plan.Status,
+                    lastUpdated: _res.data.data[i].plan.LastUpdated,
+                    toImprove: _res.data.data[i].plan.ToImprove,
+                    carerObjective: _res.data.data[i].plan.ToAchieve1 + " - " + _res.data.data[i].plan.ToAchieve2,
+                    note: _res.data.data[i].plan.Progress,
+                    date: _res.data.data[i].plan.ByWhen1
+                });
+            }
+            console.log($scope.careplans);
         }
         else {
             $scope.notUser = true;
             $scope.showMessage = true;
-            $scope.messageTxt = 'No Such Provider ...';
+            $scope.messageTxt = _res.data.data;
             $scope.messageStatus = 'warning';
         }
 
@@ -32,79 +48,7 @@
         $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
         $scope.messageStatus = 'warning';
     }).finally(function () {
-
-        // get provider plans
-        var req = {
-            method: 'get',
-            url: '/CarePlans/' + $scope.Organization,
-            data: {}
-        }
-
-        API.execute(req).then(function (_res) {
-            console.log(_res.data);
-            if (_res.data.code == 100) {
-                $scope.careplans = [];
-                $scope.plans = [];
-                $scope.result = _res.data.data;
-
-                var req2 = {
-                    method: 'get',
-                    url: '/Coordinator/List/' + $scope.Organization,
-                    data: {}
-                }
-                API.execute(req2).then(function (_res) {
-                    console.log(_res.data);
-                    if (_res.data.code == 100) {
-                        $scope.providers = _res.data.data;
-                    }
-                    else {
-                        $scope.providers = [];
-                    }
-                })
-                   .finally(function () {
-                       for (var i = 0; i < $scope.result.length; i++) {
-                           for (var j = 0; j < $scope.result[i].CarePlans.length; j++) {
-                               var _providerName;
-                               var _providerImg;
-                               for (var k = 0; k < $scope.providers.length; k++) {
-                                   if ($scope.providers[k]._id == $scope.result[i].CarePlans[j].Provider) {
-                                       _providerName = $scope.providers[k].Name;
-                                       _providerImg = $scope.providers[k].Img;
-                                   }
-                               }
-                               if ($scope.result[i].CarePlans[j].Provider == $scope.providerid) {
-                                   console.log($scope.result[i]);
-                                   $scope.careplans.push({
-                                       clientId: $scope.result[i]._id,
-                                       clientName: $scope.result[i].FirstName + " " + $scope.result[i].LastName,
-                                       clientImg: $scope.result[i].Img,
-                                       providerId: $scope.result[i].CarePlans[j].Provider,
-                                       providerName: _providerName,
-                                       providerImg: _providerImg,
-                                       planId: $scope.result[i].CarePlans[j]._id,
-                                       planName: $scope.result[i].CarePlans[j].PlanName,
-                                       planStatus: $scope.result[i].CarePlans[j].Status,
-                                       lastUpdated: $scope.result[i].CarePlans[j].LastUpdated,
-                                       toImprove: $scope.result[i].CarePlans[j].ToImprove,
-                                       carerObjective: $scope.result[i].CarePlans[j].ToAchieve1 + " - " + $scope.result[i].CarePlans[j].ToAchieve2,
-                                       note: $scope.result[i].CarePlans[j].Progress,
-                                       date: $scope.result[i].CarePlans[j].ByWhen1
-                                   });
-                               }
-                           }
-                       }
-                       console.log($scope.careplans);
-                       $rootScope.loading = false;
-                       console.log($rootScope.loading);
-                   });
-            }
-            else {
-                $scope.careplans = [];
-                $scope.showMessage = true;
-                $scope.messageTxt = 'No care plans found ...';
-                $scope.messageStatus = 'warning';
-            }
-        });
+        $rootScope.loading = false;
     });
 
 

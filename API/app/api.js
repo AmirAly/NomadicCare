@@ -35,15 +35,7 @@ module.exports = function (app, express) {
                 return 100;
         });
     }
-    //function generateRandomName() {
-    //    var length = 12,
-    //        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-    //        retVal = "";
-    //    for (var i = 0, n = charset.length; i < length; ++i) {
-    //        retVal += charset.charAt(Math.floor(Math.random() * n));
-    //    }
-    //    return retVal;
-    //};
+    
     api.get('/', function (req, res) {
         return res.json({ code: '100', data: 'API is working great' });
     });
@@ -100,26 +92,6 @@ module.exports = function (app, express) {
             }
         });
     });
-
-    api.get('/CoordinatorByEmail/:CoordinatorEmail', function (req, res) {
-        var _Email = req.params.CoordinatorEmail;
-        console.log(_Email);
-        Coordinator.find({ 'Email': _Email }, '', function (err, Obj) {
-            if (err)
-                return res.json({ code: '1', data: err });
-            else {
-                if (Obj) {
-                    if (Obj.length > 0)
-                        return res.json({ code: '100', data: Obj });
-                    else
-                        return res.json({ code: '21', data: 'No coordinator with such id' });
-                }
-                else
-                    return res.json({ code: '20', data: 'No coordinator with such id' });
-            }
-        });
-    });
-
     api.get('/Coordinator/Confirm/:code', function (req, res) {
         var _code = req.params.code;
         Coordinator.findOne({ 'RetrivalCode': _code }, '', function (err, Obj) {
@@ -217,6 +189,35 @@ module.exports = function (app, express) {
         });
     });
 
+
+    api.get('/CarerPlansByEmail/:CoordinatorEmail', function (req, res) {
+        var _Email = req.params.CoordinatorEmail;
+        console.log(_Email);
+        Client.find('', function (err, Obj) {
+            if (err)
+                return res.json({ code: '1', data: err });
+            else{
+                if (Obj) {
+                    var planList = [];
+                    for (var k = 0; k < Obj.length; k++) {
+                        for (var i = 0; i < Obj[k].CarePlans.length; i++) {
+                            if (Obj[k].CarePlans[i].ByWho1.Email == _Email || Obj[k].CarePlans[i].ByWho2.Email == _Email) {
+                                var newObj = {};
+                                newObj.plan = Obj[k].CarePlans[i];
+                                newObj.clientId = Obj[k]._id;
+                                newObj.clientName = Obj[k].FirstName + " " + Obj[k].LastName;
+                                newObj.clientImg = Obj[k].Img;
+                                planList.push(newObj);
+                            }
+                        }
+                    }
+                    return res.json({ code: '100', data: planList });
+                }
+                else
+                    return res.json({ code: '20', data: 'No plans found' });
+            }
+        });
+    });
 
     api.put('/Organization', function (req, res) {
         Organization.findOne({ Name: req.body.Name, Phone: req.body.Phone, PostalCode: req.body.PostalCode }, '', function (err, Obj) {

@@ -135,6 +135,41 @@
     <script type="text/javascript" src="js/controllers/analyticscontroller.js"></script>
     <script type="text/javascript" src="js/controllers/careplanscontroller.js"></script>
 
+    <script>
+        window.confirm = function (message, callback, caption) {
+            caption = caption || 'Confirmation'
+
+            $(document.createElement('div')).attr({
+                title: caption,
+                'class': 'dialog'
+            }).html(message).dialog({
+                position: ['center', 100],
+                dialogClass: 'fixed',
+                buttons: {
+                    "OK": function () {
+                        $(this).dialog('close');
+                        callback()
+                        return true;
+                    },
+                    "Cancel": function () {
+                        $(this).dialog('close');
+                        return false;
+                    }
+                },
+                close: function () {
+                    $(this).remove();
+                },
+                draggable: false,
+                modal: true,
+                resizable: false,
+                width: 'auto'
+            });
+        };
+
+        confirm('dd', function () {
+            console.log('xxx')
+        });
+    </script>
 
 </body>
 
