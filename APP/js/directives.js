@@ -89,24 +89,33 @@ ehs.directive('stringToNumber', function () {
     };
 });
 
-ehs.directive('confirmOnExit', function () {
+ehs.directive('confirmOnExit', function ($state) {
     return {
-        link: function ($scope, elem, attrs) {
-            console.log(elem[0].name);
-            var formName = elem[0].name;
+        link: function ($scope, elem, attrs, ctrl) {
             window.onbeforeunload = function () {
-                console.log('onbeforeunload');
-                if ($scope[formName].$dirty) {
-                    return "Do you want to leave the page without saving changes?";
+                if ($scope[attrs["name"]].$dirty) {
+                    return "Your edits will be lost.";
                 }
             }
-            $scope.$on('$stateChangeStart', function (event, next, current) {
-                console.log('stateChangeStart');
-                console.log(formName);
-                if ($scope[formName].$dirty) {
-                    if (!confirm("Do you want to leave the page without saving changes?")) {
-                        event.preventDefault();
-                    }
+            $scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+                console.log(toState);
+                console.log(toParams);
+                console.log(fromState);
+                console.log(fromParams);
+                console.log(attrs["name"]);
+                if ($scope[attrs["name"]].$dirty) {
+                    event.preventDefault();
+                    confirm("Your edits will be lost.", function () {
+                        $scope[attrs["name"]].$setPristine();
+                        event.defaultPrevented = false;
+                        event.allowDefault = true;
+                        if (attrs["name"] == 'frmPlan') {
+                            $state.go(toState.name, { planid: toParams[0] });
+                        }
+                        else {
+                            $state.go(toState.name);
+                        }
+                    });
                 }
             });
         }

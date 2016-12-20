@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="js/general/angular-bootstrap-datetimepicker/css/datetimepicker.css" />
     <link href="js/general/switch/angular-ui-switch.css" rel="stylesheet" />
 
-
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="css/slideandpush.css" />
     <link href="css/animation/animate.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
@@ -79,6 +79,10 @@
 
 
     <script type="text/javascript" src="js/general/jquery-1.11.1.min.js"></script>
+
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    
+
     <script type="text/javascript" src="js/general/bootstrap/bootstrap.min.js"></script>
 
     <!--angular js-->
@@ -134,42 +138,6 @@
     <script type="text/javascript" src="js/controllers/consultationnotescontroller.js"></script>
     <script type="text/javascript" src="js/controllers/analyticscontroller.js"></script>
     <script type="text/javascript" src="js/controllers/careplanscontroller.js"></script>
-
-    <script>
-        window.confirm = function (message, callback, caption) {
-            caption = caption || 'Confirmation'
-
-            $(document.createElement('div')).attr({
-                title: caption,
-                'class': 'dialog'
-            }).html(message).dialog({
-                position: ['center', 100],
-                dialogClass: 'fixed',
-                buttons: {
-                    "OK": function () {
-                        $(this).dialog('close');
-                        callback()
-                        return true;
-                    },
-                    "Cancel": function () {
-                        $(this).dialog('close');
-                        return false;
-                    }
-                },
-                close: function () {
-                    $(this).remove();
-                },
-                draggable: false,
-                modal: true,
-                resizable: false,
-                width: 'auto'
-            });
-        };
-
-        confirm('dd', function () {
-            console.log('xxx')
-        });
-    </script>
 
 </body>
 

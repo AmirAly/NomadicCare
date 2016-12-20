@@ -72,8 +72,8 @@
                     <div class="row">
                         <div class="col-md-11 col-sm-11 col-xs-11">
                             <div class="group">
-                                <input ng-input-effect-class is-required ng-model="txtValue" ng-class="{errorBorder : frmNewWeight.txtValue.$dirty == true && frmNewWeight.txtValue.$invalid == true ,'used': txtValue.length > 0}" 
-                                       type="number" pattern=".{1,80}" name="txtValue" id="txtValue" required>
+                                <input ng-input-effect-class is-required ng-model="txtValue" ng-class="{errorBorder : frmNewWeight.txtValue.$dirty == true && frmNewWeight.txtValue.$invalid == true ,'used': txtValue.length > 0}"
+                                       type="number" ng-pattern="/^[0-9]+(\.[0-9]{1,10})?$/" step="0.0000000001" name="txtValue" id="txtValue" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label ng-class="{errorFont : frmNewWeight.txtValue.$dirty == true && frmNewWeight.txtValue.$invalid == true }">Weight</label>
@@ -88,7 +88,7 @@
                         <div class="col-md-11 col-sm-11 col-xs-11">
                             <div class="group">
                                 <input ng-input-effect-class is-required ng-model="txtHeight" ng-class="{errorBorder : frmNewWeight.txtHeight.$dirty == true && frmNewWeight.txtHeight.$invalid == true ,'used': txtHeight.length > 0}"
-                                       type="number" pattern=".{1,80}" name="txtHeight" id="txtHeight" required>
+                                       type="number" ng-pattern="/^[0-9]+(\.[0-9]{1,10})?$/" step="0.0000000001" name="txtHeight" id="txtHeight" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label ng-class="{errorFont : frmNewWeight.txtHeight.$dirty == true && frmNewWeight.txtHeight.$invalid == true }">Height</label>

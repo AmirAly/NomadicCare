@@ -272,11 +272,12 @@
     }
 
     $scope.setActivePlan = function (_plan) {
-        $scope.activePlanTab = _plan._id;
-        $scope.activePlan = _plan;
+//$location.path('/healthrecord/careplans/' + _plan._id);
+        //$scope.activePlanTab = _plan._id;
+        //$scope.activePlan = _plan;
         $scope.currentClientInfo.CarePlans = $scope.plans;
-        $location.path('/healthrecord/careplans/' + _plan._id);
-        $state.reload();
+        
+        //$state.reload();
     }
 
     //$scope.setBywho1Data = function (form) {

@@ -2,17 +2,64 @@
 
 ehs.run(function ($rootScope, $state, slidePush, $location, $timeout) {
 
+    window.confirm = function (message, callback, caption) {
+        caption = caption || 'Confirmation'
+
+        $(document.createElement('div')).attr({
+            title: caption,
+            'class': 'dialog'
+        }).html(message).dialog({
+            position: ['center', 200],
+            dialogClass: 'fixed',
+            buttons: {
+                "Cancel": function () {
+                    $(this).dialog('close');
+                    return false;
+                },
+                "OK": function () {
+                    $(this).dialog('close');
+                    callback();
+                    return true;
+                }
+            },
+            close: function () {
+                $(this).remove();
+            },
+            draggable: false,
+            modal: true,
+            resizable: false,
+            width: 'auto'
+        });
+    };
+
+    window.alert = function (message) {
+        $(document.createElement('div')).attr({
+            'class': 'dialog'
+        }).html(message).dialog({
+            position: ['center', 200],
+            title:'Message',
+            buttons: {
+                'OK':function(){
+                    $(this).dialog('close');
+                }
+            },
+            draggable: false,
+            modal: true,
+            resizable: false,
+            width: 'auto'
+        });
+    };
+
     $rootScope.logout = function () {
-        if (confirm("Are you sure you want to logout ?") == true) {
+        confirm('Are you sure you want to logout ?', function () {
             // if menu opened , close it first before  logout
             slidePush.pushForceClose(angular.element(document.querySelector('#menu')), angular.element(document.querySelector('#menuIcon')));
             $rootScope.currentProviderId = "";
             $rootScope.currentProviderName = "";
             $rootScope.userType = '';
             $state.go('login');
-        } else {
-            console.log('cancel logout');
-        }
+        });
+
     };
 
     // set default values

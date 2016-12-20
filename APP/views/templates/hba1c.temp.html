@@ -72,7 +72,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="group">
                                 <input ng-input-effect-class is-required ng-model="txtValue" ng-class="{errorBorder : frmNewHBA1c.txtValue.$dirty == true && frmNewHBA1c.txtValue.$invalid == true ,'used': txtValue.length > 0}"
-                                       type="number" pattern=".{1,80}" name="txtValue" id="txtValue" required>
+                                       type="number" ng-pattern="/^[0-9]+(\.[0-9]{1,10})?$/" step="0.0000000001" name="txtValue" id="txtValue" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label ng-class="{errorFont : frmNewHBA1c.txtValue.$dirty == true && frmNewHBA1c.txtValue.$invalid == true }">HBA1c (mmol/ mol)</label>

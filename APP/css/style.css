@@ -18,7 +18,7 @@
 .btnTodayDate {
 }
 
-.downloadLink ,.downloadLink:hover, .downloadLink:focus,.downloadLink:visited, .downloadLink:active {
+.downloadLink, .downloadLink:hover, .downloadLink:focus, .downloadLink:visited, .downloadLink:active {
     color: #fff !important;
     text-decoration: underline;
 }
@@ -1434,3 +1434,68 @@ canvas {
     border: none;
     font-size: 16px;
 }
+
+/*override confirmatiom*/
+.ui-widget-overlay {
+    background: #000000;
+    opacity: .7;
+}
+
+.ui-widget-header {
+    border: none;
+    border-bottom: 1px solid #e5e5e5 !important;
+    border-radius: 0 !important;
+    background: #fff;
+}
+
+.ui-dialog {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    /*width: 300px !important;
+    margin: 10px auto;*/
+    margin: 20px !important;
+    outline: 0;
+    padding: 0;
+    z-index: 9999999 !important;
+}
+
+    .ui-dialog .ui-dialog-content {
+        color: #337ab7 !important;
+    }
+
+
+    .ui-dialog .ui-dialog-titlebar-close {
+        display: none;
+    }
+
+    .ui-dialog .ui-dialog-buttonpane {
+        padding: 0 !important;
+        border-top: 1px solid #e5e5e5 !important;
+    }
+
+        .ui-dialog .ui-dialog-buttonpane button {
+            background-color: #fff;
+            border: 1px solid #ccc !important;
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
