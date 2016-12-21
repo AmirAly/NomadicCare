@@ -94,7 +94,7 @@ ehs.directive('confirmOnExit', function ($state) {
         link: function ($scope, elem, attrs, ctrl) {
             window.onbeforeunload = function () {
                 if ($scope[attrs["name"]].$dirty) {
-                    return "Your edits will be lost.";
+                    return "Your edits will be lost Unless you save changes first.";
                 }
             }
             $scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
@@ -105,7 +105,7 @@ ehs.directive('confirmOnExit', function ($state) {
                 console.log(attrs["name"]);
                 if ($scope[attrs["name"]].$dirty) {
                     event.preventDefault();
-                    confirm("Your edits will be lost.", function () {
+                    confirm("Your edits will be lost Unless you save changes first.", function () {
                         $scope[attrs["name"]].$setPristine();
                         event.defaultPrevented = false;
                         event.allowDefault = true;
