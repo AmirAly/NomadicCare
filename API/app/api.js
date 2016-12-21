@@ -372,6 +372,7 @@ module.exports = function (app, express) {
                 if (Obj)
                     return res.json({ code: '20', data: 'Duplicae data, check email, phone and name' });
                 else {
+                    console.log(_newObj._id);
                     if (_newObj.Img && _newObj.Img.length > 5) {
                         var base64Data = _newObj.Img.replace(/^data:image\/png;base64,/, "");
                         require("fs").writeFile("images/" + _newObj._id + ".png", base64Data, 'base64', function (err) {
