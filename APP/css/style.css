@@ -1228,7 +1228,8 @@ canvas {
 }
 
     .modal .modal-title {
-        color: #337ab7 !important;
+        /*color: #337ab7 !important;*/
+        color: #000 !important;
     }
 
 .modal-content input {
@@ -1454,8 +1455,6 @@ canvas {
     top: 0;
     left: 0;
     right: 0;
-    /*width: 300px !important;
-    margin: 10px auto;*/
     margin: 20px !important;
     outline: 0;
     padding: 0;
@@ -1463,7 +1462,7 @@ canvas {
 }
 
     .ui-dialog .ui-dialog-content {
-        color: #337ab7 !important;
+        color: #000 !important;
     }
 
 

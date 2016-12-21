@@ -337,19 +337,20 @@
     }
 
     $scope.exportPDF = function () {
-        // export PDF here for $scope.activePlan OR $scope.plans
-        html2canvas(document.getElementById('innerTabs'), {
-            onrendered: function (canvas) {
-                var data = canvas.toDataURL();
-                var docDefinition = {
-                    content: [{
-                        image: data,
-                        width: 500,
-                    }]
-                };
-                pdfMake.createPdf(docDefinition).download("Score_Details.pdf");
-            }
-        });
+        console.log('export PDF goes here');
+        //// export PDF here for $scope.activePlan OR $scope.plans
+        //html2canvas(document.getElementById('innerTabs'), {
+        //    onrendered: function (canvas) {
+        //        var data = canvas.toDataURL();
+        //        var docDefinition = {
+        //            content: [{
+        //                image: data,
+        //                width: 500,
+        //            }]
+        //        };
+        //        pdfMake.createPdf(docDefinition).download("Score_Details.pdf");
+        //    }
+        //});
     }
 
     $scope.reassign = function () {

@@ -109,11 +109,11 @@ ehs.directive('confirmOnExit', function ($state) {
                         $scope[attrs["name"]].$setPristine();
                         event.defaultPrevented = false;
                         event.allowDefault = true;
-                        if (attrs["name"] == 'frmPlan') {
-                            $state.go(toState.name, { planid: toParams[0] });
+                        if (attrs["name"] == 'frmPlan' && toState == 'healthrecord.careplans') {
+                            $state.go(toState.name, toParams);
                         }
                         else {
-                            $state.go(toState.name);
+                            $state.go(toState.name, toParams);
                         }
                     });
                 }

@@ -35,9 +35,9 @@ module.exports = function (app, express) {
                 return 100;
         });
     }
-    
+
     api.get('/', function (req, res) {
-        return res.json({ code: '100', data: 'API is working great' });
+        return res.json({ code: '100', data: 'API is working great v1' });
     });
     api.get('/Coordinator/List', function (req, res) {
         var _id = req.params.OrganizationId;
@@ -126,6 +126,7 @@ module.exports = function (app, express) {
                             console.log(err);
                         });
                     }
+
                     var mail = {
                         to: _newObj.Email,
                         subject: 'Nomadic Care | New Provider Activation Mail',
@@ -146,6 +147,23 @@ module.exports = function (app, express) {
                     _newObj.save(function (err, Obj) {
                         if (err)
                             return res.json({ code: '1', data: err });
+                        if (Obj) {
+                            // search
+                            Coordinator.findOne({ 'Email': _newObj.Email, 'Phone': _newObj.Phone, 'Name': _newObj.Name }, '', function (err, CoordinatorObj) {
+                                if (err)
+                                    return res.json({ code: '1', data: err });
+                                else {
+                                    if (CoordinatorObj) {
+                                        var BaseImg64 = 'data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBg8GDQ8ODw4REA8NEBEQDREPDw4QDxAQExAVFRUQEhIXGyYeFxkjGhISHy8gIycpLSwsFR4xNTA2NiYrLSkBCQoKDgwOGQ8PGCkkHBwpKSwsKSksLCkpKSkpKSkpLCkpLCkyLCkpKSkpMikpLCksLCwpKSwpKSksKSwsLCkpKf/AABEIAMsA+AMBIgACEQEDEQH/xAAbAAEAAwEBAQEAAAAAAAAAAAAABAUGAwIBB//EADIQAQACAAQDBgUEAQUAAAAAAAABAgMEESEFEjFBUWFxgZETobHB0RQiMlLwM0JisuH/xAAYAQEBAQEBAAAAAAAAAAAAAAAAAgMBBP/EAB0RAQEAAwEAAwEAAAAAAAAAAAABAhExAyFBURL/2gAMAwEAAhEDEQA/AP0QB6mYAAAAAAAAAAAAO2Dk8TMactJmJ7eke6bhcDtb+V4jyjm/CblIaVgvqcFwq9eafOfwrOIWw4ty4ddOWZi1tZ3nuhyZb4aRAFgAAAAAAAAAAAAAAAAAAAAAACZw/ITnJ1nalZ3nvnuhy3Q5ZXJ3zc/tjbttPSPz5LrK8Lw8vpOnNaO232jsSsPDjCiK1jSI6RD0xuVq5ABDoqOIcJ1mb4fbvav3r+FuOy6cs2yQvuIcMjMxNq7X+VvCfHxUXT7t8ctos0+AKAAAAAAAAAAAAAAAAAAAABp8ngxl8OtY7I3853lmqxzTEd8xDVRsy9FYvoDJQAAAAoOMYPwsXWI2vGvr2/Zfqfj3XD8rfWq8OuZcVQDdAAAAAAAAAAAAAAAAAAAAD1SdLRPdMfVqoZPo1dJ1iGXorF6AZKAAAAFPx7rh+VvrVcKbj0/up5W+sLw65lxVgN0AAAAAAAAAAAAAAAAAAAAOmBl7Zq3LXTWdevRp6RyxEd0RCg4Vfkxq+OsfJoWPp1WIAzUAAAAKnjeXteYvG9axpPfGs9fotkDjNuXB87Vj7/ZWPXLxQgPQgAAAAAAAAAAAAAAAAAAAB1y14w8SkztEWrMz6tPE6smvuDY04mFpM68k8u/d1j6/Jl6T7dxTwGSwAAABU8dxNqV8ZtPpt95WzL5rF+NiXtrrradPLXb5Lwm6nJyAbpAAAAAAAAAAAAAAAAAAAAFhwXG+HiTX+8becb/TVXvVLzhzExtMTrHm5ZuaGrHHKY/6nDrfprG8d09JdnmaAAAAI3EMf9PhWnt00rr3zszcLDjGZnFxOT/bT52mOvz091e3wmoigC3AAAAAAAAAAAAAAAAAAAAAHrDw7Y08tYmZnsgGg4XXlwKeMTPvMyluWWw/hYdKz1rWInz0dXmvWkAHAABnOJ/69/OP+sIqy4xlrRic8RPLMRrMdk9N/krXox4zoAoAAAAAAAAAAAAAAAAAAAAFnwPDmb2t2RXT1mdfs5ZfhOJjbzHJHj19I/K3yeTrk68tdd51mZ6zLPPKa07IkAMVgAAAOGdwvjYV699Z943ZmJ1a1U5rgvNM2w501nXlt09JaYZa6mxUDpjZe+XnS9Zr59J8pc2yQAAAAAAAAAAAAAAEjLZK+a/jXb+07V9+30cEd7wsG2POlazbv07POexc5fg1MPe+t59q+yfWkUiIiNIjpEbQi+n47/Koy/BJnfEtp4V3n3WWXydMtH7axHj1tPnLuM7larQAl0AAAAAAAB5tSLxpMaxPWJ3hBzHBqYm9daT4b19lgOy2DOY/DcXL9a80d9d/eOxFa3RHzGQw8z/Ku/fG1vdpPT9T/LNCxzHBr4e9J5o7ulvxKvmOWdJjSY6xO0x6NJZeJfAHQAAAAAABK4bl/wBRixExrFf3T3bdIn1ct0JfDuFReIviR13rXw77fhbxGj6PPbtcmgBx0AAAAAAAAAAAAAAAARs3kaZuN437LR1hJAZfMZe2VtNbdeyeyY74cl/xbLfHw5tHWm8eXbH+dygejG7jOzQAoAAAAFxwPC0i9++YrHpv91O0fDMP4eDTxjmn1nX8M878OzqUAxWAAAAAAAAAAAAAAAAAAAA+WjmiYnt6sti4fwbWr/WZj2lqmf4vh/Dxp/5RE/b7NPO/KckIBskAAAA6tXh15IiO6Ij2ZbD/AJR5x9WrZen0rEAZKAAAAAAAAAAAAAAAAAAAAFPx2v7qT4Wj5x+VwouNWmcSI7Irt6z/AOLw6nLivAbpAAf/2Q==';
+                                        var base64Data = BaseImg64.replace(/^data:image\/png;base64,/, "");
+                                        require("fs").writeFile("images/" + CoordinatorObj._id + ".png", base64Data, 'base64', function (err) {
+                                            console.log(err);
+                                            return res.json({ code: '100', data: Obj });
+                                        });
+                                    }
+                                }
+                            });
+                        }
                         else
                             return res.json({ code: '100', data: Obj });
                     })
@@ -196,7 +214,7 @@ module.exports = function (app, express) {
         Client.find('', function (err, Obj) {
             if (err)
                 return res.json({ code: '1', data: err });
-            else{
+            else {
                 if (Obj) {
                     var planList = [];
                     for (var k = 0; k < Obj.length; k++) {
@@ -364,26 +382,44 @@ module.exports = function (app, express) {
     });
     api.post('/Client', function (req, res) {
         var _newObj = new Client(req.body);
-        Client.findOne({ 'LastName': _newObj.LastName, 'FirstName': _newObj.FirstName }, '', function (err, Obj) {
+        Client.findOne({ 'LastName': _newObj.LastName, 'FirstName': _newObj.FirstName, 'Email': _newObj.Email, 'Mobile': _newObj.Mobile }, '', function (err, Obj) {
             if (err)
                 return res.json({ code: '1', data: err });
             else {
-                console.log(Obj);
                 if (Obj)
-                    return res.json({ code: '20', data: 'Duplicae data, check email, phone and name' });
+                    return res.json({ code: '20', data: 'Duplicae data, check email, mobile and name' });
                 else {
-                    console.log(_newObj._id);
-                    if (_newObj.Img && _newObj.Img.length > 5) {
-                        var base64Data = _newObj.Img.replace(/^data:image\/png;base64,/, "");
-                        require("fs").writeFile("images/" + _newObj._id + ".png", base64Data, 'base64', function (err) {
-                            console.log(err);
-                        });
-                    }
                     _newObj.save(function (err, Obj) {
                         if (err)
                             return res.json({ code: '1', data: err });
-                        else
-                            return res.json({ code: '100', data: Obj });
+                        else {
+                            Client.findOne({ 'LastName': Obj.LastName, 'FirstName': Obj.FirstName }, '', function (err, clientObj) {
+                                if (err)
+                                    return res.json({ code: '1', data: err });
+                                else {
+                                    if (clientObj) {
+                                        console.log(clientObj._id);
+                                        if (clientObj.Img && clientObj.Img.length > 5) {
+                                            console.log('if');
+                                            var base64Data = clientObj.Img.replace(/^data:image\/png;base64,/, "");
+                                            require("fs").writeFile("images/" + clientObj._id + ".png", base64Data, 'base64', function (err) {
+                                                console.log(err);
+                                                return res.json({ code: '100', data: Obj });
+                                            });
+                                        }
+                                        else { //no user img
+                                            console.log('else');
+                                            var base64Data = clientObj.Img.replace(/^data:image\/png;base64,/, "");
+                                            require("fs").writeFile("images/" + clientObj._id + ".png", base64Data, 'base64', function (err) {
+                                                console.log(err);
+                                                return res.json({ code: '100', data: Obj });
+                                            });
+                                        }
+                                    }
+                                }
+                            });
+
+                        }
                     })
                 }
             }
@@ -441,7 +477,7 @@ module.exports = function (app, express) {
                             });
 
                         }
-                        
+
                     }
                     Obj.CarePlans = req.body.CarePlans;
                     Client.update({ _id: Obj._id }, Obj, { upsert: true }, function (err) {
