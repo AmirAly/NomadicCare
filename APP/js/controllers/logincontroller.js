@@ -3,7 +3,6 @@
     $scope.loginFormError = false;
     console.log($stateParams.confirmationcode);
     console.log($stateParams);
-
     if ($stateParams.confirmationcode == "" || $stateParams.confirmationcode == null || $stateParams.confirmationcode == '0') {
         // there is no confirmation
         console.log('if');
@@ -27,6 +26,7 @@
                 $scope.showMessage2 = true;
                 $scope.messageTxt = 'Account Activaed , Please Login With Email And Password That You receieved';
                 $scope.messageStatus = 'success';
+                $scope.openPasswordModal();
                 $timeout(function () {
                     $scope.hidelogin = false;
                 }, 1500);
@@ -136,6 +136,58 @@
             });
         }
 
+    }
+
+    $scope.changePass = function (form) {
+        $scope.showMessage = false;
+        angular.forEach($scope.frmPass.$error.required, function (field) {
+            field.$setDirty();
+        });
+
+        if (form.$valid) {
+            var req = {
+                method: 'put',
+                url: '/Coordinator/Password',
+                data: {
+                    Email: $scope.txtEmail,
+                    Password: $scope.txtPassword,
+                    NewPassword: $scope.txtNewPassword
+                }
+            }
+            ////loader
+            $rootScope.loading = true;
+
+            API.execute(req).then(function (_res) {
+                console.log(_res.data);
+                if (_res.data.code == 100) { // Provider | coordinator
+                    //function login get coordinatorId here
+                    $rootScope.currentProviderId = _res.data.data._id;
+                    $rootScope.currentProviderName = _res.data.data.Name;
+                    $rootScope.currentProviderEmail = _res.data.data.Email;
+                    $rootScope.OrganizationId = _res.data.data.Organization;
+                    $rootScope.userType = 'admin';
+
+                    $scope.showMessage = true;
+                    $scope.messageTxt = 'Welcome ...';
+                    $scope.messageStatus = 'success';
+
+                    $state.go('clients');
+                }
+                
+                else { // another error may be connection error
+                    $scope.showMessage = true;
+                    $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
+                    $scope.messageStatus = 'warning';
+                }
+            }, function (error) {
+                $scope.showMessage = true;
+                $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';
+                $scope.messageStatus = 'warning';
+            })
+            .finally(function () {
+                $rootScope.loading = false;
+            });
+        }
     }
 });
 

@@ -71,11 +71,11 @@
                     <div class="row">
                         <div class="input-group-lg  col-md-6 col-sm-6 col-xs-6">
                             <div class="group">
-                                <input ng-input-effect-class is-required pattern="^\d{3}-\d{3}-\d{4}$" ng-model="txtMobile" ng-class="{errorBorder : frmAddProvider.txtMobile.$dirty == true && frmAddProvider.txtMobile.$invalid == true ,'used': txtMobile.length > 0}" type="text" id="txtMobile" name="txtMobile" required>
+                                <input ng-input-effect-class is-required pattern="[0][4]\d{6}$" ng-model="txtMobile" ng-class="{errorBorder : frmAddProvider.txtMobile.$dirty == true && frmAddProvider.txtMobile.$invalid == true ,'used': txtMobile.length > 0}" type="text" id="txtMobile" name="txtMobile" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label ng-class="{errorFont : frmAddProvider.txtMobile.$dirty == true && frmAddProvider.txtMobile.$invalid == true }">Mobile</label>
-                                <span class="errorFont" ng-show="frmAddProvider.txtMobile.$error.pattern && frmAddProvider.txtMobile.$touched == true">Invalid Syntax ,It Should Look Like xxx-xxx-xxxx</span>
+                                <span class="errorFont" ng-show="frmAddProvider.txtMobile.$error.pattern && frmAddProvider.txtMobile.$touched == true">Invalid Syntax ,It should Be 8 characters start with 04</span>
                             </div>
                         </div>
                         <div class="input-group-lg col-md-6 col-sm-6 col-xs-6">
@@ -136,7 +136,7 @@
                                                 <div class="row">
                                                     <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
                                                         <div class="group">
-                                                            <input type="text" pattern=".{1,80}" name="txt1" ng-model="spec.Name" class="txtSpecialityName">
+                                                            <input type="text" placeholder="Enter speciality name" pattern=".{1,80}" name="txt1" ng-model="spec.Name" class="txtSpecialityName">
                                                             <span class="highlight"></span>
                                                             <span class="bar"></span>
                                                             <label></label>
@@ -149,7 +149,7 @@
                                                     <div class="row">
                                                         <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
                                                             <div class="group">
-                                                                <input type="text" pattern=".{1,80}" ng-model="spec.Description" name="txt2" class="txtSpecialityDescription">
+                                                                <input type="text" placeholder="Enter Description" pattern=".{1,80}" ng-model="spec.Description" name="txt2" class="txtSpecialityDescription">
                                                                 <span class="highlight"></span>
                                                                 <span class="bar"></span>
                                                                 <label></label>

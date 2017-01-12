@@ -173,3 +173,20 @@ ehs.directive('confirmFinishModal', function () {
         }
     }
 });
+
+// show /hide Password modal
+ehs.directive('passwordModal', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            scope.openPasswordModal = function () {
+                console.log('show');
+                element.modal('show');
+            };
+            scope.hidePasswordModal = function () {
+                console.log('hide');
+                element.modal('hide');
+            };
+        }
+    }
+});

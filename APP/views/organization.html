@@ -53,11 +53,11 @@
                         <div class="row">
                             <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
                                 <div class="group">
-                                    <input ng-input-effect-class is-required type="tel" pattern="^\d{3}-\d{3}-\d{4}$" ng-model="txtPhone" ng-class="{errorBorder : frmAddOrganization.txtPhone.$dirty == true && frmAddOrganization.txtPhone.$invalid == true ,'used': txtPhone.length > 0}" type="text" pattern=".{1,80}" id="txtPhone" name="txtPhone" required>
+                                    <input ng-input-effect-class is-required type="tel" pattern="[0][^\D4]\d{6}$" ng-model="txtPhone" ng-class="{errorBorder : frmAddOrganization.txtPhone.$dirty == true && frmAddOrganization.txtPhone.$invalid == true ,'used': txtPhone.length > 0}" type="text" pattern=".{1,80}" id="txtPhone" name="txtPhone" required>
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label ng-class="{errorFont : frmAddOrganization.txtPhone.$dirty == true && frmAddOrganization.txtPhone.$invalid == true }">Phone</label>
-                                    <span class="errorFont" ng-show="frmAddOrganization.txtPhone.$error.pattern && frmAddOrganization.txtPhone.$touched == true">Invalid Syntax ,It Should Look Like xxx-xxx-xxxx</span>
+                                    <span class="errorFont" ng-show="frmAddOrganization.txtPhone.$error.pattern && frmAddOrganization.txtPhone.$touched == true">Invalid Syntax ,It should Be 8 characters not start with 04</span>
                                 </div>
                             </div>
                         </div>
@@ -72,11 +72,11 @@
                         <div class="row">
                             <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
                                 <div class="group">
-                                    <input ng-input-effect-class is-required type="tel" pattern="^\d{3}-\d{3}-\d{4}$" ng-model="txtMobile" ng-class="{errorBorder : frmAddOrganization.txtMobile.$dirty == true && frmAddOrganization.txtMobile.$invalid == true ,'used': txtMobile.length > 0}" type="text" pattern=".{1,80}" id="txtMobile" name="txtMobile" required>
+                                    <input ng-input-effect-class is-required type="tel" pattern="[0][4]\d{6}$" ng-model="txtMobile" ng-class="{errorBorder : frmAddOrganization.txtMobile.$dirty == true && frmAddOrganization.txtMobile.$invalid == true ,'used': txtMobile.length > 0}" type="text" pattern=".{1,80}" id="txtMobile" name="txtMobile" required>
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label ng-class="{errorFont : frmAddOrganization.txtMobile.$dirty == true && frmAddOrganization.txtMobile.$invalid == true }">Mobile</label>
-                                    <span class="errorFont" ng-show="frmAddOrganization.txtMobile.$error.pattern && frmAddOrganization.txtMobile.$touched == true">Invalid Syntax ,It Should Look Like xxx-xxx-xxxx</span>
+                                    <span class="errorFont" ng-show="frmAddOrganization.txtMobile.$error.pattern && frmAddOrganization.txtMobile.$touched == true">Invalid Syntax ,It should Be 8 characters start with 04</span>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                                     <input ng-input-effect-class is-required ng-model="txtEmail" ng-class="{errorBorder : frmAddOrganization.txtEmail.$dirty == true && frmAddOrganization.txtEmail.$invalid == true ,'used': txtEmail.length > 0}" type="email" pattern="[a-zA-Z0-9_]+(?:\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" id="txtEmail" name="txtEmail" required>
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
-                                    <label ng-class="{errorFont : frmAddOrganization.txtEmail.$dirty == true && frmAddOrganization.txtEmail.$invalid == true }">Mail</label>
+                                    <label ng-class="{errorFont : frmAddOrganization.txtEmail.$dirty == true && frmAddOrganization.txtEmail.$invalid == true }">Email</label>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                                             <div class="row">
                                                 <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
                                                     <div class="group">
-                                                        <input type="text" pattern=".{1,80}" name="txt1" ng-model="spec.Name" class="txtSpecialityName">
+                                                        <input type="text" placeholder="Enter speciality name" pattern=".{1,80}" name="txt1" ng-model="spec.Name" class="txtSpecialityName">
                                                         <span class="highlight"></span>
                                                         <span class="bar"></span>
                                                         <label></label>
@@ -142,7 +142,7 @@
                                                 <div class="row">
                                                     <div class=" input-group-lg col-md-12 col-sm-12 col-xs-12">
                                                         <div class="group">
-                                                            <input type="text" pattern=".{1,80}" ng-model="spec.Description" name="txt2" class="txtSpecialityDescription">
+                                                            <input type="text" placeholder="Enter Description" pattern=".{1,80}" ng-model="spec.Description" name="txt2" class="txtSpecialityDescription">
                                                             <span class="highlight"></span>
                                                             <span class="bar"></span>
                                                             <label></label>

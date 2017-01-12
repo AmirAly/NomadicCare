@@ -38,15 +38,15 @@
                                 </div>
                             </div>
                             <div class="clear2"></div>
-
                             <div class="clear2"></div>
                             <div class="clear2"></div>
 
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <button type="submit" ng-click="submit(frmLogin)" id="btnLogin" name="btnLogin" class="btn btn-block btn-invert">Login</button>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <button type="submit" ng-click="submit(frmLogin)" id="btnLogin" name="btnLogin" class="btn btn-block btn-invert">Login</button>
+                                    </div>
                                 </div>
-                            </div>
+
                             <div class="clear2"></div>
                             <div class="clear2"></div>
                             <div class="row">
@@ -78,4 +78,92 @@
         </div>
     </div>
     <div class="row footer" ui-view="footerView"></div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog" password-modal>
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Now you can change your Password</h4>
+            </div>
+            <div class="modal-body">
+                <form name="frmPass" novalidate>
+
+                    <div class="clear2"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtEmail" ng-class="{errorBorder : loginFormError || frmPass.txtEmail.$dirty == true && frmPass.txtEmail.$invalid == true ,'used': txtEmail.length > 0}" type="email" pattern="[a-zA-Z0-9_]+(?:\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?!([a-zA-Z0-9]*\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" id="txtEmail" name="txtEmail" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : loginFormError || frmPass.txtEmail.$dirty == true && frmPass.txtEmail.$invalid == true }">User name</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtPassword" ng-class="{errorBorder : loginFormError || frmPass.txtPassword.$dirty == true && frmPass.txtPassword.$invalid == true ,'used': txtPassword.length > 0}" type="password" pattern=".{1,80}" name="txtPassword" id="txtPassword" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : loginFormError || frmPass.txtPassword.$dirty == true && frmPass.txtPassword.$invalid == true }">Current Password</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear2"></div>
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtNewPassword" ng-class="{errorBorder : loginFormError || frmPass.txtNewPassword.$dirty == true && frmPass.txtNewPassword.$invalid == true ,'used': txtNewPassword.length > 0}" type="password" pattern=".{1,80}" name="txtNewPassword" id="txtNewPassword" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : loginFormError || frmPass.txtNewPassword.$dirty == true && frmPass.txtNewPassword.$invalid == true }">New Password</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear2"></div>
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="group">
+                                <input ng-input-effect-class is-required ng-model="txtConfirmNewPassword" ng-class="{errorBorder : loginFormError || frmPass.txtConfirmNewPassword.$dirty == true && frmPass.txtConfirmNewPassword.$invalid == true ,'used': txtConfirmNewPassword.length > 0}" type="password" pattern=".{1,80}" name="txtConfirmNewPassword" id="txtConfirmNewPassword" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label ng-class="{errorFont : loginFormError || frmPass.txtConfirmNewPassword.$dirty == true && frmPass.txtConfirmNewPassword.$invalid == true }">Confirm New Password</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear2"></div>
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <button type="submit" ng-click="changePass(frmPass)" id="btnLogin" name="btnLogin" class="btn btn-block btn-invert">Login</button>
+                        </div>
+                    </div>
+
+                    <div class="clear2"></div>
+                    <div class="clear2"></div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div ng-class="{'alert-success' : messageStatus == 'success' ,'alert-danger' : messageStatus == 'danger' ,'alert-warning' : messageStatus == 'warning'}"
+                                 class="alert alert-dismissible text-center" ng-show="showMessage == true" role="alert">
+                                <span>{{messageTxt}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
 </div>
