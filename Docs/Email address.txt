@@ -1,0 +1,30 @@
+
+noreply
+noreply@nomadictec.com.au
+For system generated emails (set as "reply-to" when these emails are sent).
+Need to setup automatic reply for this email so when users reply to these emails, they get email notification saying that no one is checking this email, and that they should email "admin@nomadictec.com.au"
+
+Email: noreply@nomadictec.com.au
+
+Access details:
+
+    portal.office.com
+    Enter email address
+    Password = Denver1469
+    Select "Mail" when you login to Office 365 dashboard / landing page
+
+
+customer.care
+customer.care@nomadictec.com.au
+Used for customers to interact with Nomadictec.
+
+Need to setup automatic reply: "Thanks for your email. We will endeavor to respond to your query within 2-3 business days. Alternatively, please check out our page at www.nomadictec.com/faq for help with the system".
+
+Email: customer.care@nomadictec.com.au
+
+Access details:
+
+    portal.office.com
+    Enter email address
+    Password = Denver1469
+    Select "Mail" when you login to Office 365 dashboard / landing page
