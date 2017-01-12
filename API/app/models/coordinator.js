@@ -15,7 +15,7 @@ var Coordinator = new Schema({
         type: String,
         validate: {
             validator: function (v) {
-                return /\d{3}-\d{3}-\d/.test(v);
+                return /[0][^\D4]\d{6}$/.test(v);
             },
             message: '{VALUE} is not a valid phone number!'
         },
@@ -24,7 +24,7 @@ var Coordinator = new Schema({
         type: String,
         validate: {
             validator: function (v) {
-                return /\d{3}-\d{3}-\d/.test(v);
+                return /[0][4]\d{6}$/.test(v);
             },
             message: '{VALUE} is not a valid mobile number!'
         },
