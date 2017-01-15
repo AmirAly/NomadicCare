@@ -4,6 +4,9 @@ var nodemailer = require('nodemailer');
 var Organization = require('./models/organization');
 var Coordinator = require('./models/coordinator');
 var Client = require('./models/client');
+var CarerPortal = "http://nomaidc-career.azurewebsites.net/#/";
+var ClientPortal = "http://nomadic-client.azurewebsites.net/#/";
+var AppUrl = "http://nomadiccare-portal.azurewebsites.net/#/";
 //====================================================================================
 module.exports = function (app, express) {
     var api = express.Router();
@@ -17,8 +20,8 @@ module.exports = function (app, express) {
             port: 587,
             requiresAuth: true,
             auth: {
-                user: 'care.nomadiccare@gmail.com',
-                pass: 'nomadic@care'
+                user: 'aali.ibtekar@gmail.com',
+                pass: '1141987Dodo'
             }
         });
         var mailOptions = {
@@ -135,7 +138,7 @@ module.exports = function (app, express) {
                                 Your account username is :' + _newObj.Email + '<br/>\
                                 Your account Password is :' + _newObj.Password + '<br/>\
                                 <br/>\
-                                Please click the link below to activate your account and set your own password.\
+                                <b>Please click the following link to confirm your Email<b> then use your login data To login<br/>'+ AppUrl+ 'login/' + _newObj.RetrivalCode + ' \
                                 <br/>\
                                 <a href="http://localhost:8007/index.html#/login/' + _newObj.RetrivalCode + '">http://localhost:8007/index.html#/login/' + _newObj.RetrivalCode + '</a>  \
                                 <br/>\
@@ -513,7 +516,7 @@ module.exports = function (app, express) {
                                     text: 'Dear ' + req.body.emailTo[i] + '<br/><br/>\
                                 There is some changes happened in your care plans in Nomadic Care, <br/><br/>\
                                 Please click the following link to login and find out what has been changed .<br/>\
-                                http://localhost:1169/index.html#/' + Base64.encode(req.body.emailTo[i]) + ' \
+                               '+CarerPortal + Base64.encode(req.body.emailTo[i]) + ' \
                                 <br/>\
                                 <br/>\
                                 Nomadic Care Team'
@@ -529,7 +532,7 @@ module.exports = function (app, express) {
                                 text: 'Dear ' + Obj.FirstName + ' ' + Obj.LastName + '<br/><br/>\
                                 There is some changes happened in your care plans in Nomadic Care, <br/><br/>\
                                 Please click the following link to login and find out what has been changed .<br/>\
-                                http://localhost:1406/index.html#/' + Obj._id + ' \
+                                '+ClientPortal + Obj._id + ' \
                                 <br/>\
                                 <br/>\
                                 Nomadic Care Team'
