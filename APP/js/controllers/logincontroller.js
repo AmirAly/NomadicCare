@@ -1,6 +1,9 @@
 ﻿ehs.controller("LoginController", function ($scope, $state, $rootScope, API, $timeout, $stateParams) {
     $rootScope.userType = 'login';
     $scope.loginFormError = false;
+
+    $scope.showLoginFirstTime = false;
+
     console.log($stateParams.confirmationcode);
     console.log($stateParams);
     if ($stateParams.confirmationcode == "" || $stateParams.confirmationcode == null || $stateParams.confirmationcode == '0') {
@@ -19,14 +22,15 @@
         }
         ////loader
         $rootScope.loading = true;
-        API.execute(req).then(function (_res) {
+        API.execute(req).then(
+            function (_res) {
             console.log(_res.data);
             if (_res.data.code == 100) {
                 //Account Activaed
                 $scope.showMessage2 = true;
                 $scope.messageTxt = 'Account Activaed , Please Login With Email And Password That You receieved';
                 $scope.messageStatus = 'success';
-                $scope.openPasswordModal();
+                $scope.showLoginFirstTime = true;
                 $timeout(function () {
                     $scope.hidelogin = false;
                 }, 1500);
@@ -68,6 +72,7 @@
 
     $scope.submit = function (form) {
         $scope.showMessage = false;
+        $scope.showMessage2 = false;
         angular.forEach($scope.frmLogin.$error.required, function (field) {
             field.$setDirty();
         });
@@ -113,7 +118,7 @@
                 }
                 else if (_res.data.code == 21) { // Email not confirmed
                     $scope.showMessage = true;
-                    $scope.messageTxt = 'This Email Is Not Confirmed ...';
+                    $scope.messageTxt = 'This Email Is Not Confirmed Click The Confimation Link In Your Email.';
                     $scope.messageStatus = 'danger';
                 }
                 else if (_res.data.code == 20) { // user not exist
@@ -140,6 +145,7 @@
 
     $scope.changePass = function (form) {
         $scope.showMessage = false;
+        $scope.showMessage2 = false;
         angular.forEach($scope.frmPass.$error.required, function (field) {
             field.$setDirty();
         });
@@ -170,10 +176,19 @@
                     $scope.showMessage = true;
                     $scope.messageTxt = 'Welcome ...';
                     $scope.messageStatus = 'success';
-
+                    $scope.showLoginFirstTime = false;
                     $state.go('clients');
                 }
-                
+                else if (_res.data.code == 20) {
+                    $scope.showMessage = true;
+                    $scope.messageTxt = 'You Entered Inncorrect Password';
+                    $scope.messageStatus = 'danger';
+                }
+                else if (_res.data.code == 21) {
+                    $scope.showMessage = true;
+                    $scope.messageTxt = 'You Entered Inncorrect Email, No Such User';
+                    $scope.messageStatus = 'danger';
+                }
                 else { // another error may be connection error
                     $scope.showMessage = true;
                     $scope.messageTxt = 'Connection Error , It Seems There Is A Problem With Your Connection ...';

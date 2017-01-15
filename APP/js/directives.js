@@ -161,6 +161,7 @@ ehs.directive('confirmCreateModal', function () {
         }
     }
 });
+
 // show create confirmation modal
 ehs.directive('confirmFinishModal', function () {
     return {
@@ -174,19 +175,38 @@ ehs.directive('confirmFinishModal', function () {
     }
 });
 
-// show /hide Password modal
-ehs.directive('passwordModal', function () {
+// compare password validation
+ehs.directive("compareTo", function () {
     return {
-        restrict: 'A',
-        link: function (scope, element, attr) {
-            scope.openPasswordModal = function () {
-                console.log('show');
-                element.modal('show');
+        require: "ngModel",
+        scope: {
+            otherModelValue: "=compareTo"
+        },
+        link: function (scope, element, attributes, ngModel) {
+            ngModel.$validators.compareTo = function (modelValue) {
+                return modelValue == scope.otherModelValue;
             };
-            scope.hidePasswordModal = function () {
-                console.log('hide');
-                element.modal('hide');
-            };
+
+            scope.$watch("otherModelValue", function () {
+                ngModel.$validate();
+            });
         }
-    }
+    };
 });
+
+// show /hide Password modal
+//ehs.directive('passwordModal', function () {
+//    return {
+//        restrict: 'A',
+//        link: function (scope, element, attr) {
+//            scope.openPasswordModal = function () {
+//                console.log('show');
+//                element.modal('show');
+//            };
+//            scope.hidePasswordModal = function () {
+//                console.log('hide');
+//                element.modal('hide');
+//            };
+//        }
+//    }
+//});
