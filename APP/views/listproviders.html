@@ -20,7 +20,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="provider in providers">
-                                    <td><img src="images/{{provider._id}}.png">&nbsp;<span>{{provider.Name}}</span></td>
+                                    <td><img fallbacksrc ng-src="images/{{provider._id}}.png">&nbsp;<span>{{provider.Name}}</span></td>
                                     <td>
                                         <span>{{provider.Location}}</span>
                                         <a class="tableicon" ng-click="showProviderDetails(provider._id)"><span class="glyphicon glyphicon-edit"></span></a>
