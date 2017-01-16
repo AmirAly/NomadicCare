@@ -147,7 +147,7 @@ module.exports = function (app, express) {
                                 Kind Regards,\
                                 <br/>\
                                 Nomadic Care Team <br/>\
-                                <img src="" />'
+                                <img src="http://nomaidc-career.azurewebsites.net/images/logo2.png" />'
                     }
                     console.log(mail);
                     sendEmail(mail);
@@ -473,8 +473,13 @@ module.exports = function (app, express) {
                                 text: 'Dear ' + req.body.CarePlans[i].ByWho1.Email + '<br/><br/>\
                                                This is a gentle reminder about your plan due date on <br/>\
                                                ' + req.body.CarePlans[i].ByWhen1 + '<br/>\
-                                               <br/>\
-                                               Nomadic Care Team'
+                                               <br/><br/>\
+                                If you have any questions, please contact us at customer.care@nomadictec.com.au <br/>\
+                                <br/>\
+                                Kind Regards,\
+                                <br/>\
+                                Nomadic Care Team <br/>\
+                                <img src="http://nomaidc-career.azurewebsites.net/images/logo2.png" />'
                             }
                             var j = schedule.scheduleJob('* * 8 * ' + new Date(req.body.CarePlans[i].ByWhen1).getDay(), function () {
                                 sendEmail(mail);
@@ -493,8 +498,13 @@ module.exports = function (app, express) {
                                 text: 'Dear ' + req.body.CarePlans[i].ByWho2.Email + '<br/><br/>\
                                                This is a gentle reminder about your plan due date on <br/>\
                                                ' + req.body.CarePlans[i].ByWhen2 + '<br/>\
-                                               <br/>\
-                                               Nomadic Care Team'
+                                               <br/><br/>\
+                                If you have any questions, please contact us at customer.care@nomadictec.com.au <br/>\
+                                <br/>\
+                                Kind Regards,\
+                                <br/>\
+                                Nomadic Care Team <br/>\
+                                <img src="http://nomaidc-career.azurewebsites.net/images/logo2.png" />'
                             }
                             var j = schedule.scheduleJob('* * 8 * ' + new Date(req.body.CarePlans[i].ByWhen2).getDay(), function () {
                                 sendEmail(mail);
@@ -525,9 +535,13 @@ module.exports = function (app, express) {
                                 There is some changes happened in your care plans in Nomadic Care, <br/><br/>\
                                 Please click the following link to login and find out what has been changed .<br/>\
                                '+CarerPortal + Base64.encode(req.body.emailTo[i]) + ' \
+                                <br/><br/>\
+                                If you have any questions, please contact us at customer.care@nomadictec.com.au <br/>\
                                 <br/>\
+                                Kind Regards,\
                                 <br/>\
-                                Nomadic Care Team'
+                                Nomadic Care Team <br/>\
+                                <img src="http://nomaidc-career.azurewebsites.net/images/logo2.png" />'
                                 }
                                 console.log(mail);
                                 sendEmail(mail);
@@ -541,9 +555,13 @@ module.exports = function (app, express) {
                                 There is some changes happened in your care plans in Nomadic Care, <br/><br/>\
                                 Please click the following link to login and find out what has been changed .<br/>\
                                 '+ClientPortal + Obj._id + ' \
+                                <br/><br/>\
+                                If you have any questions, please contact us at customer.care@nomadictec.com.au <br/>\
                                 <br/>\
+                                Kind Regards,\
                                 <br/>\
-                                Nomadic Care Team'
+                                Nomadic Care Team <br/>\
+                                <img src="http://nomaidc-career.azurewebsites.net/images/logo2.png" />'
                             }
                             console.log(mail);
                             sendEmail(mail);
