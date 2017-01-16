@@ -15,13 +15,13 @@ module.exports = function (app, express) {
     function sendEmail(email) {
         var smtpTransport = nodemailer.createTransport({
             transport: "SMTP",
-            host: 'smtp.gmail.com',
+            host: 'smtp.office365.com',
             secureConnection: true,
             port: 587,
             requiresAuth: true,
             auth: {
-                user: 'aali.ibtekar@gmail.com',
-                pass: '1141987Dodo'
+                user: 'noreply@nomadictec.com.au',
+                pass: 'Denver1469'
             }
         });
         var mailOptions = {
@@ -655,7 +655,7 @@ module.exports = function (app, express) {
                     if (req.body.File) {
                         console.log(req.body._id); // undefined 
                         var base64Data = req.body.File.replace(/^data:application\/pdf;base64,/, "");
-                        require("fs").writeFile("pdfs/" + req.body.FileName + ".pdf", base64Data, 'base64', function (err) {
+                        require("fs").writeFile("attatchments/" + req.body.FileName + ".pdf", base64Data, 'base64', function (err) {
                             console.log(err);
                         });
                     }
