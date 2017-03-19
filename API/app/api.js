@@ -4,9 +4,13 @@ var nodemailer = require('nodemailer');
 var Organization = require('./models/organization');
 var Coordinator = require('./models/coordinator');
 var Client = require('./models/client');
-var CarerPortal = "http://nomaidc-career.azurewebsites.net/#/";
-var ClientPortal = "http://nomadic-client.azurewebsites.net/#/";
-var AppUrl = "http://nomadiccare-portal.azurewebsites.net/#/";
+//var CarerPortal = "http://nomaidc-career.azurewebsites.net/#/";
+//var ClientPortal = "http://nomadic-client.azurewebsites.net/#/";
+//var AppUrl = "http://nomadiccare-portal.azurewebsites.net/#/";
+
+var CarerPortal = "http://localhost:1169/index.html#/";
+var ClientPortal = "http://localhost:1406/index.html#/";
+var AppUrl = "http://localhost:8007/index.html#/";
 //====================================================================================
 module.exports = function (app, express) {
     var api = express.Router();
@@ -32,7 +36,7 @@ module.exports = function (app, express) {
             requiresAuth: true,
             auth: {
                 user: 'aali.ibtekar@gmail.com',
-                pass: '1141987Dodo'
+                pass: '2682013AmirAmira'
             }
         });
         var mailOptions = {
@@ -490,7 +494,7 @@ module.exports = function (app, express) {
                                 Kind Regards,\
                                 <br/>\
                                 Nomadic Care Team <br/>\
-                                <img src="http://nomaidc-career.azurewebsites.net/images/logo2.png" />'
+                                <img style="width:150px" src="http://nomaidc-career.azurewebsites.net/images/logo2.png" />'
                             }
                             var j = schedule.scheduleJob('* * 8 * ' + new Date(req.body.CarePlans[i].ByWhen1).getDay(), function () {
                                 sendEmail(mail);
@@ -515,7 +519,7 @@ module.exports = function (app, express) {
                                 Kind Regards,\
                                 <br/>\
                                 Nomadic Care Team <br/>\
-                                <img src="http://nomaidc-career.azurewebsites.net/images/logo2.png" />'
+                                <img style="width:150px" src="http://nomaidc-career.azurewebsites.net/images/logo2.png" />'
                             }
                             var j = schedule.scheduleJob('* * 8 * ' + new Date(req.body.CarePlans[i].ByWhen2).getDay(), function () {
                                 sendEmail(mail);
@@ -552,7 +556,7 @@ module.exports = function (app, express) {
                                 Kind Regards,\
                                 <br/>\
                                 Nomadic Care Team <br/>\
-                                <img src="http://nomaidc-career.azurewebsites.net/images/logo2.png" />'
+                                <img style="width:150px" src="http://nomaidc-career.azurewebsites.net/images/logo2.png" />'
                                 }
                                 console.log(mail);
                                 sendEmail(mail);
@@ -572,7 +576,7 @@ module.exports = function (app, express) {
                                 Kind Regards,\
                                 <br/>\
                                 Nomadic Care Team <br/>\
-                                <img src="http://nomaidc-career.azurewebsites.net/images/logo2.png" />'
+                                <img style="width:150px" src="http://nomaidc-career.azurewebsites.net/images/logo2.png" />'
                             }
                             console.log(mail);
                             sendEmail(mail);
